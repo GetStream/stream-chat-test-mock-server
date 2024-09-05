@@ -1,0 +1,8 @@
+# OS X
+.DS_Store
+
+# Environment Variables
+.env
+
+# Other
+logs/
