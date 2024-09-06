@@ -12,6 +12,7 @@ require_relative 'mocks'
 require_relative 'helpers/message'
 
 $ws = nil
+$message_list = []
 $current_channel_id = Mocks.event['channel_id']
 
 set :port, ARGV[0] || 4568

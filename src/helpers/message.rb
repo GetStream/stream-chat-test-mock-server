@@ -3,7 +3,7 @@ def message_creation(request_body:, channel_id: nil, event_type: :message_new)
   message = json['message']
   parent_id = message['parent_id']
   quoted_message_id = message['quoted_message_id']
-  channel_reply = message['show_in_channel'] || false
+  channel_reply = message['show_in_channel']
   message_text = message['text'].to_s
 
   message_type =
@@ -53,24 +53,20 @@ end
 private
 
 def message_creation_in_channel(message, message_type:, channel_id:, event_type: :message_new)
-  text = message['text'].to_s
-  message_id = message['id']
-  response = message_type == :ephemeral ? Mocks.giphy : Mocks.message
-  response_message = response['message']
   timestamp = unique_date
-  user = response_message['user']
-  attachments = message['attachments'] || response_message['attachments']
+  response = message_type == :ephemeral ? Mocks.giphy : Mocks.message
+  template_message = response['message']
 
   mocked_message = mock_message(
-    response_message,
+    template_message,
     message_type: message_type,
     channel_id: channel_id,
-    message_id: message_id,
-    text: text,
-    user: user,
+    message_id: message['id'],
+    text: message['text'].to_s,
+    user: template_message['user'],
     created_at: timestamp,
     updated_at: timestamp,
-    attachments: attachments
+    attachments: message['attachments'] || template_message['attachments']
   )
 
   response['message'] = mocked_message
@@ -94,17 +90,23 @@ def mock_message(
   user:,
   created_at:,
   updated_at:,
+  deleted_at: nil,
+  message_text_updated_at: nil,
+  pinned: nil,
+  pinned_at: nil,
+  pinned_by: nil,
+  pin_expires: nil,
   message_type: :regular,
   channel_id: nil,
   command: nil,
   parent_id: nil,
-  show_reply_in_channel: nil,
+  show_in_channel: nil,
   quoted_message_id: nil,
-  quoted_message: nil,
   attachments: nil,
   reply_count: 0
 )
   if text
+    text = text.to_s
     message['text'] = text
     message['html'] = text.to_html
 
@@ -122,21 +124,24 @@ def mock_message(
     message['channel_id'] = channel_id
   end
 
-  if created_at && updated_at
-    message['created_at'] = created_at
-    message['updated_at'] = updated_at
-  end
-
   message['type'] = message_type
+  message['pinned_at'] = pinned_at
+  message['pinned_by'] = pinned_by
+  message['pin_expires'] = pin_expires
   message['id'] = message_id if message_id
   message['command'] = command if command
+  message['created_at'] = created_at if created_at
+  message['updated_at'] = updated_at if updated_at
+  message['deleted_at'] = deleted_at if deleted_at
+  message['message_text_updated_at'] = message_text_updated_at if message_text_updated_at
+  message['pinned'] = pinned
   message['attachments'] = attachments if attachments
-  message['parent_id'] = parent_id if parent_id
-  message['show_in_channel'] = show_reply_in_channel if show_reply_in_channel
+  message['parent_id'] = parent_id unless parent_id.to_s.empty?
+  message['show_in_channel'] = show_in_channel if show_in_channel
   message['quoted_message_id'] = quoted_message_id if quoted_message_id
-  message['quoted_message'] = quoted_message if quoted_message
   message['user'] = user if user
   message['reply_count'] = reply_count if reply_count
 
+  $message_list << message unless deleted_at
   message
 end

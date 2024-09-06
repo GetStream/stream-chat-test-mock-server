@@ -36,6 +36,8 @@ Style/MissingRespondToMissing:
   Enabled: false
 Style/MultilineBlockChain:
   Enabled: false
+Style/NestedTernaryOperator:
+  Enabled: false
 Style/NumericLiteralPrefix:
   Enabled: false
 Style/TernaryParentheses:

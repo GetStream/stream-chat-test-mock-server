@@ -27,6 +27,10 @@ class Mocks
     JSON.parse(File.read('src/jsons/http_reaction.json'))
   end
 
+  def self.reaction_ws
+    JSON.parse(File.read('src/jsons/ws_reaction.json'))
+  end
+
   def self.attachment
     JSON.parse(File.read('src/jsons/http_attachment.json'))
   end
