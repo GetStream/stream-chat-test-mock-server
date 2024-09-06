@@ -8,6 +8,10 @@ class Mocks
   end
 
   def self.event
+    JSON.parse(File.read('src/jsons/http_events.json'))
+  end
+
+  def self.event_ws
     JSON.parse(File.read('src/jsons/ws_events.json'))
   end
 

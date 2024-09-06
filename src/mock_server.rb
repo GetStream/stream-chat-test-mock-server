@@ -9,6 +9,7 @@ require_relative 'extensions'
 require_relative 'data'
 require_relative 'participant'
 require_relative 'mocks'
+require_relative 'helpers/event'
 require_relative 'helpers/message'
 
 $ws = nil
@@ -42,10 +43,6 @@ post '/sync' do
   { events: [] }.to_json
 end
 
-post '/channels/messaging/:channel_id/event' do
-  Mocks.event.to_s # FIXME
-end
-
 # Read channels
 get '/channels' do
   Mocks.channels.to_s # FIXME
@@ -56,12 +53,17 @@ post '/channels/messaging/:channel_id' do
 end
 
 post '/channels/:channel_type/:channel_id/query' do
-  # FIXME: NOW
+  # FIXME
+end
+
+# Sent event
+post '/channels/messaging/:channel_id/event' do
+  create_event(type: JSON.parse(request.body.read)['type'], channel_id: params[:channel_id])
 end
 
 # Read message
 post '/channels/messaging/:channel_id/read' do
-  Mocks.event.to_s # FIXME: NOW
+  create_event(type: 'message.read', channel_id: params[:channel_id])
 end
 
 # Sent message
@@ -76,12 +78,12 @@ end
 
 # Sent reaction
 post '/messages/:message_id/reaction' do
-  Mocks.reaction.to_s # FIXME: NOW
+  Mocks.reaction.to_s # FIXME
 end
 
 # Updated reaction
 post '/messages/:message_id/reaction/:reaction_type' do
-  Mocks.reaction.to_s # FIXME: NOW
+  Mocks.reaction.to_s # FIXME
 end
 
 post '/messages/:message_id/replies' do

@@ -142,9 +142,9 @@ post '/participant/read' do
 end
 
 def event(type:, params:)
-  args = { 'user' => Participant.user, 'type' => 'typing.start', 'created_at' => unique_date }
+  args = { 'user' => Participant.user, 'type' => type, 'created_at' => unique_date }
   args['parent_id'] = params[:parent_id] unless params[:parent_id].to_s.empty?
-  $ws&.send(Mocks.event.merge(args).to_s)
+  $ws&.send(Mocks.event_ws.merge(args).to_s)
 end
 
 ###### REACTIONS ######
