@@ -1,4 +1,4 @@
-def message_creation(request_body:, channel_id: nil, event_type: :message_new)
+def create_message(request_body:, channel_id: nil, event_type: :message_new)
   json = JSON.parse(request_body)
   message = json['message']
   parent_id = message['parent_id']
@@ -16,7 +16,7 @@ def message_creation(request_body:, channel_id: nil, event_type: :message_new)
     end
 
   if quoted_message_id && parent_id
-    quoted_message_creation_in_thread(
+    create_quoted_message_in_thread(
       message,
       parent_id: parent_id,
       quoted_message_id: quoted_message_id,
@@ -25,7 +25,7 @@ def message_creation(request_body:, channel_id: nil, event_type: :message_new)
       event_type: event_type
     )
   elsif quoted_message_id
-    quoted_message_creation_in_channel(
+    create_quoted_message_in_channel(
       message,
       quoted_message_id: quoted_message_id,
       message_type: message_type,
@@ -33,7 +33,7 @@ def message_creation(request_body:, channel_id: nil, event_type: :message_new)
       event_type: event_type
     )
   elsif parent_id
-    message_creation_in_thread(
+    create_regular_message_in_thread(
       message,
       parent_id: parent_id,
       message_type: message_type,
@@ -41,7 +41,7 @@ def message_creation(request_body:, channel_id: nil, event_type: :message_new)
       event_type: event_type
     )
   else
-    message_creation_in_channel(
+    create_regular_message_in_channel(
       message,
       message_type: message_type,
       channel_id: channel_id,
@@ -52,7 +52,7 @@ end
 
 private
 
-def message_creation_in_channel(message, message_type:, channel_id:, event_type: :message_new)
+def create_regular_message_in_channel(message, message_type:, channel_id:, event_type: :message_new)
   timestamp = unique_date
   response = message_type == :ephemeral ? Mocks.giphy : Mocks.message
   template_message = response['message']
@@ -70,17 +70,16 @@ def message_creation_in_channel(message, message_type:, channel_id:, event_type:
   )
 
   response['message'] = mocked_message
-  $ws&.send(response.to_s)
   response.to_s
 end
 
-def quoted_message_creation_in_channel(message, message_type:, channel_id:, quoted_message_id:, event_type: :message_new)
+def create_quoted_message_in_channel(message, message_type:, channel_id:, quoted_message_id:, event_type: :message_new)
 end
 
-def message_creation_in_thread(message, message_type:, parent_id:, event_type: :message_new)
+def create_regular_message_in_thread(message, message_type:, parent_id:, event_type: :message_new)
 end
 
-def quoted_message_creation_in_thread(message, message_type:, parent_id:, quoted_message_id:, event_type: :message_new)
+def create_quoted_message_in_thread(message, message_type:, parent_id:, quoted_message_id:, event_type: :message_new)
 end
 
 def mock_message(

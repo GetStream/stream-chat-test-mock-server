@@ -138,6 +138,7 @@ post '/participant/typing/stop' do
 end
 
 post '/participant/read' do
+  $channel_list['channels'][0]['read'].detect { |u| u['user']['id'] == Participant.user['id'] }['last_read'] = unique_date
   event(type: 'message.read', params: params)
 end
 
