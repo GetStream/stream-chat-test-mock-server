@@ -49,13 +49,13 @@ end
 
 # Show channel list
 get '/channels' do
-  $channel_list['channels'][0]['messages'] = $message_list
+  $channel_list['channels'].each { |channel| channel['messages'] = $message_list }
   $channel_list.to_s
 end
 
 # Show channel info
 post '/channels/:channel_type/:channel_id/query' do
-  $channel_list['channels'][0].to_s
+  $channel_list['channels'].detect { |channel| channel['channel']['id'] == params[:channel_id] }.to_s
 end
 
 # Send event
@@ -75,48 +75,60 @@ end
 
 # Update message
 post '/messages/:message_id' do
-  # FIXME: NOW
+  update_message(request_body: request.body.read, params: params)
 end
 
-# Send reaction
-post '/messages/:message_id/reaction' do
-  Mocks.reaction.to_s # FIXME
+# Delete message
+delete '/messages/:message_id' do
+  update_message(request_body: request.body.read, params: params)
 end
 
-# Update reaction
-post '/messages/:message_id/reaction/:reaction_type' do
-  Mocks.reaction.to_s # FIXME
+# Pin message
+put '/messages/:message_id' do
+  update_message(request_body: request.body.read, params: params)
 end
 
-post '/messages/:message_id/replies' do
-  # FIXME
+# Send giphy
+post '/messages/:message_id/action' do
+  create_giphy(request_body: request.body.read, message_id: params[:message_id])
 end
 
 # Send image
 post '/channels/messaging/:channel_id/image' do
-  Mocks.attachment.to_s # FIXME
+  status 500
 end
 
 # Send file
 post '/channels/messaging/:channel_id/file' do
-  Mocks.attachment.to_s # FIXME
+  status 500
 end
 
-post '/messages/:message_id/action' do
-  # FIXME
+# Send reaction
+post '/messages/:message_id/reaction' do
+  status 500
+end
+
+# Update reaction
+post '/messages/:message_id/reaction/:reaction_type' do
+  status 500
+end
+
+# Show thread list
+post '/messages/:message_id/replies' do
+  status 500
 end
 
 # Truncate channel
 post '/channels/messaging/:channel_id/truncate' do
-  # FIXME
+  status 500
 end
 
 # Show channel members
 post '/members' do
-  # FIXME
+  status 500
 end
 
 # Add channel member
 post '/channels/messaging/:channel_id' do
-  # FIXME
+  status 500
 end

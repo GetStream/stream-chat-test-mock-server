@@ -1,3 +1,47 @@
+def update_message(request_body:, params:)
+  timestamp = unique_date
+  json = request_body.empty? ? {} : JSON.parse(request_body)
+  message = $message_list.detect { |msg| msg['id'] == params[:message_id] }
+
+  if json['message']
+    message['text'] = json['message']['text']
+    message['html'] = json['message']['text'].to_html
+    message['message_text_updated_at'] = timestamp
+  elsif json['set']
+    pinned = json['set']['pinned']
+    message['pinned'] = pinned
+    message['pinned_by'] = pinned ? current_user : nil
+    message['pinned_at'] = pinned ? timestamp : nil
+  elsif params[:hard]
+    message['type'] = 'deleted'
+    message['deleted_at'] = timestamp
+    message['message_text_updated_at'] = nil
+  end
+
+  message['updated_at'] = timestamp
+  response = Mocks.message
+  response['message'] = message
+  $message_list.delete_if { |msg| msg['id'] == params[:message_id] } if params[:hard].to_i == 1
+  response.to_s
+end
+
+def create_giphy(request_body:, message_id:)
+  json = JSON.parse(request_body)
+  message = $message_list.detect { |msg| msg['id'] == message_id }
+
+  if json['form_data']['image_action'] == 'send'
+    message['attachments'][0]['actions'] = nil
+    message['type'] = 'regular'
+    message['command'] = 'giphy'
+    message['text'] = ''
+    message['html'] = ''
+  end
+
+  response = Mocks.message
+  response['message'] = message
+  response.to_s
+end
+
 def create_message(request_body:, channel_id: nil, event_type: :message_new)
   json = JSON.parse(request_body)
   message = json['message']
@@ -51,6 +95,13 @@ def create_message(request_body:, channel_id: nil, event_type: :message_new)
 end
 
 private
+
+def current_user
+  return @user if @user
+
+  @user = Mocks.message['message']['user']
+  @user
+end
 
 def create_regular_message_in_channel(message, message_type:, channel_id:, event_type: :message_new)
   timestamp = unique_date
