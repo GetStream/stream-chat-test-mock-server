@@ -10,7 +10,6 @@ require_relative 'server/data'
 require_relative 'server/mocks'
 require_relative 'helpers/event'
 require_relative 'helpers/message'
-require_relative 'robots/backend'
 require_relative 'robots/participant'
 
 $ws = nil

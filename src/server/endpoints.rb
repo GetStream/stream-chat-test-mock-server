@@ -24,6 +24,12 @@ post '/channels/:channel_type/:channel_id/query' do
   $channel_list['channels'].detect { |channel| channel['channel']['id'] == params[:channel_id] }.to_s
 end
 
+# Show thread list
+get '/messages/:message_id/replies' do
+  thread_list = $message_list.select { |msg| msg['parent_id'] == params[:message_id] }
+  { messages: thread_list }.to_s
+end
+
 # Send event
 post '/channels/messaging/:channel_id/event' do
   create_event(type: JSON.parse(request.body.read)['event']['type'], channel_id: params[:channel_id])
@@ -37,6 +43,12 @@ end
 # Send message
 post '/channels/messaging/:channel_id/message' do
   create_message(request_body: request.body.read, channel_id: params[:channel_id])
+end
+
+# Get message
+get '/messages/:message_id' do
+  message = $message_list.detect { |msg| msg['id'] == params[:message_id] }
+  { message: message }.to_s
 end
 
 # Update message
@@ -76,11 +88,6 @@ end
 
 # Update reaction
 post '/messages/:message_id/reaction/:reaction_type' do
-  status 500
-end
-
-# Show thread list
-post '/messages/:message_id/replies' do
   status 500
 end
 

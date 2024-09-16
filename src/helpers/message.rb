@@ -1,3 +1,10 @@
+def current_user
+  return @user if @user
+
+  @user = Mocks.message['message']['user']
+  @user
+end
+
 def update_message(request_body:, params:)
   timestamp = unique_date
   json = request_body.empty? ? {} : JSON.parse(request_body)
@@ -25,23 +32,6 @@ def update_message(request_body:, params:)
   response.to_s
 end
 
-def create_giphy(request_body:, message_id:)
-  json = JSON.parse(request_body)
-  message = $message_list.detect { |msg| msg['id'] == message_id }
-
-  if json['form_data']['image_action'] == 'send'
-    message['attachments'][0]['actions'] = nil
-    message['type'] = 'regular'
-    message['command'] = 'giphy'
-    message['text'] = ''
-    message['html'] = ''
-  end
-
-  response = Mocks.message
-  response['message'] = message
-  response.to_s
-end
-
 def create_message(request_body:, channel_id: nil, event_type: :message_new)
   json = JSON.parse(request_body)
   message = json['message']
@@ -59,51 +49,6 @@ def create_message(request_body:, channel_id: nil, event_type: :message_new)
       :reply
     end
 
-  if quoted_message_id && parent_id
-    create_quoted_message_in_thread(
-      message,
-      parent_id: parent_id,
-      quoted_message_id: quoted_message_id,
-      message_type: message_type,
-      channel_id: channel_id,
-      event_type: event_type
-    )
-  elsif quoted_message_id
-    create_quoted_message_in_channel(
-      message,
-      quoted_message_id: quoted_message_id,
-      message_type: message_type,
-      channel_id: channel_id,
-      event_type: event_type
-    )
-  elsif parent_id
-    create_regular_message_in_thread(
-      message,
-      parent_id: parent_id,
-      message_type: message_type,
-      channel_id: channel_id,
-      event_type: event_type
-    )
-  else
-    create_regular_message_in_channel(
-      message,
-      message_type: message_type,
-      channel_id: channel_id,
-      event_type: event_type
-    )
-  end
-end
-
-private
-
-def current_user
-  return @user if @user
-
-  @user = Mocks.message['message']['user']
-  @user
-end
-
-def create_regular_message_in_channel(message, message_type:, channel_id:, event_type: :message_new)
   timestamp = unique_date
   response = message_type == :ephemeral ? Mocks.giphy : Mocks.message
   template_message = response['message']
@@ -113,6 +58,9 @@ def create_regular_message_in_channel(message, message_type:, channel_id:, event
     message_type: message_type,
     channel_id: channel_id,
     message_id: message['id'],
+    parent_id: parent_id,
+    quoted_message_id: quoted_message_id,
+    show_in_channel: channel_reply,
     text: message['text'].to_s,
     user: template_message['user'],
     created_at: timestamp,
@@ -124,13 +72,21 @@ def create_regular_message_in_channel(message, message_type:, channel_id:, event
   response.to_s
 end
 
-def create_quoted_message_in_channel(message, message_type:, channel_id:, quoted_message_id:, event_type: :message_new)
-end
+def create_giphy(request_body:, message_id:)
+  json = JSON.parse(request_body)
+  message = $message_list.detect { |msg| msg['id'] == message_id }
 
-def create_regular_message_in_thread(message, message_type:, parent_id:, event_type: :message_new)
-end
+  if json['form_data']['image_action'] == 'send'
+    message['attachments'][0]['actions'] = nil
+    message['type'] = 'regular'
+    message['command'] = 'giphy'
+    message['text'] = ''
+    message['html'] = ''
+  end
 
-def create_quoted_message_in_thread(message, message_type:, parent_id:, quoted_message_id:, event_type: :message_new)
+  response = Mocks.message
+  response['message'] = message
+  response.to_s
 end
 
 def mock_message(
@@ -174,6 +130,12 @@ def mock_message(
     message['channel_id'] = channel_id
   end
 
+  if parent_id
+    message['parent_id'] = parent_id
+    parent_message = $message_list.detect { |msg| msg['id'] == parent_id }
+    parent_message['reply_count'] += 1
+  end
+
   message['type'] = message_type
   message['pinned_at'] = pinned_at
   message['pinned_by'] = pinned_by
@@ -186,7 +148,6 @@ def mock_message(
   message['message_text_updated_at'] = message_text_updated_at if message_text_updated_at
   message['pinned'] = pinned
   message['attachments'] = attachments if attachments
-  message['parent_id'] = parent_id unless parent_id.to_s.empty?
   message['show_in_channel'] = show_in_channel if show_in_channel
   message['quoted_message_id'] = quoted_message_id if quoted_message_id
   message['user'] = user if user
