@@ -1,37 +1,3 @@
-require 'eventmachine'
-require 'faye/websocket'
-require 'puma'
-require 'json'
-require 'sinatra'
-require 'securerandom'
-require_relative 'log'
-require_relative 'extensions'
-require_relative 'data'
-require_relative 'participant'
-require_relative 'mocks'
-require_relative 'helpers/event'
-require_relative 'helpers/message'
-
-$ws = nil
-$message_list = []
-$channel_list = Mocks.channels
-$current_channel_id = Mocks.event['channel_id']
-$health_check = Mocks.health_check.to_s
-
-set :port, ARGV[0] || 4568
-
-before do
-  content_type :json
-  request.body.rewind
-end
-
-Thread.new do
-  loop do
-    sleep 3
-    $ws&.send($health_check)
-  end
-end
-
 # Connect to WebSocket
 get '/connect' do
   if Faye::WebSocket.websocket?(request.env)
