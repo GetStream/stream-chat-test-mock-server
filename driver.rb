@@ -28,7 +28,7 @@ end
 
 def start_mock_server(port)
   port = available_port if port.to_s.empty?
-  Thread.new { `bundle exec ruby mock_server.rb #{port} > logs/#{port}.log 2>&1 &` }
+  Thread.new { `bundle exec ruby src/server.rb #{port} > logs/#{port}.log 2>&1 &` }
   port.to_s
 end
 
