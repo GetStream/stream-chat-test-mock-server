@@ -32,7 +32,8 @@ end
 
 # Send event
 post '/channels/messaging/:channel_id/event' do
-  create_event(type: JSON.parse(request.body.read)['event']['type'], channel_id: params[:channel_id])
+  json = JSON.parse(request.body.read)
+  create_event(type: json['event']['type'], channel_id: params[:channel_id], parent_id: json['event']['parent_id'])
 end
 
 # Read message

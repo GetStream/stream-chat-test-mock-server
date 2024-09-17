@@ -82,6 +82,11 @@ def create_giphy(request_body:, message_id:)
   response.to_s
 end
 
+def last_message_id
+  last_message = $message_list.last
+  last_message['id'] if last_message
+end
+
 def mock_message(
   message,
   message_id:,

@@ -85,33 +85,6 @@ post '/participant/message' do
   $ws&.send(response.to_s)
 end
 
-###### EVENTS ######
-
-### Parameters
-# `thread`: Boolean - Pass this param if it's a thread event
-
-post '/participant/typing/start' do
-  event(type: 'typing.start', params: params)
-end
-
-post '/participant/typing/stop' do
-  event(type: 'typing.stop', params: params)
-end
-
-post '/participant/read' do
-  $channel_list['channels'][0]['read'].detect { |u| u['user']['id'] == Participant.user['id'] }['last_read'] = unique_date
-  event(type: 'message.read', params: params)
-end
-
-def event(type:, params:)
-  args = { 'user' => Participant.user, 'type' => type, 'created_at' => unique_date }
-  if params[:thread]
-    last_message = $message_list.last
-    args['parent_id'] = last_message['id'] if last_message
-  end
-  $ws&.send(Mocks.event_ws.merge(args).to_s)
-end
-
 ###### REACTIONS ######
 
 ### Parameters
@@ -121,10 +94,49 @@ end
 post '/participant/reaction' do
   response = create_reaction(
     type: params[:type],
-    message_id: $message_list.last['id'],
+    message_id: last_message_id,
     user: Participant.user,
     response: Mocks.reaction_ws,
     delete: params[:delete]
+  )
+  $ws&.send(response)
+end
+
+###### EVENTS ######
+
+### Parameters
+# `thread`: Boolean - Pass this param if it's a thread event
+
+post '/participant/typing/start' do
+  response = create_event(
+    type: 'typing.start',
+    channel_id: $current_channel_id,
+    user: Participant.user,
+    parent_id: params[:thread] ? last_message_id : nil,
+    response: Mocks.event_ws
+  )
+  $ws&.send(response)
+end
+
+post '/participant/typing/stop' do
+  response = create_event(
+    type: 'typing.stop',
+    channel_id: $current_channel_id,
+    user: Participant.user,
+    parent_id: params[:thread] ? last_message_id : nil,
+    response: Mocks.event_ws
+  )
+  $ws&.send(response)
+end
+
+post '/participant/read' do
+  $channel_list['channels'][0]['read'].detect { |u| u['user']['id'] == Participant.user['id'] }['last_read'] = unique_date
+  response = create_event(
+    type: 'message.read',
+    channel_id: $current_channel_id,
+    user: Participant.user,
+    parent_id: params[:thread] ? last_message_id : nil,
+    response: Mocks.event_ws
   )
   $ws&.send(response)
 end
