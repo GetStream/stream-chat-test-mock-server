@@ -73,22 +73,24 @@ end
 
 # Send image
 post '/channels/messaging/:channel_id/image' do
-  status 500
+  file = test_asset('image')
+  { file: file }.to_s
 end
 
 # Send file
 post '/channels/messaging/:channel_id/file' do
-  status 500
+  file = request.content_type.include?('video') ? test_asset('video') : test_asset('file')
+  { file: file }.to_s
 end
 
 # Send reaction
 post '/messages/:message_id/reaction' do
-  status 500
+  create_reaction(type: JSON.parse(request.body.read)['reaction']['type'], message_id: params[:message_id])
 end
 
-# Update reaction
-post '/messages/:message_id/reaction/:reaction_type' do
-  status 500
+# Delete reaction
+delete '/messages/:message_id/reaction/:reaction_type' do
+  create_reaction(type: params[:reaction_type], message_id: params[:message_id], delete: true)
 end
 
 # Truncate channel

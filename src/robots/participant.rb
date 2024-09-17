@@ -85,49 +85,10 @@ post '/participant/message' do
   $ws&.send(response.to_s)
 end
 
-def mock_attachments(params)
-  attachments = []
-
-  if params[:image]
-    attachment = {}
-    attachment['type'] = 'image'
-    attachment['image_url'] = test_asset(attachment['type'])
-    params[:image].to_i.times do |i|
-      attachment['title'] = "#{attachment['type']}_#{i}"
-      attachments << attachment
-    end
-  end
-
-  if params[:file]
-    attachment = {}
-    attachment['type'] = 'file'
-    attachment['file_size'] = 123_456
-    attachment['mime_type'] = 'application/pdf'
-    attachment['asset_url'] = test_asset(attachment['type'])
-    params[:file].to_i.times do |i|
-      attachment['title'] = "#{attachment['type']}_#{i}"
-      attachments << attachment
-    end
-  end
-
-  if params[:video]
-    attachment = {}
-    attachment['type'] = 'video'
-    attachment['mime_type'] = 'video/mp4'
-    attachment['asset_url'] = test_asset(attachment['type'])
-    params[:video].to_i.times do |i|
-      attachment['title'] = "#{attachment['type']}_#{i}"
-      attachments << attachment
-    end
-  end
-
-  attachments.empty? ? nil : attachments
-end
-
 ###### EVENTS ######
 
 ### Parameters
-# `parent_id`: String - Pass this param if it has to be done in thread
+# `thread`: Boolean - Pass this param if it's a thread event
 
 post '/participant/typing/start' do
   event(type: 'typing.start', params: params)
@@ -144,16 +105,26 @@ end
 
 def event(type:, params:)
   args = { 'user' => Participant.user, 'type' => type, 'created_at' => unique_date }
-  args['parent_id'] = params[:parent_id] unless params[:parent_id].to_s.empty?
+  if params[:thread]
+    last_message = $message_list.last
+    args['parent_id'] = last_message['id'] if last_message
+  end
   $ws&.send(Mocks.event_ws.merge(args).to_s)
 end
 
 ###### REACTIONS ######
 
 ### Parameters
-# `parent_id`: String - Pass this param if it has to be done in thread
-# `action`: String - Pass this param if you need to update a reaction (available options: `edit`, `delete`)
+# `type`: String - Pass this param to define a reaction type (available options: `like`, `love`, `sad`, `wow`, `haha`)
+# `delete`: Boolean - Pass this param if you need to delete the reaction
 
 post '/participant/reaction' do
-  status 500
+  response = create_reaction(
+    type: params[:type],
+    message_id: $message_list.last['id'],
+    user: Participant.user,
+    response: Mocks.reaction_ws,
+    delete: params[:delete]
+  )
+  $ws&.send(response)
 end

@@ -1,10 +1,3 @@
-def current_user
-  return @user if @user
-
-  @user = Mocks.message['message']['user']
-  @user
-end
-
 def update_message(request_body:, params:)
   timestamp = unique_date
   json = request_body.empty? ? {} : JSON.parse(request_body)
@@ -155,4 +148,43 @@ def mock_message(
 
   $message_list << message unless deleted_at
   message
+end
+
+def mock_attachments(params)
+  attachments = []
+
+  if params[:image]
+    attachment = {}
+    attachment['type'] = 'image'
+    attachment['image_url'] = test_asset(attachment['type'])
+    params[:image].to_i.times do |i|
+      attachment['title'] = "#{attachment['type']}_#{i}"
+      attachments << attachment
+    end
+  end
+
+  if params[:file]
+    attachment = {}
+    attachment['type'] = 'file'
+    attachment['file_size'] = 123_456
+    attachment['mime_type'] = 'application/pdf'
+    attachment['asset_url'] = test_asset(attachment['type'])
+    params[:file].to_i.times do |i|
+      attachment['title'] = "#{attachment['type']}_#{i}"
+      attachments << attachment
+    end
+  end
+
+  if params[:video]
+    attachment = {}
+    attachment['type'] = 'video'
+    attachment['mime_type'] = 'video/mp4'
+    attachment['asset_url'] = test_asset(attachment['type'])
+    params[:video].to_i.times do |i|
+      attachment['title'] = "#{attachment['type']}_#{i}"
+      attachments << attachment
+    end
+  end
+
+  attachments.empty? ? nil : attachments
 end
