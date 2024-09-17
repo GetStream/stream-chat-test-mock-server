@@ -1,0 +1,39 @@
+name: Sync
+
+on:
+  schedule:
+    # Runs "At 00:00 on day-of-month 1 and 15"
+    - cron: '0 0 1,15 * *'
+
+  workflow_dispatch:
+
+jobs:
+  sync:
+    name: Backend
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.CI_BOT_GITHUB_TOKEN }}
+    steps:
+    - uses: actions/checkout@v4.1.1
+    - uses: ./.github/actions/ruby-cache
+    - uses: ./.github/actions/python-cache
+    - run: python3 sync.py
+      timeout-minutes: 5
+    - run: |
+        git config --global user.email "stream-bot@getstream.io"
+        git config --global user.name "Stream Bot"
+        git checkout -b "ci/sync-mock-server-$(date +%s)"
+        git add -A
+        git commit -m "[CI] Sync Mock Server"
+        git push
+        gh pr create --base main --fill
+    # - uses: 8398a7/action-slack@v3
+    #   with:
+    #     status: ${{ job.status }}
+    #     text: "You shall not pass!"
+    #     job_name: "${{ github.workflow }}: ${{ github.job }}"
+    #     fields: message,commit,author,action,workflow,job,took
+    #   env:
+    #     SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+    #     MATRIX_CONTEXT: ${{ toJson(matrix) }}
+    #   if: always()
