@@ -6,3 +6,5 @@
 
 # Other
 logs/
+vendor/bundle/
+.bundle/
