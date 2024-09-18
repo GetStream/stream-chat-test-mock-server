@@ -1,6 +1,6 @@
-def create_event(type:, channel_id:, user: current_user, parent_id: nil, response: Mocks.event)
+def create_event(type:, channel_id:, parent_id: nil, user: current_user, response: Mocks.event)
   cid = "messaging:#{channel_id}"
-  if user == current_user
+  if response == Mocks.event
     response['event']['type'] = type
     response['event']['cid'] = cid
     response['event']['channel_id'] = channel_id

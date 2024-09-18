@@ -12,6 +12,7 @@ require_relative 'helpers/user'
 require_relative 'helpers/event'
 require_relative 'helpers/message'
 require_relative 'helpers/reaction'
+require_relative 'robots/chat'
 require_relative 'robots/participant'
 
 $ws = nil
