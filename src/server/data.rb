@@ -6,9 +6,15 @@ def unique_date
   Time.now.utc.strftime(time_format)
 end
 
-def update_date(timestamp:, plus_seconds:)
+def update_date(timestamp:, plus_seconds: nil, minus_seconds: nil)
   time = Time.strptime(timestamp, time_format)
-  (time + plus_seconds).utc.strftime(time_format)
+  if plus_seconds
+    (time + plus_seconds).utc.strftime(time_format)
+  elsif minus_seconds
+    (time - minus_seconds).utc.strftime(time_format)
+  else
+    timestamp
+  end
 end
 
 def unique_id
