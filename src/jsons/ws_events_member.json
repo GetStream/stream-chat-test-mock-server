@@ -1,17 +1,17 @@
 {
-    "channel_id": "73489dde-752a-11ef-b90d-a5c62a23cd5b",
+    "channel_id": "9e5e6f1a-8a8a-11ef-a35b-91c2430de719",
     "channel_type": "messaging",
-    "cid": "messaging:73489dde-752a-11ef-b90d-a5c62a23cd5b",
-    "created_at": "2024-09-17T19:24:28.542396865Z",
+    "cid": "messaging:9e5e6f1a-8a8a-11ef-a35b-91c2430de719",
+    "created_at": "2024-10-15T00:15:47.662565638Z",
     "member": {
         "banned": false,
         "channel_role": "channel_member",
-        "created_at": "2024-09-17T19:24:28.527266Z",
+        "created_at": "2024-10-15T00:15:47.654432Z",
         "notifications_muted": false,
         "role": "admin",
         "shadow_banned": false,
         "status": "member",
-        "updated_at": "2024-09-17T19:24:28.527266Z",
+        "updated_at": "2024-10-15T00:15:47.654432Z",
         "user": {
             "banned": false,
             "birthland": "Polis Massa",
@@ -19,7 +19,7 @@
             "id": "leia_organa",
             "image": "https://vignette.wikia.nocookie.net/starwars/images/f/fc/Leia_Organa_TLJ.png",
             "language": "en",
-            "last_active": "2024-09-17T11:24:40.25895Z",
+            "last_active": "2024-10-15T00:13:38.643551827Z",
             "name": "Leia Organa",
             "online": false,
             "private_settings": {
@@ -43,7 +43,7 @@
         "id": "leia_organa",
         "image": "https://vignette.wikia.nocookie.net/starwars/images/f/fc/Leia_Organa_TLJ.png",
         "language": "en",
-        "last_active": "2024-09-17T11:24:40.25895Z",
+        "last_active": "2024-10-15T00:13:38.643551827Z",
         "name": "Leia Organa",
         "online": false,
         "private_settings": {
