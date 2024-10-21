@@ -1,6 +1,6 @@
 {
     "channel": {
-        "cid": "messaging:73489dde-752a-11ef-b90d-a5c62a23cd5b",
+        "cid": "messaging:a9bfc99a-8fb6-11ef-87fd-1eebe6661088",
         "config": {
             "automod": "AI",
             "automod_behavior": "block",
@@ -49,115 +49,112 @@
             "uploads": true,
             "url_enrichment": true
         },
-        "created_at": "2024-09-17T19:24:25.926845Z",
+        "created_at": "2024-10-21T14:13:36.896161Z",
         "created_by": null,
-        "deleted_at": "2024-09-17T19:24:30.128053Z",
+        "deleted_at": "2024-10-21T14:13:39.014463Z",
         "disabled": false,
         "frozen": false,
-        "id": "73489dde-752a-11ef-b90d-a5c62a23cd5b",
+        "id": "a9bfc99a-8fb6-11ef-87fd-1eebe6661088",
         "members": [
             {
-                "Custom": {
-                    "Custom": null
-                },
                 "banned": false,
                 "channel_role": "channel_member",
-                "created_at": "2024-09-17T19:24:25.931255Z",
+                "created_at": "2024-10-21T14:13:36.901742Z",
                 "notifications_muted": false,
                 "role": "member",
                 "shadow_banned": false,
                 "status": "member",
-                "updated_at": "2024-09-17T19:24:25.931255Z",
+                "updated_at": "2024-10-21T14:13:36.901742Z",
                 "user": {
                     "banned": false,
                     "birthland": "Serenno",
+                    "blocked_user_ids": [],
                     "created_at": "2024-04-22T06:42:08.562992Z",
                     "id": "count_dooku",
                     "image": "https://vignette.wikia.nocookie.net/starwars/images/b/b8/Dooku_Headshot.jpg",
-                    "last_active": "2024-09-05T13:17:30.846138Z",
+                    "language": "",
+                    "last_active": "2024-10-09T11:45:16.459635Z",
                     "name": "Count Dooku",
                     "online": false,
                     "role": "user",
+                    "teams": [],
                     "updated_at": "2024-07-11T05:45:57.296628Z"
                 },
                 "user_id": "count_dooku"
             },
             {
-                "Custom": {
-                    "Custom": null
-                },
                 "banned": false,
                 "channel_role": "channel_member",
-                "created_at": "2024-09-17T19:24:25.931255Z",
+                "created_at": "2024-10-21T14:13:36.901742Z",
                 "notifications_muted": false,
                 "role": "member",
                 "shadow_banned": false,
                 "status": "member",
-                "updated_at": "2024-09-17T19:24:25.931255Z",
+                "updated_at": "2024-10-21T14:13:36.901742Z",
                 "user": {
                     "banned": false,
                     "birthland": "Corellia",
+                    "blocked_user_ids": [],
                     "created_at": "2024-04-04T09:18:11.060737Z",
                     "id": "han_solo",
-                    "image": "https://cutt.ly/SmeFRfC",
-                    "last_active": "2024-09-17T14:13:27.818364Z",
-                    "name": "Jigar2 Khatri",
+                    "image": "https://vignette.wikia.nocookie.net/starwars/images/e/e2/TFAHanSolo.png",
+                    "language": "",
+                    "last_active": "2024-10-21T14:12:58.024732007Z",
+                    "name": "Han Solo",
                     "online": false,
                     "role": "user",
-                    "updated_at": "2024-09-17T12:49:49.978519Z"
+                    "teams": [],
+                    "updated_at": "2024-10-14T10:52:59.066883Z"
                 },
                 "user_id": "han_solo"
             },
             {
-                "Custom": {
-                    "Custom": null
-                },
                 "banned": false,
                 "channel_role": "channel_member",
-                "created_at": "2024-09-17T19:24:25.931255Z",
+                "created_at": "2024-10-21T14:13:36.901742Z",
                 "notifications_muted": false,
                 "role": "owner",
                 "shadow_banned": false,
                 "status": "member",
-                "updated_at": "2024-09-17T19:24:25.931255Z",
+                "updated_at": "2024-10-21T14:13:36.901742Z",
                 "user": {
                     "banned": false,
                     "birthland": "Tatooine",
+                    "blocked_user_ids": [],
                     "created_at": "2024-04-04T09:26:11.805899Z",
                     "id": "luke_skywalker",
                     "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
                     "language": "fr",
-                    "last_active": "2024-09-17T19:24:25.165079112Z",
+                    "last_active": "2024-10-21T14:13:30.914780732Z",
                     "name": "Luke Skywalker",
                     "online": true,
                     "pando": "{\"speciality\":\"ios engineer\"}",
                     "role": "admin",
                     "team": "test",
+                    "teams": [],
                     "type": "team",
-                    "updated_at": "2024-09-17T16:43:05.58943Z"
+                    "updated_at": "2024-10-19T22:19:46.931674Z"
                 },
                 "user_id": "luke_skywalker"
             },
             {
-                "Custom": {
-                    "Custom": null
-                },
                 "banned": false,
                 "channel_role": "channel_member",
-                "created_at": "2024-09-17T19:24:28.527266Z",
+                "created_at": "2024-10-21T14:13:37.891603Z",
                 "notifications_muted": false,
                 "role": "admin",
                 "shadow_banned": false,
                 "status": "member",
-                "updated_at": "2024-09-17T19:24:28.527266Z",
+                "updated_at": "2024-10-21T14:13:37.891603Z",
                 "user": {
                     "banned": false,
                     "birthland": "Polis Massa",
+                    "blocked_user_ids": [],
                     "created_at": "2024-04-04T09:42:00.68335Z",
                     "id": "leia_organa",
                     "image": "https://vignette.wikia.nocookie.net/starwars/images/f/fc/Leia_Organa_TLJ.png",
                     "language": "en",
-                    "last_active": "2024-09-17T11:24:40.25895Z",
+                    "last_active": "2024-10-20T16:12:05.01843Z",
                     "name": "Leia Organa",
                     "online": false,
                     "private_settings": {
@@ -169,30 +166,33 @@
                         }
                     },
                     "role": "admin",
-                    "updated_at": "2024-09-13T11:00:27.647455Z"
+                    "teams": [],
+                    "updated_at": "2024-10-15T04:48:51.509771Z"
                 },
                 "user_id": "leia_organa"
             }
         ],
-        "truncated_at": "2024-09-17T19:24:30.128053Z",
+        "truncated_at": "2024-10-21T14:13:39.014463Z",
         "truncated_by": {
             "banned": false,
             "birthland": "Tatooine",
+            "blocked_user_ids": [],
             "created_at": "2024-04-04T09:26:11.805899Z",
             "id": "luke_skywalker",
             "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
             "language": "fr",
-            "last_active": "2024-09-17T19:24:25.165079112Z",
+            "last_active": "2024-10-21T14:13:30.914780732Z",
             "name": "Luke Skywalker",
             "online": true,
             "pando": "{\"speciality\":\"ios engineer\"}",
             "role": "admin",
             "team": "test",
+            "teams": [],
             "type": "team",
-            "updated_at": "2024-09-17T16:43:05.58943Z"
+            "updated_at": "2024-10-19T22:19:46.931674Z"
         },
         "type": "messaging",
-        "updated_at": "2024-09-17T19:24:29.89485Z"
+        "updated_at": "2024-10-21T14:13:38.90521Z"
     },
-    "duration": "20.68ms"
+    "duration": "21.77ms"
 }

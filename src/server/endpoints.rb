@@ -15,6 +15,14 @@ end
 
 # Show channel list
 get '/channels' do
+  channels_response
+end
+
+post '/channels' do
+  channels_response
+end
+
+def channels_response
   $channel_list['channels'].each { |channel| channel['messages'] = $message_list.select { |msg| msg['cid'] == channel['channel']['cid'] } }
   $channel_list.to_s
 end
