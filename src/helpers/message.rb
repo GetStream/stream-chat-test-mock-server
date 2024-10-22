@@ -96,7 +96,7 @@ def mock_message(
   updated_at:,
   deleted_at: nil,
   message_text_updated_at: nil,
-  pinned: nil,
+  pinned: false,
   pinned_at: nil,
   pinned_by: nil,
   pin_expires: nil,

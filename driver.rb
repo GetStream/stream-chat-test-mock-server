@@ -9,10 +9,6 @@ get '/start' do
   start_mock_server(params[:port])
 end
 
-get '/stop' do
-  stop_mock_server(params[:port]) unless params[:port].to_s.empty?
-end
-
 get '/clean' do
   clean
 end
@@ -20,7 +16,7 @@ end
 def clean
   Dir.glob('logs/*').each do |file|
     port = file.scan(/\d+/).join.to_i
-    stop_mock_server(port)
+    `lsof -t -i:#{port} | xargs kill -9`
     FileUtils.rm_f(file)
   end
   'OK'
@@ -30,11 +26,6 @@ def start_mock_server(port)
   port = available_port if port.to_s.empty?
   Thread.new { `bundle exec ruby src/server.rb #{port} > logs/#{port}.log 2>&1 &` }
   port.to_s
-end
-
-def stop_mock_server(port)
-  `lsof -t -i:#{port} | xargs kill -9`
-  'OK'
 end
 
 def available_port

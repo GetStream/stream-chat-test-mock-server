@@ -18,7 +18,7 @@ require_relative 'robots/participant'
 $ws = nil
 $message_list = []
 $channel_list = Mocks.channels
-$current_channel_id = Mocks.event['channel_id']
+$current_channel_id = Mocks.event_ws['channel_id']
 $health_check = Mocks.health_check.to_s
 
 set :port, ARGV[0] || 4568
@@ -26,6 +26,13 @@ set :port, ARGV[0] || 4568
 before do
   content_type :json
   request.body.rewind
+end
+
+get '/stop' do
+  Thread.new do
+    sleep 1
+    exit
+  end
 end
 
 Thread.new do

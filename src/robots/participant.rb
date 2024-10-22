@@ -28,8 +28,9 @@ post '/participant/message' do
   response = Mocks.message_ws
   last_message = $message_list.last
   last_channel_message = $message_list.reverse.find { |m| m['parent_id'].nil? }
+  also_in_channel = params[:thread_and_channel] == 'true'
 
-  if (params[:thread] || params[:thread_and_channel]) && last_channel_message
+  if (params[:thread] || also_in_channel) && last_channel_message
     last_channel_message['reply_count'] += 1
     additional_response = Mocks.message_ws
     additional_response['type'] = 'message.updated'
@@ -46,7 +47,7 @@ post '/participant/message' do
                      end
 
   template_message['attachments'][0]['actions'] = nil if params[:giphy]
-  message_type = params[:thread] && !params[:thread_and_channel] ? :reply : :regular
+  message_type = params[:thread] && !also_in_channel ? :reply : :regular
   text = ['pin', 'unpin'].include?(params[:action]) ? template_message['text'] : request.body.read
 
   message = mock_message(
@@ -64,7 +65,7 @@ post '/participant/message' do
     updated_at: timestamp,
     deleted_at: params[:action] == 'delete' ? timestamp : nil,
     message_text_updated_at: params[:action] == 'edit' ? timestamp : nil,
-    pinned: params[:action] == 'pin' ? true : nil,
+    pinned: params[:action] == 'pin',
     pinned_at: params[:action] == 'pin' ? timestamp : nil,
     pinned_by: params[:action] == 'pin' ? Participant.user : nil,
     pin_expires: nil
@@ -81,7 +82,7 @@ post '/participant/message' do
 
   response['type'] = action_type
   response['message'] = message
-  response['hard_delete'] = true if params[:hard_delete] && params[:action] == 'delete'
+  response['hard_delete'] = true if params[:hard_delete] == 'true' && params[:action] == 'delete'
   $ws&.send(response.to_s)
 end
 
