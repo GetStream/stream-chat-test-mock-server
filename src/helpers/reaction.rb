@@ -44,5 +44,7 @@ def create_reaction(type:, message_id:, user: current_user, response: Mocks.reac
   response['channel_id'] = message['cid'].split(':').last
   response['type'] = delete ? 'reaction.deleted' : 'reaction.new'
   response['user'] = user
+
+  $ws&.send(response.to_s)
   response.to_s
 end
