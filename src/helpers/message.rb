@@ -1,7 +1,36 @@
+class MessageType
+  def self.new
+    'message.new'
+  end
+
+  def self.updated
+    'message.updated'
+  end
+
+  def self.deleted
+    'message.deleted'
+  end
+end
+
+def send_message_ws(response:, event_type:)
+  ws_response = Mocks.message_ws
+  ws_response['message'] = response['message']
+  ws_response['user'] = response['message']['user']
+  ws_response['cid'] = response['message']['cid']
+  ws_response['channel_id'] = response['message']['cid'].split(':').last
+  ws_response['created_at'] = response['message']['created_at']
+  ws_response['type'] = event_type
+  $ws&.send(ws_response.to_s)
+end
+
+def find_message_by_id(id)
+  $message_list.detect { |msg| msg['id'] == id }
+end
+
 def update_message(request_body:, params:)
   timestamp = unique_date
   json = request_body.empty? ? {} : JSON.parse(request_body)
-  message = $message_list.detect { |msg| msg['id'] == params[:message_id] }
+  message = find_message_by_id(params[:message_id])
 
   if json['message']
     message['text'] = json['message']['text']
@@ -22,10 +51,12 @@ def update_message(request_body:, params:)
   response = Mocks.message
   response['message'] = message
   $message_list.delete_if { |msg| msg['id'] == params[:message_id] } if params[:hard].to_i == 1
+
+  send_message_ws(response: response, event_type: params[:hard] ? MessageType.delete : MessageType.update)
   response.to_s
 end
 
-def create_message(request_body:, channel_id: nil, event_type: :message_new)
+def create_message(request_body:, channel_id: nil)
   json = JSON.parse(request_body)
   message = json['message']
   parent_id = message['parent_id']
@@ -62,12 +93,13 @@ def create_message(request_body:, channel_id: nil, event_type: :message_new)
   )
 
   response['message'] = mocked_message
+  send_message_ws(response: response, event_type: MessageType.new)
   response.to_s
 end
 
 def create_giphy(request_body:, message_id:)
   json = JSON.parse(request_body)
-  message = $message_list.detect { |msg| msg['id'] == message_id }
+  message = find_message_by_id(message_id)
 
   if json['form_data']['image_action'] == 'send'
     message['attachments'][0]['actions'] = nil
@@ -130,7 +162,7 @@ def mock_message(
 
   if parent_id
     message['parent_id'] = parent_id
-    parent_message = $message_list.detect { |msg| msg['id'] == parent_id }
+    parent_message = find_message_by_id(parent_id)
     parent_message['reply_count'] += 1
   end
 

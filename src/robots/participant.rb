@@ -73,11 +73,11 @@ post '/participant/message' do
 
   action_type = case params[:action]
                 when 'edit', 'pin', 'unpin'
-                  'message.updated'
+                  MessageType.updated
                 when 'delete'
-                  'message.deleted'
+                  MessageType.deleted
                 else
-                  'message.new'
+                  MessageType.new
                 end
 
   response['type'] = action_type
@@ -93,14 +93,13 @@ end
 # `delete`: Boolean - Pass this param if you need to delete the reaction
 
 post '/participant/reaction' do
-  response = create_reaction(
+  create_reaction(
     type: params[:type],
     message_id: last_message_id,
     user: Participant.user,
-    response: Mocks.reaction_ws,
     delete: params[:delete]
   )
-  $ws&.send(response)
+  ''
 end
 
 ###### EVENTS ######
@@ -109,35 +108,32 @@ end
 # `thread`: Boolean - Pass this param if it's a thread event
 
 post '/participant/typing/start' do
-  response = create_event(
+  create_event(
     type: 'typing.start',
     channel_id: $current_channel_id,
     user: Participant.user,
-    parent_id: params[:thread] ? last_message_id : nil,
-    response: Mocks.event_ws
+    parent_id: params[:thread] ? last_message_id : nil
   )
-  $ws&.send(response)
+  ''
 end
 
 post '/participant/typing/stop' do
-  response = create_event(
+  create_event(
     type: 'typing.stop',
     channel_id: $current_channel_id,
     user: Participant.user,
-    parent_id: params[:thread] ? last_message_id : nil,
-    response: Mocks.event_ws
+    parent_id: params[:thread] ? last_message_id : nil
   )
-  $ws&.send(response)
+  ''
 end
 
 post '/participant/read' do
   $channel_list['channels'][0]['read'].detect { |u| u['user']['id'] == Participant.user['id'] }['last_read'] = unique_date
-  response = create_event(
+  create_event(
     type: 'message.read',
     channel_id: $current_channel_id,
     user: Participant.user,
-    parent_id: params[:thread] ? last_message_id : nil,
-    response: Mocks.event_ws
+    parent_id: params[:thread] ? last_message_id : nil
   )
-  $ws&.send(response)
+  ''
 end

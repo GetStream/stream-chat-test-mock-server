@@ -56,7 +56,7 @@ end
 
 # Get message
 get '/messages/:message_id' do
-  message = $message_list.detect { |msg| msg['id'] == params[:message_id] }
+  message = find_message_by_id(params[:message_id])
   { message: message }.to_s
 end
 
