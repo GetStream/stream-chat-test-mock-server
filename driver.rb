@@ -5,26 +5,24 @@ require 'socket'
 set :port, ARGV[0] || 4567
 FileUtils.mkdir_p('logs')
 
-get '/start' do
-  start_mock_server(params[:port])
+get '/start/:test_name' do
+  start_mock_server(test_name: params[:test_name], port: params[:port])
 end
 
-get '/clean' do
-  clean
-end
-
-def clean
-  Dir.glob('logs/*').each do |file|
-    port = file.scan(/\d+/).join.to_i
-    `lsof -t -i:#{port} | xargs kill -9`
-    FileUtils.rm_f(file)
+get '/stop' do
+  Thread.new do
+    sleep 1
+    exit
   end
-  'OK'
 end
 
-def start_mock_server(port)
+def start_mock_server(test_name:, port:)
   port = available_port if port.to_s.empty?
-  Thread.new { `bundle exec ruby src/server.rb #{port} > logs/#{port}.log 2>&1 &` }
+  Thread.new do
+    log_path = "logs/#{test_name}_#{Time.now.to_i}_#{port}.log"
+    `bundle exec ruby src/server.rb #{port} > #{log_path} 2>&1 &`
+    puts("Port: #{port}")
+  end
   port.to_s
 end
 
