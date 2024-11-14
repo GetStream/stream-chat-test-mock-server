@@ -3,28 +3,13 @@ GEM
   specs:
     ast (2.4.2)
     base64 (0.2.0)
-    connection_pool (2.4.1)
     eventmachine (1.2.7)
-    faraday (2.0.1)
-      faraday-net_http (~> 2.0)
-      ruby2_keywords (>= 0.0.4)
-    faraday-multipart (1.0.4)
-      multipart-post (~> 2)
-    faraday-net_http (2.1.0)
-    faraday-net_http_persistent (2.0.2)
-      faraday-net_http (< 3)
-      net-http-persistent (~> 4.0)
     faye-websocket (0.11.3)
       eventmachine (>= 0.12.0)
       websocket-driver (>= 0.5.1)
     json (2.7.2)
-    jwt (2.9.0)
-      base64
-    multipart-post (2.4.1)
     mustermann (3.0.3)
       ruby2_keywords (~> 0.0.1)
-    net-http-persistent (4.0.4)
-      connection_pool (~> 2.2)
     nio4r (2.7.3)
     parallel (1.26.3)
     parser (3.3.5.0)
@@ -70,14 +55,6 @@ GEM
       rack-protection (= 4.0.0)
       rack-session (>= 2.0.0, < 3)
       tilt (~> 2.0)
-    sorbet-runtime (0.5.11558)
-    stream-chat-ruby (3.6.0)
-      faraday (~> 2.0.1)
-      faraday-multipart (~> 1.0.4)
-      faraday-net_http_persistent (~> 2.0.1)
-      jwt (~> 2.3)
-      net-http-persistent (~> 4.0)
-      sorbet-runtime (~> 0.5.10539)
     tilt (2.4.0)
     unicode-display_width (2.6.0)
     webrick (1.8.1)
@@ -97,7 +74,6 @@ DEPENDENCIES
   rubocop-performance
   rubocop-require_tools
   sinatra
-  stream-chat-ruby
 
 BUNDLED WITH
    2.5.17
