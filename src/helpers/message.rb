@@ -52,7 +52,7 @@ def update_message(request_body:, params:)
   response['message'] = message
   $message_list.delete_if { |msg| msg['id'] == params[:message_id] } if params[:hard].to_i == 1
 
-  send_message_ws(response: response, event_type: params[:hard] ? MessageType.delete : MessageType.update)
+  send_message_ws(response: response, event_type: params[:hard] ? MessageType.delete : MessageType.updated)
   response.to_s
 end
 
