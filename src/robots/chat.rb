@@ -8,6 +8,7 @@ post '/mock' do
   replies_count = params[:replies].to_i || 0
   timestamp = unique_date
 
+  $current_channel_id = 1.to_s
   $message_list = []
   $channel_list['channels'] = []
 
