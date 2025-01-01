@@ -1,7 +1,7 @@
 {
     "cid": "*",
-    "connection_id": "67000b87-0a15-284e-0200-000000002d10",
-    "created_at": "2024-10-21T14:13:36.649948473Z",
+    "connection_id": "67605501-0a15-3bf6-0200-0000000020cc",
+    "created_at": "2025-01-01T00:17:25.966540487Z",
     "me": {
         "banned": false,
         "birthland": "Tatooine",
@@ -11,8 +11,8 @@
         "id": "luke_skywalker",
         "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
         "invisible": false,
-        "language": "fr",
-        "last_active": "2024-10-21T14:13:36.636047566Z",
+        "language": "en",
+        "last_active": "2025-01-01T00:17:25.949724609Z",
         "mutes": [],
         "name": "Luke Skywalker",
         "online": true,
@@ -33,7 +33,7 @@
         "unread_channels": 0,
         "unread_count": 0,
         "unread_threads": 1,
-        "updated_at": "2024-10-19T22:19:46.931674Z"
+        "updated_at": "2024-12-31T01:33:53.616251Z"
     },
     "type": "health.check"
 }
