@@ -30,14 +30,6 @@ post '/participant/message' do
   last_channel_message = $message_list.reverse.find { |m| m['parent_id'].nil? }
   also_in_channel = params[:thread_and_channel] == 'true'
 
-  if (params[:thread] || also_in_channel) && last_channel_message
-    last_channel_message['reply_count'] += 1
-    additional_response = Mocks.message_ws
-    additional_response['type'] = 'message.updated'
-    additional_response['message'] = last_channel_message
-    $ws&.send(additional_response.to_s)
-  end
-
   template_message = if params[:action]
                        $message_list.pop
                      elsif params[:giphy]
@@ -57,7 +49,7 @@ post '/participant/message' do
     message_id: params[:action] ? template_message['id'] : unique_id,
     quoted_message_id: params[:quote] ? last_message['id'] : nil,
     parent_id: params[:thread] || params[:thread_and_channel] ? last_channel_message['id'] : nil,
-    show_in_channel: params[:thread_and_channel] ? true : params[:thread] ? false : nil,
+    show_in_channel: params[:thread_and_channel] ? also_in_channel : params[:thread] ? false : nil,
     text: text,
     attachments: attachments,
     user: params[:action] ? template_message['user'] : Participant.user,

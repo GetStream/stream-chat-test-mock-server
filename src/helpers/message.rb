@@ -155,15 +155,8 @@ def mock_message(
   end
 
   if channel_id
-    channel_type = 'messaging'
-    message['cid'] = "#{channel_type}:#{channel_id}"
+    message['cid'] = "messaging:#{channel_id}"
     message['channel_id'] = channel_id
-  end
-
-  if parent_id
-    message['parent_id'] = parent_id
-    parent_message = find_message_by_id(parent_id)
-    parent_message['reply_count'] += 1
   end
 
   message['type'] = message_type
@@ -182,6 +175,21 @@ def mock_message(
   message['quoted_message_id'] = quoted_message_id if quoted_message_id
   message['user'] = user if user
   message['reply_count'] = reply_count if reply_count
+
+  if parent_id
+    message['parent_id'] = parent_id
+    parent_message = find_message_by_id(parent_id)
+    parent_message['reply_count'] += 1
+    parent_message['thread_participants'] ||= []
+    parent_message['thread_participants'] << user
+
+    additional_response = Mocks.message_ws
+    additional_response['cid'] = "messaging:#{channel_id}"
+    additional_response['channel_id'] = channel_id
+    additional_response['type'] = 'message.updated'
+    additional_response['message'] = parent_message
+    $ws&.send(additional_response.to_s)
+  end
 
   $message_list << message unless deleted_at
   message
