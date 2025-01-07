@@ -39,7 +39,7 @@ post '/participant/message' do
                      end
 
   template_message['attachments'][0]['actions'] = nil if params[:giphy]
-  message_type = params[:thread] && !also_in_channel ? :reply : :regular
+  message_type = params[:action] == 'delete' ? :deleted : params[:thread] && !also_in_channel ? :reply : :regular
   text = ['pin', 'unpin'].include?(params[:action]) ? template_message['text'] : request.body.read
 
   message = mock_message(
@@ -72,6 +72,8 @@ post '/participant/message' do
                   MessageType.new
                 end
 
+  response['channel_id'] = message['channel_id']
+  response['cid'] = "messaging:#{message['channel_id']}"
   response['type'] = action_type
   response['message'] = message
   response['hard_delete'] = true if params[:hard_delete] == 'true' && params[:action] == 'delete'
