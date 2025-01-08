@@ -12,6 +12,16 @@ class MessageType
   end
 end
 
+class SystemMessage
+  def self.invalid_command(cmd)
+    "Sorry, command #{cmd} doesn't exist. Try posting your message without the starting /"
+  end
+
+  def self.moderation
+    'Message was blocked by moderation policies'
+  end
+end
+
 def send_message_ws(response:, event_type:)
   ws_response = Mocks.message_ws
   ws_response['message'] = response['message']
@@ -62,11 +72,19 @@ def create_message(request_body:, channel_id: nil)
   parent_id = message['parent_id']
   quoted_message_id = message['quoted_message_id']
   channel_reply = message['show_in_channel']
+
   message_text = message['text'].to_s
+  is_giphy = message_text.start_with?('/giphy')
+  is_spam = !($forbidden_words & message_text.split).empty?
+  is_invalid_command = !is_giphy && message_text.start_with?('/')
+  message_text = SystemMessage.moderation if is_spam
+  message_text = SystemMessage.invalid_command(message_text.sub('/', '')) if is_invalid_command
 
   message_type =
-    if message_text.start_with?('/giphy')
+    if is_giphy
       :ephemeral
+    elsif is_invalid_command || is_spam
+      :error
     elsif channel_reply || parent_id.nil?
       :regular
     else
@@ -85,15 +103,17 @@ def create_message(request_body:, channel_id: nil)
     parent_id: parent_id,
     quoted_message_id: quoted_message_id,
     show_in_channel: channel_reply,
-    text: message['text'].to_s,
+    text: message_text,
     user: template_message['user'],
     created_at: timestamp,
     updated_at: timestamp,
-    attachments: message['attachments'] || template_message['attachments']
+    attachments: message['attachments'] || template_message['attachments'],
+    command: is_invalid_command ? message['text'].to_s.sub('/', '') : nil,
+    track_message: message_type != :error
   )
 
   response['message'] = mocked_message
-  send_message_ws(response: response, event_type: MessageType.new)
+  send_message_ws(response: response, event_type: MessageType.new) if message_type != :error
   response.to_s
 end
 
@@ -139,7 +159,8 @@ def mock_message(
   show_in_channel: nil,
   quoted_message_id: nil,
   attachments: nil,
-  reply_count: 0
+  reply_count: 0,
+  track_message: true
 )
   if text
     text = text.to_s
@@ -191,7 +212,7 @@ def mock_message(
     $ws&.send(additional_response.to_s)
   end
 
-  $message_list << message unless deleted_at
+  $message_list << message if track_message && deleted_at.nil?
   message
 end
 

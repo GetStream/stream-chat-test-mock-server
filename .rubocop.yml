@@ -98,7 +98,7 @@ Metrics/ClassLength:
 Layout/LineLength:
   Max: 370
 Metrics/ParameterLists:
-  Max: 20
+  Max: 25
 Metrics/PerceivedComplexity:
   Max: 25
 Style/GuardClause:
