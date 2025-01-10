@@ -84,7 +84,7 @@ def create_message(request_body:, channel_id: nil)
     if is_giphy
       :ephemeral
     elsif is_invalid_command || is_spam
-      :error
+      :system
     elsif channel_reply || parent_id.nil?
       :regular
     else
