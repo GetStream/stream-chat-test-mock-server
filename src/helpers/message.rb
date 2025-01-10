@@ -1,4 +1,26 @@
 class MessageType
+  def self.regular
+    :regular
+  end
+
+  def self.reply
+    :reply
+  end
+
+  def self.ephemeral
+    :ephemeral
+  end
+
+  def self.system
+    :system
+  end
+
+  def self.error
+    :error
+  end
+end
+
+class MessageEventType
   def self.new
     'message.new'
   end
@@ -62,7 +84,7 @@ def update_message(request_body:, params:)
   response['message'] = message
   $message_list.delete_if { |msg| msg['id'] == params[:message_id] } if params[:hard].to_i == 1
 
-  send_message_ws(response: response, event_type: params[:hard] ? MessageType.delete : MessageType.updated)
+  send_message_ws(response: response, event_type: params[:hard] ? MessageEventType.delete : MessageEventType.updated)
   response.to_s
 end
 
@@ -82,13 +104,13 @@ def create_message(request_body:, channel_id: nil)
 
   message_type =
     if is_giphy
-      :ephemeral
+      MessageType.ephemeral
     elsif is_invalid_command || is_spam
-      :system
+      MessageType.error
     elsif channel_reply || parent_id.nil?
-      :regular
+      MessageType.regular
     else
-      :reply
+      MessageType.reply
     end
 
   timestamp = unique_date
@@ -113,7 +135,7 @@ def create_message(request_body:, channel_id: nil)
   )
 
   response['message'] = mocked_message
-  send_message_ws(response: response, event_type: MessageType.new) if message_type != :error
+  send_message_ws(response: response, event_type: MessageEventType.new) if message_type != :error
   response.to_s
 end
 

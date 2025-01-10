@@ -65,11 +65,11 @@ post '/participant/message' do
 
   action_type = case params[:action]
                 when 'edit', 'pin', 'unpin'
-                  MessageType.updated
+                  MessageEventType.updated
                 when 'delete'
-                  MessageType.deleted
+                  MessageEventType.deleted
                 else
-                  MessageType.new
+                  MessageEventType.new
                 end
 
   response['channel_id'] = message['channel_id']
