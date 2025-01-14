@@ -44,6 +44,16 @@ class SystemMessage
   end
 end
 
+class AttachmentActionType
+  def self.send
+    'send'
+  end
+
+  def self.shuffle
+    'shuffle'
+  end
+end
+
 def send_message_ws(response:, event_type:)
   ws_response = Mocks.message_ws
   ws_response['message'] = response['message']
@@ -143,13 +153,20 @@ end
 def create_giphy(request_body:, message_id:)
   json = JSON.parse(request_body)
   message = find_message_by_id(message_id)
+  action = json['form_data']['image_action']
+  puts("TESTME: #{action}")
 
-  if json['form_data']['image_action'] == 'send'
+  if action == AttachmentActionType.send
     message['attachments'][0]['actions'] = nil
     message['type'] = 'regular'
     message['command'] = 'giphy'
     message['text'] = ''
     message['html'] = ''
+  elsif action == AttachmentActionType.shuffle
+    return nil
+  else
+    halt(503, 'Bad request')
+    return
   end
 
   response = Mocks.message
