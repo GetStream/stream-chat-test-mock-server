@@ -114,8 +114,9 @@ def create_message(request_body:, channel_id: nil)
     end
 
   timestamp = unique_date
-  response = message_type == :ephemeral ? Mocks.giphy : Mocks.message
+  response = is_giphy ? Mocks.giphy : Mocks.message
   template_message = response['message']
+  attachments = is_giphy ? template_message['attachments'] : message['attachments'] || template_message['attachments']
 
   mocked_message = mock_message(
     template_message,
@@ -129,7 +130,7 @@ def create_message(request_body:, channel_id: nil)
     user: template_message['user'],
     created_at: timestamp,
     updated_at: timestamp,
-    attachments: message['attachments'] || template_message['attachments'],
+    attachments: attachments,
     command: is_invalid_command ? message['text'].to_s.sub('/', '') : nil,
     track_message: message_type != :error
   )
@@ -153,6 +154,7 @@ def create_giphy(request_body:, message_id:)
 
   response = Mocks.message
   response['message'] = message
+  send_message_ws(response: response, event_type: MessageEventType.new)
   response.to_s
 end
 
