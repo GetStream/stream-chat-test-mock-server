@@ -60,3 +60,8 @@ post '/mock' do
 
   ''
 end
+
+post '/fail_next_message' do
+  $fail_next_message = true
+  ''
+end

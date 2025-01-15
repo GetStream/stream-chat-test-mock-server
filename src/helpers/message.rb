@@ -99,6 +99,11 @@ def update_message(request_body:, params:)
 end
 
 def create_message(request_body:, channel_id: nil)
+  if $fail_next_message
+    $fail_next_message = false
+    return nil
+  end
+
   json = JSON.parse(request_body)
   message = json['message']
   parent_id = message['parent_id']
