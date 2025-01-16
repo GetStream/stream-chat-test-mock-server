@@ -65,3 +65,8 @@ post '/fail_next_message' do
   $fail_next_message = true
   ''
 end
+
+post '/freeze_next_message' do
+  $freeze_next_message = true
+  ''
+end

@@ -102,6 +102,10 @@ def create_message(request_body:, channel_id: nil)
   if $fail_next_message
     $fail_next_message = false
     return nil
+  elsif $freeze_next_message
+    status(408)
+    $freeze_next_message = false
+    return nil
   end
 
   json = JSON.parse(request_body)
