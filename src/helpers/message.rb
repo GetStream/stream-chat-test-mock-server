@@ -99,12 +99,10 @@ def update_message(request_body:, params:)
 end
 
 def create_message(request_body:, channel_id: nil)
-  if $fail_next_message
-    $fail_next_message = false
+  if $fail_messages
     return nil
-  elsif $freeze_next_message
+  elsif $freeze_messages
     status(408)
-    $freeze_next_message = false
     return nil
   end
 
@@ -163,7 +161,6 @@ def create_giphy(request_body:, message_id:)
   json = JSON.parse(request_body)
   message = find_message_by_id(message_id)
   action = json['form_data']['image_action']
-  puts("TESTME: #{action}")
 
   if action == AttachmentActionType.send
     message['attachments'][0]['actions'] = nil

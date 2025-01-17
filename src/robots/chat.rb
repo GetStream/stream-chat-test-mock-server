@@ -61,12 +61,12 @@ post '/mock' do
   ''
 end
 
-post '/fail_next_message' do
-  $fail_next_message = true
+post '/fail_messages' do
+  $fail_messages = true
   ''
 end
 
-post '/freeze_next_message' do
-  $freeze_next_message = true
+post '/freeze_messages' do
+  $freeze_messages = true
   ''
 end

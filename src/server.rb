@@ -20,8 +20,8 @@ $message_list = []
 $channel_list = Mocks.channels
 $current_channel_id = Mocks.event_ws['channel_id']
 $health_check = Mocks.health_check.to_s
-$fail_next_message = nil
-$freeze_next_message = nil
+$fail_messages = nil
+$freeze_messages = nil
 $forbidden_words = ["wth"]
 
 set :port, ARGV[0] || 4568
