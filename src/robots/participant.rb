@@ -14,7 +14,8 @@ end
 
 ### Parameters
 # `giphy`: Boolean - Pass this param if it's an ephemeral message
-# `quote`: Boolean - Pass this param if it's a quoted message
+# `quote_last`: Boolean - Pass this param if it's a quote reply of the last message
+# `quote_first`: Boolean - Pass this param if it's a quote reply of the first message
 # `thread`: Boolean - Pass this param if it's a thread message
 # `thread_and_channel`: Boolean - Pass this param if it's a thread message also in channel
 # `image`: Integer - Pass this param if the message should contain images
@@ -26,7 +27,6 @@ post '/participant/message' do
   timestamp = unique_date
   attachments = mock_attachments(params)
   response = Mocks.message_ws
-  last_message = $message_list.last
   last_channel_message = $message_list.reverse.find { |m| m['parent_id'].nil? }
   also_in_channel = params[:thread_and_channel] == 'true'
 
@@ -42,12 +42,19 @@ post '/participant/message' do
   message_type = params[:action] == 'delete' ? :deleted : params[:thread] && !also_in_channel ? :reply : :regular
   text = ['pin', 'unpin'].include?(params[:action]) ? template_message['text'] : request.body.read
 
+  quoted_message_id =
+    if params[:quote_last]
+      $message_list.last['id']
+    elsif params[:quote_first]
+      $message_list.first['id']
+    end
+
   message = mock_message(
     template_message,
     message_type: message_type,
     channel_id: params[:action] ? template_message['channel_id'] : $current_channel_id,
     message_id: params[:action] ? template_message['id'] : unique_id,
-    quoted_message_id: params[:quote] ? last_message['id'] : nil,
+    quoted_message_id: quoted_message_id,
     parent_id: params[:thread] || params[:thread_and_channel] ? last_channel_message['id'] : nil,
     show_in_channel: params[:thread_and_channel] ? also_in_channel : params[:thread] ? false : nil,
     text: text,

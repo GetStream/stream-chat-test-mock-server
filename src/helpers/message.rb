@@ -240,9 +240,13 @@ def mock_message(
   message['pinned'] = pinned
   message['attachments'] = attachments if attachments
   message['show_in_channel'] = show_in_channel if show_in_channel
-  message['quoted_message_id'] = quoted_message_id if quoted_message_id
   message['user'] = user if user
   message['reply_count'] = reply_count if reply_count
+
+  if quoted_message_id
+    message['quoted_message_id'] = quoted_message_id
+    message['quoted_message'] = find_message_by_id(quoted_message_id)
+  end
 
   if parent_id
     message['parent_id'] = parent_id
