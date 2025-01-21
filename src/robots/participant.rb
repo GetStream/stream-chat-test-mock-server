@@ -29,8 +29,11 @@ post '/participant/message' do
   response = Mocks.message_ws
   last_channel_message = $message_list.reverse.find { |m| m['parent_id'].nil? }
   also_in_channel = params[:thread_and_channel] == 'true'
+  message_type = params[:action] == 'delete' ? :deleted : params[:thread] && !also_in_channel ? :reply : :regular
 
-  template_message = if params[:action]
+  template_message = if message_type == :deleted
+                       $message_list.filter { |msg| msg['user']['id'] == Participant.user['id'] }.pop
+                     elsif params[:action]
                        $message_list.pop
                      elsif params[:giphy]
                        Mocks.giphy['message']
@@ -39,7 +42,6 @@ post '/participant/message' do
                      end
 
   template_message['attachments'][0]['actions'] = nil if params[:giphy]
-  message_type = params[:action] == 'delete' ? :deleted : params[:thread] && !also_in_channel ? :reply : :regular
   text = ['pin', 'unpin'].include?(params[:action]) ? template_message['text'] : request.body.read
 
   quoted_message_id =

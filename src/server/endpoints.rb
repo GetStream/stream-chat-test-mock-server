@@ -67,7 +67,7 @@ end
 
 # Delete message
 delete '/messages/:message_id' do
-  update_message(request_body: request.body.read, params: params)
+  update_message(request_body: request.body.read, params: params, delete: true)
 end
 
 # Pin message

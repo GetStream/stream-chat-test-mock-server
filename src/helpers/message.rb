@@ -69,9 +69,10 @@ def find_message_by_id(id)
   $message_list.detect { |msg| msg['id'] == id }
 end
 
-def update_message(request_body:, params:)
+def update_message(request_body:, params:, delete: false)
   timestamp = unique_date
   json = request_body.empty? ? {} : JSON.parse(request_body)
+  ws_event_type = delete ? MessageEventType.delete : MessageEventType.updated
   message = find_message_by_id(params[:message_id])
 
   if json['message']
@@ -83,7 +84,7 @@ def update_message(request_body:, params:)
     message['pinned'] = pinned
     message['pinned_by'] = pinned ? current_user : nil
     message['pinned_at'] = pinned ? timestamp : nil
-  elsif params[:hard]
+  elsif delete
     message['type'] = 'deleted'
     message['deleted_at'] = timestamp
     message['message_text_updated_at'] = nil
@@ -94,7 +95,7 @@ def update_message(request_body:, params:)
   response['message'] = message
   $message_list.delete_if { |msg| msg['id'] == params[:message_id] } if params[:hard].to_i == 1
 
-  send_message_ws(response: response, event_type: params[:hard] ? MessageEventType.delete : MessageEventType.updated)
+  send_message_ws(response: response, event_type: ws_event_type)
   response.to_s
 end
 
