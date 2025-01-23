@@ -2,6 +2,8 @@
 # `channels`: Integer - Channels count. Default 1
 # `messages`: Integer - Messages count in every channel. Default 0
 # `replies`: Integer - Replies count in every message. Default 0
+# `messages_text`: String - Text for all the channel messages
+# `replies_text`: String - Text for all the thread messages
 post '/mock' do
   channels_count = params[:channels].to_i || 1
   messages_count = params[:messages].to_i || 0
@@ -27,14 +29,14 @@ post '/mock' do
   $channel_list['channels'].each do |channel|
     messages_count.downto(1) do |i|
       message_id = unique_id
-      new_timestamp = update_date(timestamp: timestamp, minus_seconds: i * (100 + channel['channel']['id'].to_i))
+      new_timestamp = update_date(timestamp: timestamp, minus_seconds: i * (1000 + channel['channel']['id'].to_i))
       message_template = Mocks.message['message']
       message_template['cid'] = channel['channel']['cid']
       message_template['id'] = message_id
       message_template['created_at'] = new_timestamp
       message_template['updated_at'] = new_timestamp
-      message_template['text'] = i.to_s
-      message_template['html'] = i.to_s.to_html
+      message_template['text'] = params[:messages_text] || i.to_s
+      message_template['html'] = message_template['text'].to_html
       message_template['user'] = i.odd? ? current_user : Participant.user
       message_template['reply_count'] = replies_count
       channel['messages'] << message_template
@@ -49,8 +51,8 @@ post '/mock' do
         reply_template['parent_id'] = message_id
         reply_template['created_at'] = new_timestamp
         reply_template['updated_at'] = new_timestamp
-        reply_template['text'] = j.to_s
-        reply_template['html'] = j.to_s.to_html
+        reply_template['text'] = params[:replies_text] || j.to_s
+        reply_template['html'] = reply_template['text'].to_html
         reply_template['user'] = j.odd? ? current_user : Participant.user
         channel['messages'] << reply_template
         $message_list << reply_template

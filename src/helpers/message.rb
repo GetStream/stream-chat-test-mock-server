@@ -72,7 +72,7 @@ end
 def update_message(request_body:, params:, delete: false)
   timestamp = unique_date
   json = request_body.empty? ? {} : JSON.parse(request_body)
-  ws_event_type = delete ? MessageEventType.delete : MessageEventType.updated
+  ws_event_type = delete ? MessageEventType.deleted : MessageEventType.updated
   message = find_message_by_id(params[:message_id])
 
   if json['message']
@@ -254,7 +254,7 @@ def mock_message(
     parent_message = find_message_by_id(parent_id)
     parent_message['reply_count'] += 1
     parent_message['thread_participants'] ||= []
-    parent_message['thread_participants'] << user
+    parent_message['thread_participants'] << user unless parent_message['thread_participants'].include?(user)
 
     additional_response = Mocks.message_ws
     additional_response['cid'] = "messaging:#{channel_id}"
