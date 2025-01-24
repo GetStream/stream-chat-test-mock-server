@@ -1,0 +1,55 @@
+{
+    "duration": "214.61ms",
+    "message": {
+        "attachments": [
+            {
+                "asset_url": "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExbzlpZ2QzN3BkencxZms5YnR5bTZnNGlwNWQxdHcwbHNhc2g4aDhsbCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/gw3IWyGkC0rsazTi/giphy.mp4",
+                "image_url": "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExbzlpZ2QzN3BkencxZms5YnR5bTZnNGlwNWQxdHcwbHNhc2g4aDhsbCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/gw3IWyGkC0rsazTi/giphy.webp",
+                "og_scrape_url": "https://giphy.com/gifs/test-gw3IWyGkC0rsazTi",
+                "text": "Discover & share this Test Computer GIF with everyone you know. GIPHY is how you search, share, discover, and create GIFs.",
+                "thumb_url": "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExbzlpZ2QzN3BkencxZms5YnR5bTZnNGlwNWQxdHcwbHNhc2g4aDhsbCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/gw3IWyGkC0rsazTi/giphy.webp",
+                "title": "Test Computer GIF - Find & Share on GIPHY",
+                "title_link": "https://giphy.com/gifs/test-gw3IWyGkC0rsazTi",
+                "type": "video"
+            }
+        ],
+        "cid": "messaging:30a9996c-da4f-11ef-85ad-1eebe6661089",
+        "created_at": "2025-01-24T12:31:57.158037Z",
+        "deleted_reply_count": 0,
+        "html": "<p><a href=\"https://giphy.com/gifs/test-gw3IWyGkC0rsazTi\" rel=\"nofollow\">https://giphy.com/gifs/test-gw3IWyGkC0rsazTi</a></p>\n",
+        "id": "3341b59c-da4f-11ef-85ad-1eebe6661089",
+        "latest_reactions": [],
+        "mentioned_users": [],
+        "own_reactions": [],
+        "pin_expires": null,
+        "pinned": false,
+        "pinned_at": null,
+        "pinned_by": null,
+        "reaction_counts": {},
+        "reaction_scores": {},
+        "reply_count": 0,
+        "shadowed": false,
+        "silent": false,
+        "text": "https://giphy.com/gifs/test-gw3IWyGkC0rsazTi",
+        "type": "regular",
+        "updated_at": "2025-01-24T12:31:57.158037Z",
+        "user": {
+            "banned": false,
+            "birthland": "Tatooine",
+            "blocked_user_ids": [],
+            "created_at": "2024-04-04T09:26:11.805899Z",
+            "id": "luke_skywalker",
+            "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+            "language": "id",
+            "last_active": "2025-01-24T12:31:54.427826084Z",
+            "name": "Luke Skywalker",
+            "online": true,
+            "pando": "{\"speciality\":\"ios engineer\"}",
+            "role": "user",
+            "team": "test",
+            "teams": [],
+            "type": "team",
+            "updated_at": "2025-01-24T05:38:59.245345Z"
+        }
+    }
+}

@@ -87,6 +87,9 @@ async def send_youtube_link(session, channel_id):
 async def send_unsplash_link(session, channel_id):
   await send_message(session=session, text='https://unsplash.com/photos/1_2d3MRbI9c', channel_id=channel_id, filename='http_unsplash_link.json')
 
+async def send_giphy_link(session, channel_id):
+  await send_message(session=session, text='https://giphy.com/gifs/test-gw3IWyGkC0rsazTi', channel_id=channel_id, filename='http_giphy_link.json')
+
 async def send_message(session, text, channel_id, filename):
   print('Sending message: "' + text + '"...')
   message_id = random_uuid()
@@ -199,6 +202,7 @@ async def chat():
       await send_ephemeral_message(session, channel_id)
       await send_youtube_link(session, channel_id)
       await send_unsplash_link(session, channel_id)
+      await send_giphy_link(session, channel_id)
       await truncate_channel_with_messsage(session, channel_id)
       await remove_channel(session, channel_id)
 

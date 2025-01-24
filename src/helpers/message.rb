@@ -214,13 +214,6 @@ def mock_message(
     text = text.to_s
     message['text'] = text
     message['html'] = text.to_html
-
-    if text.include?('youtube.com/') || text.include?('unsplash.com/')
-      json = text.include?('youtube.com/') ? Mocks.youtube_link : Mocks.unsplash_link
-      link_attachments = json['message']['attachments']
-      updated_attachments = (attachments || []) + (link_attachments || [])
-      message['attachments'] = updated_attachments
-    end
   end
 
   if channel_id
@@ -264,6 +257,20 @@ def mock_message(
     $ws&.send(additional_response.to_s)
   end
 
+  if text.include?('youtube.com/') || text.include?('unsplash.com/') || text.include?('giphy.com/')
+    json =
+      if text.include?('youtube')
+        Mocks.youtube_link
+      elsif text.include?('unsplash')
+        Mocks.unsplash_link
+      else
+        Mocks.giphy_link
+      end
+    link_attachments = json['message']['attachments']
+    updated_attachments = (attachments || []) + (link_attachments || [])
+    message['attachments'] = updated_attachments
+  end
+
   $message_list << message if track_message && deleted_at.nil?
   message
 end
@@ -305,4 +312,16 @@ def mock_attachments(params)
   end
 
   attachments.empty? ? nil : attachments
+end
+
+def create_link_preview(url)
+  if url.include?('youtube')
+    Mocks.youtube_link['message']['attachments'].first.to_s
+  elsif url.include?('unsplash')
+    Mocks.unsplash_link['message']['attachments'].first.to_s
+  elsif url.include?('giphy')
+    Mocks.giphy_link['message']['attachments'].first.to_s
+  else
+    ''
+  end
 end

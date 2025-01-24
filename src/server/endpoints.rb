@@ -116,3 +116,8 @@ end
 post '/channels/messaging/:channel_id' do
   status 500
 end
+
+# Get link preview details
+get '/og' do
+  create_link_preview(url: params[:url])
+end

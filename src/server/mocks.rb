@@ -42,4 +42,8 @@ class Mocks
   def self.unsplash_link
     JSON.parse(File.read('src/jsons/http_unsplash_link.json'))
   end
+
+  def self.giphy_link
+    JSON.parse(File.read('src/jsons/http_giphy_link.json'))
+  end
 end
