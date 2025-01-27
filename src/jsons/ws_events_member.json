@@ -1,62 +1,65 @@
 {
-    "channel_id": "a9bfc99a-8fb6-11ef-87fd-1eebe6661088",
-    "channel_type": "messaging",
-    "cid": "messaging:a9bfc99a-8fb6-11ef-87fd-1eebe6661088",
-    "created_at": "2024-10-21T14:13:37.899871527Z",
-    "member": {
-        "banned": false,
-        "channel_role": "channel_member",
-        "created_at": "2024-10-21T14:13:37.891603Z",
-        "notifications_muted": false,
-        "role": "admin",
-        "shadow_banned": false,
-        "status": "member",
-        "updated_at": "2024-10-21T14:13:37.891603Z",
-        "user": {
-            "banned": false,
-            "birthland": "Polis Massa",
-            "created_at": "2024-04-04T09:42:00.68335Z",
-            "id": "leia_organa",
-            "image": "https://vignette.wikia.nocookie.net/starwars/images/f/fc/Leia_Organa_TLJ.png",
-            "language": "en",
-            "last_active": "2024-10-20T16:12:05.01843Z",
-            "last_engaged_at": "2024-10-21T04:52:54.244124Z",
-            "name": "Leia Organa",
-            "online": false,
-            "private_settings": {
-                "readReceipts": {
-                    "enabled": false
-                },
-                "typingIndicators": {
-                    "enabled": false
-                }
-            },
-            "role": "admin",
-            "updated_at": "2024-10-15T04:48:51.509771Z"
-        },
-        "user_id": "leia_organa"
-    },
-    "type": "member.added",
+  "type": "member.added",
+  "cid": "messaging:d37a6586-4fae-4e1e-b720-116ddf7e2070",
+  "channel_id": "d37a6586-4fae-4e1e-b720-116ddf7e2070",
+  "channel_type": "messaging",
+  "member": {
+    "user_id": "leia_organa",
     "user": {
-        "banned": false,
-        "birthland": "Polis Massa",
-        "created_at": "2024-04-04T09:42:00.68335Z",
-        "id": "leia_organa",
-        "image": "https://vignette.wikia.nocookie.net/starwars/images/f/fc/Leia_Organa_TLJ.png",
-        "language": "en",
-        "last_active": "2024-10-20T16:12:05.01843Z",
-        "last_engaged_at": "2024-10-21T04:52:54.244124Z",
-        "name": "Leia Organa",
-        "online": false,
-        "private_settings": {
-            "readReceipts": {
-                "enabled": false
-            },
-            "typingIndicators": {
-                "enabled": false
-            }
+      "id": "leia_organa",
+      "role": "admin",
+      "created_at": "2024-04-04T09:42:00.68335Z",
+      "updated_at": "2025-01-16T12:34:56.765249Z",
+      "last_active": "2025-01-29T16:35:31.022088Z",
+      "last_engaged_at": "2025-01-29T01:28:41.520256Z",
+      "banned": false,
+      "online": false,
+      "language": "ru",
+      "private_settings": {
+        "readReceipts": {
+          "enabled": false
         },
-        "role": "admin",
-        "updated_at": "2024-10-15T04:48:51.509771Z"
-    }
+        "typingIndicators": {
+          "enabled": false
+        }
+      },
+      "name": "Leia Organa",
+      "image": "https://vignette.wikia.nocookie.net/starwars/images/f/fc/Leia_Organa_TLJ.png",
+      "birthland": "Polis Massa"
+    },
+    "status": "member",
+    "created_at": "2025-01-31T16:17:24.485556Z",
+    "updated_at": "2025-01-31T16:17:24.485556Z",
+    "banned": false,
+    "shadow_banned": false,
+    "archived_at": null,
+    "pinned_at": null,
+    "role": "admin",
+    "channel_role": "channel_member",
+    "notifications_muted": false
+  },
+  "user": {
+    "id": "leia_organa",
+    "role": "admin",
+    "created_at": "2024-04-04T09:42:00.68335Z",
+    "updated_at": "2025-01-16T12:34:56.765249Z",
+    "last_active": "2025-01-29T16:35:31.022088Z",
+    "last_engaged_at": "2025-01-29T01:28:41.520256Z",
+    "banned": false,
+    "online": false,
+    "language": "ru",
+    "birthland": "Polis Massa",
+    "private_settings": {
+      "readReceipts": {
+        "enabled": false
+      },
+      "typingIndicators": {
+        "enabled": false
+      }
+    },
+    "name": "Leia Organa",
+    "image": "https://vignette.wikia.nocookie.net/starwars/images/f/fc/Leia_Organa_TLJ.png"
+  },
+  "channel_last_message_at": "2025-01-31T16:17:23.974961Z",
+  "created_at": "2025-01-31T16:17:24.493268738Z"
 }

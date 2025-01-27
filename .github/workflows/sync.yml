@@ -16,8 +16,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4.1.1
     - uses: ./.github/actions/ruby-cache
-    - uses: ./.github/actions/python-cache
-    - run: python3 sync.py
+    - run: bundle exec ruby sync.rb
       timeout-minutes: 5
     - run: |
         git config --global user.email "stream-bot@getstream.io"

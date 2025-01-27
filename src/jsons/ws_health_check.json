@@ -1,39 +1,47 @@
 {
-    "cid": "*",
-    "connection_id": "67000b87-0a15-284e-0200-000000002d10",
-    "created_at": "2024-10-21T14:13:36.649948473Z",
-    "me": {
-        "banned": false,
-        "birthland": "Tatooine",
-        "channel_mutes": [],
-        "created_at": "2024-04-04T09:26:11.805899Z",
-        "devices": [],
-        "id": "luke_skywalker",
-        "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
-        "invisible": false,
-        "language": "fr",
-        "last_active": "2024-10-21T14:13:36.636047566Z",
-        "mutes": [],
-        "name": "Luke Skywalker",
-        "online": true,
-        "pando": "{\"speciality\":\"ios engineer\"}",
-        "privacy_settings": {
-            "read_receipts": {
-                "enabled": true
-            },
-            "typing_indicators": {
-                "enabled": true
-            }
-        },
-        "role": "admin",
-        "team": "test",
-        "teams": [],
-        "total_unread_count": 0,
-        "type": "team",
-        "unread_channels": 0,
-        "unread_count": 0,
-        "unread_threads": 1,
-        "updated_at": "2024-10-19T22:19:46.931674Z"
+  "connection_id": "679c8249-0a15-3bf6-0200-0000000001bf",
+  "me": {
+    "id": "luke_skywalker",
+    "name": "Luke Skywalker",
+    "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+    "language": "id",
+    "role": "admin",
+    "teams": [
+
+    ],
+    "created_at": "2024-04-04T09:26:11.805899Z",
+    "updated_at": "2025-01-31T09:38:22.825054Z",
+    "banned": false,
+    "online": true,
+    "last_active": "2025-01-31T16:17:22.225052353Z",
+    "privacy_settings": {
+      "typing_indicators": {
+        "enabled": true
+      },
+      "read_receipts": {
+        "enabled": false
+      }
     },
-    "type": "health.check"
+    "devices": [
+
+    ],
+    "invisible": false,
+    "mutes": [
+
+    ],
+    "channel_mutes": [
+
+    ],
+    "unread_count": 0,
+    "total_unread_count": 0,
+    "unread_channels": 0,
+    "unread_threads": 0,
+    "birthland": "Tatooine",
+    "team": "test",
+    "type": "team",
+    "pando": "{\"speciality\":\"ios engineer\"}"
+  },
+  "cid": "*",
+  "type": "health.check",
+  "created_at": "2025-01-31T16:17:22.242273791Z"
 }

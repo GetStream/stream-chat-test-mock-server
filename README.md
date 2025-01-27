@@ -6,6 +6,12 @@
 bundle install
 ```
 
+## Sync mock server with real backend:
+
+```bash
+bundle exec ruby sync.rb
+```
+
 ## Run mock server for manual testing:
 
 ```bash
