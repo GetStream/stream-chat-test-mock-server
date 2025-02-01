@@ -1,18 +1,18 @@
 {
   "type": "channel.updated",
-  "created_at": "2025-01-31T16:17:24.503957678Z",
-  "cid": "messaging:d37a6586-4fae-4e1e-b720-116ddf7e2070",
-  "channel_last_message_at": "2025-01-31T16:17:23.974961Z",
+  "created_at": "2025-02-01T00:16:30.068019962Z",
+  "cid": "messaging:ec9bdb21-5893-4508-a6fd-4d550d250453",
+  "channel_last_message_at": "2025-02-01T00:16:28.962939Z",
   "channel_member_count": 4,
   "channel_type": "messaging",
-  "channel_id": "d37a6586-4fae-4e1e-b720-116ddf7e2070",
+  "channel_id": "ec9bdb21-5893-4508-a6fd-4d550d250453",
   "channel": {
-    "id": "d37a6586-4fae-4e1e-b720-116ddf7e2070",
+    "id": "ec9bdb21-5893-4508-a6fd-4d550d250453",
     "type": "messaging",
-    "cid": "messaging:d37a6586-4fae-4e1e-b720-116ddf7e2070",
-    "last_message_at": "2025-01-31T16:17:23.974961Z",
-    "created_at": "2025-01-31T16:17:22.505955Z",
-    "updated_at": "2025-01-31T16:17:22.505955Z",
+    "cid": "messaging:ec9bdb21-5893-4508-a6fd-4d550d250453",
+    "last_message_at": "2025-02-01T00:16:28.962939Z",
+    "created_at": "2025-02-01T00:16:26.750289Z",
+    "updated_at": "2025-02-01T00:16:26.750289Z",
     "created_by": {
       "id": "luke_skywalker",
       "name": "Luke Skywalker",
@@ -26,7 +26,7 @@
       "updated_at": "2025-01-31T09:38:22.825054Z",
       "banned": false,
       "online": true,
-      "last_active": "2025-01-31T16:17:03.965048673Z",
+      "last_active": "2025-02-01T00:16:26.078385877Z",
       "blocked_user_ids": [
 
       ],
@@ -328,8 +328,8 @@
           "birthland": "Serenno"
         },
         "status": "member",
-        "created_at": "2025-01-31T16:17:22.510388Z",
-        "updated_at": "2025-01-31T16:17:22.510388Z",
+        "created_at": "2025-02-01T00:16:26.75422Z",
+        "updated_at": "2025-02-01T00:16:26.75422Z",
         "banned": false,
         "shadow_banned": false,
         "role": "member",
@@ -545,8 +545,8 @@
           "birthland": "Corellia"
         },
         "status": "member",
-        "created_at": "2025-01-31T16:17:22.510388Z",
-        "updated_at": "2025-01-31T16:17:22.510388Z",
+        "created_at": "2025-02-01T00:16:26.75422Z",
+        "updated_at": "2025-02-01T00:16:26.75422Z",
         "banned": false,
         "shadow_banned": false,
         "role": "member",
@@ -568,7 +568,7 @@
           "updated_at": "2025-01-31T09:38:22.825054Z",
           "banned": false,
           "online": true,
-          "last_active": "2025-01-31T16:17:03.965048673Z",
+          "last_active": "2025-02-01T00:16:26.078385877Z",
           "blocked_user_ids": [
 
           ],
@@ -761,14 +761,14 @@
             }
           ],
           "invisible": false,
-          "pando": "{\"speciality\":\"ios engineer\"}",
-          "birthland": "Tatooine",
           "team": "test",
-          "type": "team"
+          "type": "team",
+          "pando": "{\"speciality\":\"ios engineer\"}",
+          "birthland": "Tatooine"
         },
         "status": "member",
-        "created_at": "2025-01-31T16:17:22.510388Z",
-        "updated_at": "2025-01-31T16:17:22.510388Z",
+        "created_at": "2025-02-01T00:16:26.75422Z",
+        "updated_at": "2025-02-01T00:16:26.75422Z",
         "banned": false,
         "shadow_banned": false,
         "role": "owner",
@@ -974,6 +974,7 @@
             }
           ],
           "invisible": false,
+          "birthland": "Polis Massa",
           "private_settings": {
             "readReceipts": {
               "enabled": false
@@ -981,12 +982,11 @@
             "typingIndicators": {
               "enabled": false
             }
-          },
-          "birthland": "Polis Massa"
+          }
         },
         "status": "member",
-        "created_at": "2025-01-31T16:17:24.485556Z",
-        "updated_at": "2025-01-31T16:17:24.485556Z",
+        "created_at": "2025-02-01T00:16:30.047087Z",
+        "updated_at": "2025-02-01T00:16:30.047087Z",
         "banned": false,
         "shadow_banned": false,
         "role": "admin",
@@ -1059,10 +1059,13 @@
     "updated_at": "2025-01-31T09:38:22.825054Z",
     "banned": false,
     "online": true,
-    "last_active": "2025-01-31T16:15:56.152156879Z",
+    "last_active": "2025-02-01T00:16:26.078385877Z",
     "blocked_user_ids": [
 
     ],
+    "team": "test",
+    "type": "team",
+    "pando": "{\"speciality\":\"ios engineer\"}",
     "birthland": "Tatooine",
     "privacy_settings": {
       "read_receipts": {
@@ -1071,9 +1074,6 @@
       "typing_indicators": {
         "enabled": false
       }
-    },
-    "team": "test",
-    "type": "team",
-    "pando": "{\"speciality\":\"ios engineer\"}"
+    }
   }
 }
