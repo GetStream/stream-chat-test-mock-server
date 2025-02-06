@@ -119,5 +119,5 @@ end
 
 # Get link preview details
 get '/og' do
-  create_link_preview(url: params[:url])
+  create_link_preview(params[:url])
 end
