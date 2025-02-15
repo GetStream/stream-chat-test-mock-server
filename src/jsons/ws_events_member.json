@@ -1,7 +1,7 @@
 {
   "type": "member.added",
-  "cid": "messaging:d37a6586-4fae-4e1e-b720-116ddf7e2070",
-  "channel_id": "d37a6586-4fae-4e1e-b720-116ddf7e2070",
+  "cid": "messaging:6258821b-e7e5-4ae1-a745-63699214d729",
+  "channel_id": "6258821b-e7e5-4ae1-a745-63699214d729",
   "channel_type": "messaging",
   "member": {
     "user_id": "leia_organa",
@@ -10,11 +10,12 @@
       "role": "admin",
       "created_at": "2024-04-04T09:42:00.68335Z",
       "updated_at": "2025-01-16T12:34:56.765249Z",
-      "last_active": "2025-01-29T16:35:31.022088Z",
-      "last_engaged_at": "2025-01-29T01:28:41.520256Z",
+      "last_active": "2025-02-14T13:12:46.241933Z",
+      "last_engaged_at": "2025-02-14T08:58:37.266996Z",
       "banned": false,
       "online": false,
       "language": "ru",
+      "birthland": "Polis Massa",
       "private_settings": {
         "readReceipts": {
           "enabled": false
@@ -24,12 +25,11 @@
         }
       },
       "name": "Leia Organa",
-      "image": "https://vignette.wikia.nocookie.net/starwars/images/f/fc/Leia_Organa_TLJ.png",
-      "birthland": "Polis Massa"
+      "image": "https://vignette.wikia.nocookie.net/starwars/images/f/fc/Leia_Organa_TLJ.png"
     },
     "status": "member",
-    "created_at": "2025-01-31T16:17:24.485556Z",
-    "updated_at": "2025-01-31T16:17:24.485556Z",
+    "created_at": "2025-02-15T00:15:14.948869Z",
+    "updated_at": "2025-02-15T00:15:14.948869Z",
     "banned": false,
     "shadow_banned": false,
     "archived_at": null,
@@ -43,8 +43,8 @@
     "role": "admin",
     "created_at": "2024-04-04T09:42:00.68335Z",
     "updated_at": "2025-01-16T12:34:56.765249Z",
-    "last_active": "2025-01-29T16:35:31.022088Z",
-    "last_engaged_at": "2025-01-29T01:28:41.520256Z",
+    "last_active": "2025-02-14T13:12:46.241933Z",
+    "last_engaged_at": "2025-02-14T08:58:37.266996Z",
     "banned": false,
     "online": false,
     "language": "ru",
@@ -60,6 +60,6 @@
     "name": "Leia Organa",
     "image": "https://vignette.wikia.nocookie.net/starwars/images/f/fc/Leia_Organa_TLJ.png"
   },
-  "channel_last_message_at": "2025-01-31T16:17:23.974961Z",
-  "created_at": "2025-01-31T16:17:24.493268738Z"
+  "channel_last_message_at": "2025-02-15T00:15:14.17042Z",
+  "created_at": "2025-02-15T00:15:14.956527151Z"
 }
