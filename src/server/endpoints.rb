@@ -1,3 +1,7 @@
+get '/ping' do
+  halt(200)
+end
+
 # Connect to WebSocket
 get '/connect' do
   if Faye::WebSocket.websocket?(request.env)
