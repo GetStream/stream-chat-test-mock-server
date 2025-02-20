@@ -23,6 +23,8 @@ end
 # `file`: Integer - Pass this param if the message should contain files
 # `action`: String - Pass this param if you need to update a message (available options: `pin`, `unpin`, `edit`, `delete`)
 # `hard_delete`: Boolean - Pass this param if you need to hard delete a message (requires: `action=delete`)
+# `delay`: Int - Pass this param if you need the ws to be delayed by the amount of seconds
+
 post '/participant/message' do
   timestamp = unique_date
   attachments = mock_attachments(params)
@@ -86,7 +88,15 @@ post '/participant/message' do
   response['type'] = action_type
   response['message'] = message
   response['hard_delete'] = true if params[:hard_delete] == 'true' && params[:action] == 'delete'
-  $ws&.send(response.to_s)
+
+  if params[:delay].to_i.positive?
+    Thread.new do
+      sleep(params[:delay].to_i)
+      $ws&.send(response.to_s)
+    end
+  else
+    $ws&.send(response.to_s)
+  end
 end
 
 ###### REACTIONS ######
@@ -94,13 +104,15 @@ end
 ### Parameters
 # `type`: String - Pass this param to define a reaction type (available options: `like`, `love`, `sad`, `wow`, `haha`)
 # `delete`: Boolean - Pass this param if you need to delete the reaction
+# `delay`: Int - Pass this param if you need the ws to be delayed by the amount of seconds
 
 post '/participant/reaction' do
   create_reaction(
     type: params[:type],
     message_id: last_message_id,
     user: Participant.user,
-    delete: params[:delete]
+    delete: params[:delete],
+    delay: params[:delay]
   )
   ''
 end

@@ -19,7 +19,7 @@ def send_reaction_ws(response:, event_type:)
   $ws&.send(ws_response.to_s)
 end
 
-def create_reaction(type:, message_id:, user: current_user, delete: nil)
+def create_reaction(type:, message_id:, user: current_user, delete: nil, delay: nil)
   timestamp = unique_date
   message = find_message_by_id(message_id)
 
@@ -63,6 +63,14 @@ def create_reaction(type:, message_id:, user: current_user, delete: nil)
   response['message'] = message
   event_type = delete ? ReactionType.deleted : ReactionType.new
 
-  send_reaction_ws(response: response, event_type: event_type)
+  if params[:delay].to_i.positive?
+    Thread.new do
+      sleep(params[:delay].to_i)
+      send_reaction_ws(response: response, event_type: event_type)
+    end
+  else
+    send_reaction_ws(response: response, event_type: event_type)
+  end
+
   response.to_s
 end
