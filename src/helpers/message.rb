@@ -79,11 +79,14 @@ def update_message(request_body:, params:, delete: false)
     message['text'] = json['message']['text']
     message['html'] = json['message']['text'].to_html
     message['message_text_updated_at'] = timestamp
-  elsif json['set']
-    pinned = json['set']['pinned']
-    message['pinned'] = pinned
-    message['pinned_by'] = pinned ? current_user : nil
-    message['pinned_at'] = pinned ? timestamp : nil
+  elsif json['set'] && json['set']['text']
+    message['text'] = json['set']['text']
+    message['html'] = json['set']['text'].to_html
+    message['message_text_updated_at'] = timestamp
+  elsif json['set'] && json['set']['pinned']
+    message['pinned'] = json['set']['pinned']
+    message['pinned_by'] = json['set']['pinned'] ? current_user : nil
+    message['pinned_at'] = json['set']['pinned'] ? timestamp : nil
   elsif delete
     message['type'] = 'deleted'
     message['deleted_at'] = timestamp
