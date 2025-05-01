@@ -1,23 +1,24 @@
 {
   "type": "reaction.new",
-  "cid": "messaging:d37a6586-4fae-4e1e-b720-116ddf7e2070",
-  "channel_id": "d37a6586-4fae-4e1e-b720-116ddf7e2070",
+  "cid": "messaging:21b42551-8328-42f4-a21a-b4e27aa6949d",
+  "channel_id": "21b42551-8328-42f4-a21a-b4e27aa6949d",
   "channel_type": "messaging",
   "message": {
-    "id": "b53893f9-d1dd-416f-bd04-0e93b61e62f1",
+    "id": "48cd13e8-eb44-4824-890e-1d355ebb5a30",
     "text": "Test",
     "html": "<p>Test</p>\n",
     "type": "regular",
     "user": {
       "id": "luke_skywalker",
       "role": "admin",
+      "teams_role": null,
       "created_at": "2024-04-04T09:26:11.805899Z",
-      "updated_at": "2025-01-31T09:38:22.825054Z",
-      "last_active": "2025-01-31T16:15:56.152156879Z",
-      "last_engaged_at": "2025-01-31T00:11:13.65581Z",
+      "updated_at": "2025-04-19T12:19:13.801419Z",
+      "last_active": "2025-05-01T00:06:38.8670444Z",
+      "last_engaged_at": "2025-04-29T00:57:28.76845Z",
       "banned": false,
       "online": true,
-      "language": "id",
+      "language": "zh",
       "name": "Luke Skywalker",
       "team": "test",
       "type": "team",
@@ -25,34 +26,38 @@
       "pando": "{\"speciality\":\"ios engineer\"}",
       "birthland": "Tatooine"
     },
+    "restricted_visibility": [
+
+    ],
     "attachments": [
 
     ],
     "latest_reactions": [
       {
-        "message_id": "b53893f9-d1dd-416f-bd04-0e93b61e62f1",
+        "message_id": "48cd13e8-eb44-4824-890e-1d355ebb5a30",
         "user_id": "luke_skywalker",
         "user": {
           "id": "luke_skywalker",
           "role": "admin",
+          "teams_role": null,
           "created_at": "2024-04-04T09:26:11.805899Z",
-          "updated_at": "2025-01-31T09:38:22.825054Z",
-          "last_active": "2025-01-31T16:15:56.152156879Z",
-          "last_engaged_at": "2025-01-31T00:11:13.65581Z",
+          "updated_at": "2025-04-19T12:19:13.801419Z",
+          "last_active": "2025-05-01T00:06:38.8670444Z",
+          "last_engaged_at": "2025-04-29T00:57:28.76845Z",
           "banned": false,
           "online": true,
-          "language": "id",
+          "language": "zh",
+          "name": "Luke Skywalker",
+          "team": "test",
           "type": "team",
           "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
           "pando": "{\"speciality\":\"ios engineer\"}",
-          "birthland": "Tatooine",
-          "name": "Luke Skywalker",
-          "team": "test"
+          "birthland": "Tatooine"
         },
         "type": "like",
         "score": 1,
-        "created_at": "2025-01-31T16:17:24.261004Z",
-        "updated_at": "2025-01-31T16:17:24.261004Z"
+        "created_at": "2025-05-01T00:06:44.373398Z",
+        "updated_at": "2025-05-01T00:06:44.373398Z"
       }
     ],
     "own_reactions": [
@@ -68,19 +73,24 @@
       "like": {
         "count": 1,
         "sum_scores": 1,
-        "first_reaction_at": "2025-01-31T16:17:24.261004Z",
-        "last_reaction_at": "2025-01-31T16:17:24.261004Z"
+        "first_reaction_at": "2025-05-01T00:06:44.373398Z",
+        "last_reaction_at": "2025-05-01T00:06:44.373398Z"
       }
     },
     "reply_count": 0,
     "deleted_reply_count": 0,
-    "cid": "messaging:d37a6586-4fae-4e1e-b720-116ddf7e2070",
-    "created_at": "2025-01-31T16:17:23.974961Z",
-    "updated_at": "2025-01-31T16:17:24.26389Z",
+    "cid": "messaging:21b42551-8328-42f4-a21a-b4e27aa6949d",
+    "created_at": "2025-05-01T00:06:43.963995Z",
+    "updated_at": "2025-05-01T00:06:44.385326Z",
     "shadowed": false,
     "mentioned_users": [
 
     ],
+    "i18n": {
+      "fr_text": "test",
+      "language": "zh",
+      "zh_text": "Test"
+    },
     "silent": false,
     "pinned": false,
     "pinned_at": null,
@@ -88,40 +98,42 @@
     "pin_expires": null
   },
   "reaction": {
-    "message_id": "b53893f9-d1dd-416f-bd04-0e93b61e62f1",
+    "message_id": "48cd13e8-eb44-4824-890e-1d355ebb5a30",
     "user_id": "luke_skywalker",
     "user": {
       "id": "luke_skywalker",
       "role": "admin",
+      "teams_role": null,
       "created_at": "2024-04-04T09:26:11.805899Z",
-      "updated_at": "2025-01-31T09:38:22.825054Z",
-      "last_active": "2025-01-31T16:15:56.152156879Z",
-      "last_engaged_at": "2025-01-31T00:11:13.65581Z",
+      "updated_at": "2025-04-19T12:19:13.801419Z",
+      "last_active": "2025-05-01T00:06:38.8670444Z",
+      "last_engaged_at": "2025-04-29T00:57:28.76845Z",
       "banned": false,
       "online": true,
-      "language": "id",
-      "pando": "{\"speciality\":\"ios engineer\"}",
-      "birthland": "Tatooine",
+      "language": "zh",
       "name": "Luke Skywalker",
       "team": "test",
       "type": "team",
-      "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg"
+      "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+      "pando": "{\"speciality\":\"ios engineer\"}",
+      "birthland": "Tatooine"
     },
     "type": "like",
     "score": 1,
-    "created_at": "2025-01-31T16:17:24.261004Z",
-    "updated_at": "2025-01-31T16:17:24.261004Z"
+    "created_at": "2025-05-01T00:06:44.373398Z",
+    "updated_at": "2025-05-01T00:06:44.373398Z"
   },
   "user": {
     "id": "luke_skywalker",
     "role": "admin",
+    "teams_role": null,
     "created_at": "2024-04-04T09:26:11.805899Z",
-    "updated_at": "2025-01-31T09:38:22.825054Z",
-    "last_active": "2025-01-31T16:15:56.152156879Z",
-    "last_engaged_at": "2025-01-31T00:11:13.65581Z",
+    "updated_at": "2025-04-19T12:19:13.801419Z",
+    "last_active": "2025-05-01T00:06:38.8670444Z",
+    "last_engaged_at": "2025-04-29T00:57:28.76845Z",
     "banned": false,
     "online": true,
-    "language": "id",
+    "language": "zh",
     "name": "Luke Skywalker",
     "team": "test",
     "type": "team",
@@ -129,6 +141,6 @@
     "pando": "{\"speciality\":\"ios engineer\"}",
     "birthland": "Tatooine"
   },
-  "channel_last_message_at": "2025-01-31T16:17:23.974961Z",
-  "created_at": "2025-01-31T16:17:24.273229948Z"
+  "channel_last_message_at": "2025-05-01T00:06:43.963995Z",
+  "created_at": "2025-05-01T00:06:44.394724735Z"
 }
