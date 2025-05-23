@@ -22,7 +22,6 @@ end
 def create_reaction(type:, message_id:, user: current_user, delete: nil, delay: nil)
   timestamp = unique_date
   message = find_message_by_id(message_id)
-  message['reaction_scores'] ||= {}
 
   response = Mocks.reaction
   response['reaction']['type'] = type
