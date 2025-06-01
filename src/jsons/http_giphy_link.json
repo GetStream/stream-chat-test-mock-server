@@ -1,6 +1,6 @@
 {
   "message": {
-    "id": "ba84dc3d-6463-4823-a30c-5094e9ba14de",
+    "id": "c7db1a35-d438-4a56-a2e0-2dd730e850a1",
     "text": "https://giphy.com/gifs/test-gw3IWyGkC0rsazTi",
     "html": "<p><a href=\"https://giphy.com/gifs/test-gw3IWyGkC0rsazTi\" rel=\"nofollow\">https://giphy.com/gifs/test-gw3IWyGkC0rsazTi</a></p>\n",
     "type": "regular",
@@ -8,16 +8,16 @@
       "id": "luke_skywalker",
       "name": "Luke Skywalker",
       "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
-      "language": "id",
+      "language": "en",
       "role": "admin",
       "teams": [
 
       ],
       "created_at": "2024-04-04T09:26:11.805899Z",
-      "updated_at": "2025-01-31T09:38:22.825054Z",
+      "updated_at": "2025-05-22T11:47:57.82369Z",
       "banned": false,
       "online": true,
-      "last_active": "2025-01-31T16:17:03.965048673Z",
+      "last_active": "2025-06-01T00:07:40.062212302Z",
       "blocked_user_ids": [
 
       ],
@@ -32,9 +32,9 @@
         "title": "Test Computer GIF - Find & Share on GIPHY",
         "title_link": "https://giphy.com/gifs/test-gw3IWyGkC0rsazTi",
         "text": "Discover & share this Test Computer GIF with everyone you know. GIPHY is how you search, share, discover, and create GIFs.",
-        "image_url": "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExdnN6bThhZnN4bHQ3dTl3YzA2dDB6ZWhqcm4weGJtNzR6b2p0eHN2MSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/gw3IWyGkC0rsazTi/giphy.webp",
-        "thumb_url": "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExdnN6bThhZnN4bHQ3dTl3YzA2dDB6ZWhqcm4weGJtNzR6b2p0eHN2MSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/gw3IWyGkC0rsazTi/giphy.webp",
-        "asset_url": "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExdnN6bThhZnN4bHQ3dTl3YzA2dDB6ZWhqcm4weGJtNzR6b2p0eHN2MSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/gw3IWyGkC0rsazTi/giphy.mp4",
+        "image_url": "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExdHU0bmN1MThnNXRqZWNjYjdrN21xeHN6Z21zZnVwaHYwN2IxZDJ0byZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/gw3IWyGkC0rsazTi/giphy.webp",
+        "thumb_url": "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExdHU0bmN1MThnNXRqZWNjYjdrN21xeHN6Z21zZnVwaHYwN2IxZDJ0byZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/gw3IWyGkC0rsazTi/giphy.webp",
+        "asset_url": "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExdHU0bmN1MThnNXRqZWNjYjdrN21xeHN6Z21zZnVwaHYwN2IxZDJ0byZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/gw3IWyGkC0rsazTi/giphy.mp4",
         "og_scrape_url": "https://giphy.com/gifs/test-gw3IWyGkC0rsazTi"
       }
     ],
@@ -50,18 +50,26 @@
     },
     "reply_count": 0,
     "deleted_reply_count": 0,
-    "cid": "messaging:d37a6586-4fae-4e1e-b720-116ddf7e2070",
-    "created_at": "2025-01-31T16:17:26.384117Z",
-    "updated_at": "2025-01-31T16:17:26.384117Z",
+    "cid": "messaging:379ecfa6-c9cb-4ff2-9138-53e92bf2b334",
+    "created_at": "2025-06-01T00:07:49.889305Z",
+    "updated_at": "2025-06-01T00:07:49.889305Z",
     "shadowed": false,
     "mentioned_users": [
 
     ],
+    "i18n": {
+      "en_text": "https://giphy.com/gifs/test-gw3IWyGkC0rsazTi",
+      "fr_text": "https://giphy.com/gifs/test-gw3IWyGkC0rsazTi",
+      "language": "en"
+    },
     "silent": false,
     "pinned": false,
     "pinned_at": null,
     "pinned_by": null,
-    "pin_expires": null
+    "pin_expires": null,
+    "restricted_visibility": [
+
+    ]
   },
-  "duration": "299.27ms"
+  "duration": "438.30ms"
 }
