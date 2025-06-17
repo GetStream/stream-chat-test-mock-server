@@ -63,6 +63,7 @@ post '/participant/message' do
     show_in_channel: params[:thread_and_channel] ? also_in_channel : params[:thread] ? false : nil,
     text: text,
     attachments: attachments,
+    skip_enrich_url: false,
     user: params[:action] ? template_message['user'] : Participant.user,
     created_at: params[:action] ? template_message['created_at'] : timestamp,
     updated_at: timestamp,
