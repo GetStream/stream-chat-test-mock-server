@@ -152,6 +152,7 @@ def create_message(request_body:, channel_id: nil)
     created_at: timestamp,
     updated_at: timestamp,
     attachments: attachments,
+    skip_enrich_url: json['skip_enrich_url'],
     command: is_invalid_command ? message['text'].to_s.sub('/', '') : nil,
     track_message: message_type != :error
   )
@@ -210,6 +211,7 @@ def mock_message(
   show_in_channel: nil,
   quoted_message_id: nil,
   attachments: nil,
+  skip_enrich_url: nil,
   reply_count: 0,
   track_message: true
 )
@@ -260,7 +262,7 @@ def mock_message(
     $ws&.send(additional_response.to_s)
   end
 
-  if text.include?('youtube.com/') || text.include?('unsplash.com/') || text.include?('giphy.com/')
+  if !skip_enrich_url && (text.include?('youtube.com/') || text.include?('unsplash.com/') || text.include?('giphy.com/'))
     json =
       if text.include?('youtube')
         Mocks.youtube_link
