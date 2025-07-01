@@ -1,6 +1,6 @@
 {
   "message": {
-    "id": "52acba8b-da95-4552-a8d6-9fdfe8fa720f",
+    "id": "37423534-48e8-44a1-aadb-1ee04dd2f618",
     "text": "https://youtube.com/watch?v=xOX7MsrbaPY",
     "html": "<p><a href=\"https://youtube.com/watch?v=xOX7MsrbaPY\" rel=\"nofollow\">https://youtube.com/watch?v=xOX7MsrbaPY</a></p>\n",
     "type": "regular",
@@ -8,34 +8,32 @@
       "id": "luke_skywalker",
       "name": "Luke Skywalker",
       "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
-      "language": "id",
+      "language": "en",
       "role": "admin",
       "teams": [
 
       ],
       "created_at": "2024-04-04T09:26:11.805899Z",
-      "updated_at": "2025-01-31T09:38:22.825054Z",
+      "updated_at": "2025-06-06T08:22:36.844279Z",
       "banned": false,
       "online": true,
-      "last_active": "2025-01-31T16:17:03.965048673Z",
+      "last_active": "2025-07-01T00:07:12.26645698Z",
       "blocked_user_ids": [
 
       ],
-      "pando": "{\"speciality\":\"ios engineer\"}",
       "birthland": "Tatooine",
       "team": "test",
-      "type": "team"
+      "type": "team",
+      "pando": "{\"speciality\":\"ios engineer\"}"
     },
     "attachments": [
       {
         "type": "video",
-        "author_name": "YouTube",
+        "author_name": "Introducing MotionScape",
         "title": "Introducing MotionScape: Prototype SwiftUI Animation Easings",
         "title_link": "https://www.youtube.com/watch?v=xOX7MsrbaPY",
-        "text": "MotionScape is your SwiftUI animation's playground as a developer. You can see all animations and their parameters in effect with beautifully designed and handcrafted animation examples. Best of all: directly preview and export your settings as production-ready SwiftUI code that you can use in your apps as-is.\n\nSupercharge your apps with animations and get to know how to use them - with MotionScape!\n\nDownload MotionScape from the Mac AppStore: \nhttps://gstrm.io/motionscape-yt\n\nWebpage:\nhttps://getstream.github.io/motionscape-app/\n\nSwiftUI chat messaging:\nhttps://getstream.io/chat/sdk/swiftui/\n...",
-        "image_url": "https://i.ytimg.com/vi/xOX7MsrbaPY/mqdefault.jpg",
-        "thumb_url": "https://i.ytimg.com/vi/xOX7MsrbaPY/mqdefault.jpg",
-        "asset_url": "https://www.youtube.com/watch?v=xOX7MsrbaPY",
+        "text": "MotionScape is your SwiftUI animation's playground as a developer. You can see all animations and their parameters in effect with beautifully designed and handcrafted animation examples. Best of all: directly preview and export your settings as production-ready SwiftUI code that you can use in your apps as-is.  Supercharge your apps with animations and get to know how to use them - with MotionScape!  Download MotionScape from the Mac AppStore:  https://gstrm.io/motionscape-yt  Webpage: https://getstream.github.io/motionscape-app/  SwiftUI chat messaging: https://getstream.io/chat/sdk/swiftui/  Chapters: 00:00 Introducing MotionScape 00:31 Adjusting animation parameters 00:54 Supported interpolations 01:03 Previewing animation examples 01:50 Find and download MotionScape",
+        "asset_url": "https://www.youtube.com/embed/xOX7MsrbaPY",
         "og_scrape_url": "https://youtube.com/watch?v=xOX7MsrbaPY"
       }
     ],
@@ -51,18 +49,26 @@
     },
     "reply_count": 0,
     "deleted_reply_count": 0,
-    "cid": "messaging:d37a6586-4fae-4e1e-b720-116ddf7e2070",
-    "created_at": "2025-01-31T16:17:25.490048Z",
-    "updated_at": "2025-01-31T16:17:25.490048Z",
+    "cid": "messaging:01de0dc6-5210-411c-bf1e-bf078b659900",
+    "created_at": "2025-07-01T00:07:22.294387Z",
+    "updated_at": "2025-07-01T00:07:22.294387Z",
     "shadowed": false,
     "mentioned_users": [
 
     ],
+    "i18n": {
+      "en_text": "https://youtube.com/watch?v=xOX7MsrbaPY",
+      "fr_text": "https://youtube.com/watch?v=xOX7MsrbaPY",
+      "language": "en"
+    },
     "silent": false,
     "pinned": false,
     "pinned_at": null,
     "pinned_by": null,
-    "pin_expires": null
+    "pin_expires": null,
+    "restricted_visibility": [
+
+    ]
   },
-  "duration": "248.40ms"
+  "duration": "3738.86ms"
 }
