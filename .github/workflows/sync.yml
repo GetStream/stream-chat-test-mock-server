@@ -21,11 +21,11 @@ jobs:
     - run: |
         git config --global user.email "stream-bot@getstream.io"
         git config --global user.name "Stream Bot"
-        brach="ci/sync-mock-server-$(date +%s)"
-        git checkout -b "${brach}"
+        branch="ci/sync-mock-server-$(date +%s)"
+        git checkout -b "${branch}"
         git add src/jsons
         git commit -m "[CI] Sync Mock Server"
-        git push --set-upstream origin "${brach}"
+        git push --set-upstream origin "${branch}"
         gh pr create --base main --fill
     - uses: 8398a7/action-slack@v3
       with:
