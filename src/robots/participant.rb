@@ -3,9 +3,9 @@ class Participant
     return @user if @user
 
     @user = Mocks.message_ws['message']['user']
-    @user['id'] = 'han_solo'
-    @user['name'] = 'Han Solo'
-    @user['image'] = 'https://vignette.wikia.nocookie.net/starwars/images/e/e2/TFAHanSolo.png'
+    @user['id'] = 'count_dooku'
+    @user['name'] = 'Count Dooku'
+    @user['image'] = 'https://vignette.wikia.nocookie.net/starwars/images/b/b8/Dooku_Headshot.jpg'
     @user
   end
 end
@@ -144,7 +144,17 @@ post '/participant/typing/stop' do
 end
 
 post '/participant/read' do
-  $channel_list['channels'][0]['read'].detect { |u| u['user']['id'] == Participant.user['id'] }['last_read'] = unique_date
+  user_reads = $channel_list['channels'][0]['read'].detect { |u| u['user']['id'] == Participant.user['id'] }
+  if user_reads
+    user_reads['last_read'] = unique_date
+    user_reads['unread_messages'] = 0
+  else
+    $channel_list['channels'][0]['read'] << {
+      'user' => Participant.user,
+      'last_read' => unique_date,
+      'unread_messages' => 0
+    }
+  end
   create_event(
     type: 'message.read',
     channel_id: $current_channel_id,
