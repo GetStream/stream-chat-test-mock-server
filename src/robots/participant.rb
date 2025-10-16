@@ -3,9 +3,9 @@ class Participant
     return @user if @user
 
     @user = Mocks.message_ws['message']['user']
-    @user['id'] = 'han_solo'
-    @user['name'] = 'Han Solo'
-    @user['image'] = 'https://vignette.wikia.nocookie.net/starwars/images/e/e2/TFAHanSolo.png'
+    @user['id'] = 'count_dooku'
+    @user['name'] = 'Count Dooku'
+    @user['image'] = 'https://vignette.wikia.nocookie.net/starwars/images/b/b8/Dooku_Headshot.jpg'
     @user
   end
 end
