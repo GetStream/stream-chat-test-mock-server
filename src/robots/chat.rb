@@ -14,16 +14,18 @@ post '/mock' do
   message_timestamp = 0
   reply_timestamp = 0
 
-  $current_channel_id = 1.to_s
   $message_list = []
   $channel_list['channels'] = []
 
   channels_count.downto(1) do |i|
+    channel_id = SecureRandom.uuid
+    channel_name = channel_id.split('-').first
+    $current_channel_id = channel_id if i == 1
     channel_timestamp = update_date(timestamp: timestamp, minus_seconds: (i * 600) + 1_000_000)
     channel_template = Mocks.channels['channels'].first
     channel_template['channel']['last_message_at'] = channel_timestamp
-    channel_template['channel']['id'] = i.to_s
-    channel_template['channel']['name'] = i.to_s
+    channel_template['channel']['id'] = channel_id
+    channel_template['channel']['name'] = channel_name
     channel_template['channel']['cid'] = "messaging:#{i}"
     channel_template['channel']['created_at'] = channel_timestamp
     channel_template['channel']['updated_at'] = channel_timestamp
@@ -32,7 +34,7 @@ post '/mock' do
   end
 
   $channel_list['channels'].each do |channel|
-    messages_count.downto(1) do |i|
+    messages_count.times do |i|
       message_id = unique_id
       message_timestamp = update_date(timestamp: channel_timestamp, plus_seconds: (i * 600) + 100_000)
       message_template = Mocks.message['message']
@@ -40,14 +42,14 @@ post '/mock' do
       message_template['id'] = message_id
       message_template['created_at'] = message_timestamp
       message_template['updated_at'] = message_timestamp
-      message_template['text'] = params[:messages_text] || i.to_s
+      message_template['text'] = params[:messages_text] || (i + 1).to_s
       message_template['html'] = message_template['text'].to_html
-      message_template['user'] = i.odd? ? current_user : Participant.user
+      message_template['user'] = (i + 1).odd? ? current_user : Participant.user
       message_template['reply_count'] = replies_count
       channel['messages'] << message_template
       $message_list << message_template
 
-      replies_count.downto(1) do |j|
+      replies_count.times do |j|
         reply_timestamp = update_date(timestamp: message_timestamp, plus_seconds: (j * 600) + 300_000)
         reply_template = Mocks.message['message']
         reply_template['cid'] = channel['channel']['cid']
@@ -56,9 +58,9 @@ post '/mock' do
         reply_template['parent_id'] = message_id
         reply_template['created_at'] = reply_timestamp
         reply_template['updated_at'] = reply_timestamp
-        reply_template['text'] = params[:replies_text] || j.to_s
+        reply_template['text'] = params[:replies_text] || (j + 1).to_s
         reply_template['html'] = reply_template['text'].to_html
-        reply_template['user'] = j.odd? ? current_user : Participant.user
+        reply_template['user'] = (j + 1).odd? ? current_user : Participant.user
         channel['messages'] << reply_template
         $message_list << reply_template
       end
