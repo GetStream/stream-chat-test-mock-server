@@ -1,17 +1,17 @@
 {
   "type": "channel.updated",
-  "created_at": "2025-10-15T11:37:42.791732481Z",
-  "cid": "messaging:00dface1-3754-4117-a6e2-937c662f467e",
+  "created_at": "2025-10-16T10:23:58.934211178Z",
+  "cid": "messaging:a69efceb-be1e-4a4c-8064-9ec345999164",
   "channel_member_count": 4,
   "channel_type": "messaging",
-  "channel_id": "00dface1-3754-4117-a6e2-937c662f467e",
+  "channel_id": "a69efceb-be1e-4a4c-8064-9ec345999164",
   "channel": {
-    "id": "00dface1-3754-4117-a6e2-937c662f467e",
+    "id": "a69efceb-be1e-4a4c-8064-9ec345999164",
     "type": "messaging",
-    "cid": "messaging:00dface1-3754-4117-a6e2-937c662f467e",
-    "last_message_at": "2025-10-15T11:37:41.992552Z",
-    "created_at": "2025-10-15T11:37:40.118452Z",
-    "updated_at": "2025-10-15T11:37:40.118452Z",
+    "cid": "messaging:a69efceb-be1e-4a4c-8064-9ec345999164",
+    "last_message_at": "2025-10-16T10:23:58.495734Z",
+    "created_at": "2025-10-16T10:23:56.726053Z",
+    "updated_at": "2025-10-16T10:23:56.726053Z",
     "created_by": {
       "id": "luke_skywalker",
       "name": "Luke Skywalker",
@@ -25,11 +25,11 @@
       "updated_at": "2025-09-15T05:51:41.748915Z",
       "banned": false,
       "online": true,
-      "last_active": "2025-10-15T11:37:39.564503254Z",
+      "last_active": "2025-10-16T10:23:56.462757835Z",
       "blocked_user_ids": [
 
       ],
-      "avg_response_time": 203648,
+      "avg_response_time": 198075,
       "shadow_banned": false,
       "privacy_settings": {
         "typing_indicators": {
@@ -40,6 +40,13 @@
         }
       },
       "devices": [
+        {
+          "push_provider": "apn",
+          "push_provider_name": "APN-Configuration",
+          "id": "2cc451c75329308ca4acda9cf63b1b5e93a53c109b2e8583b4cdeb742aaa722a",
+          "created_at": "2025-10-15T16:15:09.571543Z",
+          "user_id": "luke_skywalker"
+        },
         {
           "push_provider": "apn",
           "push_provider_name": "APN-Configuration",
@@ -59,13 +66,6 @@
           "push_provider_name": "APN-Configuration",
           "id": "80dc67313692ff3d512089cd19df179395b298d106b86cd2aedf0edfe1de40cd7caba3025823acccf9173fce2000728459e6751c4c7c96b80415a441d54c690d3f2d1635d26a8d58c0407edff8fcfe34",
           "created_at": "2025-09-23T11:14:39.868685Z",
-          "user_id": "luke_skywalker"
-        },
-        {
-          "push_provider": "apn",
-          "push_provider_name": "APN-Configuration",
-          "id": "8013785658480684ee2a2f523bd4d52d6f2fac5e34283f4765362b4d526e5f374a46a0eeff277aee8d94ca872c4cdce2c021fef9cb1c71a4e5b28bba5481cab79c2ff7f111d4a7488c7a28de76736ba6",
-          "created_at": "2025-09-22T07:33:07.001628Z",
           "user_id": "luke_skywalker"
         },
         {
@@ -203,13 +203,13 @@
         }
       ],
       "invisible": false,
-      "pando": "{\"speciality\":\"ios engineer\"}",
-      "type": "team",
-      "canReceiveMessages": false,
       "birthland": "Tatooine",
+      "team": "test",
+      "canReceiveMessages": false,
       "custom_extra_data_key": true,
       "canBeAddedToGroups": true,
-      "team": "test"
+      "type": "team",
+      "pando": "{\"speciality\":\"ios engineer\"}"
     },
     "frozen": false,
     "disabled": false,
@@ -326,8 +326,8 @@
           "birthland": "Serenno"
         },
         "status": "member",
-        "created_at": "2025-10-15T11:37:40.124335Z",
-        "updated_at": "2025-10-15T11:37:40.124335Z",
+        "created_at": "2025-10-16T10:23:56.739246Z",
+        "updated_at": "2025-10-16T10:23:56.739246Z",
         "banned": false,
         "shadow_banned": false,
         "role": "member",
@@ -516,8 +516,8 @@
           "birthland": "Socorro"
         },
         "status": "member",
-        "created_at": "2025-10-15T11:37:40.124335Z",
-        "updated_at": "2025-10-15T11:37:40.124335Z",
+        "created_at": "2025-10-16T10:23:56.739246Z",
+        "updated_at": "2025-10-16T10:23:56.739246Z",
         "banned": false,
         "shadow_banned": false,
         "role": "admin",
@@ -539,11 +539,11 @@
           "updated_at": "2025-09-15T05:51:41.748915Z",
           "banned": false,
           "online": true,
-          "last_active": "2025-10-15T11:37:39.564503254Z",
+          "last_active": "2025-10-16T10:23:56.462757835Z",
           "blocked_user_ids": [
 
           ],
-          "avg_response_time": 203648,
+          "avg_response_time": 198075,
           "shadow_banned": false,
           "privacy_settings": {
             "typing_indicators": {
@@ -554,6 +554,13 @@
             }
           },
           "devices": [
+            {
+              "push_provider": "apn",
+              "push_provider_name": "APN-Configuration",
+              "id": "2cc451c75329308ca4acda9cf63b1b5e93a53c109b2e8583b4cdeb742aaa722a",
+              "created_at": "2025-10-15T16:15:09.571543Z",
+              "user_id": "luke_skywalker"
+            },
             {
               "push_provider": "apn",
               "push_provider_name": "APN-Configuration",
@@ -573,13 +580,6 @@
               "push_provider_name": "APN-Configuration",
               "id": "80dc67313692ff3d512089cd19df179395b298d106b86cd2aedf0edfe1de40cd7caba3025823acccf9173fce2000728459e6751c4c7c96b80415a441d54c690d3f2d1635d26a8d58c0407edff8fcfe34",
               "created_at": "2025-09-23T11:14:39.868685Z",
-              "user_id": "luke_skywalker"
-            },
-            {
-              "push_provider": "apn",
-              "push_provider_name": "APN-Configuration",
-              "id": "8013785658480684ee2a2f523bd4d52d6f2fac5e34283f4765362b4d526e5f374a46a0eeff277aee8d94ca872c4cdce2c021fef9cb1c71a4e5b28bba5481cab79c2ff7f111d4a7488c7a28de76736ba6",
-              "created_at": "2025-09-22T07:33:07.001628Z",
               "user_id": "luke_skywalker"
             },
             {
@@ -717,17 +717,17 @@
             }
           ],
           "invisible": false,
-          "canReceiveMessages": false,
           "pando": "{\"speciality\":\"ios engineer\"}",
           "birthland": "Tatooine",
-          "custom_extra_data_key": true,
-          "team": "test",
           "canBeAddedToGroups": true,
+          "team": "test",
+          "canReceiveMessages": false,
+          "custom_extra_data_key": true,
           "type": "team"
         },
         "status": "member",
-        "created_at": "2025-10-15T11:37:40.124335Z",
-        "updated_at": "2025-10-15T11:37:40.124335Z",
+        "created_at": "2025-10-16T10:23:56.739246Z",
+        "updated_at": "2025-10-16T10:23:56.739246Z",
         "banned": false,
         "shadow_banned": false,
         "role": "owner",
@@ -748,12 +748,12 @@
           "created_at": "2024-04-04T09:42:00.68335Z",
           "updated_at": "2025-10-01T16:49:27.725672Z",
           "banned": false,
-          "online": true,
-          "last_active": "2025-10-15T11:36:59.732748595Z",
+          "online": false,
+          "last_active": "2025-10-15T16:10:53.431746Z",
           "blocked_user_ids": [
 
           ],
-          "avg_response_time": 638602,
+          "avg_response_time": 630185,
           "shadow_banned": false,
           "privacy_settings": {
             "typing_indicators": {
@@ -769,13 +769,6 @@
               "push_provider_name": "APN-Configuration",
               "id": "801ffb7f463b104d50a2cbdad23120a4b2ea77d3c98954b7929bc19f4fd0f38ca988fbd91577879dedfc503001f515fbf11ccf204b755c0e062df31750ebb8c463da8a3afb6a4e6dc028e96623f74a35",
               "created_at": "2025-10-11T12:30:03.355048Z",
-              "user_id": "leia_organa"
-            },
-            {
-              "push_provider": "apn",
-              "push_provider_name": "APN-Configuration",
-              "id": "14216b28af8556468ae8dbf08a5ea602f9deb9c2eb115d9b6aacf7f7bde74ade",
-              "created_at": "2025-10-10T16:00:49.838202Z",
               "user_id": "leia_organa"
             },
             {
@@ -924,8 +917,8 @@
           "is_moderator": true
         },
         "status": "member",
-        "created_at": "2025-10-15T11:37:42.770666Z",
-        "updated_at": "2025-10-15T11:37:42.770666Z",
+        "created_at": "2025-10-16T10:23:58.91274Z",
+        "updated_at": "2025-10-16T10:23:58.91274Z",
         "banned": false,
         "shadow_banned": false,
         "role": "admin",
@@ -1001,11 +994,17 @@
     "updated_at": "2025-09-15T05:51:41.748915Z",
     "banned": false,
     "online": true,
-    "last_active": "2025-10-15T11:37:39.564503254Z",
+    "last_active": "2025-10-16T10:23:56.462757835Z",
     "blocked_user_ids": [
 
     ],
-    "avg_response_time": 203648,
+    "avg_response_time": 198075,
+    "birthland": "Tatooine",
+    "canBeAddedToGroups": true,
+    "team": "test",
+    "custom_extra_data_key": true,
+    "pando": "{\"speciality\":\"ios engineer\"}",
+    "canReceiveMessages": false,
     "privacy_settings": {
       "read_receipts": {
         "enabled": true
@@ -1014,12 +1013,6 @@
         "enabled": true
       }
     },
-    "canReceiveMessages": false,
-    "pando": "{\"speciality\":\"ios engineer\"}",
-    "custom_extra_data_key": true,
-    "birthland": "Tatooine",
-    "team": "test",
-    "canBeAddedToGroups": true,
     "type": "team"
   }
 }

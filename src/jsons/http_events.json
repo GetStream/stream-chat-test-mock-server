@@ -1,8 +1,8 @@
 {
   "event": {
     "type": "typing.start",
-    "cid": "messaging:00dface1-3754-4117-a6e2-937c662f467e",
-    "channel_id": "00dface1-3754-4117-a6e2-937c662f467e",
+    "cid": "messaging:a69efceb-be1e-4a4c-8064-9ec345999164",
+    "channel_id": "a69efceb-be1e-4a4c-8064-9ec345999164",
     "channel_type": "messaging",
     "user": {
       "id": "luke_skywalker",
@@ -17,20 +17,20 @@
       "updated_at": "2025-09-15T05:51:41.748915Z",
       "banned": false,
       "online": true,
-      "last_active": "2025-10-15T11:37:39.564503254Z",
+      "last_active": "2025-10-16T10:23:56.462757835Z",
       "blocked_user_ids": [
 
       ],
-      "avg_response_time": 203648,
-      "pando": "{\"speciality\":\"ios engineer\"}",
-      "custom_extra_data_key": true,
+      "avg_response_time": 198075,
       "team": "test",
-      "canBeAddedToGroups": true,
       "canReceiveMessages": false,
+      "canBeAddedToGroups": true,
+      "custom_extra_data_key": true,
+      "type": "team",
       "birthland": "Tatooine",
-      "type": "team"
+      "pando": "{\"speciality\":\"ios engineer\"}"
     },
-    "created_at": "2025-10-15T11:37:41.251276867Z"
+    "created_at": "2025-10-16T10:23:57.385424554Z"
   },
-  "duration": "7.77ms"
+  "duration": "7.79ms"
 }

@@ -1,11 +1,11 @@
 {
   "channel": {
-    "id": "00dface1-3754-4117-a6e2-937c662f467e",
+    "id": "a69efceb-be1e-4a4c-8064-9ec345999164",
     "type": "messaging",
-    "cid": "messaging:00dface1-3754-4117-a6e2-937c662f467e",
-    "last_message_at": "2025-10-15T11:37:41.992552Z",
-    "created_at": "2025-10-15T11:37:40.118452Z",
-    "updated_at": "2025-10-15T11:37:40.118452Z",
+    "cid": "messaging:a69efceb-be1e-4a4c-8064-9ec345999164",
+    "last_message_at": "2025-10-16T10:23:58.495734Z",
+    "created_at": "2025-10-16T10:23:56.726053Z",
+    "updated_at": "2025-10-16T10:23:56.726053Z",
     "created_by": {
       "id": "luke_skywalker",
       "name": "Luke Skywalker",
@@ -19,18 +19,18 @@
       "updated_at": "2025-09-15T05:51:41.748915Z",
       "banned": false,
       "online": true,
-      "last_active": "2025-10-15T11:37:39.564503254Z",
+      "last_active": "2025-10-16T10:23:56.462757835Z",
       "blocked_user_ids": [
 
       ],
-      "avg_response_time": 203648,
-      "canBeAddedToGroups": true,
-      "pando": "{\"speciality\":\"ios engineer\"}",
-      "type": "team",
-      "canReceiveMessages": false,
+      "avg_response_time": 198075,
       "birthland": "Tatooine",
+      "team": "test",
+      "canReceiveMessages": false,
       "custom_extra_data_key": true,
-      "team": "test"
+      "canBeAddedToGroups": true,
+      "type": "team",
+      "pando": "{\"speciality\":\"ios engineer\"}"
     },
     "frozen": false,
     "disabled": false,
@@ -150,8 +150,8 @@
         "birthland": "Serenno"
       },
       "status": "member",
-      "created_at": "2025-10-15T11:37:40.124335Z",
-      "updated_at": "2025-10-15T11:37:40.124335Z",
+      "created_at": "2025-10-16T10:23:56.739246Z",
+      "updated_at": "2025-10-16T10:23:56.739246Z",
       "banned": false,
       "shadow_banned": false,
       "role": "member",
@@ -181,8 +181,8 @@
         "birthland": "Socorro"
       },
       "status": "member",
-      "created_at": "2025-10-15T11:37:40.124335Z",
-      "updated_at": "2025-10-15T11:37:40.124335Z",
+      "created_at": "2025-10-16T10:23:56.739246Z",
+      "updated_at": "2025-10-16T10:23:56.739246Z",
       "banned": false,
       "shadow_banned": false,
       "role": "admin",
@@ -204,22 +204,22 @@
         "updated_at": "2025-09-15T05:51:41.748915Z",
         "banned": false,
         "online": true,
-        "last_active": "2025-10-15T11:37:39.564503254Z",
+        "last_active": "2025-10-16T10:23:56.462757835Z",
         "blocked_user_ids": [
 
         ],
-        "avg_response_time": 203648,
-        "canBeAddedToGroups": true,
-        "type": "team",
-        "birthland": "Tatooine",
-        "canReceiveMessages": false,
-        "pando": "{\"speciality\":\"ios engineer\"}",
+        "avg_response_time": 198075,
         "custom_extra_data_key": true,
-        "team": "test"
+        "pando": "{\"speciality\":\"ios engineer\"}",
+        "birthland": "Tatooine",
+        "team": "test",
+        "type": "team",
+        "canBeAddedToGroups": true,
+        "canReceiveMessages": false
       },
       "status": "member",
-      "created_at": "2025-10-15T11:37:40.124335Z",
-      "updated_at": "2025-10-15T11:37:40.124335Z",
+      "created_at": "2025-10-16T10:23:56.739246Z",
+      "updated_at": "2025-10-16T10:23:56.739246Z",
       "banned": false,
       "shadow_banned": false,
       "role": "owner",
@@ -240,18 +240,18 @@
         "created_at": "2024-04-04T09:42:00.68335Z",
         "updated_at": "2025-10-01T16:49:27.725672Z",
         "banned": false,
-        "online": true,
-        "last_active": "2025-10-15T11:36:59.732748595Z",
+        "online": false,
+        "last_active": "2025-10-15T16:10:53.431746Z",
         "blocked_user_ids": [
 
         ],
-        "avg_response_time": 638602,
+        "avg_response_time": 630185,
         "birthland": "Polis Massa",
         "is_moderator": true
       },
       "status": "member",
-      "created_at": "2025-10-15T11:37:42.770666Z",
-      "updated_at": "2025-10-15T11:37:42.770666Z",
+      "created_at": "2025-10-16T10:23:58.91274Z",
+      "updated_at": "2025-10-16T10:23:58.91274Z",
       "banned": false,
       "shadow_banned": false,
       "role": "admin",
@@ -259,5 +259,5 @@
       "notifications_muted": false
     }
   ],
-  "duration": "33.56ms"
+  "duration": "39.81ms"
 }
