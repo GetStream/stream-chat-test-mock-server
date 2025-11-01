@@ -1,11 +1,11 @@
 {
   "channel": {
-    "id": "a69efceb-be1e-4a4c-8064-9ec345999164",
+    "id": "d3e3e253-3ee0-4253-be61-fd4962da587e",
     "type": "messaging",
-    "cid": "messaging:a69efceb-be1e-4a4c-8064-9ec345999164",
-    "last_message_at": "2025-10-16T10:23:58.495734Z",
-    "created_at": "2025-10-16T10:23:56.726053Z",
-    "updated_at": "2025-10-16T10:23:56.726053Z",
+    "cid": "messaging:d3e3e253-3ee0-4253-be61-fd4962da587e",
+    "last_message_at": "2025-11-01T00:07:19.30627Z",
+    "created_at": "2025-11-01T00:07:17.28238Z",
+    "updated_at": "2025-11-01T00:07:17.28238Z",
     "created_by": {
       "id": "luke_skywalker",
       "name": "Luke Skywalker",
@@ -19,29 +19,30 @@
       "updated_at": "2025-09-15T05:51:41.748915Z",
       "banned": false,
       "online": true,
-      "last_active": "2025-10-16T10:23:56.462757835Z",
+      "last_active": "2025-11-01T00:07:16.698182851Z",
       "blocked_user_ids": [
 
       ],
-      "avg_response_time": 198075,
-      "birthland": "Tatooine",
-      "team": "test",
-      "canReceiveMessages": false,
+      "avg_response_time": 187539,
       "custom_extra_data_key": true,
-      "canBeAddedToGroups": true,
       "type": "team",
-      "pando": "{\"speciality\":\"ios engineer\"}"
+      "canBeAddedToGroups": true,
+      "canReceiveMessages": false,
+      "pando": "{\"speciality\":\"ios engineer\"}",
+      "birthland": "Tatooine",
+      "team": "test"
     },
     "frozen": false,
     "disabled": false,
     "member_count": 4,
     "config": {
-      "created_at": "2021-03-01T19:26:18.406502Z",
-      "updated_at": "2025-07-28T15:20:21.098826Z",
+      "created_at": "2025-10-30T15:27:28.1791459Z",
+      "updated_at": "2025-10-30T15:27:28.179146048Z",
       "name": "messaging",
       "typing_events": true,
       "read_events": true,
       "connect_events": true,
+      "delivery_events": true,
       "search": true,
       "reactions": true,
       "replies": true,
@@ -51,32 +52,16 @@
       "url_enrichment": true,
       "custom_events": true,
       "push_notifications": true,
-      "reminders": true,
+      "reminders": false,
       "mark_messages_pending": false,
-      "polls": true,
+      "polls": false,
       "user_message_reminders": false,
-      "shared_locations": true,
+      "shared_locations": false,
       "count_messages": false,
       "message_retention": "infinite",
       "max_message_length": 5000,
-      "automod": "AI",
-      "automod_behavior": "block",
-      "blocklist": "profanity_en_2020_v1",
-      "blocklist_behavior": "block",
-      "automod_thresholds": {
-        "explicit": {
-          "flag": 0.85,
-          "block": 0.9
-        },
-        "spam": {
-          "flag": 0.85,
-          "block": 0.9
-        },
-        "toxic": {
-          "flag": 0.85,
-          "block": 0.9
-        }
-      },
+      "automod": "disabled",
+      "automod_behavior": "flag",
       "skip_last_msg_update_for_system_msgs": false,
       "commands": [
         {
@@ -95,7 +80,9 @@
       "delete-any-message",
       "delete-channel",
       "delete-own-message",
+      "delivery-events",
       "flag-message",
+      "freeze-channel",
       "join-channel",
       "leave-channel",
       "mute-channel",
@@ -150,8 +137,8 @@
         "birthland": "Serenno"
       },
       "status": "member",
-      "created_at": "2025-10-16T10:23:56.739246Z",
-      "updated_at": "2025-10-16T10:23:56.739246Z",
+      "created_at": "2025-11-01T00:07:17.312124Z",
+      "updated_at": "2025-11-01T00:07:17.312124Z",
       "banned": false,
       "shadow_banned": false,
       "role": "member",
@@ -173,7 +160,7 @@
         "updated_at": "2025-04-16T17:23:28.189521Z",
         "banned": false,
         "online": false,
-        "last_active": "2025-10-12T03:39:43.111316Z",
+        "last_active": "2025-10-30T15:57:52.121514Z",
         "blocked_user_ids": [
 
         ],
@@ -181,8 +168,8 @@
         "birthland": "Socorro"
       },
       "status": "member",
-      "created_at": "2025-10-16T10:23:56.739246Z",
-      "updated_at": "2025-10-16T10:23:56.739246Z",
+      "created_at": "2025-11-01T00:07:17.312124Z",
+      "updated_at": "2025-11-01T00:07:17.312124Z",
       "banned": false,
       "shadow_banned": false,
       "role": "admin",
@@ -204,22 +191,22 @@
         "updated_at": "2025-09-15T05:51:41.748915Z",
         "banned": false,
         "online": true,
-        "last_active": "2025-10-16T10:23:56.462757835Z",
+        "last_active": "2025-11-01T00:07:16.698182851Z",
         "blocked_user_ids": [
 
         ],
-        "avg_response_time": 198075,
-        "custom_extra_data_key": true,
-        "pando": "{\"speciality\":\"ios engineer\"}",
-        "birthland": "Tatooine",
-        "team": "test",
+        "avg_response_time": 187539,
         "type": "team",
+        "birthland": "Tatooine",
+        "canReceiveMessages": false,
+        "pando": "{\"speciality\":\"ios engineer\"}",
+        "custom_extra_data_key": true,
         "canBeAddedToGroups": true,
-        "canReceiveMessages": false
+        "team": "test"
       },
       "status": "member",
-      "created_at": "2025-10-16T10:23:56.739246Z",
-      "updated_at": "2025-10-16T10:23:56.739246Z",
+      "created_at": "2025-11-01T00:07:17.312124Z",
+      "updated_at": "2025-11-01T00:07:17.312124Z",
       "banned": false,
       "shadow_banned": false,
       "role": "owner",
@@ -241,17 +228,17 @@
         "updated_at": "2025-10-01T16:49:27.725672Z",
         "banned": false,
         "online": false,
-        "last_active": "2025-10-15T16:10:53.431746Z",
+        "last_active": "2025-10-31T14:57:45.298933Z",
         "blocked_user_ids": [
 
         ],
-        "avg_response_time": 630185,
-        "birthland": "Polis Massa",
-        "is_moderator": true
+        "avg_response_time": 582450,
+        "is_moderator": true,
+        "birthland": "Polis Massa"
       },
       "status": "member",
-      "created_at": "2025-10-16T10:23:58.91274Z",
-      "updated_at": "2025-10-16T10:23:58.91274Z",
+      "created_at": "2025-11-01T00:07:20.082764Z",
+      "updated_at": "2025-11-01T00:07:20.082764Z",
       "banned": false,
       "shadow_banned": false,
       "role": "admin",
@@ -259,5 +246,5 @@
       "notifications_muted": false
     }
   ],
-  "duration": "39.81ms"
+  "duration": "45.12ms"
 }

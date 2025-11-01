@@ -1,7 +1,7 @@
 {
   "type": "member.added",
-  "cid": "messaging:a69efceb-be1e-4a4c-8064-9ec345999164",
-  "channel_id": "a69efceb-be1e-4a4c-8064-9ec345999164",
+  "cid": "messaging:d3e3e253-3ee0-4253-be61-fd4962da587e",
+  "channel_id": "d3e3e253-3ee0-4253-be61-fd4962da587e",
   "channel_type": "messaging",
   "member": {
     "user_id": "leia_organa",
@@ -11,19 +11,19 @@
       "teams_role": null,
       "created_at": "2024-04-04T09:42:00.68335Z",
       "updated_at": "2025-10-01T16:49:27.725672Z",
-      "last_active": "2025-10-15T16:10:53.431746Z",
-      "last_engaged_at": "2025-10-15T00:02:20.390107Z",
+      "last_active": "2025-10-31T14:57:45.298933Z",
+      "last_engaged_at": "2025-10-31T02:43:58.907543Z",
       "banned": false,
       "online": false,
-      "avg_response_time": 630185,
+      "avg_response_time": 582450,
       "name": "Leia Organa",
       "image": "https://vignette.wikia.nocookie.net/starwars/images/f/fc/Leia_Organa_TLJ.png",
       "birthland": "Polis Massa",
       "is_moderator": true
     },
     "status": "member",
-    "created_at": "2025-10-16T10:23:58.91274Z",
-    "updated_at": "2025-10-16T10:23:58.91274Z",
+    "created_at": "2025-11-01T00:07:20.082764Z",
+    "updated_at": "2025-11-01T00:07:20.082764Z",
     "banned": false,
     "shadow_banned": false,
     "is_global_banned": false,
@@ -39,16 +39,16 @@
     "teams_role": null,
     "created_at": "2024-04-04T09:42:00.68335Z",
     "updated_at": "2025-10-01T16:49:27.725672Z",
-    "last_active": "2025-10-15T16:10:53.431746Z",
-    "last_engaged_at": "2025-10-15T00:02:20.390107Z",
+    "last_active": "2025-10-31T14:57:45.298933Z",
+    "last_engaged_at": "2025-10-31T02:43:58.907543Z",
     "banned": false,
     "online": false,
-    "avg_response_time": 630185,
-    "birthland": "Polis Massa",
+    "avg_response_time": 582450,
     "is_moderator": true,
     "name": "Leia Organa",
-    "image": "https://vignette.wikia.nocookie.net/starwars/images/f/fc/Leia_Organa_TLJ.png"
+    "image": "https://vignette.wikia.nocookie.net/starwars/images/f/fc/Leia_Organa_TLJ.png",
+    "birthland": "Polis Massa"
   },
-  "channel_last_message_at": "2025-10-16T10:23:58.495734Z",
-  "created_at": "2025-10-16T10:23:58.923013459Z"
+  "channel_last_message_at": "2025-11-01T00:07:19.30627Z",
+  "created_at": "2025-11-01T00:07:20.094886704Z"
 }
