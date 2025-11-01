@@ -1,6 +1,6 @@
 {
   "message": {
-    "id": "9732bd67-5b8e-45ab-b607-5175a99b17cb",
+    "id": "af1d169f-f3b5-4c8f-a9b8-6b84cf8731e2",
     "text": "https://giphy.com/gifs/test-gw3IWyGkC0rsazTi",
     "html": "<p><a href=\"https://giphy.com/gifs/test-gw3IWyGkC0rsazTi\" rel=\"nofollow\">https://giphy.com/gifs/test-gw3IWyGkC0rsazTi</a></p>\n",
     "type": "regular",
@@ -17,18 +17,18 @@
       "updated_at": "2025-09-15T05:51:41.748915Z",
       "banned": false,
       "online": true,
-      "last_active": "2025-10-16T10:23:56.462757835Z",
+      "last_active": "2025-11-01T00:07:16.698182851Z",
       "blocked_user_ids": [
 
       ],
-      "avg_response_time": 198075,
+      "avg_response_time": 187539,
+      "team": "test",
       "custom_extra_data_key": true,
-      "type": "team",
-      "pando": "{\"speciality\":\"ios engineer\"}",
-      "canReceiveMessages": false,
       "birthland": "Tatooine",
       "canBeAddedToGroups": true,
-      "team": "test"
+      "pando": "{\"speciality\":\"ios engineer\"}",
+      "canReceiveMessages": false,
+      "type": "team"
     },
     "member": {
       "channel_role": "channel_member"
@@ -39,9 +39,9 @@
         "title": "Test Computer GIF - Find & Share on GIPHY",
         "title_link": "https://giphy.com/gifs/test-gw3IWyGkC0rsazTi",
         "text": "Discover & share this Test Computer GIF with everyone you know. GIPHY is how you search, share, discover, and create GIFs.",
-        "image_url": "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExbnZwNjQzdHhtMWx4emdsbWRrdjVucnI5aWhjcGRuNGFxZWdlMnlzayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/gw3IWyGkC0rsazTi/giphy.webp",
-        "thumb_url": "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExbnZwNjQzdHhtMWx4emdsbWRrdjVucnI5aWhjcGRuNGFxZWdlMnlzayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/gw3IWyGkC0rsazTi/giphy.webp",
-        "asset_url": "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExbnZwNjQzdHhtMWx4emdsbWRrdjVucnI5aWhjcGRuNGFxZWdlMnlzayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/gw3IWyGkC0rsazTi/giphy.mp4",
+        "image_url": "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExdW5vemRjYmU2bGs4NWpobTI0czd2bnVybHZ2bTB4M2hsaG9jZ294dCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/gw3IWyGkC0rsazTi/giphy.webp",
+        "thumb_url": "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExdW5vemRjYmU2bGs4NWpobTI0czd2bnVybHZ2bTB4M2hsaG9jZ294dCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/gw3IWyGkC0rsazTi/giphy.webp",
+        "asset_url": "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExdW5vemRjYmU2bGs4NWpobTI0czd2bnVybHZ2bTB4M2hsaG9jZ294dCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/gw3IWyGkC0rsazTi/giphy.mp4",
         "og_scrape_url": "https://giphy.com/gifs/test-gw3IWyGkC0rsazTi"
       }
     ],
@@ -57,9 +57,9 @@
     },
     "reply_count": 0,
     "deleted_reply_count": 0,
-    "cid": "messaging:a69efceb-be1e-4a4c-8064-9ec345999164",
-    "created_at": "2025-10-16T10:24:05.007774Z",
-    "updated_at": "2025-10-16T10:24:05.007774Z",
+    "cid": "messaging:d3e3e253-3ee0-4253-be61-fd4962da587e",
+    "created_at": "2025-11-01T00:07:30.759709Z",
+    "updated_at": "2025-11-01T00:07:30.759709Z",
     "shadowed": false,
     "mentioned_users": [
 
@@ -73,5 +73,5 @@
 
     ]
   },
-  "duration": "568.98ms"
+  "duration": "652.76ms"
 }
