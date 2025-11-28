@@ -108,6 +108,8 @@ def create_message(request_body:, channel_id: nil)
   elsif $freeze_messages
     status(408)
     return nil
+  elsif $delay_messages.to_i > 0
+    sleep($delay_messages)
   end
 
   json = JSON.parse(request_body)
@@ -329,4 +331,100 @@ def create_link_preview(url)
   else
     ''
   end
+end
+
+def paginate_message_list(params:, request_body:)
+  channel = find_channel_by_id(params[:channel_id])
+  json = request_body.empty? ? {} : JSON.parse(request_body)
+  messages = json['messages']
+  return channel.to_s unless messages && messages['limit']
+
+  message_list = $message_list.select { |msg| msg['cid'] == "#{params[:channel_type]}:#{params[:channel_id]}" && msg['parent_id'].nil? }
+  paginated_messages = mock_message_pagination(
+    message_list: message_list,
+    limit: messages['limit'].to_i,
+    id_lt: messages['id_lt'],
+    id_gt: messages['id_gt'],
+    id_lte: messages['id_lte'],
+    id_gte: messages['id_gte'],
+    id_around: messages['id_around']
+  )
+  channel['messages'] = paginated_messages
+  channel.to_s
+end
+
+def paginate_thread_list(params:)
+  thread_list = $message_list.select { |msg| msg['parent_id'] == params[:message_id] }
+  parent_message = find_message_by_id(params[:message_id])
+
+  unless params[:limit] && parent_message
+    thread_list.insert(0, parent_message) if parent_message
+    return { messages: thread_list }.to_s
+  end
+
+  thread_list.insert(0, parent_message) if parent_message
+
+  paginated_messages = mock_message_pagination(
+    message_list: thread_list,
+    limit: params[:limit].to_i,
+    id_lt: params[:id_lt],
+    id_gt: params[:id_gt],
+    id_lte: params[:id_lte],
+    id_gte: params[:id_gte],
+    id_around: params[:id_around]
+  )
+
+  { messages: paginated_messages }.to_s
+end
+
+def mock_message_pagination(message_list:, limit:, id_lt: nil, id_gt: nil, id_lte: nil, id_gte: nil, id_around: nil)
+  new_message_list = []
+  start_with = nil
+  end_with = nil
+
+  if id_lt
+    message_index = message_list.index { |msg| msg['id'] == id_lt }
+    if message_index
+      start_with = (message_index - limit) > 0 ? (message_index - limit) : 0
+      end_with = (message_index - 1) > 0 ? (message_index - 1) : 0
+    end
+  elsif id_gt
+    message_index = message_list.index { |msg| msg['id'] == id_gt }
+    if message_index
+      message_count = message_list.count - 1
+      plus_limit = message_index + limit
+      start_with = message_index
+      end_with = plus_limit < message_count ? plus_limit : message_count
+    end
+  elsif id_lte
+    message_index = message_list.index { |msg| msg['id'] == id_lte }
+    if message_index
+      minus_limit = message_index - limit
+      start_with = minus_limit > 0 ? minus_limit : 0
+      end_with = message_index
+    end
+  elsif id_gte
+    message_index = message_list.index { |msg| msg['id'] == id_gte }
+    if message_index
+      message_count = message_list.count - 1
+      plus_limit = message_index + limit
+      start_with = message_index
+      end_with = (plus_limit < message_count) ? (plus_limit - 1) : message_count
+    end
+  elsif id_around
+    message_index = message_list.index { |msg| msg['id'] == id_around }
+    if message_index
+      start_with = message_index
+      end_with = [message_index + limit, message_list.count - 1].min
+    end
+  end
+
+  if start_with && end_with
+    end_with = [end_with, message_list.count - 1].min
+    new_message_list = message_list[start_with..end_with] || []
+  else
+    new_message_list = message_list.last(limit) || []
+  end
+
+  new_message_list
 end

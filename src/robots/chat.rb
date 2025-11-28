@@ -2,6 +2,7 @@
 # `channels`: Integer - Channels count. Default 1
 # `messages`: Integer - Messages count in every channel. Default 0
 # `replies`: Integer - Replies count in every message. Default 0
+# `attachments`: Boolean - Attachments included in every message. Default false
 # `messages_text`: String - Text for all the channel messages
 # `replies_text`: String - Text for all the thread messages
 post '/mock' do
@@ -19,14 +20,14 @@ post '/mock' do
 
   channels_count.downto(1) do |i|
     channel_id = SecureRandom.uuid
-    channel_name = channel_id.split('-').first
+    channel_name = i.to_s
     $current_channel_id = channel_id if i == 1
     channel_timestamp = update_date(timestamp: timestamp, minus_seconds: (i * 600) + 1_000_000)
     channel_template = Mocks.channels['channels'].first
     channel_template['channel']['last_message_at'] = channel_timestamp
     channel_template['channel']['id'] = channel_id
     channel_template['channel']['name'] = channel_name
-    channel_template['channel']['cid'] = "messaging:#{i}"
+    channel_template['channel']['cid'] = "messaging:#{channel_id}"
     channel_template['channel']['created_at'] = channel_timestamp
     channel_template['channel']['updated_at'] = channel_timestamp
     channel_template['read'] = []
@@ -46,6 +47,7 @@ post '/mock' do
       message_template['html'] = message_template['text'].to_html
       message_template['user'] = (i + 1).odd? ? current_user : Participant.user
       message_template['reply_count'] = replies_count
+      message_template['attachments'] = mock_attachments(image: 1, video: 1, file: 1) if params[:attachments]
       channel['messages'] << message_template
       $message_list << message_template
 
@@ -61,6 +63,7 @@ post '/mock' do
         reply_template['text'] = params[:replies_text] || (j + 1).to_s
         reply_template['html'] = reply_template['text'].to_html
         reply_template['user'] = (j + 1).odd? ? current_user : Participant.user
+        message_template['attachments'] = mock_attachments(image: 1, video: 1, file: 1) if params[:attachments]
         channel['messages'] << reply_template
         $message_list << reply_template
       end
@@ -77,5 +80,10 @@ end
 
 post '/freeze_messages' do
   $freeze_messages = true
+  ''
+end
+
+post '/delay_messages' do
+  $delay_messages = params[:delay].to_i.positive? ? params[:delay].to_i : 5
   ''
 end
