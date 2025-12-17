@@ -7,6 +7,10 @@ class Mocks
     JSON.parse(File.read('src/jsons/http_channels.json'))
   end
 
+  def self.ws_channel_update
+    JSON.parse(File.read('src/jsons/ws_events_channel.json'))
+  end
+
   def self.event
     JSON.parse(File.read('src/jsons/http_events.json'))
   end
@@ -45,5 +49,21 @@ class Mocks
 
   def self.giphy_link
     JSON.parse(File.read('src/jsons/http_giphy_link.json'))
+  end
+
+  def self.truncate
+    JSON.parse(File.read('src/jsons/http_truncate.json'))
+  end
+
+  def self.member
+    JSON.parse(File.read('src/jsons/http_member.json'))
+  end
+
+  def self.update_member
+    JSON.parse(File.read('src/jsons/http_add_member.json'))
+  end
+
+  def self.ws_update_member
+    JSON.parse(File.read('src/jsons/ws_events_member.json'))
   end
 end

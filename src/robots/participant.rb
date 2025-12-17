@@ -31,6 +31,8 @@ post '/participant/message' do
   response = Mocks.message_ws
   last_channel_message = $message_list.reverse.find { |m| m['parent_id'].nil? }
   also_in_channel = params[:thread_and_channel] == 'true'
+  parent_id = params[:thread] || also_in_channel ? last_channel_message['id'] : nil
+  thread_list = parent_id ? $message_list.filter { |m| m['parent_id'] == parent_id } : []
   message_type = params[:action] == 'delete' ? :deleted : params[:thread] && !also_in_channel ? :reply : :regular
 
   template_message = if message_type == :deleted
@@ -47,7 +49,11 @@ post '/participant/message' do
   text = ['pin', 'unpin'].include?(params[:action]) ? template_message['text'] : request.body.read
 
   quoted_message_id =
-    if params[:quote_last]
+    if parent_id && thread_list.any? && params[:quote_first]
+      thread_list.first['id']
+    elsif parent_id && thread_list.any? && params[:quote_last]
+      thread_list.last['id']
+    elsif params[:quote_last]
       $message_list.last['id']
     elsif params[:quote_first]
       $message_list.first['id']
@@ -59,7 +65,7 @@ post '/participant/message' do
     channel_id: params[:action] ? template_message['channel_id'] : $current_channel_id,
     message_id: params[:action] ? template_message['id'] : unique_id,
     quoted_message_id: quoted_message_id,
-    parent_id: params[:thread] || params[:thread_and_channel] ? last_channel_message['id'] : nil,
+    parent_id: parent_id,
     show_in_channel: params[:thread_and_channel] ? also_in_channel : params[:thread] ? false : nil,
     text: text,
     attachments: attachments,
@@ -88,6 +94,7 @@ post '/participant/message' do
   response['cid'] = "messaging:#{message['channel_id']}"
   response['type'] = action_type
   response['message'] = message
+  response['user'] = Participant.user
   response['hard_delete'] = true if params[:hard_delete] == 'true' && params[:action] == 'delete'
 
   if params[:delay].to_i.positive?
@@ -98,6 +105,94 @@ post '/participant/message' do
   else
     $ws&.send(response.to_s)
   end
+  sync_channels
+end
+
+###### PUSH NOTIFICATIONS ######
+
+### Parameters
+# `title`: String - Push notification title
+# `body`: String - Push notification body
+# `rest`: String - Rest of the payload (empty, null, incorrect_type, incorrect_data, invalid)
+# `bundle_id`: String - Test app bundle id
+# `udid`: String - Device udid
+
+post '/participant/push' do
+  badge = 1
+  mutable_content = 1
+  category = 'stream.chat'
+  sender = 'stream.chat'
+  type = MessageEventType.new
+  version = 'v2'
+  id = last_message_id
+  cid = "messaging:#{$current_channel_id}"
+
+  case params[:rest]
+  when 'empty'
+    params[:title] = ''
+    badge = 0
+    mutable_content = 0
+    category = ''
+    sender = ''
+    type = ''
+    version = ''
+    id = ''
+    cid = ''
+  when 'null'
+    params[:title] = nil
+    badge = nil
+    mutable_content = nil
+    category = nil
+    sender = nil
+    type = nil
+    version = nil
+    id = nil
+    cid = nil
+  when 'incorrect_type'
+    params[:title] = 42
+    badge = 'test'
+    mutable_content = 'test'
+    category = 42
+    sender = 42
+    type = 42
+    version = 42
+    id = 42
+    cid = 42
+  when 'incorrect_data'
+    badge = -1
+    mutable_content = -1
+  end
+
+  if params[:body] == 'empty'
+    params[:body] = ''
+  elsif params[:body] == 'null'
+    params[:body] = nil
+  elsif params[:body].to_i.positive?
+    params[:body] = params[:body].to_i
+  end
+
+  payload = {
+    aps: {
+        alert: {
+            title: params[:title],
+            body: params[:body]
+        },
+        badge: badge,
+        'mutable-content': mutable_content,
+        category: category
+    },
+    stream: {
+      sender: sender,
+      type: type,
+      version: version,
+      id: id,
+      cid: cid
+    }
+  }.to_json
+
+  push_data_file = 'push_payload.json'
+  File.write(push_data_file, payload)
+  puts `xcrun simctl push #{params['udid']} #{params['bundle_id']} #{push_data_file}`
 end
 
 ###### REACTIONS ######
@@ -115,6 +210,7 @@ post '/participant/reaction' do
     delete: params[:delete],
     delay: params[:delay]
   )
+  sync_channels
   ''
 end
 
@@ -124,21 +220,33 @@ end
 # `thread`: Boolean - Pass this param if it's a thread event
 
 post '/participant/typing/start' do
+  parent_id = nil
+  if params[:thread]
+    last_message = $message_list.last
+    parent_id = last_message['parent_id'] || last_message['id']
+  end
+
   create_event(
     type: 'typing.start',
     channel_id: $current_channel_id,
-    user: Participant.user,
-    parent_id: params[:thread] ? last_message_id : nil
+    parent_id: parent_id,
+    user: Participant.user
   )
   ''
 end
 
 post '/participant/typing/stop' do
+  parent_id = nil
+  if params[:thread]
+    last_message = $message_list.last
+    parent_id = last_message['parent_id'] || last_message['id']
+  end
+
   create_event(
     type: 'typing.stop',
     channel_id: $current_channel_id,
-    user: Participant.user,
-    parent_id: params[:thread] ? last_message_id : nil
+    parent_id: parent_id,
+    user: Participant.user
   )
   ''
 end
@@ -155,11 +263,18 @@ post '/participant/read' do
       'unread_messages' => 0
     }
   end
+
+  parent_id = nil
+  if params[:thread]
+    last_message = $message_list.last
+    parent_id = last_message['parent_id'] || last_message['id']
+  end
+
   create_event(
     type: 'message.read',
     channel_id: $current_channel_id,
-    user: Participant.user,
-    parent_id: params[:thread] ? last_message_id : nil
+    parent_id: parent_id,
+    user: Participant.user
   )
   ''
 end

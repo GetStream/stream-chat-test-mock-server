@@ -6,7 +6,7 @@ end
 get '/connect' do
   if Faye::WebSocket.websocket?(request.env)
     $ws = Faye::WebSocket.new(request.env)
-    $ws.on(:open) { |_| $ws.send($health_check) }
+    $ws.on(:open) { |_| send_health_check }
     $ws.on(:close) { $ws = nil }
     $ws.rack_response
   end
@@ -19,27 +19,24 @@ end
 
 # Show channel list
 get '/channels' do
-  channels_response
+  sync_channels
+  paginate_channel_list(payload: params[:payload])
 end
 
+# Show channel list (post request)
 post '/channels' do
-  channels_response
-end
-
-def channels_response
-  $channel_list['channels'].each { |channel| channel['messages'] = $message_list.select { |msg| msg['cid'] == channel['channel']['cid'] } }
-  $channel_list.to_s
+  sync_channels
+  paginate_channel_list(payload: params[:payload])
 end
 
 # Show channel info
 post '/channels/:channel_type/:channel_id/query' do
-  $channel_list['channels'].detect { |channel| channel['channel']['id'] == params[:channel_id] }.to_s
+  paginate_message_list(params: params, request_body: request.body.read)
 end
 
 # Show thread list
 get '/messages/:message_id/replies' do
-  thread_list = $message_list.select { |msg| msg['parent_id'] == params[:message_id] }
-  { messages: thread_list }.to_s
+  paginate_thread_list(params: params)
 end
 
 # Send event
@@ -108,17 +105,12 @@ end
 
 # Truncate channel
 post '/channels/messaging/:channel_id/truncate' do
-  status 500
+  truncate_channel(channel_id: params[:channel_id], request_body: request.body.read)
 end
 
-# Show channel members
-post '/members' do
-  status 500
-end
-
-# Add channel member
+# Add/remove channel member
 post '/channels/messaging/:channel_id' do
-  status 500
+  update_members(channel_id: params[:channel_id], request_body: request.body.read)
 end
 
 # Get link preview details

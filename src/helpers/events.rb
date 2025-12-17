@@ -5,6 +5,7 @@ def send_event_ws(response)
   ws_response['channel_id'] = response['event']['channel_id']
   ws_response['created_at'] = response['created_at']
   ws_response['type'] = response['event']['type']
+  ws_response['parent_id'] = response['parent_id'] if response['parent_id']
   $ws&.send(ws_response.to_s)
 end
 
@@ -14,9 +15,8 @@ def create_event(type:, channel_id:, parent_id: nil, user: current_user)
   response['event']['cid'] = "messaging:#{channel_id}"
   response['event']['channel_id'] = channel_id
   response['created_at'] = unique_date
-  response['parent_id'] = parent_id
+  response['parent_id'] = parent_id if parent_id
   response['user'] = user
-
   send_event_ws(response)
   response.to_s
 end
