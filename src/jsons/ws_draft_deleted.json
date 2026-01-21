@@ -1,0 +1,16 @@
+{
+  "type": "draft.deleted",
+  "created_at": "2026-01-21T16:23:50.224671317Z",
+  "cid": "messaging:6dc09d76-dfef-42cd-b487-1acc98ac2d25",
+  "draft": {
+    "message": {
+      "id": "",
+      "text": ""
+    },
+    "channel_cid": "messaging:6dc09d76-dfef-42cd-b487-1acc98ac2d25",
+    "channel": null,
+    "parent_message": null,
+    "quoted_message": null,
+    "created_at": "0001-01-01T00:00:00Z"
+  }
+}

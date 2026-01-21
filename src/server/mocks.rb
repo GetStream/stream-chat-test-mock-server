@@ -66,4 +66,16 @@ class Mocks
   def self.ws_update_member
     JSON.parse(File.read('src/jsons/ws_events_member.json'))
   end
+
+  def self.draft
+    JSON.parse(File.read('src/jsons/http_draft.json'))
+  end
+
+  def self.ws_draft_updated
+    JSON.parse(File.read('src/jsons/ws_draft_updated.json'))
+  end
+
+  def self.ws_draft_deleted
+    JSON.parse(File.read('src/jsons/ws_draft_deleted.json'))
+  end
 end
