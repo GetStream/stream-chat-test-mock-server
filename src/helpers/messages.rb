@@ -206,6 +206,7 @@ def create_draft(channel_id:, request_body:)
   message_id = json['message']['id']
   cid = "messaging:#{channel_id}"
   channel = find_channel_by_id(channel_id)
+  parent_message = parent_id ? find_message_by_id(parent_id) : nil
 
   response = Mocks.draft
   response['draft']['created_at'] = unique_date
@@ -215,7 +216,7 @@ def create_draft(channel_id:, request_body:)
   response['draft']['channel'] = channel
   if parent_id
     response['draft']['parent_id'] = parent_id
-    response['draft']['parent_message'] = find_message_by_id(parent_id)
+    response['draft']['parent_message'] = parent_message
     response['draft']['message']['parent_id'] = parent_id
   end
 
@@ -230,8 +231,11 @@ def create_draft(channel_id:, request_body:)
   ws_response['draft']['message']['id'] = message_id
   if parent_id
     ws_response['draft']['parent_id'] = parent_id
-    ws_response['draft']['parent_message'] = response['draft']['parent_message']
+    ws_response['draft']['parent_message'] = parent_message
     ws_response['draft']['message']['parent_id'] = parent_id
+    parent_message['draft'] = response['draft']
+  else
+    channel['draft'] = response['draft']
   end
 
   $ws&.send(ws_response.to_s)
@@ -239,12 +243,22 @@ def create_draft(channel_id:, request_body:)
 end
 
 def delete_draft(channel_id:, params:)
+  channel = find_channel_by_id(channel_id)
   ws_response = Mocks.ws_draft_deleted
   ws_response['type'] = DraftEventType.deleted
   ws_response['created_at'] = unique_date
   ws_response['cid'] = "messaging:#{channel_id}"
   ws_response['draft']['channel_cid'] = ws_response['cid']
-  ws_response['draft']['parent_id'] = params[:parent_id] if params[:parent_id]
+  if params[:parent_id]
+    parent_message = find_message_by_id(params[:parent_id])
+    ws_response['draft']['parent_id'] = params[:parent_id]
+    ws_response['draft']['parent_message'] = parent_message
+    ws_response['draft']['parent_message']['draft'] = nil
+    parent_message['draft'] = nil
+  else
+    channel['draft'] = nil
+  end
+  channel['draft'] = nil
   $ws&.send(ws_response.to_s)
   { duration: '7.11ms' }.to_s
 end
