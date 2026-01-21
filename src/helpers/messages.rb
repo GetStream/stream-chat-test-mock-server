@@ -229,11 +229,10 @@ def create_draft(channel_id:, request_body:)
   ws_response['draft']['channel'] = channel
   ws_response['draft']['message']['text'] = text
   ws_response['draft']['message']['id'] = message_id
+
   # Create draft copy without channel to avoid circular reference
   draft_copy = response['draft'].dup
   draft_copy.delete('channel')
-  draft_copy['message'] = draft_copy['message'].dup if draft_copy['message']
-  draft_copy['parent_message'] = draft_copy['parent_message'].dup if draft_copy['parent_message']
 
   if parent_id
     ws_response['draft']['parent_id'] = parent_id
