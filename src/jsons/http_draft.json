@@ -1,0 +1,93 @@
+{
+  "draft": {
+    "message": {
+      "id": "5f2456c0-7cff-447b-b2bc-cad1cc377c70",
+      "text": "Test",
+      "show_in_channel": false,
+      "silent": false
+    },
+    "channel_cid": "messaging:6dc09d76-dfef-42cd-b487-1acc98ac2d25",
+    "channel": {
+      "id": "6dc09d76-dfef-42cd-b487-1acc98ac2d25",
+      "type": "messaging",
+      "cid": "messaging:6dc09d76-dfef-42cd-b487-1acc98ac2d25",
+      "last_message_at": "2026-01-21T16:23:48.710525Z",
+      "created_at": "2026-01-21T16:23:48.062675Z",
+      "updated_at": "2026-01-21T16:23:48.062675Z",
+      "created_by": {
+        "id": "luke_skywalker",
+        "name": "Luke Skywalker",
+        "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+        "language": "zh-TW",
+        "role": "admin",
+        "teams": [
+
+        ],
+        "created_at": "2024-04-04T09:26:11.805899Z",
+        "updated_at": "2026-01-13T00:08:08.392874Z",
+        "banned": false,
+        "online": true,
+        "last_active": "2026-01-21T16:23:14.909720148Z",
+        "blocked_user_ids": [
+
+        ],
+        "avg_response_time": 153351,
+        "pando": "{\"speciality\":\"ios engineer\"}",
+        "birthland": "Tatooine",
+        "type": "team",
+        "custom_extra_data_key": true,
+        "team": "test",
+        "canReceiveMessages": false,
+        "canBeAddedToGroups": true,
+        "birthLand": "Tatooine"
+      },
+      "frozen": false,
+      "disabled": false,
+      "member_count": 4,
+      "config": {
+        "created_at": "2025-11-03T16:24:02.541231Z",
+        "updated_at": "2025-11-12T13:34:57.580888Z",
+        "name": "messaging",
+        "typing_events": true,
+        "read_events": true,
+        "connect_events": true,
+        "delivery_events": true,
+        "search": true,
+        "reactions": true,
+        "replies": true,
+        "quotes": true,
+        "mutes": true,
+        "uploads": true,
+        "url_enrichment": true,
+        "custom_events": true,
+        "push_notifications": true,
+        "reminders": true,
+        "mark_messages_pending": false,
+        "polls": true,
+        "user_message_reminders": false,
+        "shared_locations": true,
+        "count_messages": true,
+        "message_retention": "infinite",
+        "max_message_length": 5000,
+        "automod": "disabled",
+        "automod_behavior": "flag",
+        "blocklist_behavior": "flag",
+        "skip_last_msg_update_for_system_msgs": true,
+        "commands": [
+          {
+            "name": "giphy",
+            "description": "Post a random gif to the channel",
+            "args": "[text]",
+            "set": "fun_set"
+          }
+        ]
+      },
+      "message_count": 4,
+      "name": "Sync Mock Server"
+    },
+    "parent_message": null,
+    "quoted_message": null,
+    "created_at": "2026-01-21T16:23:50.087331333Z"
+  },
+  "duration": "17.99ms"
+}

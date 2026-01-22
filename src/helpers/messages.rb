@@ -34,6 +34,16 @@ class MessageEventType
   end
 end
 
+class DraftEventType
+  def self.updated
+    'draft.updated'
+  end
+
+  def self.deleted
+    'draft.deleted'
+  end
+end
+
 class SystemMessage
   def self.invalid_command(cmd)
     "Sorry, command #{cmd} doesn't exist. Try posting your message without the starting /"
@@ -187,6 +197,74 @@ def create_giphy(request_body:, message_id:)
   response['message'] = message
   send_message_ws(response: response, event_type: MessageEventType.new)
   response.to_s
+end
+
+def create_draft(channel_id:, request_body:)
+  json = JSON.parse(request_body)
+  text = json['message']['text']
+  parent_id = json['message']['parent_id']
+  message_id = json['message']['id']
+  cid = "messaging:#{channel_id}"
+  channel = find_channel_by_id(channel_id)
+  parent_message = parent_id ? find_message_by_id(parent_id) : nil
+
+  response = Mocks.draft
+  response['draft']['created_at'] = unique_date
+  response['draft']['message']['text'] = text
+  response['draft']['message']['id'] = message_id
+  response['draft']['channel_cid'] = cid
+  response['draft']['channel'] = channel
+  if parent_id
+    response['draft']['parent_id'] = parent_id
+    response['draft']['parent_message'] = parent_message
+    response['draft']['message']['parent_id'] = parent_id
+  end
+
+  ws_response = Mocks.ws_draft_updated
+  ws_response['type'] = DraftEventType.updated
+  ws_response['cid'] = cid
+  ws_response['created_at'] = response['draft']['created_at']
+  ws_response['draft']['created_at'] = response['draft']['created_at']
+  ws_response['draft']['channel_cid'] = ws_response['cid']
+  ws_response['draft']['channel'] = channel
+  ws_response['draft']['message']['text'] = text
+  ws_response['draft']['message']['id'] = message_id
+
+  # Create draft copy without channel and parent_message to avoid circular reference
+  draft_copy = response['draft'].dup
+  draft_copy.delete('channel')
+  if parent_id
+    draft_copy.delete('parent_message')
+    ws_response['draft']['parent_id'] = parent_id
+    ws_response['draft']['parent_message'] = parent_message
+    ws_response['draft']['message']['parent_id'] = parent_id
+    parent_message['draft'] = draft_copy
+  else
+    channel['draft'] = draft_copy
+  end
+
+  $ws&.send(ws_response.to_s)
+  response.to_s
+end
+
+def delete_draft(channel_id:, params:)
+  channel = find_channel_by_id(channel_id)
+  ws_response = Mocks.ws_draft_deleted
+  ws_response['type'] = DraftEventType.deleted
+  ws_response['created_at'] = unique_date
+  ws_response['cid'] = "messaging:#{channel_id}"
+  ws_response['draft']['channel_cid'] = ws_response['cid']
+  if params[:parent_id]
+    parent_message = find_message_by_id(params[:parent_id])
+    ws_response['draft']['parent_id'] = params[:parent_id]
+    ws_response['draft']['parent_message'] = parent_message
+    ws_response['draft']['parent_message']['draft'] = nil
+    parent_message['draft'] = nil
+  else
+    channel['draft'] = nil
+  end
+  $ws&.send(ws_response.to_s)
+  { duration: '7.11ms' }.to_s
 end
 
 def last_message_id

@@ -110,6 +110,27 @@ def send_giphy_link(channel_id)
   send_message(channel_id, 'https://giphy.com/gifs/test-gw3IWyGkC0rsazTi', 'http_giphy_link.json')
 end
 
+def create_draft_message(channel_id, text, filename)
+  message_id = SecureRandom.uuid
+  payload = {
+    message: {
+      id: message_id,
+      show_in_channel: false,
+      silent: false,
+      text: text
+    }
+  }.to_json
+  endpoint = "#{STREAM_HTTP_URL}/channels/messaging/#{channel_id}/draft?api_key=#{STREAM_DEMO_API_KEY}"
+  response = http_post(endpoint, payload)
+  save_json(response, filename)
+  message_id
+end
+
+def delete_draft_message(channel_id)
+  endpoint = "#{STREAM_HTTP_URL}/channels/messaging/#{channel_id}/draft?api_key=#{STREAM_DEMO_API_KEY}"
+  http_delete(endpoint)
+end
+
 def create_channel(connection_id)
   payload = {
     data: {
@@ -246,6 +267,8 @@ EM.run do
       send_youtube_link(channel_id)
       send_unsplash_link(channel_id)
       send_giphy_link(channel_id)
+      create_draft_message(channel_id, 'Test', 'http_draft.json')
+      delete_draft_message(channel_id)
       truncate_channel_with_message(channel_id)
       remove_channel(channel_id)
     when 'typing.start'
@@ -259,6 +282,10 @@ EM.run do
       save_json(JSON.parse(event.data), 'ws_reaction.json')
     when 'member.added'
       save_json(JSON.parse(event.data), 'ws_events_member.json')
+    when 'draft.updated'
+      save_json(JSON.parse(event.data), 'ws_draft_updated.json')
+    when 'draft.deleted'
+      save_json(JSON.parse(event.data), 'ws_draft_deleted.json')
     when 'channel.updated'
       json = JSON.parse(event.data)
       json['user']['privacy_settings']['typing_indicators']['enabled'] = true

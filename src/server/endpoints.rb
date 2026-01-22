@@ -76,6 +76,16 @@ put '/messages/:message_id' do
   update_message(request_body: request.body.read, params: params)
 end
 
+# Create draft message
+post '/channels/messaging/:channel_id/draft' do
+  create_draft(channel_id: params[:channel_id], request_body: request.body.read)
+end
+
+# Delete draft message
+delete '/channels/messaging/:channel_id/draft' do
+  delete_draft(channel_id: params[:channel_id], params: params)
+end
+
 # Send giphy
 post '/messages/:message_id/action' do
   create_giphy(request_body: request.body.read, message_id: params[:message_id])
