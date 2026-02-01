@@ -1,47 +1,49 @@
 {
   "channel": {
-    "id": "a69efceb-be1e-4a4c-8064-9ec345999164",
+    "id": "45e10375-ae74-495d-9105-25f55d7e5fab",
     "type": "messaging",
-    "cid": "messaging:a69efceb-be1e-4a4c-8064-9ec345999164",
-    "last_message_at": "2025-10-16T10:23:58.495734Z",
-    "created_at": "2025-10-16T10:23:56.726053Z",
-    "updated_at": "2025-10-16T10:23:56.726053Z",
+    "cid": "messaging:45e10375-ae74-495d-9105-25f55d7e5fab",
+    "last_message_at": "2026-02-01T00:09:25.286787Z",
+    "created_at": "2026-02-01T00:09:22.817453Z",
+    "updated_at": "2026-02-01T00:09:22.817454Z",
     "created_by": {
       "id": "luke_skywalker",
       "name": "Luke Skywalker",
       "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
-      "language": "en",
+      "language": "zh-TW",
       "role": "admin",
       "teams": [
 
       ],
       "created_at": "2024-04-04T09:26:11.805899Z",
-      "updated_at": "2025-09-15T05:51:41.748915Z",
+      "updated_at": "2026-01-29T07:37:37.227103Z",
       "banned": false,
       "online": true,
-      "last_active": "2025-10-16T10:23:56.462757835Z",
+      "last_active": "2026-02-01T00:09:21.940582664Z",
       "blocked_user_ids": [
 
       ],
-      "avg_response_time": 198075,
-      "birthland": "Tatooine",
-      "team": "test",
-      "canReceiveMessages": false,
-      "custom_extra_data_key": true,
-      "canBeAddedToGroups": true,
+      "avg_response_time": 153351,
       "type": "team",
-      "pando": "{\"speciality\":\"ios engineer\"}"
+      "birthland": "Tatooine",
+      "birthLand": "Tatooine",
+      "canBeAddedToGroups": true,
+      "custom_extra_data_key": true,
+      "pando": "{\"speciality\":\"ios engineer\"}",
+      "canReceiveMessages": false,
+      "team": "test"
     },
     "frozen": false,
     "disabled": false,
     "member_count": 4,
     "config": {
-      "created_at": "2021-03-01T19:26:18.406502Z",
-      "updated_at": "2025-07-28T15:20:21.098826Z",
+      "created_at": "2025-11-03T16:24:02.541231Z",
+      "updated_at": "2025-11-12T13:34:57.580888Z",
       "name": "messaging",
       "typing_events": true,
       "read_events": true,
       "connect_events": true,
+      "delivery_events": true,
       "search": true,
       "reactions": true,
       "replies": true,
@@ -56,28 +58,13 @@
       "polls": true,
       "user_message_reminders": false,
       "shared_locations": true,
-      "count_messages": false,
+      "count_messages": true,
       "message_retention": "infinite",
       "max_message_length": 5000,
-      "automod": "AI",
-      "automod_behavior": "block",
-      "blocklist": "profanity_en_2020_v1",
-      "blocklist_behavior": "block",
-      "automod_thresholds": {
-        "explicit": {
-          "flag": 0.85,
-          "block": 0.9
-        },
-        "spam": {
-          "flag": 0.85,
-          "block": 0.9
-        },
-        "toxic": {
-          "flag": 0.85,
-          "block": 0.9
-        }
-      },
-      "skip_last_msg_update_for_system_msgs": false,
+      "automod": "disabled",
+      "automod_behavior": "flag",
+      "blocklist_behavior": "flag",
+      "skip_last_msg_update_for_system_msgs": true,
       "commands": [
         {
           "name": "giphy",
@@ -95,7 +82,9 @@
       "delete-any-message",
       "delete-channel",
       "delete-own-message",
+      "delivery-events",
       "flag-message",
+      "freeze-channel",
       "join-channel",
       "leave-channel",
       "mute-channel",
@@ -124,6 +113,7 @@
       "upload-file"
     ],
     "hidden": false,
+    "message_count": 1,
     "name": "Sync Mock Server"
   },
   "members": [
@@ -142,16 +132,16 @@
         "updated_at": "2025-04-23T13:02:29.974824Z",
         "banned": false,
         "online": false,
-        "last_active": "2025-10-01T07:12:24.084195Z",
+        "last_active": "2026-01-08T15:35:40.964428Z",
         "blocked_user_ids": [
-
+          "chewbacca"
         ],
-        "avg_response_time": 531,
+        "avg_response_time": 76339,
         "birthland": "Serenno"
       },
       "status": "member",
-      "created_at": "2025-10-16T10:23:56.739246Z",
-      "updated_at": "2025-10-16T10:23:56.739246Z",
+      "created_at": "2026-02-01T00:09:22.983927Z",
+      "updated_at": "2026-02-01T00:09:22.983927Z",
       "banned": false,
       "shadow_banned": false,
       "role": "member",
@@ -164,25 +154,25 @@
         "id": "lando_calrissian",
         "name": "Lando Calrissian",
         "image": "https://vignette.wikia.nocookie.net/starwars/images/8/8f/Lando_ROTJ.png",
-        "language": "",
+        "language": "zh-TW",
         "role": "admin",
         "teams": [
 
         ],
         "created_at": "2024-04-04T19:06:08.890459Z",
-        "updated_at": "2025-04-16T17:23:28.189521Z",
+        "updated_at": "2025-12-24T04:46:54.176901Z",
         "banned": false,
         "online": false,
-        "last_active": "2025-10-12T03:39:43.111316Z",
+        "last_active": "2026-01-28T10:44:35.786836Z",
         "blocked_user_ids": [
 
         ],
-        "avg_response_time": 1165670,
+        "avg_response_time": 777135,
         "birthland": "Socorro"
       },
       "status": "member",
-      "created_at": "2025-10-16T10:23:56.739246Z",
-      "updated_at": "2025-10-16T10:23:56.739246Z",
+      "created_at": "2026-02-01T00:09:22.983927Z",
+      "updated_at": "2026-02-01T00:09:22.983927Z",
       "banned": false,
       "shadow_banned": false,
       "role": "admin",
@@ -195,31 +185,32 @@
         "id": "luke_skywalker",
         "name": "Luke Skywalker",
         "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
-        "language": "en",
+        "language": "zh-TW",
         "role": "admin",
         "teams": [
 
         ],
         "created_at": "2024-04-04T09:26:11.805899Z",
-        "updated_at": "2025-09-15T05:51:41.748915Z",
+        "updated_at": "2026-01-29T07:37:37.227103Z",
         "banned": false,
         "online": true,
-        "last_active": "2025-10-16T10:23:56.462757835Z",
+        "last_active": "2026-02-01T00:09:21.940582664Z",
         "blocked_user_ids": [
 
         ],
-        "avg_response_time": 198075,
-        "custom_extra_data_key": true,
-        "pando": "{\"speciality\":\"ios engineer\"}",
-        "birthland": "Tatooine",
+        "avg_response_time": 153351,
         "team": "test",
+        "birthLand": "Tatooine",
+        "canReceiveMessages": false,
         "type": "team",
+        "birthland": "Tatooine",
         "canBeAddedToGroups": true,
-        "canReceiveMessages": false
+        "custom_extra_data_key": true,
+        "pando": "{\"speciality\":\"ios engineer\"}"
       },
       "status": "member",
-      "created_at": "2025-10-16T10:23:56.739246Z",
-      "updated_at": "2025-10-16T10:23:56.739246Z",
+      "created_at": "2026-02-01T00:09:22.983927Z",
+      "updated_at": "2026-02-01T00:09:22.983927Z",
       "banned": false,
       "shadow_banned": false,
       "role": "owner",
@@ -238,20 +229,22 @@
 
         ],
         "created_at": "2024-04-04T09:42:00.68335Z",
-        "updated_at": "2025-10-01T16:49:27.725672Z",
+        "updated_at": "2026-01-19T15:44:51.187202Z",
         "banned": false,
         "online": false,
-        "last_active": "2025-10-15T16:10:53.431746Z",
+        "last_active": "2026-01-28T14:10:22.092155Z",
         "blocked_user_ids": [
-
+          "lando_calrissian",
+          "chewbacca"
         ],
-        "avg_response_time": 630185,
+        "avg_response_time": 458515,
         "birthland": "Polis Massa",
-        "is_moderator": true
+        "is_moderator": true,
+        "birthLand": "Polis Massa"
       },
       "status": "member",
-      "created_at": "2025-10-16T10:23:58.91274Z",
-      "updated_at": "2025-10-16T10:23:58.91274Z",
+      "created_at": "2026-02-01T00:09:26.078326Z",
+      "updated_at": "2026-02-01T00:09:26.078326Z",
       "banned": false,
       "shadow_banned": false,
       "role": "admin",
@@ -259,5 +252,5 @@
       "notifications_muted": false
     }
   ],
-  "duration": "39.81ms"
+  "duration": "44.49ms"
 }

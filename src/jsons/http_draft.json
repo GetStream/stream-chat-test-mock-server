@@ -1,19 +1,19 @@
 {
   "draft": {
     "message": {
-      "id": "5f2456c0-7cff-447b-b2bc-cad1cc377c70",
+      "id": "80c161a5-b183-4f99-838a-d2471d0251fd",
       "text": "Test",
       "show_in_channel": false,
       "silent": false
     },
-    "channel_cid": "messaging:6dc09d76-dfef-42cd-b487-1acc98ac2d25",
+    "channel_cid": "messaging:45e10375-ae74-495d-9105-25f55d7e5fab",
     "channel": {
-      "id": "6dc09d76-dfef-42cd-b487-1acc98ac2d25",
+      "id": "45e10375-ae74-495d-9105-25f55d7e5fab",
       "type": "messaging",
-      "cid": "messaging:6dc09d76-dfef-42cd-b487-1acc98ac2d25",
-      "last_message_at": "2026-01-21T16:23:48.710525Z",
-      "created_at": "2026-01-21T16:23:48.062675Z",
-      "updated_at": "2026-01-21T16:23:48.062675Z",
+      "cid": "messaging:45e10375-ae74-495d-9105-25f55d7e5fab",
+      "last_message_at": "2026-02-01T00:09:28.553711Z",
+      "created_at": "2026-02-01T00:09:22.817453Z",
+      "updated_at": "2026-02-01T00:09:22.817454Z",
       "created_by": {
         "id": "luke_skywalker",
         "name": "Luke Skywalker",
@@ -24,22 +24,22 @@
 
         ],
         "created_at": "2024-04-04T09:26:11.805899Z",
-        "updated_at": "2026-01-13T00:08:08.392874Z",
+        "updated_at": "2026-01-29T07:37:37.227103Z",
         "banned": false,
         "online": true,
-        "last_active": "2026-01-21T16:23:14.909720148Z",
+        "last_active": "2026-02-01T00:09:21.940582664Z",
         "blocked_user_ids": [
 
         ],
         "avg_response_time": 153351,
-        "pando": "{\"speciality\":\"ios engineer\"}",
-        "birthland": "Tatooine",
-        "type": "team",
-        "custom_extra_data_key": true,
-        "team": "test",
         "canReceiveMessages": false,
+        "pando": "{\"speciality\":\"ios engineer\"}",
+        "birthLand": "Tatooine",
+        "custom_extra_data_key": true,
+        "birthland": "Tatooine",
+        "team": "test",
         "canBeAddedToGroups": true,
-        "birthLand": "Tatooine"
+        "type": "team"
       },
       "frozen": false,
       "disabled": false,
@@ -87,7 +87,7 @@
     },
     "parent_message": null,
     "quoted_message": null,
-    "created_at": "2026-01-21T16:23:50.087331333Z"
+    "created_at": "2026-02-01T00:09:28.938550589Z"
   },
-  "duration": "17.99ms"
+  "duration": "15.42ms"
 }
