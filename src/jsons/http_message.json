@@ -1,6 +1,6 @@
 {
   "message": {
-    "id": "1308ec41-a0a9-416e-b2a2-6d3f9440e548",
+    "id": "0dcdb21f-7cad-47f2-8b36-2a5b33061aed",
     "text": "Test",
     "html": "<p>Test</p>\n",
     "type": "regular",
@@ -8,26 +8,27 @@
       "id": "luke_skywalker",
       "name": "Luke Skywalker",
       "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
-      "language": "en",
+      "language": "zh-TW",
       "role": "admin",
       "teams": [
 
       ],
       "created_at": "2024-04-04T09:26:11.805899Z",
-      "updated_at": "2025-09-15T05:51:41.748915Z",
+      "updated_at": "2026-02-15T16:28:30.054901Z",
       "banned": false,
       "online": true,
-      "last_active": "2025-10-16T10:23:56.462757835Z",
+      "last_active": "2026-03-01T00:09:17.602288251Z",
       "blocked_user_ids": [
 
       ],
-      "avg_response_time": 198075,
-      "canReceiveMessages": false,
+      "avg_response_time": 155014,
       "team": "test",
-      "canBeAddedToGroups": true,
       "custom_extra_data_key": true,
+      "canBeAddedToGroups": true,
+      "canReceiveMessages": false,
       "type": "team",
       "pando": "{\"speciality\":\"ios engineer\"}",
+      "birthLand": "Tatooine",
       "birthland": "Tatooine"
     },
     "member": {
@@ -48,13 +49,15 @@
     },
     "reply_count": 0,
     "deleted_reply_count": 0,
-    "cid": "messaging:a69efceb-be1e-4a4c-8064-9ec345999164",
-    "created_at": "2025-10-16T10:23:58.495734Z",
-    "updated_at": "2025-10-16T10:23:58.495734Z",
+    "cid": "messaging:b5d89e2b-4ea8-4a7f-8cf7-33f732760fd2",
+    "created_at": "2026-03-01T00:09:21.48717Z",
+    "updated_at": "2026-03-01T00:09:21.48717Z",
     "shadowed": false,
     "mentioned_users": [
 
     ],
+    "mentioned_channel": false,
+    "mentioned_here": false,
     "silent": false,
     "pinned": false,
     "pinned_at": null,
@@ -64,5 +67,5 @@
 
     ]
   },
-  "duration": "1068.49ms"
+  "duration": "335.39ms"
 }
