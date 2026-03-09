@@ -68,6 +68,7 @@ post '/mock' do
         $message_list << reply_template
       end
     end
+    channel['channel']['last_message_at'] = message_timestamp if messages_count.positive?
   end
 
   ''
