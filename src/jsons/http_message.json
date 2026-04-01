@@ -1,6 +1,6 @@
 {
   "message": {
-    "id": "1308ec41-a0a9-416e-b2a2-6d3f9440e548",
+    "id": "c9ace3a6-1e90-4c87-92d2-9854e46c018c",
     "text": "Test",
     "html": "<p>Test</p>\n",
     "type": "regular",
@@ -8,30 +8,32 @@
       "id": "luke_skywalker",
       "name": "Luke Skywalker",
       "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
-      "language": "en",
+      "language": "zh",
       "role": "admin",
       "teams": [
 
       ],
       "created_at": "2024-04-04T09:26:11.805899Z",
-      "updated_at": "2025-09-15T05:51:41.748915Z",
+      "updated_at": "2026-03-30T22:53:49.127251Z",
       "banned": false,
       "online": true,
-      "last_active": "2025-10-16T10:23:56.462757835Z",
+      "last_active": "2026-04-01T00:13:41.83521677Z",
       "blocked_user_ids": [
 
       ],
-      "avg_response_time": 198075,
-      "canReceiveMessages": false,
-      "team": "test",
+      "avg_response_time": 150537,
       "canBeAddedToGroups": true,
-      "custom_extra_data_key": true,
-      "type": "team",
+      "team": "test",
       "pando": "{\"speciality\":\"ios engineer\"}",
-      "birthland": "Tatooine"
+      "canReceiveMessages": false,
+      "custom_extra_data_key": true,
+      "birthLand": "Tatooine",
+      "birthland": "Tatooine",
+      "type": "team"
     },
     "member": {
-      "channel_role": "channel_member"
+      "channel_role": "channel_member",
+      "notifications_muted": false
     },
     "attachments": [
 
@@ -48,13 +50,20 @@
     },
     "reply_count": 0,
     "deleted_reply_count": 0,
-    "cid": "messaging:a69efceb-be1e-4a4c-8064-9ec345999164",
-    "created_at": "2025-10-16T10:23:58.495734Z",
-    "updated_at": "2025-10-16T10:23:58.495734Z",
+    "cid": "messaging:248f8fc5-d6f2-43ad-9202-4a4dac955de5",
+    "created_at": "2026-04-01T00:13:45.543789Z",
+    "updated_at": "2026-04-01T00:13:45.543789Z",
     "shadowed": false,
     "mentioned_users": [
 
     ],
+    "mentioned_channel": false,
+    "mentioned_here": false,
+    "i18n": {
+      "zh_text": "Test",
+      "language": "zh",
+      "zh-TW_text": "測試"
+    },
     "silent": false,
     "pinned": false,
     "pinned_at": null,
@@ -64,5 +73,5 @@
 
     ]
   },
-  "duration": "1068.49ms"
+  "duration": "220.43ms"
 }
