@@ -1,45 +1,45 @@
 {
   "draft": {
     "message": {
-      "id": "5f2456c0-7cff-447b-b2bc-cad1cc377c70",
+      "id": "77df3c99-0cfc-4466-9db4-b074b4e3b4cc",
       "text": "Test",
       "show_in_channel": false,
       "silent": false
     },
-    "channel_cid": "messaging:6dc09d76-dfef-42cd-b487-1acc98ac2d25",
+    "channel_cid": "messaging:0182cf08-2721-4715-9367-9989066c505a",
     "channel": {
-      "id": "6dc09d76-dfef-42cd-b487-1acc98ac2d25",
+      "id": "0182cf08-2721-4715-9367-9989066c505a",
       "type": "messaging",
-      "cid": "messaging:6dc09d76-dfef-42cd-b487-1acc98ac2d25",
-      "last_message_at": "2026-01-21T16:23:48.710525Z",
-      "created_at": "2026-01-21T16:23:48.062675Z",
-      "updated_at": "2026-01-21T16:23:48.062675Z",
+      "cid": "messaging:0182cf08-2721-4715-9367-9989066c505a",
+      "last_message_at": "2026-05-01T00:22:30.574942Z",
+      "created_at": "2026-05-01T00:22:18.183725Z",
+      "updated_at": "2026-05-01T00:22:18.183725Z",
       "created_by": {
         "id": "luke_skywalker",
         "name": "Luke Skywalker",
         "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
-        "language": "zh-TW",
+        "language": "zh",
         "role": "admin",
         "teams": [
 
         ],
         "created_at": "2024-04-04T09:26:11.805899Z",
-        "updated_at": "2026-01-13T00:08:08.392874Z",
+        "updated_at": "2026-05-01T00:22:16.472036Z",
         "banned": false,
-        "online": true,
-        "last_active": "2026-01-21T16:23:14.909720148Z",
+        "online": false,
+        "last_active": "2026-05-01T00:07:13.865123Z",
         "blocked_user_ids": [
 
         ],
-        "avg_response_time": 153351,
-        "pando": "{\"speciality\":\"ios engineer\"}",
-        "birthland": "Tatooine",
+        "avg_response_time": 136573,
         "type": "team",
-        "custom_extra_data_key": true,
-        "team": "test",
-        "canReceiveMessages": false,
         "canBeAddedToGroups": true,
-        "birthLand": "Tatooine"
+        "canReceiveMessages": false,
+        "team": "test",
+        "pando": "{\"speciality\":\"ios engineer\"}",
+        "custom_extra_data_key": true,
+        "birthLand": "Tatooine",
+        "birthland": "Tatooine"
       },
       "frozen": false,
       "disabled": false,
@@ -87,7 +87,7 @@
     },
     "parent_message": null,
     "quoted_message": null,
-    "created_at": "2026-01-21T16:23:50.087331333Z"
+    "created_at": "2026-05-01T00:22:31.179143751Z"
   },
-  "duration": "17.99ms"
+  "duration": "63.00ms"
 }
