@@ -1,6 +1,6 @@
 {
   "message": {
-    "id": "1308ec41-a0a9-416e-b2a2-6d3f9440e548",
+    "id": "4c7955ca-461e-4acb-9672-6f6e8880b4f3",
     "text": "Test",
     "html": "<p>Test</p>\n",
     "type": "regular",
@@ -8,30 +8,32 @@
       "id": "luke_skywalker",
       "name": "Luke Skywalker",
       "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
-      "language": "en",
+      "language": "zh",
       "role": "admin",
       "teams": [
 
       ],
       "created_at": "2024-04-04T09:26:11.805899Z",
-      "updated_at": "2025-09-15T05:51:41.748915Z",
+      "updated_at": "2026-05-01T00:22:16.472036Z",
       "banned": false,
-      "online": true,
-      "last_active": "2025-10-16T10:23:56.462757835Z",
+      "online": false,
+      "last_active": "2026-05-01T00:07:13.865123Z",
       "blocked_user_ids": [
 
       ],
-      "avg_response_time": 198075,
-      "canReceiveMessages": false,
+      "avg_response_time": 136573,
       "team": "test",
       "canBeAddedToGroups": true,
       "custom_extra_data_key": true,
-      "type": "team",
+      "birthland": "Tatooine",
+      "canReceiveMessages": false,
       "pando": "{\"speciality\":\"ios engineer\"}",
-      "birthland": "Tatooine"
+      "type": "team",
+      "birthLand": "Tatooine"
     },
     "member": {
-      "channel_role": "channel_member"
+      "channel_role": "channel_member",
+      "notifications_muted": false
     },
     "attachments": [
 
@@ -48,13 +50,20 @@
     },
     "reply_count": 0,
     "deleted_reply_count": 0,
-    "cid": "messaging:a69efceb-be1e-4a4c-8064-9ec345999164",
-    "created_at": "2025-10-16T10:23:58.495734Z",
-    "updated_at": "2025-10-16T10:23:58.495734Z",
+    "cid": "messaging:0182cf08-2721-4715-9367-9989066c505a",
+    "created_at": "2026-05-01T00:22:22.324844Z",
+    "updated_at": "2026-05-01T00:22:22.324844Z",
     "shadowed": false,
     "mentioned_users": [
 
     ],
+    "mentioned_channel": false,
+    "mentioned_here": false,
+    "i18n": {
+      "zh_text": "Test",
+      "language": "zh",
+      "zh-TW_text": "測試"
+    },
     "silent": false,
     "pinned": false,
     "pinned_at": null,
@@ -64,5 +73,5 @@
 
     ]
   },
-  "duration": "1068.49ms"
+  "duration": "465.27ms"
 }
