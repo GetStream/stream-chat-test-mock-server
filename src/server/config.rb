@@ -11,8 +11,10 @@ post '/config/cooldown' do
   if params[:enabled].to_s.casecmp('true').zero?
     channel['channel']['cooldown'] = params[:duration].to_i
     channel['channel']['own_capabilities'].delete('skip-slow-mode')
+    channel['channel']['own_capabilities'] |= ['slow-mode']
   else
     channel['channel']['cooldown'] = nil
+    channel['channel']['own_capabilities'].delete('slow-mode')
   end
 
   halt(200)
