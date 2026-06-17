@@ -91,6 +91,7 @@
       "cast-poll-vote",
       "connect-events",
       "create-attachment",
+      "create-mention",
       "delete-any-message",
       "delete-channel",
       "delete-own-message",
