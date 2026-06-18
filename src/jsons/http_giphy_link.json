@@ -1,6 +1,6 @@
 {
   "message": {
-    "id": "9732bd67-5b8e-45ab-b607-5175a99b17cb",
+    "id": "af27a688-78ff-4727-8dfb-5a0020b19651",
     "text": "https://giphy.com/gifs/test-gw3IWyGkC0rsazTi",
     "html": "<p><a href=\"https://giphy.com/gifs/test-gw3IWyGkC0rsazTi\" rel=\"nofollow\">https://giphy.com/gifs/test-gw3IWyGkC0rsazTi</a></p>\n",
     "type": "regular",
@@ -8,30 +8,32 @@
       "id": "luke_skywalker",
       "name": "Luke Skywalker",
       "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
-      "language": "en",
-      "role": "admin",
+      "language": "zh",
+      "role": "user",
       "teams": [
 
       ],
       "created_at": "2024-04-04T09:26:11.805899Z",
-      "updated_at": "2025-09-15T05:51:41.748915Z",
+      "updated_at": "2026-06-16T09:55:49.096497Z",
       "banned": false,
       "online": true,
-      "last_active": "2025-10-16T10:23:56.462757835Z",
+      "last_active": "2026-06-18T09:04:52.935351077Z",
       "blocked_user_ids": [
 
       ],
-      "avg_response_time": 198075,
-      "custom_extra_data_key": true,
+      "avg_response_time": 140111,
       "type": "team",
-      "pando": "{\"speciality\":\"ios engineer\"}",
-      "canReceiveMessages": false,
-      "birthland": "Tatooine",
       "canBeAddedToGroups": true,
-      "team": "test"
+      "canReceiveMessages": false,
+      "birthLand": "Tatooine",
+      "birthland": "Tatooine",
+      "team": "test",
+      "pando": "{\"speciality\":\"ios engineer\"}",
+      "custom_extra_data_key": true
     },
     "member": {
-      "channel_role": "channel_member"
+      "channel_role": "channel_member",
+      "notifications_muted": false
     },
     "attachments": [
       {
@@ -39,9 +41,9 @@
         "title": "Test Computer GIF - Find & Share on GIPHY",
         "title_link": "https://giphy.com/gifs/test-gw3IWyGkC0rsazTi",
         "text": "Discover & share this Test Computer GIF with everyone you know. GIPHY is how you search, share, discover, and create GIFs.",
-        "image_url": "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExbnZwNjQzdHhtMWx4emdsbWRrdjVucnI5aWhjcGRuNGFxZWdlMnlzayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/gw3IWyGkC0rsazTi/giphy.webp",
-        "thumb_url": "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExbnZwNjQzdHhtMWx4emdsbWRrdjVucnI5aWhjcGRuNGFxZWdlMnlzayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/gw3IWyGkC0rsazTi/giphy.webp",
-        "asset_url": "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExbnZwNjQzdHhtMWx4emdsbWRrdjVucnI5aWhjcGRuNGFxZWdlMnlzayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/gw3IWyGkC0rsazTi/giphy.mp4",
+        "image_url": "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExaHkwb21xemNuOWx5eWlyeHhsdGY5dnl1ZXlhYXJrb20wcTRzamNvMSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/gw3IWyGkC0rsazTi/giphy.webp",
+        "thumb_url": "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExaHkwb21xemNuOWx5eWlyeHhsdGY5dnl1ZXlhYXJrb20wcTRzamNvMSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/gw3IWyGkC0rsazTi/giphy.webp",
+        "asset_url": "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExaHkwb21xemNuOWx5eWlyeHhsdGY5dnl1ZXlhYXJrb20wcTRzamNvMSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/gw3IWyGkC0rsazTi/giphy.mp4",
         "og_scrape_url": "https://giphy.com/gifs/test-gw3IWyGkC0rsazTi"
       }
     ],
@@ -57,13 +59,20 @@
     },
     "reply_count": 0,
     "deleted_reply_count": 0,
-    "cid": "messaging:a69efceb-be1e-4a4c-8064-9ec345999164",
-    "created_at": "2025-10-16T10:24:05.007774Z",
-    "updated_at": "2025-10-16T10:24:05.007774Z",
+    "cid": "messaging:06f3bf0b-2176-4526-ba09-e6a87f0c82a5",
+    "created_at": "2026-06-18T09:05:01.340854Z",
+    "updated_at": "2026-06-18T09:05:01.340854Z",
     "shadowed": false,
     "mentioned_users": [
 
     ],
+    "mentioned_channel": false,
+    "mentioned_here": false,
+    "i18n": {
+      "zh_text": "https://giphy.com/gifs/test-gw3IWyGkC0rsazTi",
+      "language": "zh",
+      "zh-TW_text": "https://giphy.com/gifs/test-gw3IWyGkC0rsazTi"
+    },
     "silent": false,
     "pinned": false,
     "pinned_at": null,
@@ -73,5 +82,5 @@
 
     ]
   },
-  "duration": "568.98ms"
+  "duration": "430.55ms"
 }

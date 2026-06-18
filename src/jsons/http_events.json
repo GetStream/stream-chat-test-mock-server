@@ -1,36 +1,37 @@
 {
   "event": {
     "type": "typing.start",
-    "cid": "messaging:a69efceb-be1e-4a4c-8064-9ec345999164",
-    "channel_id": "a69efceb-be1e-4a4c-8064-9ec345999164",
+    "cid": "messaging:06f3bf0b-2176-4526-ba09-e6a87f0c82a5",
+    "channel_id": "06f3bf0b-2176-4526-ba09-e6a87f0c82a5",
     "channel_type": "messaging",
     "user": {
       "id": "luke_skywalker",
       "name": "Luke Skywalker",
       "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
-      "language": "en",
-      "role": "admin",
+      "language": "zh",
+      "role": "user",
       "teams": [
 
       ],
       "created_at": "2024-04-04T09:26:11.805899Z",
-      "updated_at": "2025-09-15T05:51:41.748915Z",
+      "updated_at": "2026-06-16T09:55:49.096497Z",
       "banned": false,
       "online": true,
-      "last_active": "2025-10-16T10:23:56.462757835Z",
+      "last_active": "2026-06-18T09:04:52.935351077Z",
       "blocked_user_ids": [
 
       ],
-      "avg_response_time": 198075,
-      "team": "test",
-      "canReceiveMessages": false,
+      "avg_response_time": 140111,
       "canBeAddedToGroups": true,
-      "custom_extra_data_key": true,
+      "canReceiveMessages": false,
       "type": "team",
       "birthland": "Tatooine",
-      "pando": "{\"speciality\":\"ios engineer\"}"
+      "custom_extra_data_key": true,
+      "team": "test",
+      "pando": "{\"speciality\":\"ios engineer\"}",
+      "birthLand": "Tatooine"
     },
-    "created_at": "2025-10-16T10:23:57.385424554Z"
+    "created_at": "2026-06-18T09:04:55.835239072Z"
   },
-  "duration": "7.79ms"
+  "duration": "5.28ms"
 }
