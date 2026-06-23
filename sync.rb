@@ -77,7 +77,7 @@ def send_typing_event(channel_id)
   save_json(response, 'http_events.json')
 end
 
-def send_message(channel_id, text, filename)
+def send_message(channel_id, text, filename, fill_attachment: false)
   message_id = SecureRandom.uuid
   payload = {
     message: {
@@ -90,12 +90,28 @@ def send_message(channel_id, text, filename)
   }.to_json
   endpoint = "#{STREAM_HTTP_URL}/channels/messaging/#{channel_id}/message?api_key=#{STREAM_DEMO_API_KEY}"
   response = http_post(endpoint, payload)
+  fill_attachment_defaults(response) if fill_attachment
   save_json(response, filename)
   message_id
 end
 
+# Image link previews (e.g. Unsplash) come back without `title`/`text`, so the
+# preview card has no copy. Fill them with defaults when the scrape left them blank.
+def fill_attachment_defaults(response)
+  attachment = response.dig('message', 'attachments', 0)
+  return unless attachment
+
+  attachment['title'] = 'Title' if attachment['title'].to_s.empty?
+  attachment['text'] = 'Description' if attachment['text'].to_s.empty?
+end
+
 def send_youtube_link(channel_id)
-  send_message(channel_id, 'https://www.youtube.com/watch?v=xOX7MsrbaPY', 'http_youtube_link.json')
+  send_message(
+    channel_id,
+    'https://www.youtube.com/watch?v=xOX7MsrbaPY',
+    'http_youtube_link.json',
+    fill_attachment: true
+  )
 end
 
 def send_ephemeral_message(channel_id)
@@ -103,7 +119,12 @@ def send_ephemeral_message(channel_id)
 end
 
 def send_unsplash_link(channel_id)
-  send_message(channel_id, 'https://images.unsplash.com/photo-1568574728383-06fca083883d', 'http_unsplash_link.json')
+  send_message(
+    channel_id,
+    'https://images.unsplash.com/photo-1568574728383-06fca083883d',
+    'http_unsplash_link.json',
+    fill_attachment: true
+  )
 end
 
 def send_giphy_link(channel_id)

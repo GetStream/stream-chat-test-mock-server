@@ -1,17 +1,17 @@
 {
   "type": "message.new",
-  "created_at": "2026-06-23T13:33:39.226567504Z",
-  "cid": "messaging:7ae6484a-f4b5-425c-8b1d-0be03673c394",
+  "created_at": "2026-06-23T15:46:02.670394441Z",
+  "cid": "messaging:ec865378-1aa8-4317-8cb0-449021aaeec3",
   "channel_member_count": 3,
   "channel_message_count": 1,
   "channel_custom": {
     "name": "Sync Mock Server"
   },
   "channel_type": "messaging",
-  "channel_id": "7ae6484a-f4b5-425c-8b1d-0be03673c394",
-  "message_id": "d10b7dcb-e23e-41ca-b850-3b5c60c261a5",
+  "channel_id": "ec865378-1aa8-4317-8cb0-449021aaeec3",
+  "message_id": "97e8d484-fcda-4fa6-9cf8-92ceb179f0c5",
   "message": {
-    "id": "d10b7dcb-e23e-41ca-b850-3b5c60c261a5",
+    "id": "97e8d484-fcda-4fa6-9cf8-92ceb179f0c5",
     "text": "Test",
     "html": "<p>Test</p>\n",
     "type": "regular",
@@ -28,7 +28,7 @@
       "updated_at": "2026-06-23T13:32:25.454217Z",
       "banned": false,
       "online": true,
-      "last_active": "2026-06-23T13:32:54.90379901Z",
+      "last_active": "2026-06-23T15:45:14.499463175Z",
       "blocked_user_ids": [
 
       ],
@@ -50,7 +50,7 @@
           "push_provider": "apn",
           "push_provider_name": "APN-Configuration",
           "id": "80a950623445c56f9f7e1464dc5fc1d5877e2fa24f6498366fc6d41b1a9136e89d8963356c70780ee1e6b4d10ca740ac62781ab956b375031f4addff2221f582cbbc296a27e1854edac97dec5a375a25",
-          "created_at": "2026-06-23T13:14:22.543867Z",
+          "created_at": "2026-06-23T15:31:10.803006Z",
           "user_id": "luke_skywalker"
         },
         {
@@ -223,14 +223,14 @@
         }
       ],
       "invisible": false,
-      "custom_extra_data_key": true,
-      "birthland": "Tatooine",
-      "type": "team",
-      "birthLand": "Tatooine",
       "pando": "{\"speciality\":\"ios engineer\"}",
+      "team": "test",
       "canBeAddedToGroups": true,
-      "canReceiveMessages": false,
-      "team": "test"
+      "type": "team",
+      "birthland": "Tatooine",
+      "custom_extra_data_key": true,
+      "birthLand": "Tatooine",
+      "canReceiveMessages": false
     },
     "member": {
       "channel_role": "channel_member",
@@ -251,9 +251,9 @@
     },
     "reply_count": 0,
     "deleted_reply_count": 0,
-    "cid": "messaging:7ae6484a-f4b5-425c-8b1d-0be03673c394",
-    "created_at": "2026-06-23T13:33:39.207252Z",
-    "updated_at": "2026-06-23T13:33:39.207252Z",
+    "cid": "messaging:ec865378-1aa8-4317-8cb0-449021aaeec3",
+    "created_at": "2026-06-23T15:46:02.622729Z",
+    "updated_at": "2026-06-23T15:46:02.622729Z",
     "shadowed": false,
     "mentioned_users": [
 
@@ -287,12 +287,15 @@
     "updated_at": "2026-06-23T13:32:25.454217Z",
     "banned": false,
     "online": true,
-    "last_active": "2026-06-23T13:31:14.967781Z",
+    "last_active": "2026-06-23T15:19:48.779957Z",
     "blocked_user_ids": [
 
     ],
     "avg_response_time": 140111,
     "birthLand": "Tatooine",
+    "team": "test",
+    "canBeAddedToGroups": true,
+    "birthland": "Tatooine",
     "privacy_settings": {
       "read_receipts": {
         "enabled": false
@@ -301,13 +304,10 @@
         "enabled": false
       }
     },
-    "custom_extra_data_key": true,
-    "birthland": "Tatooine",
-    "canBeAddedToGroups": true,
-    "canReceiveMessages": false,
-    "team": "test",
     "pando": "{\"speciality\":\"ios engineer\"}",
-    "type": "team"
+    "canReceiveMessages": false,
+    "type": "team",
+    "custom_extra_data_key": true
   },
   "watcher_count": 1,
   "unread_count": 0,

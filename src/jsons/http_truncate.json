@@ -1,12 +1,12 @@
 {
-  "duration": "48.17ms",
+  "duration": "69.40ms",
   "channel": {
-    "id": "7ae6484a-f4b5-425c-8b1d-0be03673c394",
+    "id": "ec865378-1aa8-4317-8cb0-449021aaeec3",
     "type": "messaging",
-    "cid": "messaging:7ae6484a-f4b5-425c-8b1d-0be03673c394",
+    "cid": "messaging:ec865378-1aa8-4317-8cb0-449021aaeec3",
     "last_message_at": "0001-01-01T00:00:00Z",
-    "created_at": "2026-06-23T13:33:38.566987Z",
-    "updated_at": "2026-06-23T13:33:40.867859Z",
+    "created_at": "2026-06-23T15:46:01.530852Z",
+    "updated_at": "2026-06-23T15:46:04.41254Z",
     "created_by": {
       "id": "luke_skywalker",
       "name": "Luke Skywalker",
@@ -20,19 +20,19 @@
       "updated_at": "2026-06-23T13:32:25.454217Z",
       "banned": false,
       "online": true,
-      "last_active": "2026-06-23T13:32:54.90379901Z",
+      "last_active": "2026-06-23T15:46:03.553259558Z",
       "blocked_user_ids": [
 
       ],
       "avg_response_time": 140111,
       "team": "test",
-      "birthland": "Tatooine",
-      "type": "team",
       "birthLand": "Tatooine",
+      "birthland": "Tatooine",
       "custom_extra_data_key": true,
-      "pando": "{\"speciality\":\"ios engineer\"}",
+      "canReceiveMessages": false,
+      "type": "team",
       "canBeAddedToGroups": true,
-      "canReceiveMessages": false
+      "pando": "{\"speciality\":\"ios engineer\"}"
     },
     "frozen": false,
     "disabled": false,
@@ -60,8 +60,8 @@
           "birthland": "Serenno"
         },
         "status": "member",
-        "created_at": "2026-06-23T13:33:38.571162Z",
-        "updated_at": "2026-06-23T13:33:38.571162Z",
+        "created_at": "2026-06-23T15:46:01.554584Z",
+        "updated_at": "2026-06-23T15:46:01.554584Z",
         "banned": false,
         "shadow_banned": false,
         "role": "member",
@@ -91,8 +91,8 @@
           "birthland": "Socorro"
         },
         "status": "member",
-        "created_at": "2026-06-23T13:33:38.571162Z",
-        "updated_at": "2026-06-23T13:33:38.571162Z",
+        "created_at": "2026-06-23T15:46:01.554584Z",
+        "updated_at": "2026-06-23T15:46:01.554584Z",
         "banned": false,
         "shadow_banned": false,
         "role": "admin",
@@ -114,23 +114,23 @@
           "updated_at": "2026-06-23T13:32:25.454217Z",
           "banned": false,
           "online": true,
-          "last_active": "2026-06-23T13:32:54.90379901Z",
+          "last_active": "2026-06-23T15:46:03.553259558Z",
           "blocked_user_ids": [
 
           ],
           "avg_response_time": 140111,
-          "canReceiveMessages": false,
-          "type": "team",
           "birthLand": "Tatooine",
-          "team": "test",
           "birthland": "Tatooine",
-          "canBeAddedToGroups": true,
           "custom_extra_data_key": true,
-          "pando": "{\"speciality\":\"ios engineer\"}"
+          "canBeAddedToGroups": true,
+          "pando": "{\"speciality\":\"ios engineer\"}",
+          "team": "test",
+          "canReceiveMessages": false,
+          "type": "team"
         },
         "status": "member",
-        "created_at": "2026-06-23T13:33:38.571162Z",
-        "updated_at": "2026-06-23T13:33:38.571162Z",
+        "created_at": "2026-06-23T15:46:01.554584Z",
+        "updated_at": "2026-06-23T15:46:01.554584Z",
         "banned": false,
         "shadow_banned": false,
         "role": "owner",
@@ -163,8 +163,8 @@
           "is_moderator": true
         },
         "status": "member",
-        "created_at": "2026-06-23T13:33:39.513607Z",
-        "updated_at": "2026-06-23T13:33:39.513607Z",
+        "created_at": "2026-06-23T15:46:02.959009Z",
+        "updated_at": "2026-06-23T15:46:02.959009Z",
         "banned": false,
         "shadow_banned": false,
         "role": "admin",
@@ -211,7 +211,7 @@
         }
       ]
     },
-    "truncated_at": "2026-06-23T13:33:40.859031Z",
+    "truncated_at": "2026-06-23T15:46:04.398588Z",
     "truncated_by": {
       "id": "luke_skywalker",
       "name": "Luke Skywalker",
@@ -225,25 +225,25 @@
       "updated_at": "2026-06-23T13:32:25.454217Z",
       "banned": false,
       "online": true,
-      "last_active": "2026-06-23T13:32:54.90379901Z",
+      "last_active": "2026-06-23T15:46:03.553259558Z",
       "blocked_user_ids": [
 
       ],
       "avg_response_time": 140111,
-      "canBeAddedToGroups": true,
       "team": "test",
-      "pando": "{\"speciality\":\"ios engineer\"}",
-      "canReceiveMessages": false,
       "type": "team",
-      "custom_extra_data_key": true,
+      "birthland": "Tatooine",
       "birthLand": "Tatooine",
-      "birthland": "Tatooine"
+      "canReceiveMessages": false,
+      "canBeAddedToGroups": true,
+      "pando": "{\"speciality\":\"ios engineer\"}",
+      "custom_extra_data_key": true
     },
     "message_count": 4,
     "name": "Sync Mock Server"
   },
   "message": {
-    "id": "349e33be-0271-41ec-800e-3b724f4ab46e",
+    "id": "ee5bc5a0-1c92-4396-bf1d-091b0be69acd",
     "text": "Channel truncated",
     "html": "<p>Channel truncated</p>\n",
     "type": "system",
@@ -260,19 +260,19 @@
       "updated_at": "2026-06-23T13:32:25.454217Z",
       "banned": false,
       "online": true,
-      "last_active": "2026-06-23T13:32:54.90379901Z",
+      "last_active": "2026-06-23T15:46:03.553259558Z",
       "blocked_user_ids": [
 
       ],
       "avg_response_time": 140111,
-      "type": "team",
-      "birthLand": "Tatooine",
-      "birthland": "Tatooine",
-      "canReceiveMessages": false,
-      "custom_extra_data_key": true,
       "canBeAddedToGroups": true,
+      "pando": "{\"speciality\":\"ios engineer\"}",
+      "custom_extra_data_key": true,
+      "birthLand": "Tatooine",
+      "canReceiveMessages": false,
       "team": "test",
-      "pando": "{\"speciality\":\"ios engineer\"}"
+      "type": "team",
+      "birthland": "Tatooine"
     },
     "attachments": [
 
@@ -289,9 +289,9 @@
     },
     "reply_count": 0,
     "deleted_reply_count": 0,
-    "cid": "messaging:7ae6484a-f4b5-425c-8b1d-0be03673c394",
-    "created_at": "2026-06-23T13:33:40.859032Z",
-    "updated_at": "2026-06-23T13:33:40.859032Z",
+    "cid": "messaging:ec865378-1aa8-4317-8cb0-449021aaeec3",
+    "created_at": "2026-06-23T15:46:04.398589Z",
+    "updated_at": "2026-06-23T15:46:04.398589Z",
     "shadowed": false,
     "mentioned_users": [
 

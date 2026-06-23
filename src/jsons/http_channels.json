@@ -2,11 +2,11 @@
   "channels": [
     {
       "channel": {
-        "id": "7ae6484a-f4b5-425c-8b1d-0be03673c394",
+        "id": "ec865378-1aa8-4317-8cb0-449021aaeec3",
         "type": "messaging",
-        "cid": "messaging:7ae6484a-f4b5-425c-8b1d-0be03673c394",
-        "created_at": "2026-06-23T13:33:38.566987Z",
-        "updated_at": "2026-06-23T13:33:38.566987Z",
+        "cid": "messaging:ec865378-1aa8-4317-8cb0-449021aaeec3",
+        "created_at": "2026-06-23T15:46:01.530852Z",
+        "updated_at": "2026-06-23T15:46:01.530852Z",
         "created_by": {
           "id": "luke_skywalker",
           "name": "Luke Skywalker",
@@ -20,19 +20,19 @@
           "updated_at": "2026-06-23T13:32:25.454217Z",
           "banned": false,
           "online": true,
-          "last_active": "2026-06-23T13:32:54.90379901Z",
+          "last_active": "2026-06-23T15:45:14.499463175Z",
           "blocked_user_ids": [
 
           ],
           "avg_response_time": 140111,
-          "canBeAddedToGroups": true,
-          "birthLand": "Tatooine",
-          "birthland": "Tatooine",
-          "canReceiveMessages": false,
-          "type": "team",
-          "custom_extra_data_key": true,
           "team": "test",
-          "pando": "{\"speciality\":\"ios engineer\"}"
+          "birthLand": "Tatooine",
+          "canBeAddedToGroups": true,
+          "pando": "{\"speciality\":\"ios engineer\"}",
+          "birthland": "Tatooine",
+          "custom_extra_data_key": true,
+          "canReceiveMessages": false,
+          "type": "team"
         },
         "frozen": false,
         "disabled": false,
@@ -142,7 +142,7 @@
             "birthland": "Serenno"
           },
           "unread_messages": 0,
-          "last_read": "2026-06-23T13:33:38Z"
+          "last_read": "2026-06-23T15:46:02Z"
         },
         {
           "user": {
@@ -166,7 +166,7 @@
             "birthland": "Socorro"
           },
           "unread_messages": 0,
-          "last_read": "2026-06-23T13:33:38Z"
+          "last_read": "2026-06-23T15:46:02Z"
         },
         {
           "user": {
@@ -182,22 +182,22 @@
             "updated_at": "2026-06-23T13:32:25.454217Z",
             "banned": false,
             "online": true,
-            "last_active": "2026-06-23T13:32:54.90379901Z",
+            "last_active": "2026-06-23T15:45:14.499463175Z",
             "blocked_user_ids": [
 
             ],
             "avg_response_time": 140111,
-            "birthland": "Tatooine",
-            "canReceiveMessages": false,
-            "team": "test",
-            "type": "team",
-            "custom_extra_data_key": true,
-            "pando": "{\"speciality\":\"ios engineer\"}",
             "canBeAddedToGroups": true,
+            "birthland": "Tatooine",
+            "team": "test",
+            "canReceiveMessages": false,
+            "type": "team",
+            "pando": "{\"speciality\":\"ios engineer\"}",
+            "custom_extra_data_key": true,
             "birthLand": "Tatooine"
           },
           "unread_messages": 0,
-          "last_read": "2026-06-23T13:33:38Z"
+          "last_read": "2026-06-23T15:46:02Z"
         }
       ],
       "members": [
@@ -224,8 +224,8 @@
             "birthland": "Serenno"
           },
           "status": "member",
-          "created_at": "2026-06-23T13:33:38.571162Z",
-          "updated_at": "2026-06-23T13:33:38.571162Z",
+          "created_at": "2026-06-23T15:46:01.554584Z",
+          "updated_at": "2026-06-23T15:46:01.554584Z",
           "banned": false,
           "shadow_banned": false,
           "role": "member",
@@ -255,8 +255,8 @@
             "birthland": "Socorro"
           },
           "status": "member",
-          "created_at": "2026-06-23T13:33:38.571162Z",
-          "updated_at": "2026-06-23T13:33:38.571162Z",
+          "created_at": "2026-06-23T15:46:01.554584Z",
+          "updated_at": "2026-06-23T15:46:01.554584Z",
           "banned": false,
           "shadow_banned": false,
           "role": "admin",
@@ -278,23 +278,23 @@
             "updated_at": "2026-06-23T13:32:25.454217Z",
             "banned": false,
             "online": true,
-            "last_active": "2026-06-23T13:32:54.90379901Z",
+            "last_active": "2026-06-23T15:45:14.499463175Z",
             "blocked_user_ids": [
 
             ],
             "avg_response_time": 140111,
-            "birthland": "Tatooine",
-            "canReceiveMessages": false,
-            "team": "test",
-            "type": "team",
-            "custom_extra_data_key": true,
-            "pando": "{\"speciality\":\"ios engineer\"}",
             "canBeAddedToGroups": true,
+            "birthland": "Tatooine",
+            "team": "test",
+            "canReceiveMessages": false,
+            "type": "team",
+            "pando": "{\"speciality\":\"ios engineer\"}",
+            "custom_extra_data_key": true,
             "birthLand": "Tatooine"
           },
           "status": "member",
-          "created_at": "2026-06-23T13:33:38.571162Z",
-          "updated_at": "2026-06-23T13:33:38.571162Z",
+          "created_at": "2026-06-23T15:46:01.554584Z",
+          "updated_at": "2026-06-23T15:46:01.554584Z",
           "banned": false,
           "shadow_banned": false,
           "role": "owner",
@@ -316,23 +316,23 @@
           "updated_at": "2026-06-23T13:32:25.454217Z",
           "banned": false,
           "online": true,
-          "last_active": "2026-06-23T13:32:54.90379901Z",
+          "last_active": "2026-06-23T15:45:14.499463175Z",
           "blocked_user_ids": [
 
           ],
           "avg_response_time": 140111,
-          "custom_extra_data_key": true,
-          "pando": "{\"speciality\":\"ios engineer\"}",
-          "birthland": "Tatooine",
-          "canBeAddedToGroups": true,
-          "canReceiveMessages": false,
-          "type": "team",
+          "team": "test",
           "birthLand": "Tatooine",
-          "team": "test"
+          "canReceiveMessages": false,
+          "pando": "{\"speciality\":\"ios engineer\"}",
+          "custom_extra_data_key": true,
+          "canBeAddedToGroups": true,
+          "type": "team",
+          "birthland": "Tatooine"
         },
         "status": "member",
-        "created_at": "2026-06-23T13:33:38.571162Z",
-        "updated_at": "2026-06-23T13:33:38.571162Z",
+        "created_at": "2026-06-23T15:46:01.554584Z",
+        "updated_at": "2026-06-23T15:46:01.554584Z",
         "banned": false,
         "shadow_banned": false,
         "channel_role": "channel_member",
@@ -343,5 +343,5 @@
       ]
     }
   ],
-  "duration": "143.10ms"
+  "duration": "429.52ms"
 }

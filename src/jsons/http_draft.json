@@ -1,19 +1,19 @@
 {
   "draft": {
     "message": {
-      "id": "bfd33c17-150d-4590-90c8-be386d510d05",
+      "id": "6c9d681a-5c0d-4b76-8d7b-847369be2d77",
       "text": "Test",
       "show_in_channel": false,
       "silent": false
     },
-    "channel_cid": "messaging:7ae6484a-f4b5-425c-8b1d-0be03673c394",
+    "channel_cid": "messaging:ec865378-1aa8-4317-8cb0-449021aaeec3",
     "channel": {
-      "id": "7ae6484a-f4b5-425c-8b1d-0be03673c394",
+      "id": "ec865378-1aa8-4317-8cb0-449021aaeec3",
       "type": "messaging",
-      "cid": "messaging:7ae6484a-f4b5-425c-8b1d-0be03673c394",
-      "last_message_at": "2026-06-23T13:33:40.43624Z",
-      "created_at": "2026-06-23T13:33:38.566987Z",
-      "updated_at": "2026-06-23T13:33:38.566987Z",
+      "cid": "messaging:ec865378-1aa8-4317-8cb0-449021aaeec3",
+      "last_message_at": "2026-06-23T15:46:03.994197Z",
+      "created_at": "2026-06-23T15:46:01.530852Z",
+      "updated_at": "2026-06-23T15:46:01.530852Z",
       "created_by": {
         "id": "luke_skywalker",
         "name": "Luke Skywalker",
@@ -27,19 +27,19 @@
         "updated_at": "2026-06-23T13:32:25.454217Z",
         "banned": false,
         "online": true,
-        "last_active": "2026-06-23T13:32:54.90379901Z",
+        "last_active": "2026-06-23T15:46:03.553259558Z",
         "blocked_user_ids": [
 
         ],
         "avg_response_time": 140111,
+        "custom_extra_data_key": true,
         "team": "test",
         "pando": "{\"speciality\":\"ios engineer\"}",
-        "birthLand": "Tatooine",
         "birthland": "Tatooine",
-        "canBeAddedToGroups": true,
         "canReceiveMessages": false,
+        "birthLand": "Tatooine",
         "type": "team",
-        "custom_extra_data_key": true
+        "canBeAddedToGroups": true
       },
       "frozen": false,
       "disabled": false,
@@ -87,7 +87,7 @@
     },
     "parent_message": null,
     "quoted_message": null,
-    "created_at": "2026-06-23T13:33:40.605149461Z"
+    "created_at": "2026-06-23T15:46:04.147324912Z"
   },
-  "duration": "14.12ms"
+  "duration": "18.81ms"
 }

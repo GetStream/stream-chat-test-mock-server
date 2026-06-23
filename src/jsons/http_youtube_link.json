@@ -1,6 +1,6 @@
 {
   "message": {
-    "id": "318a8504-e323-4637-90c9-f28e95deed1d",
+    "id": "1f93808d-6d8a-4122-80c0-859b63fa96e6",
     "text": "https://www.youtube.com/watch?v=xOX7MsrbaPY",
     "html": "<p><a href=\"https://www.youtube.com/watch?v=xOX7MsrbaPY\" rel=\"nofollow\">https://www.youtube.com/watch?v=xOX7MsrbaPY</a></p>\n",
     "type": "regular",
@@ -17,19 +17,19 @@
       "updated_at": "2026-06-23T13:32:25.454217Z",
       "banned": false,
       "online": true,
-      "last_active": "2026-06-23T13:32:54.90379901Z",
+      "last_active": "2026-06-23T15:46:03.553259558Z",
       "blocked_user_ids": [
 
       ],
       "avg_response_time": 140111,
-      "pando": "{\"speciality\":\"ios engineer\"}",
-      "type": "team",
-      "birthLand": "Tatooine",
+      "canReceiveMessages": false,
       "birthland": "Tatooine",
       "team": "test",
+      "type": "team",
       "custom_extra_data_key": true,
-      "canBeAddedToGroups": true,
-      "canReceiveMessages": false
+      "pando": "{\"speciality\":\"ios engineer\"}",
+      "birthLand": "Tatooine",
+      "canBeAddedToGroups": true
     },
     "member": {
       "channel_role": "channel_member",
@@ -60,9 +60,9 @@
     },
     "reply_count": 0,
     "deleted_reply_count": 0,
-    "cid": "messaging:7ae6484a-f4b5-425c-8b1d-0be03673c394",
-    "created_at": "2026-06-23T13:33:40.141986Z",
-    "updated_at": "2026-06-23T13:33:40.141986Z",
+    "cid": "messaging:ec865378-1aa8-4317-8cb0-449021aaeec3",
+    "created_at": "2026-06-23T15:46:03.637014Z",
+    "updated_at": "2026-06-23T15:46:03.637014Z",
     "shadowed": false,
     "mentioned_users": [
 
@@ -70,9 +70,9 @@
     "mentioned_channel": false,
     "mentioned_here": false,
     "i18n": {
-      "zh_text": "https://www.youtube.com/watch?v=xOX7MsrbaPY",
       "language": "zh",
-      "zh-TW_text": "https://www.youtube.com/watch?v=xOX7MsrbaPY"
+      "zh-TW_text": "https://www.youtube.com/watch?v=xOX7MsrbaPY",
+      "zh_text": "https://www.youtube.com/watch?v=xOX7MsrbaPY"
     },
     "silent": false,
     "pinned": false,
@@ -83,5 +83,5 @@
 
     ]
   },
-  "duration": "90.57ms"
+  "duration": "67.00ms"
 }
