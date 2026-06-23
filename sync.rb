@@ -95,7 +95,7 @@ def send_message(channel_id, text, filename)
 end
 
 def send_youtube_link(channel_id)
-  send_message(channel_id, 'https://youtube.com/watch?v=xOX7MsrbaPY', 'http_youtube_link.json')
+  send_message(channel_id, 'https://www.youtube.com/watch?v=xOX7MsrbaPY', 'http_youtube_link.json')
 end
 
 def send_ephemeral_message(channel_id)
@@ -103,7 +103,7 @@ def send_ephemeral_message(channel_id)
 end
 
 def send_unsplash_link(channel_id)
-  send_message(channel_id, 'https://unsplash.com/photos/1_2d3MRbI9c', 'http_unsplash_link.json')
+  send_message(channel_id, 'https://images.unsplash.com/photo-1568574728383-06fca083883d', 'http_unsplash_link.json')
 end
 
 def send_giphy_link(channel_id)

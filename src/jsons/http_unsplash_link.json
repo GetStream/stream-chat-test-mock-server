@@ -1,8 +1,8 @@
 {
   "message": {
-    "id": "b9f078df-a1ed-4778-abdb-f21d06e27dbd",
-    "text": "https://unsplash.com/photos/1_2d3MRbI9c",
-    "html": "<p><a href=\"https://unsplash.com/photos/1_2d3MRbI9c\" rel=\"nofollow\">https://unsplash.com/photos/1_2d3MRbI9c</a></p>\n",
+    "id": "ea61c9ca-c93c-41aa-ae22-a237afcea8aa",
+    "text": "https://images.unsplash.com/photo-1568574728383-06fca083883d",
+    "html": "<p><a href=\"https://images.unsplash.com/photo-1568574728383-06fca083883d\" rel=\"nofollow\">https://images.unsplash.com/photo-1568574728383-06fca083883d</a></p>\n",
     "type": "regular",
     "user": {
       "id": "luke_skywalker",
@@ -14,29 +14,34 @@
 
       ],
       "created_at": "2024-04-04T09:26:11.805899Z",
-      "updated_at": "2026-06-21T17:24:00.477428Z",
+      "updated_at": "2026-06-23T13:32:25.454217Z",
       "banned": false,
       "online": true,
-      "last_active": "2026-06-23T09:07:20.137910069Z",
+      "last_active": "2026-06-23T13:32:54.90379901Z",
       "blocked_user_ids": [
 
       ],
       "avg_response_time": 140111,
-      "birthland": "Tatooine",
+      "team": "test",
+      "custom_extra_data_key": true,
       "canReceiveMessages": false,
-      "pando": "{\"speciality\":\"ios engineer\"}",
+      "canBeAddedToGroups": true,
       "type": "team",
       "birthLand": "Tatooine",
-      "custom_extra_data_key": true,
-      "team": "test",
-      "canBeAddedToGroups": true
+      "pando": "{\"speciality\":\"ios engineer\"}",
+      "birthland": "Tatooine"
     },
     "member": {
       "channel_role": "channel_member",
       "notifications_muted": false
     },
     "attachments": [
-
+      {
+        "type": "image",
+        "image_url": "https://images.unsplash.com/photo-1568574728383-06fca083883d",
+        "thumb_url": "https://images.unsplash.com/photo-1568574728383-06fca083883d",
+        "og_scrape_url": "https://images.unsplash.com/photo-1568574728383-06fca083883d"
+      }
     ],
     "latest_reactions": [
 
@@ -50,9 +55,9 @@
     },
     "reply_count": 0,
     "deleted_reply_count": 0,
-    "cid": "messaging:a739c32b-e898-4f6b-905c-7c664ef6794c",
-    "created_at": "2026-06-23T09:07:30.060959Z",
-    "updated_at": "2026-06-23T09:07:30.060959Z",
+    "cid": "messaging:7ae6484a-f4b5-425c-8b1d-0be03673c394",
+    "created_at": "2026-06-23T13:33:40.307271Z",
+    "updated_at": "2026-06-23T13:33:40.307271Z",
     "shadowed": false,
     "mentioned_users": [
 
@@ -60,9 +65,9 @@
     "mentioned_channel": false,
     "mentioned_here": false,
     "i18n": {
-      "zh_text": "https://unsplash.com/photos/1_2d3MRbI9c",
+      "zh_text": "https://images.unsplash.com/photo-1568574728383-06fca083883d",
       "language": "zh",
-      "zh-TW_text": "https://unsplash.com/photos/1_2d3MRbI9c"
+      "zh-TW_text": "https://images.unsplash.com/photo-1568574728383-06fca083883d"
     },
     "silent": false,
     "pinned": false,
@@ -73,5 +78,5 @@
 
     ]
   },
-  "duration": "70.44ms"
+  "duration": "49.79ms"
 }
