@@ -65,8 +65,8 @@ post '/mock' do
         reply_template['updated_at'] = reply_timestamp
         reply_template['text'] = params[:replies_text] || (j + 1).to_s
         reply_template['html'] = reply_template['text'].to_html
-        if (lang = message_template.dig('i18n', 'language'))
-          message_template['i18n']["#{lang}_text"] = message_template['text']
+        if (lang = reply_template.dig('i18n', 'language'))
+          reply_template['i18n']["#{lang}_text"] = reply_template['text']
         end
         reply_template['user'] = (j + 1).odd? ? current_user : Participant.user
         message_template['attachments'] = mock_attachments(image: 1, video: 1, file: 1) if params[:attachments]
