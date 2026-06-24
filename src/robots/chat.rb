@@ -45,6 +45,9 @@ post '/mock' do
       message_template['updated_at'] = message_timestamp
       message_template['text'] = params[:messages_text] || (i + 1).to_s
       message_template['html'] = message_template['text'].to_html
+      if (lang = message_template.dig('i18n', 'language'))
+        message_template['i18n']["#{lang}_text"] = message_template['text']
+      end
       message_template['user'] = (i + 1).odd? ? current_user : Participant.user
       message_template['reply_count'] = replies_count
       message_template['attachments'] = mock_attachments(image: 1, video: 1, file: 1) if params[:attachments]
@@ -62,6 +65,9 @@ post '/mock' do
         reply_template['updated_at'] = reply_timestamp
         reply_template['text'] = params[:replies_text] || (j + 1).to_s
         reply_template['html'] = reply_template['text'].to_html
+        if (lang = message_template.dig('i18n', 'language'))
+          message_template['i18n']["#{lang}_text"] = message_template['text']
+        end
         reply_template['user'] = (j + 1).odd? ? current_user : Participant.user
         message_template['attachments'] = mock_attachments(image: 1, video: 1, file: 1) if params[:attachments]
         channel['messages'] << reply_template
