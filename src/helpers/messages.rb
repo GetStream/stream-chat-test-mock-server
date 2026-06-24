@@ -300,9 +300,6 @@ def mock_message(
     text = text.to_s
     message['text'] = text
     message['html'] = text.to_html
-    if (lang = message.dig('i18n', 'language'))
-      message['i18n']["#{lang}_text"] = text
-    end
   end
 
   if channel_id

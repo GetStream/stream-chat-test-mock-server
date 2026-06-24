@@ -240,6 +240,33 @@ def save_json(data, filename)
   puts("✅ #{filename}")
 end
 
+# Strip the `i18n` object out of every `message` in all generated fixtures.
+# The translation metadata is noise for the mock server, so remove it as a
+# final pass once all JSONs have been written.
+def remove_message_i18n(node)
+  case node
+  when Hash
+    node.each do |key, value|
+      value.delete('i18n') if key == 'message' && value.is_a?(Hash)
+      if key == 'messages' && value.is_a?(Array)
+        value.each { |message| message.delete('i18n') if message.is_a?(Hash) }
+      end
+      remove_message_i18n(value)
+    end
+  when Array
+    node.each { |item| remove_message_i18n(item) }
+  end
+end
+
+def cleanup_message_i18n
+  Dir.glob("#{MOCK_SERVER_FIXTURES_PATH}/*.json").sort.each do |path|
+    data = JSON.parse(File.read(path))
+    remove_message_i18n(data)
+    File.write(path, JSON.pretty_generate(data))
+  end
+  puts('🧹 Removed i18n from message objects')
+end
+
 def http_get(url, headers = STREAM_HEADERS)
   uri = URI(url)
   request = Net::HTTP::Get.new(uri, headers)
@@ -323,6 +350,7 @@ EM.run do
 
   ws.on(:close) do |event|
     ws = nil
+    cleanup_message_i18n
     exit 0
   end
 end

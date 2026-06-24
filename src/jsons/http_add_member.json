@@ -1,11 +1,11 @@
 {
   "channel": {
-    "id": "ec865378-1aa8-4317-8cb0-449021aaeec3",
+    "id": "9214bd91-fafb-49b7-ae0c-c6e4cbdef8c9",
     "type": "messaging",
-    "cid": "messaging:ec865378-1aa8-4317-8cb0-449021aaeec3",
-    "last_message_at": "2026-06-23T15:46:02.622729Z",
-    "created_at": "2026-06-23T15:46:01.530852Z",
-    "updated_at": "2026-06-23T15:46:01.530852Z",
+    "cid": "messaging:9214bd91-fafb-49b7-ae0c-c6e4cbdef8c9",
+    "last_message_at": "2026-06-24T11:44:49.394479Z",
+    "created_at": "2026-06-24T11:44:48.428721Z",
+    "updated_at": "2026-06-24T11:44:48.428721Z",
     "created_by": {
       "id": "luke_skywalker",
       "name": "Luke Skywalker",
@@ -19,19 +19,19 @@
       "updated_at": "2026-06-23T13:32:25.454217Z",
       "banned": false,
       "online": true,
-      "last_active": "2026-06-23T15:45:14.499463175Z",
+      "last_active": "2026-06-24T11:44:45.388376007Z",
       "blocked_user_ids": [
 
       ],
       "avg_response_time": 140111,
+      "birthLand": "Tatooine",
       "canReceiveMessages": false,
+      "canBeAddedToGroups": true,
+      "custom_extra_data_key": true,
+      "team": "test",
       "pando": "{\"speciality\":\"ios engineer\"}",
       "birthland": "Tatooine",
-      "team": "test",
-      "type": "team",
-      "birthLand": "Tatooine",
-      "canBeAddedToGroups": true,
-      "custom_extra_data_key": true
+      "type": "team"
     },
     "frozen": false,
     "disabled": false,
@@ -134,8 +134,8 @@
         "birthland": "Serenno"
       },
       "status": "member",
-      "created_at": "2026-06-23T15:46:01.554584Z",
-      "updated_at": "2026-06-23T15:46:01.554584Z",
+      "created_at": "2026-06-24T11:44:48.465137Z",
+      "updated_at": "2026-06-24T11:44:48.465137Z",
       "banned": false,
       "shadow_banned": false,
       "role": "member",
@@ -165,8 +165,8 @@
         "birthland": "Socorro"
       },
       "status": "member",
-      "created_at": "2026-06-23T15:46:01.554584Z",
-      "updated_at": "2026-06-23T15:46:01.554584Z",
+      "created_at": "2026-06-24T11:44:48.465137Z",
+      "updated_at": "2026-06-24T11:44:48.465137Z",
       "banned": false,
       "shadow_banned": false,
       "role": "admin",
@@ -188,23 +188,23 @@
         "updated_at": "2026-06-23T13:32:25.454217Z",
         "banned": false,
         "online": true,
-        "last_active": "2026-06-23T15:45:14.499463175Z",
+        "last_active": "2026-06-24T11:44:45.388376007Z",
         "blocked_user_ids": [
 
         ],
         "avg_response_time": 140111,
-        "birthland": "Tatooine",
-        "birthLand": "Tatooine",
-        "pando": "{\"speciality\":\"ios engineer\"}",
-        "custom_extra_data_key": true,
-        "team": "test",
-        "canReceiveMessages": false,
         "type": "team",
-        "canBeAddedToGroups": true
+        "birthLand": "Tatooine",
+        "canReceiveMessages": false,
+        "canBeAddedToGroups": true,
+        "team": "test",
+        "pando": "{\"speciality\":\"ios engineer\"}",
+        "birthland": "Tatooine",
+        "custom_extra_data_key": true
       },
       "status": "member",
-      "created_at": "2026-06-23T15:46:01.554584Z",
-      "updated_at": "2026-06-23T15:46:01.554584Z",
+      "created_at": "2026-06-24T11:44:48.465137Z",
+      "updated_at": "2026-06-24T11:44:48.465137Z",
       "banned": false,
       "shadow_banned": false,
       "role": "owner",
@@ -226,7 +226,7 @@
         "updated_at": "2026-03-11T11:07:22.748689Z",
         "banned": false,
         "online": false,
-        "last_active": "2026-06-22T02:25:30.155052Z",
+        "last_active": "2026-06-23T23:52:10.419136Z",
         "blocked_user_ids": [
           "lando_calrissian",
           "chewbacca"
@@ -237,8 +237,8 @@
         "is_moderator": true
       },
       "status": "member",
-      "created_at": "2026-06-23T15:46:02.959009Z",
-      "updated_at": "2026-06-23T15:46:02.959009Z",
+      "created_at": "2026-06-24T11:44:49.750627Z",
+      "updated_at": "2026-06-24T11:44:49.750627Z",
       "banned": false,
       "shadow_banned": false,
       "role": "admin",
@@ -246,5 +246,5 @@
       "notifications_muted": false
     }
   ],
-  "duration": "41.67ms"
+  "duration": "31.03ms"
 }

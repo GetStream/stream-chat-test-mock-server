@@ -1,6 +1,6 @@
 {
   "message": {
-    "id": "1f93808d-6d8a-4122-80c0-859b63fa96e6",
+    "id": "9bb53407-d04c-46f0-9567-f212a82e4b00",
     "text": "https://www.youtube.com/watch?v=xOX7MsrbaPY",
     "html": "<p><a href=\"https://www.youtube.com/watch?v=xOX7MsrbaPY\" rel=\"nofollow\">https://www.youtube.com/watch?v=xOX7MsrbaPY</a></p>\n",
     "type": "regular",
@@ -17,19 +17,19 @@
       "updated_at": "2026-06-23T13:32:25.454217Z",
       "banned": false,
       "online": true,
-      "last_active": "2026-06-23T15:46:03.553259558Z",
+      "last_active": "2026-06-24T11:44:45.388376007Z",
       "blocked_user_ids": [
 
       ],
       "avg_response_time": 140111,
-      "canReceiveMessages": false,
-      "birthland": "Tatooine",
-      "team": "test",
       "type": "team",
-      "custom_extra_data_key": true,
+      "canBeAddedToGroups": true,
       "pando": "{\"speciality\":\"ios engineer\"}",
-      "birthLand": "Tatooine",
-      "canBeAddedToGroups": true
+      "birthland": "Tatooine",
+      "canReceiveMessages": false,
+      "custom_extra_data_key": true,
+      "team": "test",
+      "birthLand": "Tatooine"
     },
     "member": {
       "channel_role": "channel_member",
@@ -60,20 +60,15 @@
     },
     "reply_count": 0,
     "deleted_reply_count": 0,
-    "cid": "messaging:ec865378-1aa8-4317-8cb0-449021aaeec3",
-    "created_at": "2026-06-23T15:46:03.637014Z",
-    "updated_at": "2026-06-23T15:46:03.637014Z",
+    "cid": "messaging:9214bd91-fafb-49b7-ae0c-c6e4cbdef8c9",
+    "created_at": "2026-06-24T11:44:50.507782Z",
+    "updated_at": "2026-06-24T11:44:50.507782Z",
     "shadowed": false,
     "mentioned_users": [
 
     ],
     "mentioned_channel": false,
     "mentioned_here": false,
-    "i18n": {
-      "language": "zh",
-      "zh-TW_text": "https://www.youtube.com/watch?v=xOX7MsrbaPY",
-      "zh_text": "https://www.youtube.com/watch?v=xOX7MsrbaPY"
-    },
     "silent": false,
     "pinned": false,
     "pinned_at": null,
@@ -83,5 +78,5 @@
 
     ]
   },
-  "duration": "67.00ms"
+  "duration": "166.13ms"
 }

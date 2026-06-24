@@ -1,22 +1,22 @@
 {
   "type": "draft.updated",
-  "created_at": "2026-06-23T15:46:04.157870673Z",
-  "cid": "messaging:ec865378-1aa8-4317-8cb0-449021aaeec3",
+  "created_at": "2026-06-24T11:44:51.254678136Z",
+  "cid": "messaging:9214bd91-fafb-49b7-ae0c-c6e4cbdef8c9",
   "draft": {
     "message": {
-      "id": "6c9d681a-5c0d-4b76-8d7b-847369be2d77",
+      "id": "81885b81-f73c-45c9-9073-9e8a16cd257a",
       "text": "Test",
       "show_in_channel": false,
       "silent": false
     },
-    "channel_cid": "messaging:ec865378-1aa8-4317-8cb0-449021aaeec3",
+    "channel_cid": "messaging:9214bd91-fafb-49b7-ae0c-c6e4cbdef8c9",
     "channel": {
-      "id": "ec865378-1aa8-4317-8cb0-449021aaeec3",
+      "id": "9214bd91-fafb-49b7-ae0c-c6e4cbdef8c9",
       "type": "messaging",
-      "cid": "messaging:ec865378-1aa8-4317-8cb0-449021aaeec3",
-      "last_message_at": "2026-06-23T15:46:03.994197Z",
-      "created_at": "2026-06-23T15:46:01.530852Z",
-      "updated_at": "2026-06-23T15:46:01.530852Z",
+      "cid": "messaging:9214bd91-fafb-49b7-ae0c-c6e4cbdef8c9",
+      "last_message_at": "2026-06-24T11:44:51.101592Z",
+      "created_at": "2026-06-24T11:44:48.428721Z",
+      "updated_at": "2026-06-24T11:44:48.428721Z",
       "created_by": {
         "id": "luke_skywalker",
         "name": "Luke Skywalker",
@@ -30,7 +30,7 @@
         "updated_at": "2026-06-23T13:32:25.454217Z",
         "banned": false,
         "online": true,
-        "last_active": "2026-06-23T15:46:03.553259558Z",
+        "last_active": "2026-06-24T11:44:45.388376007Z",
         "blocked_user_ids": [
 
         ],
@@ -225,14 +225,14 @@
           }
         ],
         "invisible": false,
-        "type": "team",
-        "canBeAddedToGroups": true,
         "custom_extra_data_key": true,
+        "canBeAddedToGroups": true,
+        "canReceiveMessages": false,
         "team": "test",
+        "birthLand": "Tatooine",
         "pando": "{\"speciality\":\"ios engineer\"}",
         "birthland": "Tatooine",
-        "canReceiveMessages": false,
-        "birthLand": "Tatooine"
+        "type": "team"
       },
       "frozen": false,
       "disabled": false,
@@ -280,6 +280,6 @@
     },
     "parent_message": null,
     "quoted_message": null,
-    "created_at": "2026-06-23T15:46:04.147324912Z"
+    "created_at": "2026-06-24T11:44:51.245461098Z"
   }
 }
