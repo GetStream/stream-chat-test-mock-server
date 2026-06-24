@@ -36,8 +36,9 @@ jobs:
         body=$(cat <<'EOF'
         Automated mock server sync.
 
-        - [Android](https://github.com/GetStream/stream-chat-android/actions/workflows/e2e-test-cron.yml?query=event%3Aworkflow_dispatch)
-        - [iOS](https://github.com/GetStream/stream-chat-swift/actions/workflows/cron-checks.yml?query=event%3Aworkflow_dispatch)
+        Please verify the E2E test runs and move forward with the PR if they pass:
+        - [ ] [Android](https://github.com/GetStream/stream-chat-android/actions/workflows/e2e-test-cron.yml?query=event%3Aworkflow_dispatch)
+        - [ ] [iOS](https://github.com/GetStream/stream-chat-swift/actions/workflows/cron-checks.yml?query=event%3Aworkflow_dispatch)
         EOF
         )
         gh pr create --base main --title "[CI] Sync Mock Server" --body "$body"
