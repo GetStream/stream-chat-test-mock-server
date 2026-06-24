@@ -1,45 +1,45 @@
 {
   "draft": {
     "message": {
-      "id": "5f2456c0-7cff-447b-b2bc-cad1cc377c70",
+      "id": "81885b81-f73c-45c9-9073-9e8a16cd257a",
       "text": "Test",
       "show_in_channel": false,
       "silent": false
     },
-    "channel_cid": "messaging:6dc09d76-dfef-42cd-b487-1acc98ac2d25",
+    "channel_cid": "messaging:9214bd91-fafb-49b7-ae0c-c6e4cbdef8c9",
     "channel": {
-      "id": "6dc09d76-dfef-42cd-b487-1acc98ac2d25",
+      "id": "9214bd91-fafb-49b7-ae0c-c6e4cbdef8c9",
       "type": "messaging",
-      "cid": "messaging:6dc09d76-dfef-42cd-b487-1acc98ac2d25",
-      "last_message_at": "2026-01-21T16:23:48.710525Z",
-      "created_at": "2026-01-21T16:23:48.062675Z",
-      "updated_at": "2026-01-21T16:23:48.062675Z",
+      "cid": "messaging:9214bd91-fafb-49b7-ae0c-c6e4cbdef8c9",
+      "last_message_at": "2026-06-24T11:44:51.101592Z",
+      "created_at": "2026-06-24T11:44:48.428721Z",
+      "updated_at": "2026-06-24T11:44:48.428721Z",
       "created_by": {
         "id": "luke_skywalker",
         "name": "Luke Skywalker",
         "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
-        "language": "zh-TW",
-        "role": "admin",
+        "language": "zh",
+        "role": "user",
         "teams": [
 
         ],
         "created_at": "2024-04-04T09:26:11.805899Z",
-        "updated_at": "2026-01-13T00:08:08.392874Z",
+        "updated_at": "2026-06-23T13:32:25.454217Z",
         "banned": false,
         "online": true,
-        "last_active": "2026-01-21T16:23:14.909720148Z",
+        "last_active": "2026-06-24T11:44:45.388376007Z",
         "blocked_user_ids": [
 
         ],
-        "avg_response_time": 153351,
+        "avg_response_time": 140111,
+        "canReceiveMessages": false,
+        "team": "test",
+        "birthLand": "Tatooine",
         "pando": "{\"speciality\":\"ios engineer\"}",
         "birthland": "Tatooine",
         "type": "team",
         "custom_extra_data_key": true,
-        "team": "test",
-        "canReceiveMessages": false,
-        "canBeAddedToGroups": true,
-        "birthLand": "Tatooine"
+        "canBeAddedToGroups": true
       },
       "frozen": false,
       "disabled": false,
@@ -87,7 +87,7 @@
     },
     "parent_message": null,
     "quoted_message": null,
-    "created_at": "2026-01-21T16:23:50.087331333Z"
+    "created_at": "2026-06-24T11:44:51.245461098Z"
   },
-  "duration": "17.99ms"
+  "duration": "17.08ms"
 }

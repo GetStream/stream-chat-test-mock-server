@@ -77,7 +77,7 @@ def send_typing_event(channel_id)
   save_json(response, 'http_events.json')
 end
 
-def send_message(channel_id, text, filename)
+def send_message(channel_id, text, filename, fill_attachment: false)
   message_id = SecureRandom.uuid
   payload = {
     message: {
@@ -90,12 +90,28 @@ def send_message(channel_id, text, filename)
   }.to_json
   endpoint = "#{STREAM_HTTP_URL}/channels/messaging/#{channel_id}/message?api_key=#{STREAM_DEMO_API_KEY}"
   response = http_post(endpoint, payload)
+  fill_attachment_defaults(response) if fill_attachment
   save_json(response, filename)
   message_id
 end
 
+# Image link previews (e.g. Unsplash) come back without `title`/`text`, so the
+# preview card has no copy. Fill them with defaults when the scrape left them blank.
+def fill_attachment_defaults(response)
+  attachment = response.dig('message', 'attachments', 0)
+  return unless attachment
+
+  attachment['title'] = 'Title' if attachment['title'].to_s.empty?
+  attachment['text'] = 'Description' if attachment['text'].to_s.empty?
+end
+
 def send_youtube_link(channel_id)
-  send_message(channel_id, 'https://youtube.com/watch?v=xOX7MsrbaPY', 'http_youtube_link.json')
+  send_message(
+    channel_id,
+    'https://www.youtube.com/watch?v=xOX7MsrbaPY',
+    'http_youtube_link.json',
+    fill_attachment: true
+  )
 end
 
 def send_ephemeral_message(channel_id)
@@ -103,7 +119,12 @@ def send_ephemeral_message(channel_id)
 end
 
 def send_unsplash_link(channel_id)
-  send_message(channel_id, 'https://unsplash.com/photos/1_2d3MRbI9c', 'http_unsplash_link.json')
+  send_message(
+    channel_id,
+    'https://images.unsplash.com/photo-1568574728383-06fca083883d',
+    'http_unsplash_link.json',
+    fill_attachment: true
+  )
 end
 
 def send_giphy_link(channel_id)
@@ -219,6 +240,33 @@ def save_json(data, filename)
   puts("✅ #{filename}")
 end
 
+# Strip the `i18n` object out of every `message` in all generated fixtures.
+# The translation metadata is noise for the mock server, so remove it as a
+# final pass once all JSONs have been written.
+def remove_message_i18n(node)
+  case node
+  when Hash
+    node.each do |key, value|
+      value.delete('i18n') if key == 'message' && value.kind_of?(Hash)
+      if key == 'messages' && value.kind_of?(Array)
+        value.each { |message| message.delete('i18n') if message.kind_of?(Hash) }
+      end
+      remove_message_i18n(value)
+    end
+  when Array
+    node.each { |item| remove_message_i18n(item) }
+  end
+end
+
+def cleanup_message_i18n
+  Dir.glob("#{MOCK_SERVER_FIXTURES_PATH}/*.json").sort.each do |path|
+    data = JSON.parse(File.read(path))
+    remove_message_i18n(data)
+    File.write(path, JSON.pretty_generate(data))
+  end
+  puts('🧹 Removed i18n from message objects')
+end
+
 def http_get(url, headers = STREAM_HEADERS)
   uri = URI(url)
   request = Net::HTTP::Get.new(uri, headers)
@@ -302,6 +350,7 @@ EM.run do
 
   ws.on(:close) do |event|
     ws = nil
+    cleanup_message_i18n
     exit 0
   end
 end
