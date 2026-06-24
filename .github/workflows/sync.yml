@@ -18,7 +18,8 @@ jobs:
     - uses: ./.github/actions/ruby-cache
     - run: bundle exec ruby sync.rb
       timeout-minutes: 5
-    - run: |
+    - name: Commit and push
+      run: |
         git config --global user.email "stream-bot@getstream.io"
         git config --global user.name "Stream Bot"
         branch="ci/sync-mock-server-$(date +%s)"
@@ -26,7 +27,20 @@ jobs:
         git add src/jsons
         git commit -m "[CI] Sync Mock Server"
         git push --set-upstream origin "${branch}"
-        gh pr create --base main --fill
+    - name: Trigger E2E tests on iOS and Android
+      run: |
+        gh workflow run e2e-test-cron.yml --repo GetStream/stream-chat-android
+        gh workflow run cron-checks.yml --repo GetStream/stream-chat-swift
+    - name: Create PR
+      run: |
+        body=$(cat <<'EOF'
+        Automated mock server sync.
+
+        - [Android](https://github.com/GetStream/stream-chat-android/actions/workflows/e2e-test-cron.yml?query=event%3Aworkflow_dispatch)
+        - [iOS](https://github.com/GetStream/stream-chat-swift/actions/workflows/cron-checks.yml?query=event%3Aworkflow_dispatch)
+        EOF
+        )
+        gh pr create --base main --title "[CI] Sync Mock Server" --body "$body"
     - uses: 8398a7/action-slack@v3
       with:
         status: ${{ job.status }}

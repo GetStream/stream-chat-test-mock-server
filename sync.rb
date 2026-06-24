@@ -247,9 +247,9 @@ def remove_message_i18n(node)
   case node
   when Hash
     node.each do |key, value|
-      value.delete('i18n') if key == 'message' && value.is_a?(Hash)
-      if key == 'messages' && value.is_a?(Array)
-        value.each { |message| message.delete('i18n') if message.is_a?(Hash) }
+      value.delete('i18n') if key == 'message' && value.kind_of?(Hash)
+      if key == 'messages' && value.kind_of?(Array)
+        value.each { |message| message.delete('i18n') if message.kind_of?(Hash) }
       end
       remove_message_i18n(value)
     end
