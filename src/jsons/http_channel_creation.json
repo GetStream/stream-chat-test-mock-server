@@ -1,10 +1,10 @@
 {
   "channel": {
-    "id": "9214bd91-fafb-49b7-ae0c-c6e4cbdef8c9",
+    "id": "6f094b8a-30e4-4c0d-b656-b12d96552187",
     "type": "messaging",
-    "cid": "messaging:9214bd91-fafb-49b7-ae0c-c6e4cbdef8c9",
-    "created_at": "2026-06-24T11:44:48.428721Z",
-    "updated_at": "2026-06-24T11:44:48.428721Z",
+    "cid": "messaging:6f094b8a-30e4-4c0d-b656-b12d96552187",
+    "created_at": "2026-07-01T00:29:28.770437Z",
+    "updated_at": "2026-07-01T00:29:28.770437Z",
     "created_by": {
       "id": "luke_skywalker",
       "name": "Luke Skywalker",
@@ -15,22 +15,22 @@
 
       ],
       "created_at": "2024-04-04T09:26:11.805899Z",
-      "updated_at": "2026-06-23T13:32:25.454217Z",
+      "updated_at": "2026-06-26T07:21:33.161557Z",
       "banned": false,
       "online": true,
-      "last_active": "2026-06-24T11:44:45.388376007Z",
+      "last_active": "2026-07-01T00:29:27.963396786Z",
       "blocked_user_ids": [
 
       ],
-      "avg_response_time": 140111,
-      "team": "test",
-      "birthland": "Tatooine",
+      "avg_response_time": 143327,
       "canReceiveMessages": false,
+      "pando": "{\"speciality\":\"ios engineer\"}",
+      "canBeAddedToGroups": true,
       "type": "team",
       "birthLand": "Tatooine",
       "custom_extra_data_key": true,
-      "canBeAddedToGroups": true,
-      "pando": "{\"speciality\":\"ios engineer\"}"
+      "team": "test",
+      "birthland": "Tatooine"
     },
     "frozen": false,
     "disabled": false,
@@ -139,7 +139,7 @@
         "avg_response_time": 56399,
         "birthland": "Serenno"
       },
-      "last_read": "2026-06-24T11:44:48.517704296Z",
+      "last_read": "2026-07-01T00:29:28.853884841Z",
       "unread_messages": 0
     },
     {
@@ -177,24 +177,24 @@
 
         ],
         "created_at": "2024-04-04T09:26:11.805899Z",
-        "updated_at": "2026-06-23T13:32:25.454217Z",
+        "updated_at": "2026-06-26T07:21:33.161557Z",
         "banned": false,
         "online": true,
-        "last_active": "2026-06-24T11:44:45.388376007Z",
+        "last_active": "2026-07-01T00:29:27.963396786Z",
         "blocked_user_ids": [
 
         ],
-        "avg_response_time": 140111,
+        "avg_response_time": 143327,
         "birthLand": "Tatooine",
-        "team": "test",
-        "custom_extra_data_key": true,
         "canBeAddedToGroups": true,
-        "canReceiveMessages": false,
-        "type": "team",
+        "custom_extra_data_key": true,
         "birthland": "Tatooine",
-        "pando": "{\"speciality\":\"ios engineer\"}"
+        "canReceiveMessages": false,
+        "pando": "{\"speciality\":\"ios engineer\"}",
+        "type": "team",
+        "team": "test"
       },
-      "last_read": "2026-06-24T11:44:48.517704296Z",
+      "last_read": "2026-07-01T00:29:28.853884841Z",
       "unread_messages": 0
     }
   ],
@@ -222,8 +222,8 @@
         "birthland": "Serenno"
       },
       "status": "member",
-      "created_at": "2026-06-24T11:44:48.465137Z",
-      "updated_at": "2026-06-24T11:44:48.465137Z",
+      "created_at": "2026-07-01T00:29:28.807102Z",
+      "updated_at": "2026-07-01T00:29:28.807102Z",
       "banned": false,
       "shadow_banned": false,
       "role": "member",
@@ -253,8 +253,8 @@
         "birthland": "Socorro"
       },
       "status": "member",
-      "created_at": "2026-06-24T11:44:48.465137Z",
-      "updated_at": "2026-06-24T11:44:48.465137Z",
+      "created_at": "2026-07-01T00:29:28.807102Z",
+      "updated_at": "2026-07-01T00:29:28.807102Z",
       "banned": false,
       "shadow_banned": false,
       "role": "admin",
@@ -273,26 +273,26 @@
 
         ],
         "created_at": "2024-04-04T09:26:11.805899Z",
-        "updated_at": "2026-06-23T13:32:25.454217Z",
+        "updated_at": "2026-06-26T07:21:33.161557Z",
         "banned": false,
         "online": true,
-        "last_active": "2026-06-24T11:44:45.388376007Z",
+        "last_active": "2026-07-01T00:29:27.963396786Z",
         "blocked_user_ids": [
 
         ],
-        "avg_response_time": 140111,
-        "custom_extra_data_key": true,
-        "canBeAddedToGroups": true,
-        "canReceiveMessages": false,
-        "type": "team",
-        "birthLand": "Tatooine",
-        "team": "test",
+        "avg_response_time": 143327,
         "birthland": "Tatooine",
-        "pando": "{\"speciality\":\"ios engineer\"}"
+        "canReceiveMessages": false,
+        "pando": "{\"speciality\":\"ios engineer\"}",
+        "birthLand": "Tatooine",
+        "custom_extra_data_key": true,
+        "team": "test",
+        "type": "team",
+        "canBeAddedToGroups": true
       },
       "status": "member",
-      "created_at": "2026-06-24T11:44:48.465137Z",
-      "updated_at": "2026-06-24T11:44:48.465137Z",
+      "created_at": "2026-07-01T00:29:28.807102Z",
+      "updated_at": "2026-07-01T00:29:28.807102Z",
       "banned": false,
       "shadow_banned": false,
       "role": "owner",
@@ -311,26 +311,26 @@
 
       ],
       "created_at": "2024-04-04T09:26:11.805899Z",
-      "updated_at": "2026-06-23T13:32:25.454217Z",
+      "updated_at": "2026-06-26T07:21:33.161557Z",
       "banned": false,
       "online": true,
-      "last_active": "2026-06-24T11:44:45.388376007Z",
+      "last_active": "2026-07-01T00:29:27.963396786Z",
       "blocked_user_ids": [
 
       ],
-      "avg_response_time": 140111,
-      "birthLand": "Tatooine",
+      "avg_response_time": 143327,
+      "canBeAddedToGroups": true,
       "custom_extra_data_key": true,
+      "canReceiveMessages": false,
       "type": "team",
       "team": "test",
       "pando": "{\"speciality\":\"ios engineer\"}",
-      "canBeAddedToGroups": true,
       "birthland": "Tatooine",
-      "canReceiveMessages": false
+      "birthLand": "Tatooine"
     },
     "status": "member",
-    "created_at": "2026-06-24T11:44:48.465137Z",
-    "updated_at": "2026-06-24T11:44:48.465137Z",
+    "created_at": "2026-07-01T00:29:28.807102Z",
+    "updated_at": "2026-07-01T00:29:28.807102Z",
     "banned": false,
     "shadow_banned": false,
     "role": "owner",
@@ -340,5 +340,5 @@
   "threads": [
 
   ],
-  "duration": "229.11ms"
+  "duration": "160.60ms"
 }
