@@ -418,7 +418,11 @@ def paginate_message_list(params:, request_body:)
   messages = json['messages']
   return channel.to_s unless messages && messages['limit']
 
-  message_list = $message_list.select { |msg| msg['cid'] == "#{params[:channel_type]}:#{params[:channel_id]}" && msg['parent_id'].nil? }
+  # Match the backend's channel message predicate: (parent_id IS NULL) OR (show_in_channel = true).
+  # Thread replies sent also to the channel must be part of the channel query response.
+  message_list = $message_list.select do |msg|
+    msg['cid'] == "#{params[:channel_type]}:#{params[:channel_id]}" && (msg['parent_id'].nil? || msg['show_in_channel'])
+  end
   paginated_messages = mock_message_pagination(
     message_list: message_list,
     limit: messages['limit'].to_i,
