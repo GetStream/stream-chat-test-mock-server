@@ -97,3 +97,16 @@ post '/truncate_channel' do
   truncate_channel(channel_id: $current_channel_id, request_body: request_body)
   ''
 end
+
+# Adds or removes a member on the current channel as a server-side action, reusing
+# the same helper as the client-initiated channel update endpoint. The app under test
+# receives the `member.added`/`member.removed` and `channel.updated` websocket events.
+post '/add_member' do
+  update_members(channel_id: $current_channel_id, request_body: { add_members: [params[:user_id]] }.to_json)
+  ''
+end
+
+post '/remove_member' do
+  update_members(channel_id: $current_channel_id, request_body: { remove_members: [params[:user_id]] }.to_json)
+  ''
+end
