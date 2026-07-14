@@ -88,3 +88,12 @@ post '/delay_messages' do
   $delay_messages = params[:delay].to_i.positive? ? params[:delay].to_i : 5
   ''
 end
+
+# Truncates the current channel as a server-side action, reusing the same helper
+# as the client-initiated truncate endpoint. The app under test only receives the
+# `channel.truncated` websocket event (and the system message when requested).
+post '/truncate_channel' do
+  request_body = params[:with_message] == 'true' ? '{"message":{}}' : ''
+  truncate_channel(channel_id: $current_channel_id, request_body: request_body)
+  ''
+end
