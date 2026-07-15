@@ -239,7 +239,7 @@ def android_push
   end
 
   extras = data.compact.map { |key, value| "--es #{key} '#{value}'" }.join(' ')
-  puts `adb shell am broadcast -n #{params[:component]} #{extras}`
+  puts(`adb shell am broadcast -n #{params[:component]} #{extras}`)
 end
 
 ###### REACTIONS ######
