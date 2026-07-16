@@ -111,6 +111,7 @@ end
 ###### PUSH NOTIFICATIONS ######
 
 ### Parameters
+# `platform`: String - `ios` (default) or `android`
 # `title`: String - Push notification title
 # `body`: String - Push notification body
 # `rest`: String - Rest of the payload (empty, null, incorrect_type, incorrect_data, invalid)
@@ -119,8 +120,10 @@ end
 # `component`: String - Broadcast receiver component of the test app (Android)
 
 post '/participant/push' do
-  return android_push if params[:component]
+  params[:platform] == 'android' ? android_push : ios_push
+end
 
+def ios_push
   badge = 1
   mutable_content = 1
   category = 'stream.chat'
@@ -195,7 +198,7 @@ post '/participant/push' do
 
   push_data_file = 'push_payload.json'
   File.write(push_data_file, payload)
-  puts `xcrun simctl push #{params['udid']} #{params['bundle_id']} #{push_data_file}`
+  puts(`xcrun simctl push #{params['udid']} #{params['bundle_id']} #{push_data_file}`)
 end
 
 # Delivers the push payload to the Android test app with an adb broadcast. The receiver
