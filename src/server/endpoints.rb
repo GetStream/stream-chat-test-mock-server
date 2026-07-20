@@ -103,6 +103,18 @@ post '/channels/messaging/:channel_id/file' do
   { file: file }.to_s
 end
 
+# Send image (v2)
+post '/api/v2/chat/channels/messaging/:channel_id/image' do
+  file = test_asset('image')
+  { file: file }.to_s
+end
+
+# Send file (v2)
+post '/api/v2/chat/channels/messaging/:channel_id/file' do
+  file = request.content_type.include?('video') ? test_asset('video') : test_asset('file')
+  { file: file }.to_s
+end
+
 # Send reaction
 post '/messages/:message_id/reaction' do
   create_reaction(type: JSON.parse(request.body.read)['reaction']['type'], message_id: params[:message_id])
