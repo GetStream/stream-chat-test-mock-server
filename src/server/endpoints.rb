@@ -12,6 +12,11 @@ get '/connect' do
   end
 end
 
+# Show WebSocket connection status
+get '/ws/status' do
+  { connected: !$ws.nil? }.to_json
+end
+
 # Synchronize
 post '/sync' do
   { events: [] }.to_json
