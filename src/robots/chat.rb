@@ -16,6 +16,7 @@ post '/mock' do
   reply_timestamp = 0
 
   $message_list = []
+  $sync_events = []
   $channel_list['channels'] = []
 
   channels_count.downto(1) do |i|

@@ -57,7 +57,7 @@ def truncate_channel(channel_id:, request_body:)
   ws_response['created_at'] = truncated_at
   ws_response['user'] = truncated_by
   ws_response['channel'] = response['channel']
-  $ws&.send(ws_response.to_s)
+  broadcast_event(ws_response)
 
   # If message provided in request, create system message
   if json['message']

@@ -73,7 +73,7 @@ def send_message_ws(response:, event_type:)
   ws_response['channel_id'] = response['message']['cid'].split(':').last
   ws_response['created_at'] = response['message']['created_at']
   ws_response['type'] = event_type
-  $ws&.send(ws_response.to_s)
+  broadcast_event(ws_response)
 end
 
 def find_message_by_id(id)
@@ -243,7 +243,7 @@ def create_draft(channel_id:, request_body:)
     channel['draft'] = draft_copy
   end
 
-  $ws&.send(ws_response.to_s)
+  broadcast_event(ws_response)
   response.to_s
 end
 
@@ -263,7 +263,7 @@ def delete_draft(channel_id:, params:)
   else
     channel['draft'] = nil
   end
-  $ws&.send(ws_response.to_s)
+  broadcast_event(ws_response)
   { duration: '7.11ms' }.to_s
 end
 
@@ -340,7 +340,7 @@ def mock_message(
     additional_response['channel_id'] = channel_id
     additional_response['type'] = 'message.updated'
     additional_response['message'] = parent_message
-    $ws&.send(additional_response.to_s)
+    broadcast_event(additional_response)
   end
 
   if !skip_enrich_url && (text.include?('youtube.com/') || text.include?('unsplash.com/') || text.include?('giphy.com/'))

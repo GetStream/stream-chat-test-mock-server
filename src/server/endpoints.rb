@@ -17,9 +17,17 @@ get '/ws/status' do
   { connected: !$ws.nil? }.to_json
 end
 
-# Synchronize
+# Synchronize: replay the events broadcast since `last_sync_at` for the requested channels,
+# so a client that missed live events while its socket was down recovers them on reconnect.
 post '/sync' do
-  { events: [] }.to_json
+  body = request.body.read
+  json = body.empty? ? {} : JSON.parse(body)
+  cids = json['channel_cids'] || []
+  last_sync_at = json['last_sync_at']
+  events = $sync_events.select do |event|
+    cids.include?(event['cid']) && event_after_sync?(event['created_at'], last_sync_at)
+  end
+  { events: events }.to_s
 end
 
 # Show channel list
