@@ -16,7 +16,7 @@ def send_reaction_ws(response:, event_type:)
   ws_response['channel_id'] = response['message']['cid'].split(':').last
   ws_response['created_at'] = response['reaction']['created_at']
   ws_response['type'] = event_type
-  $ws&.send(ws_response.to_s)
+  broadcast_event(ws_response)
 end
 
 def create_reaction(type:, message_id:, user: current_user, delete: nil, delay: nil)

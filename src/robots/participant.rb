@@ -100,10 +100,10 @@ post '/participant/message' do
   if params[:delay].to_i.positive?
     Thread.new do
       sleep(params[:delay].to_i)
-      $ws&.send(response.to_s)
+      broadcast_event(response)
     end
   else
-    $ws&.send(response.to_s)
+    broadcast_event(response)
   end
   sync_channels
 end
