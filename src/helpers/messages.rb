@@ -80,6 +80,20 @@ def find_message_by_id(id)
   $message_list.detect { |msg| msg['id'] == id }
 end
 
+# Mirrors the backend response for a message sent with an id that already exists:
+# HTTP 400 with the input error code 4. Clients rely on the code and the
+# "already exists" text to recognize that the message was in fact delivered.
+def duplicate_message_error(message_id)
+  {
+    code: 4,
+    message: "a message with ID #{message_id} already exists",
+    StatusCode: 400,
+    duration: '0.10ms',
+    more_info: 'https://getstream.io/chat/docs/api_errors_response',
+    details: []
+  }.to_json
+end
+
 def update_message(request_body:, params:, delete: false)
   timestamp = unique_date
   json = request_body.empty? ? {} : JSON.parse(request_body)
@@ -125,6 +139,13 @@ def create_message(request_body:, channel_id: nil)
 
   json = JSON.parse(request_body)
   message = json['message']
+
+  # The real backend enforces message id uniqueness and rejects a duplicate send
+  # with a 400 input error (code 4). Mirror it so that a client retrying a message
+  # whose response was lost gets the same behavior as in production, and so that
+  # channel query responses can never contain the same message id twice.
+  halt(400, duplicate_message_error(message['id'])) if message['id'] && find_message_by_id(message['id'])
+
   parent_id = message['parent_id']
   quoted_message_id = message['quoted_message_id']
   channel_reply = message['show_in_channel']
