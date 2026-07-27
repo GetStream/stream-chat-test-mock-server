@@ -24,7 +24,7 @@ def update_members(channel_id:, request_body:)
     ws_response['member'] = member
     ws_response['user'] = member['user']
     ws_response['created_at'] = unique_date
-    $ws&.send(ws_response.to_s)
+    broadcast_event(ws_response)
   end
 
   if remove_members
@@ -43,7 +43,7 @@ def update_members(channel_id:, request_body:)
   ws_response['type'] = 'channel.updated'
   ws_response['user'] = current_user
   ws_response['created_at'] = unique_date
-  $ws&.send(ws_response.to_s)
+  broadcast_event(ws_response)
 
   response = Mocks.update_member
   response['members'] = channel['members']
