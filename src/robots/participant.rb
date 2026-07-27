@@ -93,6 +93,7 @@ post '/participant/message' do
   response['channel_id'] = message['channel_id']
   response['cid'] = "messaging:#{message['channel_id']}"
   response['type'] = action_type
+  response['created_at'] = timestamp
   response['message'] = message
   response['user'] = Participant.user
   response['hard_delete'] = true if params[:hard_delete] == 'true' && params[:action] == 'delete'
