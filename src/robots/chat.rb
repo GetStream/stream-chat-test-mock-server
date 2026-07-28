@@ -18,6 +18,10 @@ post '/mock' do
   $message_list = []
   $sync_events = []
   $channel_list['channels'] = []
+  $reminders = []
+  $user_mutes = []
+  $channel_mutes = []
+  $blocked_users = []
 
   channels_count.downto(1) do |i|
     channel_id = SecureRandom.uuid
@@ -31,7 +35,11 @@ post '/mock' do
     channel_template['channel']['cid'] = "messaging:#{channel_id}"
     channel_template['channel']['created_at'] = channel_timestamp
     channel_template['channel']['updated_at'] = channel_timestamp
+    # Both users start with everything read, so seeded messages render without
+    # an unread separator; only messages sent after the mock create unread state.
     channel_template['read'] = []
+    seed_read_state(channel: channel_template, user: current_user, last_read: timestamp)
+    seed_read_state(channel: channel_template, user: Participant.user, last_read: timestamp)
     $channel_list['channels'] << channel_template
   end
 
@@ -109,5 +117,16 @@ end
 
 post '/remove_member' do
   update_members(channel_id: $current_channel_id, request_body: { remove_members: [params[:user_id]] }.to_json)
+  ''
+end
+
+# Seeds a server-side reminder on the last message for the app user, so tests can
+# open the reminders screen without creating the reminder through the app.
+### Parameters
+# `remind_at`: Integer - Offset in seconds from now for the scheduled reminder.
+#                        Omit it for a save-for-later reminder without a due date.
+post '/create_reminder' do
+  remind_at = params[:remind_at] ? update_date(timestamp: unique_date, plus_seconds: params[:remind_at].to_i) : nil
+  create_reminder(message_id: last_message_id, remind_at: remind_at)
   ''
 end

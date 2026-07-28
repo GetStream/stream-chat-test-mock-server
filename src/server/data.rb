@@ -1,5 +1,8 @@
+# Sub-second precision, like the real backend. Clients drop read-state updates
+# whose timestamp is not strictly newer than the last processed one, so two
+# events stamped within the same second would lose one unread count.
 def time_format
-  @time_format ||= '%Y-%m-%dT%H:%M:%SZ'
+  @time_format ||= '%Y-%m-%dT%H:%M:%S.%6NZ'
 end
 
 def unique_date
@@ -7,7 +10,7 @@ def unique_date
 end
 
 def update_date(timestamp:, plus_seconds: nil, minus_seconds: nil)
-  time = Time.strptime(timestamp, time_format)
+  time = Time.parse(timestamp)
   if plus_seconds
     (time + plus_seconds).utc.strftime(time_format)
   elsif minus_seconds

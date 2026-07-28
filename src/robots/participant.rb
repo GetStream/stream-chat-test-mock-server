@@ -90,6 +90,10 @@ post '/participant/message' do
                   MessageEventType.new
                 end
 
+  if params[:action].nil? && message_type == :regular
+    track_message_read_states(channel_id: message['channel_id'], message: message)
+  end
+
   response['channel_id'] = message['channel_id']
   response['cid'] = "messaging:#{message['channel_id']}"
   response['type'] = action_type
@@ -303,17 +307,7 @@ post '/participant/typing/stop' do
 end
 
 post '/participant/read' do
-  user_reads = $channel_list['channels'][0]['read'].detect { |u| u['user']['id'] == Participant.user['id'] }
-  if user_reads
-    user_reads['last_read'] = unique_date
-    user_reads['unread_messages'] = 0
-  else
-    $channel_list['channels'][0]['read'] << {
-      'user' => Participant.user,
-      'last_read' => unique_date,
-      'unread_messages' => 0
-    }
-  end
+  mark_channel_read(channel: find_channel_by_id($current_channel_id), user: Participant.user)
 
   parent_id = nil
   if params[:thread]

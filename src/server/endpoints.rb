@@ -58,9 +58,39 @@ post '/channels/messaging/:channel_id/event' do
   create_event(type: json['event']['type'], channel_id: params[:channel_id], parent_id: json['event']['parent_id'])
 end
 
-# Read message
+# Mark channel read
 post '/channels/messaging/:channel_id/read' do
+  mark_channel_read(channel: find_channel_by_id(params[:channel_id]), user: current_user)
   create_event(type: 'message.read', channel_id: params[:channel_id])
+end
+
+# Mark channels delivered
+post '/channels/delivered' do
+  { duration: '7.11ms' }.to_s
+end
+
+# Mark channel unread from a message on
+post '/channels/messaging/:channel_id/unread' do
+  json = JSON.parse(request.body.read)
+  channel = find_channel_by_id(params[:channel_id])
+  read = mark_channel_unread(channel: channel, user: current_user, message_id: json['message_id'])
+  halt(400, { message: "message #{json['message_id']} not found" }.to_s) unless read
+
+  broadcast_event(
+    'type' => 'notification.mark_unread',
+    'created_at' => unique_date,
+    'cid' => channel['channel']['cid'],
+    'channel_type' => 'messaging',
+    'channel_id' => params[:channel_id],
+    'user' => current_user,
+    'first_unread_message_id' => json['message_id'],
+    'last_read_message_id' => read['last_read_message_id'],
+    'last_read_at' => read['last_read'],
+    'unread_messages' => read['unread_messages'],
+    'unread_channels' => 1,
+    'total_unread_count' => read['unread_messages']
+  )
+  { duration: '7.11ms' }.to_s
 end
 
 # Send message
@@ -146,6 +176,126 @@ end
 # Add/remove channel member
 post '/channels/messaging/:channel_id' do
   update_members(channel_id: params[:channel_id], request_body: request.body.read)
+end
+
+# Delete channel
+delete '/channels/messaging/:channel_id' do
+  channel = find_channel_by_id(params[:channel_id])
+  timestamp = unique_date
+  channel['channel']['deleted_at'] = timestamp
+  $channel_list['channels'].delete(channel)
+  $message_list.delete_if { |msg| msg['cid'] == channel['channel']['cid'] }
+
+  broadcast_event(
+    'type' => 'channel.deleted',
+    'created_at' => timestamp,
+    'cid' => channel['channel']['cid'],
+    'channel_type' => 'messaging',
+    'channel_id' => params[:channel_id],
+    'channel' => channel['channel'],
+    'user' => current_user
+  )
+  { channel: channel['channel'], duration: '7.11ms' }.to_s
+end
+
+# Show pinned messages
+get '/channels/messaging/:channel_id/pinned_messages' do
+  payload = params[:payload] ? JSON.parse(params[:payload]) : {}
+  pinned_messages = $message_list.select do |msg|
+    msg['cid'] == "messaging:#{params[:channel_id]}" && msg['pinned']
+  end
+  pinned_messages = pinned_messages.last(payload['limit'].to_i) if payload['limit']
+  { messages: pinned_messages, duration: '7.11ms' }.to_s
+end
+
+# Search messages
+get '/search' do
+  payload = JSON.parse(params[:payload])
+  { results: search_messages(payload).map { |msg| { message: msg } }, duration: '7.11ms' }.to_s
+end
+
+# Show thread list
+post '/threads' do
+  body = request.body.read
+  json = body.empty? ? {} : JSON.parse(body)
+  query_threads(reply_limit: (json['reply_limit'] || 2).to_i)
+end
+
+# Query message reactions
+post '/messages/:message_id/reactions' do
+  body = request.body.read
+  json = body.empty? ? {} : JSON.parse(body)
+  filter_type = json.dig('filter', 'type')
+  filter_type = filter_type.values.first if filter_type.is_a?(Hash)
+  message = find_message_by_id(params[:message_id])
+  reactions = message['latest_reactions'] || []
+  reactions = reactions.select { |reaction| reaction['type'] == filter_type } if filter_type
+  { reactions: reactions, duration: '7.11ms' }.to_s
+end
+
+# Flag message or user
+post '/moderation/flag' do
+  flag_target(request_body: request.body.read)
+end
+
+# Unflag message or user
+post '/moderation/unflag' do
+  flag_target(request_body: request.body.read)
+end
+
+# Mute user
+post '/moderation/mute' do
+  mute_user(target_id: JSON.parse(request.body.read)['target_id'])
+end
+
+# Unmute user
+post '/moderation/unmute' do
+  unmute_user(target_id: JSON.parse(request.body.read)['target_id'])
+end
+
+# Mute channel
+post '/moderation/mute/channel' do
+  mute_channel(channel_cids: JSON.parse(request.body.read)['channel_cids'])
+end
+
+# Unmute channel
+post '/moderation/unmute/channel' do
+  unmute_channel(channel_cids: JSON.parse(request.body.read)['channel_cids'])
+end
+
+# Block user
+post '/users/block' do
+  block_user(blocked_user_id: JSON.parse(request.body.read)['blocked_user_id'])
+end
+
+# Unblock user
+post '/users/unblock' do
+  unblock_user(blocked_user_id: JSON.parse(request.body.read)['blocked_user_id'])
+end
+
+# Show blocked users
+get '/users/block' do
+  { blocks: $blocked_users, duration: '7.11ms' }.to_s
+end
+
+# Query message reminders
+post '/reminders/query' do
+  { reminders: $reminders, duration: '7.11ms' }.to_s
+end
+
+# Create message reminder
+post '/messages/:message_id/reminders' do
+  create_reminder(message_id: params[:message_id], remind_at: JSON.parse(request.body.read)['remind_at'])
+end
+
+# Update message reminder
+patch '/messages/:message_id/reminders' do
+  update_reminder(message_id: params[:message_id], remind_at: JSON.parse(request.body.read)['remind_at'])
+end
+
+# Delete message reminder
+delete '/messages/:message_id/reminders' do
+  delete_reminder(message_id: params[:message_id])
 end
 
 # Get link preview details
