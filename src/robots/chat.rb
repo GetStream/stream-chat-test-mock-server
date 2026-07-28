@@ -35,11 +35,12 @@ post '/mock' do
     channel_template['channel']['cid'] = "messaging:#{channel_id}"
     channel_template['channel']['created_at'] = channel_timestamp
     channel_template['channel']['updated_at'] = channel_timestamp
-    # Both users start with everything read, so seeded messages render without
-    # an unread separator; only messages sent after the mock create unread state.
+    # Only the app user starts with a read entry (fully read, so seeded messages
+    # render without an unread separator). The participant gets one on demand via
+    # /participant/read: seeding it here would mark every seeded message as read
+    # by the participant and flip the delivery status checkmarks.
     channel_template['read'] = []
     seed_read_state(channel: channel_template, user: current_user, last_read: timestamp)
-    seed_read_state(channel: channel_template, user: Participant.user, last_read: timestamp)
     $channel_list['channels'] << channel_template
   end
 
