@@ -226,7 +226,7 @@ post '/messages/:message_id/reactions' do
   body = request.body.read
   json = body.empty? ? {} : JSON.parse(body)
   filter_type = json.dig('filter', 'type')
-  filter_type = filter_type.values.first if filter_type.is_a?(Hash)
+  filter_type = filter_type.values.first if filter_type.kind_of?(Hash)
   message = find_message_by_id(params[:message_id])
   reactions = message['latest_reactions'] || []
   reactions = reactions.select { |reaction| reaction['type'] == filter_type } if filter_type

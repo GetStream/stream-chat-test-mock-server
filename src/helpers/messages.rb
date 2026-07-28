@@ -84,7 +84,7 @@ end
 # operator condition like {"$autocomplete": "term"} or {"$q": "term"}.
 def search_messages(payload)
   condition = payload.dig('message_filter_conditions', 'text')
-  term = condition.is_a?(Hash) ? condition.values.first.to_s : condition.to_s
+  term = condition.kind_of?(Hash) ? condition.values.first.to_s : condition.to_s
   $message_list.select do |msg|
     msg['type'] != 'deleted' && msg['text'].to_s.downcase.include?(term.downcase)
   end
