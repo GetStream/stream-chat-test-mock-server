@@ -30,6 +30,9 @@ def update_members(channel_id:, request_body:)
   if remove_members
     member_ids.each do |id|
       channel['members'].delete_if { |m| m['user_id'] == id }
+      # The backend drops a removed member's read state; serving it again on a
+      # later channel query would undo the client's own read pruning.
+      channel['read'].delete_if { |read| read['user']['id'] == id }
     end
     channel['channel']['member_count'] -= member_ids.count
   end
