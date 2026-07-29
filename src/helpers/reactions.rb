@@ -10,6 +10,8 @@ end
 
 def send_reaction_ws(response:, event_type:)
   ws_response = Mocks.reaction_ws
+  ws_response['reaction'] = response['reaction']
+  ws_response['message_id'] = response['message']['id']
   ws_response['message'] = response['message']
   ws_response['user'] = response['reaction']['user']
   ws_response['cid'] = response['message']['cid']
