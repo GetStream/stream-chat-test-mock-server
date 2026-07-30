@@ -26,6 +26,8 @@ end
 # `delay`: Int - Pass this param if you need the ws to be delayed by the amount of seconds
 
 post '/participant/message' do
+  halt(400, { message: 'no current channel' }.to_s) unless find_channel_by_id($current_channel_id)
+
   timestamp = unique_date
   attachments = mock_attachments(params)
   response = Mocks.message_ws
@@ -307,7 +309,10 @@ post '/participant/typing/stop' do
 end
 
 post '/participant/read' do
-  mark_channel_read(channel: find_channel_by_id($current_channel_id), user: Participant.user)
+  channel = find_channel_by_id($current_channel_id)
+  halt(400, { message: 'no current channel' }.to_s) unless channel
+
+  mark_channel_read(channel: channel, user: Participant.user)
 
   parent_id = nil
   if params[:thread]

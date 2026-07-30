@@ -60,7 +60,10 @@ end
 
 # Mark channel read
 post '/channels/messaging/:channel_id/read' do
-  mark_channel_read(channel: find_channel_by_id(params[:channel_id]), user: current_user)
+  channel = find_channel_by_id(params[:channel_id])
+  halt(400, { message: "channel #{params[:channel_id]} not found" }.to_s) unless channel
+
+  mark_channel_read(channel: channel, user: current_user)
   create_event(type: 'message.read', channel_id: params[:channel_id])
 end
 
@@ -181,6 +184,8 @@ end
 # Delete channel
 delete '/channels/messaging/:channel_id' do
   channel = find_channel_by_id(params[:channel_id])
+  halt(400, { message: "channel #{params[:channel_id]} not found" }.to_s) unless channel
+
   timestamp = unique_date
   channel['channel']['deleted_at'] = timestamp
   $channel_list['channels'].delete(channel)
@@ -233,6 +238,8 @@ post '/messages/:message_id/reactions' do
   filter_type = json.dig('filter', 'type')
   filter_type = filter_type.values.first if filter_type.kind_of?(Hash)
   message = find_message_by_id(params[:message_id])
+  halt(400, { message: "message #{params[:message_id]} not found" }.to_s) unless message
+
   reactions = message['latest_reactions'] || []
   reactions = reactions.select { |reaction| reaction['type'] == filter_type } if filter_type
   { reactions: reactions, duration: '7.11ms' }.to_s

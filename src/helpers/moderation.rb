@@ -51,6 +51,8 @@ def mute_channel(channel_cids:)
   timestamp = unique_date
   channel_cids.each do |cid|
     channel = find_channel_by_id(cid.split(':').last)
+    halt(400, { message: "channel #{cid} not found" }.to_s) unless channel
+
     # The backend upserts a repeated mute instead of duplicating it.
     $channel_mutes.delete_if { |existing| existing['channel']['cid'] == cid }
     $channel_mutes << {
