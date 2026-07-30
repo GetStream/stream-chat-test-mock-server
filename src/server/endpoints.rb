@@ -185,6 +185,11 @@ delete '/channels/messaging/:channel_id' do
   channel['channel']['deleted_at'] = timestamp
   $channel_list['channels'].delete(channel)
   $message_list.delete_if { |msg| msg['cid'] == channel['channel']['cid'] }
+  # The participant and chat robots act on the current channel; leaving the pointer
+  # on the deleted channel would break every robot call after the deletion.
+  if params[:channel_id] == $current_channel_id
+    $current_channel_id = $channel_list['channels'].first&.dig('channel', 'id')
+  end
 
   broadcast_event(
     'type' => 'channel.deleted',
