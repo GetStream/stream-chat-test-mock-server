@@ -80,6 +80,22 @@ def find_message_by_id(id)
   $message_list.detect { |msg| msg['id'] == id }
 end
 
+# The search payload carries the term either as a plain string or wrapped in an
+# operator condition like {"$autocomplete": "term"} or {"$q": "term"}. The channel
+# scope arrives in filter_conditions as a bare cid or an operator hash like
+# {"$in": ["messaging:<id>"]}; when present, only those channels are searched.
+def search_messages(payload)
+  condition = payload.dig('message_filter_conditions', 'text')
+  term = condition.kind_of?(Hash) ? condition.values.first.to_s : condition.to_s
+  cid_condition = payload.dig('filter_conditions', 'cid')
+  cids = cid_condition.kind_of?(Hash) ? Array(cid_condition.values.first) : Array(cid_condition)
+  $message_list.select do |msg|
+    msg['type'] != 'deleted' &&
+      (cids.empty? || cids.include?(msg['cid'])) &&
+      msg['text'].to_s.downcase.include?(term.downcase)
+  end
+end
+
 # Mirrors the backend response for a message sent with an id that already exists:
 # HTTP 400 with the input error code 4. Clients rely on the code and the
 # "already exists" text to recognize that the message was in fact delivered.
@@ -192,6 +208,7 @@ def create_message(request_body:, channel_id: nil)
   )
 
   response['message'] = mocked_message
+  track_message_read_states(channel_id: channel_id, message: mocked_message) if message_type == :regular
   send_message_ws(response: response, event_type: MessageEventType.new) if message_type != :error
   response.to_s
 end
@@ -439,11 +456,7 @@ def paginate_message_list(params:, request_body:)
   messages = json['messages']
   return channel.to_s unless messages && messages['limit']
 
-  # Match the backend's channel message predicate: (parent_id IS NULL) OR (show_in_channel = true).
-  # Thread replies sent also to the channel must be part of the channel query response.
-  message_list = $message_list.select do |msg|
-    msg['cid'] == "#{params[:channel_type]}:#{params[:channel_id]}" && (msg['parent_id'].nil? || msg['show_in_channel'])
-  end
+  message_list = channel_visible_messages(cid: "#{params[:channel_type]}:#{params[:channel_id]}")
   paginated_messages = mock_message_pagination(
     message_list: message_list,
     limit: messages['limit'].to_i,

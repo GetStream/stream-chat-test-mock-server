@@ -26,6 +26,8 @@ end
 # `delay`: Int - Pass this param if you need the ws to be delayed by the amount of seconds
 
 post '/participant/message' do
+  halt(400, { message: 'no current channel' }.to_s) unless find_channel_by_id($current_channel_id)
+
   timestamp = unique_date
   attachments = mock_attachments(params)
   response = Mocks.message_ws
@@ -89,6 +91,10 @@ post '/participant/message' do
                 else
                   MessageEventType.new
                 end
+
+  if params[:action].nil? && message_type == :regular
+    track_message_read_states(channel_id: message['channel_id'], message: message)
+  end
 
   response['channel_id'] = message['channel_id']
   response['cid'] = "messaging:#{message['channel_id']}"
@@ -303,17 +309,10 @@ post '/participant/typing/stop' do
 end
 
 post '/participant/read' do
-  user_reads = $channel_list['channels'][0]['read'].detect { |u| u['user']['id'] == Participant.user['id'] }
-  if user_reads
-    user_reads['last_read'] = unique_date
-    user_reads['unread_messages'] = 0
-  else
-    $channel_list['channels'][0]['read'] << {
-      'user' => Participant.user,
-      'last_read' => unique_date,
-      'unread_messages' => 0
-    }
-  end
+  channel = find_channel_by_id($current_channel_id)
+  halt(400, { message: 'no current channel' }.to_s) unless channel
+
+  mark_channel_read(channel: channel, user: Participant.user)
 
   parent_id = nil
   if params[:thread]
