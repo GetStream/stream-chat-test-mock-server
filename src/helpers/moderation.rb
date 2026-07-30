@@ -1,5 +1,7 @@
-# Moderation state: user mutes, channel mutes, flags, and blocked users.
-# Kept in globals so each test run (one server process per test) starts clean.
+# Moderation state: user mutes, channel mutes, and blocked users, kept in globals
+# so each test run (one server process per test) starts clean. Flagging is
+# stateless: flag_target echoes a flag object back, which is all the clients
+# need since nothing queries flags.
 
 def own_user
   user = current_user.dup
@@ -32,6 +34,8 @@ def mute_user(target_id:)
     'created_at' => timestamp,
     'updated_at' => timestamp
   }
+  # The backend upserts a repeated mute instead of duplicating it.
+  $user_mutes.delete_if { |existing| existing['target']['id'] == target_id }
   $user_mutes << mute
   send_mutes_updated_ws('notification.mutes_updated')
   { mute: mute, own_user: own_user, duration: '7.11ms' }.to_s
@@ -47,6 +51,8 @@ def mute_channel(channel_cids:)
   timestamp = unique_date
   channel_cids.each do |cid|
     channel = find_channel_by_id(cid.split(':').last)
+    # The backend upserts a repeated mute instead of duplicating it.
+    $channel_mutes.delete_if { |existing| existing['channel']['cid'] == cid }
     $channel_mutes << {
       'user' => current_user,
       'channel' => channel['channel'],
