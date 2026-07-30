@@ -7,6 +7,8 @@ end
 
 def create_reminder(message_id:, remind_at:)
   message = find_message_by_id(message_id)
+  halt(400, { message: "message #{message_id} not found" }.to_s) unless message
+
   timestamp = unique_date
   reminder = {
     'channel_cid' => message['cid'],
@@ -24,6 +26,8 @@ end
 
 def update_reminder(message_id:, remind_at:)
   reminder = find_reminder(message_id)
+  halt(400, { message: "reminder for message #{message_id} not found" }.to_s) unless reminder
+
   reminder['remind_at'] = remind_at
   reminder['updated_at'] = unique_date
   reminder['message']['reminder'] = reminder_info(reminder)
