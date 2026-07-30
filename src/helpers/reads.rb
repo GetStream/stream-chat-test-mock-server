@@ -58,7 +58,9 @@ def mark_channel_unread(channel:, user:, message_id:)
   first_unread_message = messages[message_index]
   read = find_read_state(channel: channel, user_id: user['id']) ||
          seed_read_state(channel: channel, user: user, last_read: unique_date)
-  read['last_read'] = update_date(timestamp: first_unread_message['created_at'], minus_seconds: 1)
+  # One tick of the date format's precision: a larger rewind could place last_read
+  # before messages that precede the target when messages are microseconds apart.
+  read['last_read'] = update_date(timestamp: first_unread_message['created_at'], minus_seconds: 0.000001)
   read['unread_messages'] = messages.count - message_index
   read['last_read_message_id'] = message_index.positive? ? messages[message_index - 1]['id'] : nil
   read
