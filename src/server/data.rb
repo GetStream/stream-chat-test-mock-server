@@ -10,6 +10,8 @@ def unique_date
 end
 
 def update_date(timestamp:, plus_seconds: nil, minus_seconds: nil)
+  # Time.parse instead of Time.strptime(timestamp, time_format): template fixtures
+  # still carry second-precision or nanosecond dates that do not match time_format.
   time = Time.parse(timestamp)
   if plus_seconds
     (time + plus_seconds).utc.strftime(time_format)

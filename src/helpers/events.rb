@@ -39,7 +39,7 @@ SYNC_REPLAYED_EVENT_TYPES = %w[
 def broadcast_event(event)
   if event.kind_of?(Hash) && event['cid'] && SYNC_REPLAYED_EVENT_TYPES.include?(event['type'])
     snapshot = JSON.parse(event.to_s)
-    snapshot['created_at'] = Time.now.utc.strftime('%Y-%m-%dT%H:%M:%S.%6NZ')
+    snapshot['created_at'] = unique_date
     $sync_events << snapshot
   end
   $ws&.send(event.to_s)
