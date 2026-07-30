@@ -81,12 +81,18 @@ def find_message_by_id(id)
 end
 
 # The search payload carries the term either as a plain string or wrapped in an
-# operator condition like {"$autocomplete": "term"} or {"$q": "term"}.
+# operator condition like {"$autocomplete": "term"} or {"$q": "term"}. The channel
+# scope arrives in filter_conditions as a bare cid or an operator hash like
+# {"$in": ["messaging:<id>"]}; when present, only those channels are searched.
 def search_messages(payload)
   condition = payload.dig('message_filter_conditions', 'text')
   term = condition.kind_of?(Hash) ? condition.values.first.to_s : condition.to_s
+  cid_condition = payload.dig('filter_conditions', 'cid')
+  cids = cid_condition.kind_of?(Hash) ? Array(cid_condition.values.first) : Array(cid_condition)
   $message_list.select do |msg|
-    msg['type'] != 'deleted' && msg['text'].to_s.downcase.include?(term.downcase)
+    msg['type'] != 'deleted' &&
+      (cids.empty? || cids.include?(msg['cid'])) &&
+      msg['text'].to_s.downcase.include?(term.downcase)
   end
 end
 
