@@ -26,6 +26,8 @@ end
 # `delay`: Int - Pass this param if you need the ws to be delayed by the amount of seconds
 
 post '/participant/message' do
+  halt(400, { message: 'no current channel' }.to_s) unless find_channel_by_id($current_channel_id)
+
   timestamp = unique_date
   attachments = mock_attachments(params)
   response = Mocks.message_ws
@@ -90,9 +92,14 @@ post '/participant/message' do
                   MessageEventType.new
                 end
 
+  if params[:action].nil? && message_type == :regular
+    track_message_read_states(channel_id: message['channel_id'], message: message)
+  end
+
   response['channel_id'] = message['channel_id']
   response['cid'] = "messaging:#{message['channel_id']}"
   response['type'] = action_type
+  response['created_at'] = timestamp
   response['message'] = message
   response['user'] = Participant.user
   response['hard_delete'] = true if params[:hard_delete] == 'true' && params[:action] == 'delete'
@@ -100,10 +107,10 @@ post '/participant/message' do
   if params[:delay].to_i.positive?
     Thread.new do
       sleep(params[:delay].to_i)
-      $ws&.send(response.to_s)
+      broadcast_event(response)
     end
   else
-    $ws&.send(response.to_s)
+    broadcast_event(response)
   end
   sync_channels
 end
@@ -111,13 +118,19 @@ end
 ###### PUSH NOTIFICATIONS ######
 
 ### Parameters
+# `platform`: String - `ios` (default) or `android`
 # `title`: String - Push notification title
 # `body`: String - Push notification body
 # `rest`: String - Rest of the payload (empty, null, incorrect_type, incorrect_data, invalid)
-# `bundle_id`: String - Test app bundle id
-# `udid`: String - Device udid
+# `bundle_id`: String - Test app bundle id (iOS)
+# `udid`: String - Device udid (iOS)
+# `component`: String - Broadcast receiver component of the test app (Android)
 
 post '/participant/push' do
+  params[:platform] == 'android' ? android_push : ios_push
+end
+
+def ios_push
   badge = 1
   mutable_content = 1
   category = 'stream.chat'
@@ -192,7 +205,51 @@ post '/participant/push' do
 
   push_data_file = 'push_payload.json'
   File.write(push_data_file, payload)
-  puts `xcrun simctl push #{params['udid']} #{params['bundle_id']} #{push_data_file}`
+  puts(`xcrun simctl push #{params['udid']} #{params['bundle_id']} #{push_data_file}`)
+end
+
+# Delivers the push payload to the Android test app with an adb broadcast. The receiver
+# feeds it into the client SDK pipeline, whose validator requires `version`, `sender`,
+# a supported `type`, `message_id`, and `cid` (or the `channel_id` and `channel_type` pair).
+# The `rest` degradations mirror the iOS semantics against that contract: optional keys
+# degrade without dropping the push, `invalid_*` break a required key so the push is dropped.
+def android_push
+  data = {
+    version: 'v2',
+    sender: 'stream.chat',
+    type: MessageEventType.new,
+    message_id: last_message_id,
+    cid: "messaging:#{$current_channel_id}",
+    channel_id: $current_channel_id,
+    channel_type: 'messaging',
+    title: params[:title],
+    body: params[:body]
+  }
+
+  case params[:rest]
+  when 'null'
+    data.delete(:title)
+    data.delete(:body)
+  when 'empty'
+    data[:title] = ''
+    data[:body] = ''
+  when 'incorrect_type'
+    data[:title] = '42'
+    data[:badge] = 'test'
+    data[:'mutable-content'] = 'test'
+  when 'incorrect_data'
+    data[:badge] = '-1'
+    data[:'mutable-content'] = '-1'
+  when 'invalid_version'
+    data[:version] = '42'
+  when 'invalid_sender'
+    data[:sender] = ''
+  when 'invalid_type'
+    data[:type] = 'bogus'
+  end
+
+  extras = data.compact.map { |key, value| "--es #{key} '#{value}'" }.join(' ')
+  puts(`adb shell am broadcast -n #{params[:component]} #{extras}`)
 end
 
 ###### REACTIONS ######
@@ -252,17 +309,10 @@ post '/participant/typing/stop' do
 end
 
 post '/participant/read' do
-  user_reads = $channel_list['channels'][0]['read'].detect { |u| u['user']['id'] == Participant.user['id'] }
-  if user_reads
-    user_reads['last_read'] = unique_date
-    user_reads['unread_messages'] = 0
-  else
-    $channel_list['channels'][0]['read'] << {
-      'user' => Participant.user,
-      'last_read' => unique_date,
-      'unread_messages' => 0
-    }
-  end
+  channel = find_channel_by_id($current_channel_id)
+  halt(400, { message: 'no current channel' }.to_s) unless channel
+
+  mark_channel_read(channel: channel, user: Participant.user)
 
   parent_id = nil
   if params[:thread]

@@ -57,13 +57,18 @@ def truncate_channel(channel_id:, request_body:)
   ws_response['created_at'] = truncated_at
   ws_response['user'] = truncated_by
   ws_response['channel'] = response['channel']
-  $ws&.send(ws_response.to_s)
+  broadcast_event(ws_response)
 
   # If message provided in request, create system message
   if json['message']
     message_id = json['message']['id'] || unique_id
     message_text = json['message']['text'] || 'Channel truncated'
 
+    # Persist the system message (track_message: true) so it survives a channel re-query.
+    # The backend keeps the truncation system message, so a client that re-watches the
+    # channel after `channel.truncated` gets it back. Without persistence the re-query
+    # rebuilds `channel['messages']` from an empty `$message_list` and wipes the message
+    # the client just received over the websocket, which flakes the assertion.
     truncated_message = mock_message(
       Mocks.message['message'],
       message_type: MessageType.system,
@@ -73,7 +78,7 @@ def truncate_channel(channel_id:, request_body:)
       user: truncated_by,
       created_at: truncated_at,
       updated_at: truncated_at,
-      track_message: false
+      track_message: true
     )
 
     response['message'] = truncated_message

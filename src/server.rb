@@ -2,6 +2,7 @@ require 'eventmachine'
 require 'faye/websocket'
 require 'puma'
 require 'json'
+require 'time'
 require 'sinatra'
 require 'securerandom'
 require_relative 'server/config'
@@ -16,11 +17,20 @@ require_relative 'helpers/messages'
 require_relative 'helpers/members'
 require_relative 'helpers/reactions'
 require_relative 'helpers/channels'
+require_relative 'helpers/reads'
+require_relative 'helpers/moderation'
+require_relative 'helpers/reminders'
+require_relative 'helpers/threads'
 require_relative 'robots/chat'
 require_relative 'robots/participant'
 
 $ws = nil
 $message_list = []
+$sync_events = []
+$reminders = []
+$user_mutes = []
+$channel_mutes = []
+$blocked_users = []
 $channel_list = Mocks.channels
 $current_channel_id = Mocks.event_ws['channel_id']
 $health_check = Mocks.health_check.to_s

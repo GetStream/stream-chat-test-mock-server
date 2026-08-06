@@ -24,12 +24,15 @@ def update_members(channel_id:, request_body:)
     ws_response['member'] = member
     ws_response['user'] = member['user']
     ws_response['created_at'] = unique_date
-    $ws&.send(ws_response.to_s)
+    broadcast_event(ws_response)
   end
 
   if remove_members
     member_ids.each do |id|
       channel['members'].delete_if { |m| m['user_id'] == id }
+      # The backend drops a removed member's read state; serving it again on a
+      # later channel query would undo the client's own read pruning.
+      channel['read'].delete_if { |read| read['user']['id'] == id }
     end
     channel['channel']['member_count'] -= member_ids.count
   end
@@ -43,7 +46,7 @@ def update_members(channel_id:, request_body:)
   ws_response['type'] = 'channel.updated'
   ws_response['user'] = current_user
   ws_response['created_at'] = unique_date
-  $ws&.send(ws_response.to_s)
+  broadcast_event(ws_response)
 
   response = Mocks.update_member
   response['members'] = channel['members']
