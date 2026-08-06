@@ -118,6 +118,11 @@ post '/channels/messaging/:channel_id/truncate' do
   truncate_channel(channel_id: params[:channel_id], request_body: request.body.read)
 end
 
+# Truncate channel (v2)
+post '/api/v2/chat/channels/messaging/:channel_id/truncate' do
+  truncate_channel(channel_id: params[:channel_id], request_body: request.body.read)
+end
+
 # Add/remove channel member
 post '/channels/messaging/:channel_id' do
   update_members(channel_id: params[:channel_id], request_body: request.body.read)
