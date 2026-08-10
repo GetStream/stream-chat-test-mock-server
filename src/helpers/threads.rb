@@ -1,8 +1,6 @@
 # Builds the thread objects served by the threads query from the tracked messages:
 # every channel message with replies is a thread.
 
-THREAD_PARTICIPANT_APP_PK = 102_398
-
 def query_threads(reply_limit:)
   parents = $message_list.select do |msg|
     msg['parent_id'].nil? && $message_list.any? { |reply| reply['parent_id'] == msg['id'] }
@@ -36,11 +34,10 @@ def build_thread(parent:, reply_limit:)
 end
 
 # Mirrors the fields the real backend sends for a thread participant. Clients generated from the
-# OpenAPI spec require app_pk, channel_cid, created_at, last_read_at and custom.
+# OpenAPI spec require channel_cid, created_at, last_read_at and custom.
 def build_thread_participant(parent:, user:, replies:)
   user_replies = replies.select { |reply| reply['user']['id'] == user['id'] }
   {
-    'app_pk' => THREAD_PARTICIPANT_APP_PK,
     'channel_cid' => parent['cid'],
     'thread_id' => parent['id'],
     'user_id' => user['id'],
