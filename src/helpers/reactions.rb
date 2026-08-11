@@ -21,6 +21,18 @@ def send_reaction_ws(response:, event_type:)
   broadcast_event(ws_response)
 end
 
+def query_reactions(message_id:, request_body:)
+  json = request_body.empty? ? {} : JSON.parse(request_body)
+  filter_type = json.dig('filter', 'type')
+  filter_type = filter_type.values.first if filter_type.kind_of?(Hash)
+  message = find_message_by_id(message_id)
+  halt(400, { message: "message #{message_id} not found" }.to_s) unless message
+
+  reactions = message['latest_reactions'] || []
+  reactions = reactions.select { |reaction| reaction['type'] == filter_type } if filter_type
+  { reactions: reactions, duration: '7.11ms' }.to_s
+end
+
 def create_reaction(type:, message_id:, user: current_user, delete: nil, delay: nil)
   timestamp = unique_date
   message = find_message_by_id(message_id)

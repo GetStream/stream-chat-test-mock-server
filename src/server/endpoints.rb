@@ -238,16 +238,12 @@ end
 
 # Query message reactions
 post '/messages/:message_id/reactions' do
-  body = request.body.read
-  json = body.empty? ? {} : JSON.parse(body)
-  filter_type = json.dig('filter', 'type')
-  filter_type = filter_type.values.first if filter_type.kind_of?(Hash)
-  message = find_message_by_id(params[:message_id])
-  halt(400, { message: "message #{params[:message_id]} not found" }.to_s) unless message
+  query_reactions(message_id: params[:message_id], request_body: request.body.read)
+end
 
-  reactions = message['latest_reactions'] || []
-  reactions = reactions.select { |reaction| reaction['type'] == filter_type } if filter_type
-  { reactions: reactions, duration: '7.11ms' }.to_s
+# Query message reactions (v2)
+post '/api/v2/chat/messages/:message_id/reactions' do
+  query_reactions(message_id: params[:message_id], request_body: request.body.read)
 end
 
 # Flag message or user
