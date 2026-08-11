@@ -29,6 +29,22 @@ def build_thread(parent:, reply_limit:)
     'participant_count' => participants.count,
     'reply_count' => replies.count,
     'latest_replies' => replies.last(reply_limit),
-    'thread_participants' => participants.map { |user| { 'user_id' => user['id'], 'user' => user } }
+    'thread_participants' => participants.map { |user| build_thread_participant(parent: parent, user: user, replies: replies) }
+  }
+end
+
+# Mirrors the fields the real backend sends for a thread participant. Clients generated from the
+# OpenAPI spec require channel_cid, created_at, last_read_at and custom.
+def build_thread_participant(parent:, user:, replies:)
+  user_replies = replies.select { |reply| reply['user']['id'] == user['id'] }
+  {
+    'channel_cid' => parent['cid'],
+    'thread_id' => parent['id'],
+    'user_id' => user['id'],
+    'user' => user,
+    'created_at' => user_replies.first['created_at'],
+    'last_read_at' => user_replies.last['created_at'],
+    'last_thread_message_at' => user_replies.last['created_at'],
+    'custom' => {}
   }
 end
