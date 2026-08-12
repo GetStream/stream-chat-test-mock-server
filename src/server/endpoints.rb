@@ -139,26 +139,22 @@ end
 
 # Send image
 post '/channels/messaging/:channel_id/image' do
-  file = test_asset('image')
-  { file: file }.to_s
+  upload_response('image').to_json
 end
 
 # Send file
 post '/channels/messaging/:channel_id/file' do
-  file = request.content_type.include?('video') ? test_asset('video') : test_asset('file')
-  { file: file }.to_s
+  upload_response(request.content_type.include?('video') ? 'video' : 'file').to_json
 end
 
 # Send image (v2)
 post '/api/v2/chat/channels/messaging/:channel_id/image' do
-  file = test_asset('image')
-  { file: file }.to_s
+  upload_response('image').to_json
 end
 
 # Send file (v2)
 post '/api/v2/chat/channels/messaging/:channel_id/file' do
-  file = request.content_type.include?('video') ? test_asset('video') : test_asset('file')
-  { file: file }.to_s
+  upload_response(request.content_type.include?('video') ? 'video' : 'file').to_json
 end
 
 # Send reaction
