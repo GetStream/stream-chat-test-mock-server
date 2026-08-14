@@ -34,3 +34,10 @@ def test_asset(type)
   }
   assets[type]
 end
+
+# The real backend answers uploads with the asset URL, the request duration and,
+# only when a thumbnail was generated, a `thumb_url`. Clients parse `duration` as
+# non-null, so it has to be there on every upload response.
+def upload_response(type)
+  { file: test_asset(type), duration: '49.41ms' }
+end
