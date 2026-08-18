@@ -212,6 +212,11 @@ post '/channels/messaging/:channel_id' do
   update_members(channel_id: params[:channel_id], request_body: request.body.read)
 end
 
+# Add/remove channel member (v2)
+post '/api/v2/chat/channels/messaging/:channel_id' do
+  update_members(channel_id: params[:channel_id], request_body: request.body.read)
+end
+
 # Delete channel
 delete '/channels/messaging/:channel_id' do
   channel = find_channel_by_id(params[:channel_id])
