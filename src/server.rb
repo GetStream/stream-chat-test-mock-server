@@ -19,6 +19,7 @@ require_relative 'helpers/reactions'
 require_relative 'helpers/channels'
 require_relative 'helpers/reads'
 require_relative 'helpers/moderation'
+require_relative 'helpers/polls'
 require_relative 'helpers/reminders'
 require_relative 'helpers/threads'
 require_relative 'robots/chat'
@@ -28,6 +29,7 @@ $ws = nil
 $message_list = []
 $sync_events = []
 $reminders = []
+$polls = []
 $user_mutes = []
 $channel_mutes = []
 $blocked_users = []

@@ -346,6 +346,89 @@ delete '/messages/:message_id/reminders' do
   delete_reminder(message_id: params[:message_id])
 end
 
+# iOS sends every poll path under /api/v2 while Android and Flutter send it unprefixed,
+# so each poll route is registered under both spellings, like the v2 upload routes above.
+['/polls', '/api/v2/polls'].each do |polls|
+  # Create poll
+  post polls do
+    create_poll(request_body: request.body.read)
+  end
+
+  # Update poll
+  put polls do
+    update_poll(request_body: request.body.read)
+  end
+
+  # Query polls
+  post "#{polls}/query" do
+    { polls: $polls, duration: '7.11ms' }.to_s
+  end
+
+  # Get poll
+  get "#{polls}/:poll_id" do
+    poll = find_poll(params[:poll_id])
+    halt(400, { message: "poll #{params[:poll_id]} not found" }.to_s) unless poll
+
+    { poll: poll, duration: '7.11ms' }.to_s
+  end
+
+  # Partially update poll
+  patch "#{polls}/:poll_id" do
+    partial_update_poll(poll_id: params[:poll_id], request_body: request.body.read)
+  end
+
+  # Delete poll
+  delete "#{polls}/:poll_id" do
+    delete_poll(poll_id: params[:poll_id])
+  end
+
+  # Create poll option
+  post "#{polls}/:poll_id/options" do
+    create_poll_option(poll_id: params[:poll_id], request_body: request.body.read)
+  end
+
+  # Update poll option
+  put "#{polls}/:poll_id/options" do
+    update_poll_option(poll_id: params[:poll_id], request_body: request.body.read)
+  end
+
+  # Get poll option
+  get "#{polls}/:poll_id/options/:option_id" do
+    get_poll_option(poll_id: params[:poll_id], option_id: params[:option_id])
+  end
+
+  # Delete poll option
+  delete "#{polls}/:poll_id/options/:option_id" do
+    delete_poll_option(poll_id: params[:poll_id], option_id: params[:option_id])
+  end
+
+  # Query poll votes
+  post "#{polls}/:poll_id/votes" do
+    query_poll_votes(poll_id: params[:poll_id], request_body: request.body.read)
+  end
+end
+
+['/messages', '/api/v2/chat/messages'].each do |messages|
+  # Cast poll vote or answer
+  post "#{messages}/:message_id/polls/:poll_id/vote" do
+    json = JSON.parse(request.body.read)
+    cast_poll_vote(
+      message_id: params[:message_id],
+      poll_id: params[:poll_id],
+      vote_data: json['vote'] || {}
+    )
+  end
+
+  # Remove poll vote
+  delete "#{messages}/:message_id/polls/:poll_id/vote/:vote_id" do
+    remove_poll_vote(
+      message_id: params[:message_id],
+      poll_id: params[:poll_id],
+      vote_id: params[:vote_id]
+    )
+  end
+end
+
 # Get link preview details
 get '/og' do
   create_link_preview(params[:url])
