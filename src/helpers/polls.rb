@@ -105,6 +105,15 @@ def update_poll(request_body:)
   { poll: poll, duration: '7.11ms' }.to_s
 end
 
+# The keys every client parses as required on a poll payload. Like the real backend,
+# `unset` only removes keys outside this set (custom data): nil-ing or dropping a core
+# key would poison the poll embedded on its message and break every later channel query.
+POLL_CORE_KEYS = %w[
+  id name description options allow_answers allow_user_suggested_options enforce_unique_vote
+  voting_visibility is_closed created_by created_by_id created_at updated_at vote_count
+  answers_count own_votes latest_answers latest_votes_by_option vote_counts_by_option
+].freeze
+
 def partial_update_poll(poll_id:, request_body:)
   json = JSON.parse(request_body)
   poll = find_poll(poll_id)
@@ -112,7 +121,7 @@ def partial_update_poll(poll_id:, request_body:)
 
   closing = json.dig('set', 'is_closed') && !poll['is_closed']
   (json['set'] || {}).each { |key, value| poll[key] = value }
-  (json['unset'] || []).each { |key| poll[key] = nil }
+  (json['unset'] || []).each { |key| poll.delete(key) unless POLL_CORE_KEYS.include?(key) }
   poll['updated_at'] = unique_date
   broadcast_poll_event(type: closing ? PollEventType.closed : PollEventType.updated, poll: poll)
   { poll: poll, duration: '7.11ms' }.to_s
@@ -151,6 +160,16 @@ def update_poll_option(poll_id:, request_body:)
   option['text'] = json['text'].to_s
   poll['updated_at'] = unique_date
   broadcast_poll_event(type: PollEventType.updated, poll: poll)
+  { poll_option: option, duration: '7.11ms' }.to_s
+end
+
+def get_poll_option(poll_id:, option_id:)
+  poll = find_poll(poll_id)
+  halt(400, { message: "poll #{poll_id} not found" }.to_s) unless poll
+
+  option = poll['options'].detect { |opt| opt['id'] == option_id }
+  halt(400, { message: "option #{option_id} not found" }.to_s) unless option
+
   { poll_option: option, duration: '7.11ms' }.to_s
 end
 
