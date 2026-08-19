@@ -271,6 +271,37 @@ post '/participant/reaction' do
   ''
 end
 
+###### POLLS ######
+
+### Parameters
+# `option`: String - The text of the poll option to vote for
+# `answer`: String - Pass this param to add an answer (comment) instead of an option vote
+
+post '/participant/poll_vote' do
+  message = $message_list.reverse.detect { |msg| msg['poll'] }
+  halt(400, { message: 'no message with a poll' }.to_s) unless message
+
+  poll = message['poll']
+  vote_data =
+    if params[:answer]
+      { 'answer_text' => params[:answer] }
+    else
+      option = poll['options'].detect { |opt| opt['text'] == params[:option] }
+      halt(400, { message: "option #{params[:option]} not found" }.to_s) unless option
+
+      { 'option_id' => option['id'] }
+    end
+
+  cast_poll_vote(
+    message_id: message['id'],
+    poll_id: poll['id'],
+    vote_data: vote_data,
+    user: Participant.user
+  )
+  sync_channels
+  ''
+end
+
 ###### EVENTS ######
 
 ### Parameters

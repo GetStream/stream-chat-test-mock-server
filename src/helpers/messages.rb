@@ -216,6 +216,12 @@ def create_message(request_body:, channel_id: nil)
     track_message: message_type != :error
   )
 
+  # The poll message arrives with the poll id flattened onto the message root
+  # (`poll_id`), never as a nested poll object: the client creates the poll with
+  # POST /polls first and then sends a regular message referencing it.
+  poll = message['poll_id'] ? find_poll(message['poll_id']) : nil
+  mocked_message['poll'] = poll if poll
+
   response['message'] = mocked_message
   track_message_read_states(channel_id: channel_id, message: mocked_message) if message_type == :regular
   send_message_ws(response: response, event_type: MessageEventType.new) if broadcast_new_message?(message_type)
