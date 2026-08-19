@@ -4,10 +4,18 @@
 # need since nothing queries flags.
 
 def own_user
-  user = current_user.dup
-  user['mutes'] = $user_mutes
-  user['channel_mutes'] = $channel_mutes
-  user
+  current_user.dup.merge(live_own_user_state)
+end
+
+# The client applies every own-user push as a full update, so any payload that
+# carries `me` (the health check included) has to embed the live moderation
+# state or it wipes what a mute or block endpoint just changed.
+def live_own_user_state
+  {
+    'mutes' => $user_mutes,
+    'channel_mutes' => $channel_mutes,
+    'blocked_user_ids' => $blocked_users.map { |b| b['blocked_user_id'] }
+  }
 end
 
 def find_user_by_id(user_id)
@@ -94,6 +102,7 @@ def block_user(blocked_user_id:)
     'created_at' => timestamp
   }
   $blocked_users << block
+  hide_direct_message_channels(blocked_user_id)
   {
     blocked_by_user_id: current_user['id'],
     blocked_user_id: blocked_user_id,
@@ -104,5 +113,51 @@ end
 
 def unblock_user(blocked_user_id:)
   $blocked_users.delete_if { |b| b['blocked_user_id'] == blocked_user_id }
+  show_direct_message_channels(blocked_user_id)
   { duration: '7.11ms' }.to_s
+end
+
+# The backend hides every channel whose exact members are the blocking and the
+# blocked user, and unhides those same channels on unblock. The block remembers
+# which channels it hid so an unblock does not surface a channel the user had
+# hidden independently.
+def hide_direct_message_channels(blocked_user_id)
+  hidden_cids = []
+  channels_with_exact_members(blocked_user_id).each do |channel|
+    next if channel['channel']['hidden']
+
+    channel['channel']['hidden'] = true
+    hidden_cids << channel['channel']['cid']
+    send_channel_visibility_ws(channel: channel, type: 'channel.hidden')
+  end
+  $block_hidden_channels[blocked_user_id] = hidden_cids
+end
+
+def show_direct_message_channels(blocked_user_id)
+  ($block_hidden_channels.delete(blocked_user_id) || []).each do |cid|
+    channel = find_channel_by_id(cid.split(':').last)
+    next unless channel && channel['channel']['hidden']
+
+    channel['channel']['hidden'] = false
+    send_channel_visibility_ws(channel: channel, type: 'channel.visible')
+  end
+end
+
+def channels_with_exact_members(user_id)
+  expected_ids = [current_user['id'], user_id].sort
+  $channel_list['channels'].select do |channel|
+    (channel['members'] || []).map { |m| m['user_id'] }.sort == expected_ids
+  end
+end
+
+def send_channel_visibility_ws(channel:, type:)
+  ws_response = Mocks.event_ws
+  ws_response['type'] = type
+  ws_response['cid'] = channel['channel']['cid']
+  ws_response['channel_id'] = channel['channel']['id']
+  ws_response['created_at'] = unique_date
+  ws_response['user'] = current_user
+  ws_response['channel'] = channel['channel']
+  ws_response['clear_history'] = false if type == 'channel.hidden'
+  broadcast_event(ws_response)
 end

@@ -7,11 +7,47 @@ def sync_channels
   $channel_list.to_s
 end
 
+# The backend excludes hidden channels from a query by default and matches
+# `$autocomplete` search conditions on `name` and `member.user.name`. The tests
+# only need enough of that to prove a channel is matched by its name, so every
+# other condition in the filter keeps being ignored.
+def queried_channels(filter)
+  channels = ($channel_list['channels'] || []).reject { |c| c['channel']['hidden'] }
+  name_terms = autocomplete_terms(filter, 'name')
+  member_terms = autocomplete_terms(filter, 'member.user.name')
+  return channels if name_terms.empty? && member_terms.empty?
+
+  channels.select do |channel|
+    name = channel['channel']['name'].to_s.downcase
+    member_names = (channel['members'] || []).map { |m| m.dig('user', 'name').to_s.downcase }
+    name_terms.any? { |term| name.include?(term.downcase) } ||
+      member_terms.any? { |term| member_names.any? { |n| n.include?(term.downcase) } }
+  end
+end
+
+def autocomplete_terms(node, field)
+  case node
+  when Array
+    node.flat_map { |item| autocomplete_terms(item, field) }
+  when Hash
+    node.flat_map do |key, value|
+      if key == field && value.kind_of?(Hash) && value['$autocomplete']
+        [value['$autocomplete']]
+      else
+        autocomplete_terms(value, field)
+      end
+    end
+  else
+    []
+  end
+end
+
 def paginate_channel_list(payload: nil)
   payload = JSON.parse(payload) if payload
-  return $channel_list.to_s if payload.nil? || payload['limit'].nil?
-
   limited_channel_list = $channel_list.dup
+  limited_channel_list['channels'] = queried_channels(payload && payload['filter_conditions'])
+  return limited_channel_list.to_s if payload.nil? || payload['limit'].nil?
+
   channels = limited_channel_list['channels'] || []
   channel_count = channels.count - 1
   limit = payload['limit'].to_i
