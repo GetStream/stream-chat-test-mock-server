@@ -101,6 +101,11 @@ post '/channels/messaging/:channel_id/message' do
   create_message(request_body: request.body.read, channel_id: params[:channel_id])
 end
 
+# Send message (v2)
+post '/api/v2/chat/channels/messaging/:channel_id/message' do
+  create_message(request_body: request.body.read, channel_id: params[:channel_id])
+end
+
 # Get message
 get '/messages/:message_id' do
   message = find_message_by_id(params[:message_id])
@@ -109,6 +114,11 @@ end
 
 # Update message
 post '/messages/:message_id' do
+  update_message(request_body: request.body.read, params: params)
+end
+
+# Update message (v2)
+post '/api/v2/chat/messages/:message_id' do
   update_message(request_body: request.body.read, params: params)
 end
 
@@ -122,8 +132,18 @@ put '/messages/:message_id' do
   update_message(request_body: request.body.read, params: params)
 end
 
+# Edit or pin message (v2)
+put '/api/v2/chat/messages/:message_id' do
+  update_message(request_body: request.body.read, params: params)
+end
+
 # Create draft message
 post '/channels/messaging/:channel_id/draft' do
+  create_draft(channel_id: params[:channel_id], request_body: request.body.read)
+end
+
+# Create draft message (v2)
+post '/api/v2/chat/channels/messaging/:channel_id/draft' do
   create_draft(channel_id: params[:channel_id], request_body: request.body.read)
 end
 
@@ -162,8 +182,18 @@ post '/messages/:message_id/reaction' do
   create_reaction(type: JSON.parse(request.body.read)['reaction']['type'], message_id: params[:message_id])
 end
 
+# Send reaction (v2)
+post '/api/v2/chat/messages/:message_id/reaction' do
+  create_reaction(type: JSON.parse(request.body.read)['reaction']['type'], message_id: params[:message_id])
+end
+
 # Delete reaction
 delete '/messages/:message_id/reaction/:reaction_type' do
+  create_reaction(type: params[:reaction_type], message_id: params[:message_id], delete: true)
+end
+
+# Delete reaction (v2)
+delete '/api/v2/chat/messages/:message_id/reaction/:reaction_type' do
   create_reaction(type: params[:reaction_type], message_id: params[:message_id], delete: true)
 end
 
@@ -179,6 +209,11 @@ end
 
 # Add/remove channel member
 post '/channels/messaging/:channel_id' do
+  update_members(channel_id: params[:channel_id], request_body: request.body.read)
+end
+
+# Add/remove channel member (v2)
+post '/api/v2/chat/channels/messaging/:channel_id' do
   update_members(channel_id: params[:channel_id], request_body: request.body.read)
 end
 
