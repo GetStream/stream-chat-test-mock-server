@@ -64,6 +64,15 @@ class AttachmentActionType
   end
 end
 
+# The real backend broadcasts message.new only for regular, reply and system
+# messages. An ephemeral message (the giphy preview) is visible to its sender
+# only and gets no event: it reaches the sender in the send response instead.
+# Broadcasting one lets the event arrive after the sender cancelled the preview
+# and bring the cancelled message back.
+def broadcast_new_message?(message_type)
+  [MessageType.regular, MessageType.reply, MessageType.system].include?(message_type)
+end
+
 def send_message_ws(response:, event_type:)
   ws_response = Mocks.message_ws
   ws_response['message_id'] = response['message']['id']
@@ -209,7 +218,7 @@ def create_message(request_body:, channel_id: nil)
 
   response['message'] = mocked_message
   track_message_read_states(channel_id: channel_id, message: mocked_message) if message_type == :regular
-  send_message_ws(response: response, event_type: MessageEventType.new) if message_type != :error
+  send_message_ws(response: response, event_type: MessageEventType.new) if broadcast_new_message?(message_type)
   response.to_s
 end
 
