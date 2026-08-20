@@ -130,7 +130,9 @@ def hide_direct_message_channels(blocked_user_id)
     hidden_cids << channel['channel']['cid']
     send_channel_visibility_ws(channel: channel, type: 'channel.hidden')
   end
-  $block_hidden_channels[blocked_user_id] = hidden_cids
+  # A repeated block finds the channels already hidden and collects nothing, so
+  # union with what earlier blocks recorded instead of overwriting it.
+  $block_hidden_channels[blocked_user_id] = ($block_hidden_channels[blocked_user_id] || []) | hidden_cids
 end
 
 def show_direct_message_channels(blocked_user_id)

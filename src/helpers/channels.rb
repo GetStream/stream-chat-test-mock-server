@@ -42,11 +42,18 @@ def autocomplete_terms(node, field)
   end
 end
 
+def search_query?(filter)
+  autocomplete_terms(filter, 'name').any? || autocomplete_terms(filter, 'member.user.name').any?
+end
+
 def paginate_channel_list(payload: nil)
   payload = JSON.parse(payload) if payload
+  filter = payload && payload['filter_conditions']
   limited_channel_list = $channel_list.dup
-  limited_channel_list['channels'] = queried_channels(payload && payload['filter_conditions'])
-  return limited_channel_list.to_s if payload.nil? || payload['limit'].nil?
+  limited_channel_list['channels'] = queried_channels(filter)
+  # A search query is never sliced and leaves the pagination flag alone, so
+  # channel search cannot disturb the paging state of the unfiltered queries.
+  return limited_channel_list.to_s if payload.nil? || payload['limit'].nil? || search_query?(filter)
 
   channels = limited_channel_list['channels'] || []
   channel_count = channels.count - 1
