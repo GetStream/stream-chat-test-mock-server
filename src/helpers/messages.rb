@@ -64,6 +64,15 @@ class AttachmentActionType
   end
 end
 
+# The real backend broadcasts message.new only for regular, reply and system
+# messages. An ephemeral message (the giphy preview) is visible to its sender
+# only and gets no event: it reaches the sender in the send response instead.
+# Broadcasting one lets the event arrive after the sender cancelled the preview
+# and bring the cancelled message back.
+def broadcast_new_message?(message_type)
+  [MessageType.regular, MessageType.reply, MessageType.system].include?(message_type)
+end
+
 def send_message_ws(response:, event_type:)
   ws_response = Mocks.message_ws
   ws_response['message_id'] = response['message']['id']
@@ -73,11 +82,41 @@ def send_message_ws(response:, event_type:)
   ws_response['channel_id'] = response['message']['cid'].split(':').last
   ws_response['created_at'] = response['message']['created_at']
   ws_response['type'] = event_type
-  $ws&.send(ws_response.to_s)
+  broadcast_event(ws_response)
 end
 
 def find_message_by_id(id)
   $message_list.detect { |msg| msg['id'] == id }
+end
+
+# The search payload carries the term either as a plain string or wrapped in an
+# operator condition like {"$autocomplete": "term"} or {"$q": "term"}. The channel
+# scope arrives in filter_conditions as a bare cid or an operator hash like
+# {"$in": ["messaging:<id>"]}; when present, only those channels are searched.
+def search_messages(payload)
+  condition = payload.dig('message_filter_conditions', 'text')
+  term = condition.kind_of?(Hash) ? condition.values.first.to_s : condition.to_s
+  cid_condition = payload.dig('filter_conditions', 'cid')
+  cids = cid_condition.kind_of?(Hash) ? Array(cid_condition.values.first) : Array(cid_condition)
+  $message_list.select do |msg|
+    msg['type'] != 'deleted' &&
+      (cids.empty? || cids.include?(msg['cid'])) &&
+      msg['text'].to_s.downcase.include?(term.downcase)
+  end
+end
+
+# Mirrors the backend response for a message sent with an id that already exists:
+# HTTP 400 with the input error code 4. Clients rely on the code and the
+# "already exists" text to recognize that the message was in fact delivered.
+def duplicate_message_error(message_id)
+  {
+    code: 4,
+    message: "a message with ID #{message_id} already exists",
+    StatusCode: 400,
+    duration: '0.10ms',
+    more_info: 'https://getstream.io/chat/docs/api_errors_response',
+    details: []
+  }.to_json
 end
 
 def update_message(request_body:, params:, delete: false)
@@ -94,7 +133,7 @@ def update_message(request_body:, params:, delete: false)
     message['text'] = json['set']['text']
     message['html'] = json['set']['text'].to_html
     message['message_text_updated_at'] = timestamp
-  elsif json['set'] && json['set']['pinned']
+  elsif json['set'] && json['set'].key?('pinned')
     message['pinned'] = json['set']['pinned']
     message['pinned_by'] = json['set']['pinned'] ? current_user : nil
     message['pinned_at'] = json['set']['pinned'] ? timestamp : nil
@@ -125,6 +164,13 @@ def create_message(request_body:, channel_id: nil)
 
   json = JSON.parse(request_body)
   message = json['message']
+
+  # The real backend enforces message id uniqueness and rejects a duplicate send
+  # with a 400 input error (code 4). Mirror it so that a client retrying a message
+  # whose response was lost gets the same behavior as in production, and so that
+  # channel query responses can never contain the same message id twice.
+  halt(400, duplicate_message_error(message['id'])) if message['id'] && find_message_by_id(message['id'])
+
   parent_id = message['parent_id']
   quoted_message_id = message['quoted_message_id']
   channel_reply = message['show_in_channel']
@@ -170,8 +216,15 @@ def create_message(request_body:, channel_id: nil)
     track_message: message_type != :error
   )
 
+  # The poll message arrives with the poll id flattened onto the message root
+  # (`poll_id`), never as a nested poll object: the client creates the poll with
+  # POST /polls first and then sends a regular message referencing it.
+  poll = message['poll_id'] ? find_poll(message['poll_id']) : nil
+  mocked_message['poll'] = poll if poll
+
   response['message'] = mocked_message
-  send_message_ws(response: response, event_type: MessageEventType.new) if message_type != :error
+  track_message_read_states(channel_id: channel_id, message: mocked_message) if message_type == :regular
+  send_message_ws(response: response, event_type: MessageEventType.new) if broadcast_new_message?(message_type)
   response.to_s
 end
 
@@ -243,7 +296,7 @@ def create_draft(channel_id:, request_body:)
     channel['draft'] = draft_copy
   end
 
-  $ws&.send(ws_response.to_s)
+  broadcast_event(ws_response)
   response.to_s
 end
 
@@ -263,7 +316,7 @@ def delete_draft(channel_id:, params:)
   else
     channel['draft'] = nil
   end
-  $ws&.send(ws_response.to_s)
+  broadcast_event(ws_response)
   { duration: '7.11ms' }.to_s
 end
 
@@ -340,7 +393,7 @@ def mock_message(
     additional_response['channel_id'] = channel_id
     additional_response['type'] = 'message.updated'
     additional_response['message'] = parent_message
-    $ws&.send(additional_response.to_s)
+    broadcast_event(additional_response)
   end
 
   if !skip_enrich_url && (text.include?('youtube.com/') || text.include?('unsplash.com/') || text.include?('giphy.com/'))
@@ -418,11 +471,7 @@ def paginate_message_list(params:, request_body:)
   messages = json['messages']
   return channel.to_s unless messages && messages['limit']
 
-  # Match the backend's channel message predicate: (parent_id IS NULL) OR (show_in_channel = true).
-  # Thread replies sent also to the channel must be part of the channel query response.
-  message_list = $message_list.select do |msg|
-    msg['cid'] == "#{params[:channel_type]}:#{params[:channel_id]}" && (msg['parent_id'].nil? || msg['show_in_channel'])
-  end
+  message_list = channel_visible_messages(cid: "#{params[:channel_type]}:#{params[:channel_id]}")
   paginated_messages = mock_message_pagination(
     message_list: message_list,
     limit: messages['limit'].to_i,

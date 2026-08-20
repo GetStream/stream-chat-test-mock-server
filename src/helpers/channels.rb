@@ -7,11 +7,54 @@ def sync_channels
   $channel_list.to_s
 end
 
+# The backend excludes hidden channels from a query by default and matches
+# `$autocomplete` search conditions on `name` and `member.user.name`. The tests
+# only need enough of that to prove a channel is matched by its name, so every
+# other condition in the filter keeps being ignored.
+def queried_channels(filter)
+  channels = ($channel_list['channels'] || []).reject { |c| c['channel']['hidden'] }
+  name_terms = autocomplete_terms(filter, 'name')
+  member_terms = autocomplete_terms(filter, 'member.user.name')
+  return channels if name_terms.empty? && member_terms.empty?
+
+  channels.select do |channel|
+    name = channel['channel']['name'].to_s.downcase
+    member_names = (channel['members'] || []).map { |m| m.dig('user', 'name').to_s.downcase }
+    name_terms.any? { |term| name.include?(term.downcase) } ||
+      member_terms.any? { |term| member_names.any? { |n| n.include?(term.downcase) } }
+  end
+end
+
+def autocomplete_terms(node, field)
+  case node
+  when Array
+    node.flat_map { |item| autocomplete_terms(item, field) }
+  when Hash
+    node.flat_map do |key, value|
+      if key == field && value.kind_of?(Hash) && value['$autocomplete']
+        [value['$autocomplete']]
+      else
+        autocomplete_terms(value, field)
+      end
+    end
+  else
+    []
+  end
+end
+
+def search_query?(filter)
+  autocomplete_terms(filter, 'name').any? || autocomplete_terms(filter, 'member.user.name').any?
+end
+
 def paginate_channel_list(payload: nil)
   payload = JSON.parse(payload) if payload
-  return $channel_list.to_s if payload.nil? || payload['limit'].nil?
-
+  filter = payload && payload['filter_conditions']
   limited_channel_list = $channel_list.dup
+  limited_channel_list['channels'] = queried_channels(filter)
+  # A search query is never sliced and leaves the pagination flag alone, so
+  # channel search cannot disturb the paging state of the unfiltered queries.
+  return limited_channel_list.to_s if payload.nil? || payload['limit'].nil? || search_query?(filter)
+
   channels = limited_channel_list['channels'] || []
   channel_count = channels.count - 1
   limit = payload['limit'].to_i
@@ -57,13 +100,18 @@ def truncate_channel(channel_id:, request_body:)
   ws_response['created_at'] = truncated_at
   ws_response['user'] = truncated_by
   ws_response['channel'] = response['channel']
-  $ws&.send(ws_response.to_s)
+  broadcast_event(ws_response)
 
   # If message provided in request, create system message
   if json['message']
     message_id = json['message']['id'] || unique_id
     message_text = json['message']['text'] || 'Channel truncated'
 
+    # Persist the system message (track_message: true) so it survives a channel re-query.
+    # The backend keeps the truncation system message, so a client that re-watches the
+    # channel after `channel.truncated` gets it back. Without persistence the re-query
+    # rebuilds `channel['messages']` from an empty `$message_list` and wipes the message
+    # the client just received over the websocket, which flakes the assertion.
     truncated_message = mock_message(
       Mocks.message['message'],
       message_type: MessageType.system,
@@ -73,7 +121,7 @@ def truncate_channel(channel_id:, request_body:)
       user: truncated_by,
       created_at: truncated_at,
       updated_at: truncated_at,
-      track_message: false
+      track_message: true
     )
 
     response['message'] = truncated_message

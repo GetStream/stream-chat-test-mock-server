@@ -5,8 +5,15 @@
 # `attachments`: Boolean - Attachments included in every message. Default false
 # `messages_text`: String - Text for all the channel messages
 # `replies_text`: String - Text for all the thread messages
+# `dm`: Boolean - Also seed a direct-message channel between the app user and
+#                 the participant: exactly two members, a member-based cid and
+#                 no name, which is how the backend models 1:1 channels. Default false
+# `channel_names`: String - Comma-separated names for the first channels, in channel
+#                  order ("1", "2", ...). Channels without an entry keep their
+#                  positional name. Lets a test seed a name it can search for
 post '/mock' do
   channels_count = params[:channels].to_i || 1
+  channel_names = (params[:channel_names] || '').split(',')
   messages_count = params[:messages].to_i || 0
   replies_count = params[:replies].to_i || 0
 
@@ -16,11 +23,18 @@ post '/mock' do
   reply_timestamp = 0
 
   $message_list = []
+  $sync_events = []
   $channel_list['channels'] = []
+  $reminders = []
+  $polls = []
+  $user_mutes = []
+  $channel_mutes = []
+  $blocked_users = []
+  $block_hidden_channels = {}
 
   channels_count.downto(1) do |i|
     channel_id = SecureRandom.uuid
-    channel_name = i.to_s
+    channel_name = channel_names[i - 1] || i.to_s
     $current_channel_id = channel_id if i == 1
     channel_timestamp = update_date(timestamp: timestamp, minus_seconds: (i * 600) + 1_000_000)
     channel_template = Mocks.channels['channels'].first
@@ -30,8 +44,32 @@ post '/mock' do
     channel_template['channel']['cid'] = "messaging:#{channel_id}"
     channel_template['channel']['created_at'] = channel_timestamp
     channel_template['channel']['updated_at'] = channel_timestamp
+    # Only the app user starts with a read entry (fully read, so seeded messages
+    # render without an unread separator). The participant gets one on demand via
+    # /participant/read: seeding it here would mark every seeded message as read
+    # by the participant and flip the delivery status checkmarks.
     channel_template['read'] = []
+    seed_read_state(channel: channel_template, user: current_user, last_read: timestamp)
     $channel_list['channels'] << channel_template
+  end
+
+  if params[:dm] == 'true'
+    dm_id = "!members-#{SecureRandom.uuid}"
+    dm_timestamp = update_date(timestamp: timestamp, minus_seconds: ((channels_count + 1) * 600) + 1_000_000)
+    dm_channel = Mocks.channels['channels'].first
+    dm_channel['channel']['id'] = dm_id
+    dm_channel['channel']['cid'] = "messaging:#{dm_id}"
+    dm_channel['channel'].delete('name')
+    dm_channel['channel']['last_message_at'] = dm_timestamp
+    dm_channel['channel']['created_at'] = dm_timestamp
+    dm_channel['channel']['updated_at'] = dm_timestamp
+    dm_channel['members'] = dm_channel['members'].select do |member|
+      [current_user['id'], Participant.user['id']].include?(member['user_id'])
+    end
+    dm_channel['channel']['member_count'] = dm_channel['members'].count
+    dm_channel['read'] = []
+    seed_read_state(channel: dm_channel, user: current_user, last_read: timestamp)
+    $channel_list['channels'] << dm_channel
   end
 
   $channel_list['channels'].each do |channel|
@@ -108,5 +146,16 @@ end
 
 post '/remove_member' do
   update_members(channel_id: $current_channel_id, request_body: { remove_members: [params[:user_id]] }.to_json)
+  ''
+end
+
+# Seeds a server-side reminder on the last message for the app user, so tests can
+# open the reminders screen without creating the reminder through the app.
+### Parameters
+# `remind_at`: Integer - Offset in seconds from now for the scheduled reminder.
+#                        Omit it for a save-for-later reminder without a due date.
+post '/create_reminder' do
+  remind_at = params[:remind_at] ? update_date(timestamp: unique_date, plus_seconds: params[:remind_at].to_i) : nil
+  create_reminder(message_id: last_message_id, remind_at: remind_at)
   ''
 end

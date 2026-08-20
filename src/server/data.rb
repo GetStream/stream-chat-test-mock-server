@@ -1,5 +1,8 @@
+# Sub-second precision, like the real backend. Clients drop read-state updates
+# whose timestamp is not strictly newer than the last processed one, so two
+# events stamped within the same second would lose one unread count.
 def time_format
-  @time_format ||= '%Y-%m-%dT%H:%M:%SZ'
+  @time_format ||= '%Y-%m-%dT%H:%M:%S.%6NZ'
 end
 
 def unique_date
@@ -7,7 +10,9 @@ def unique_date
 end
 
 def update_date(timestamp:, plus_seconds: nil, minus_seconds: nil)
-  time = Time.strptime(timestamp, time_format)
+  # Time.parse instead of Time.strptime(timestamp, time_format): template fixtures
+  # still carry second-precision or nanosecond dates that do not match time_format.
+  time = Time.parse(timestamp)
   if plus_seconds
     (time + plus_seconds).utc.strftime(time_format)
   elsif minus_seconds
@@ -28,4 +33,11 @@ def test_asset(type)
     'file' => 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf'
   }
   assets[type]
+end
+
+# The real backend answers uploads with the asset URL, the request duration and,
+# only when a thumbnail was generated, a `thumb_url`. Clients parse `duration` as
+# non-null, so it has to be there on every upload response.
+def upload_response(type)
+  { file: test_asset(type), duration: '49.41ms' }
 end
