@@ -91,7 +91,9 @@ def block_user(blocked_user_id:)
   block = {
     'user_id' => current_user['id'],
     'blocked_user_id' => blocked_user_id,
-    'created_at' => timestamp
+    'created_at' => timestamp,
+    'user' => current_user,
+    'blocked_user' => current_user.merge('id' => blocked_user_id)
   }
   $blocked_users << block
   {
