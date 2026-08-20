@@ -36,10 +36,12 @@ get '/channels' do
   paginate_channel_list(payload: params[:payload])
 end
 
-# Show channel list (post request)
+# Show channel list (post request). Android sends the query as the request body,
+# while iOS sends it as the `payload` query parameter.
 post '/channels' do
   sync_channels
-  paginate_channel_list(payload: params[:payload])
+  body = request.body.read
+  paginate_channel_list(payload: params[:payload] || (body unless body.empty?))
 end
 
 # Show channel info
