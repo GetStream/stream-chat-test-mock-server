@@ -454,15 +454,17 @@ def mock_attachments(params)
 end
 
 def create_link_preview(url)
-  if url.include?('youtube')
-    Mocks.youtube_link['message']['attachments'].first.to_s
-  elsif url.include?('unsplash')
-    Mocks.unsplash_link['message']['attachments'].first.to_s
-  elsif url.include?('giphy')
-    Mocks.giphy_link['message']['attachments'].first.to_s
-  else
-    ''
-  end
+  attachment =
+    if url.include?('youtube')
+      Mocks.youtube_link['message']['attachments'].first
+    elsif url.include?('unsplash')
+      Mocks.unsplash_link['message']['attachments'].first
+    elsif url.include?('giphy')
+      Mocks.giphy_link['message']['attachments'].first
+    end
+  return '' if attachment.nil?
+
+  attachment.merge('duration' => '7.11ms').to_s
 end
 
 def paginate_message_list(params:, request_body:)
