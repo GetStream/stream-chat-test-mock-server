@@ -129,6 +129,11 @@ delete '/messages/:message_id' do
   update_message(request_body: request.body.read, params: params, delete: true)
 end
 
+# Delete message (v2)
+delete '/api/v2/chat/messages/:message_id' do
+  update_message(request_body: request.body.read, params: params, delete: true)
+end
+
 # Edit or pin message
 put '/messages/:message_id' do
   update_message(request_body: request.body.read, params: params)
@@ -151,6 +156,11 @@ end
 
 # Delete draft message
 delete '/channels/messaging/:channel_id/draft' do
+  delete_draft(channel_id: params[:channel_id], params: params)
+end
+
+# Delete draft message (v2)
+delete '/api/v2/chat/channels/messaging/:channel_id/draft' do
   delete_draft(channel_id: params[:channel_id], params: params)
 end
 
