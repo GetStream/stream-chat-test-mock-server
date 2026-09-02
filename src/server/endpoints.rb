@@ -169,6 +169,11 @@ post '/messages/:message_id/action' do
   create_giphy(request_body: request.body.read, message_id: params[:message_id])
 end
 
+# Send giphy (v2)
+post '/api/v2/chat/messages/:message_id/action' do
+  create_giphy(request_body: request.body.read, message_id: params[:message_id])
+end
+
 # Send image
 post '/channels/messaging/:channel_id/image' do
   upload_response('image').to_json
@@ -274,6 +279,13 @@ end
 
 # Show thread list
 post '/threads' do
+  body = request.body.read
+  json = body.empty? ? {} : JSON.parse(body)
+  query_threads(reply_limit: (json['reply_limit'] || 2).to_i)
+end
+
+# Show thread list (v2)
+post '/api/v2/chat/threads' do
   body = request.body.read
   json = body.empty? ? {} : JSON.parse(body)
   query_threads(reply_limit: (json['reply_limit'] || 2).to_i)

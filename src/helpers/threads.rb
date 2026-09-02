@@ -27,6 +27,7 @@ def build_thread(parent:, reply_limit:)
     'created_by_user_id' => replies.first['user']['id'],
     'created_by' => replies.first['user'],
     'participant_count' => participants.count,
+    'active_participant_count' => participants.count,
     'reply_count' => replies.count,
     'latest_replies' => replies.last(reply_limit),
     'thread_participants' => participants.map { |user| build_thread_participant(parent: parent, user: user, replies: replies) }
