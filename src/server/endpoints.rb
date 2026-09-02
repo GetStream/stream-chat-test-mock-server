@@ -284,6 +284,13 @@ post '/threads' do
   query_threads(reply_limit: (json['reply_limit'] || 2).to_i)
 end
 
+# Show thread list (v2)
+post '/api/v2/chat/threads' do
+  body = request.body.read
+  json = body.empty? ? {} : JSON.parse(body)
+  query_threads(reply_limit: (json['reply_limit'] || 2).to_i)
+end
+
 # Query message reactions
 post '/messages/:message_id/reactions' do
   body = request.body.read
