@@ -169,6 +169,11 @@ post '/messages/:message_id/action' do
   create_giphy(request_body: request.body.read, message_id: params[:message_id])
 end
 
+# Send giphy (v2)
+post '/api/v2/chat/messages/:message_id/action' do
+  create_giphy(request_body: request.body.read, message_id: params[:message_id])
+end
+
 # Send image
 post '/channels/messaging/:channel_id/image' do
   upload_response('image').to_json
