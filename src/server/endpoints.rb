@@ -36,35 +36,60 @@ get '/channels' do
   paginate_channel_list(payload: params[:payload])
 end
 
-# Show channel list (post request). Android sends the query as the request body,
-# while iOS sends it as the `payload` query parameter.
-post '/channels' do
-  sync_channels
-  body = request.body.read
-  paginate_channel_list(payload: params[:payload] || (body unless body.empty?))
-end
+['/channels', '/api/v2/chat/channels'].each do |channels|
+  # Show channel list (post request). Android sends the query as the request body,
+  # while iOS sends it as the `payload` query parameter.
+  post channels do
+    sync_channels
+    body = request.body.read
+    paginate_channel_list(payload: params[:payload] || (body unless body.empty?))
+  end
 
-# Show channel list (v2)
-get '/api/v2/chat/channels' do
-  sync_channels
-  paginate_channel_list(payload: params[:payload])
-end
+  # Show channel info
+  post "#{channels}/:channel_type/:channel_id/query" do
+    paginate_message_list(params: params, request_body: request.body.read)
+  end
 
-# Show channel list (post request, v2)
-post '/api/v2/chat/channels' do
-  sync_channels
-  body = request.body.read
-  paginate_channel_list(payload: params[:payload] || (body unless body.empty?))
-end
+  # Send event
+  post "#{channels}/messaging/:channel_id/event" do
+    json = JSON.parse(request.body.read)
+    create_event(type: json['event']['type'], channel_id: params[:channel_id], parent_id: json['event']['parent_id'])
+  end
 
-# Show channel info
-post '/channels/:channel_type/:channel_id/query' do
-  paginate_message_list(params: params, request_body: request.body.read)
-end
+  # Mark channel read
+  post "#{channels}/messaging/:channel_id/read" do
+    channel = find_channel_by_id(params[:channel_id])
+    halt(400, { message: "channel #{params[:channel_id]} not found" }.to_s) unless channel
 
-# Get or create channel (v2)
-post '/api/v2/chat/channels/:channel_type/:channel_id/query' do
-  paginate_message_list(params: params, request_body: request.body.read)
+    mark_channel_read(channel: channel, user: current_user)
+    create_event(type: 'message.read', channel_id: params[:channel_id])
+  end
+
+  # Mark channel unread from a message on
+  post "#{channels}/messaging/:channel_id/unread" do
+    json = JSON.parse(request.body.read)
+    channel = find_channel_by_id(params[:channel_id])
+    halt(400, { message: "channel #{params[:channel_id]} not found" }.to_s) unless channel
+
+    read = mark_channel_unread(channel: channel, user: current_user, message_id: json['message_id'])
+    halt(400, { message: "message #{json['message_id']} not found" }.to_s) unless read
+
+    broadcast_event(
+      'type' => 'notification.mark_unread',
+      'created_at' => unique_date,
+      'cid' => channel['channel']['cid'],
+      'channel_type' => 'messaging',
+      'channel_id' => params[:channel_id],
+      'user' => current_user,
+      'first_unread_message_id' => json['message_id'],
+      'last_read_message_id' => read['last_read_message_id'],
+      'last_read_at' => read['last_read'],
+      'unread_messages' => read['unread_messages'],
+      'unread_channels' => 1,
+      'total_unread_count' => read['unread_messages']
+    )
+    { duration: '7.11ms' }.to_s
+  end
 end
 
 # Get or create distinct channel (v2)
@@ -84,96 +109,8 @@ post '/api/v2/chat/channels/:channel_type/query' do
   )
 end
 
-# Show thread list
-get '/messages/:message_id/replies' do
-  paginate_thread_list(params: params)
-end
-
-# Show thread list (v2)
-get '/api/v2/chat/messages/:message_id/replies' do
-  paginate_thread_list(params: params)
-end
-
-# Send event
-post '/channels/messaging/:channel_id/event' do
-  json = JSON.parse(request.body.read)
-  create_event(type: json['event']['type'], channel_id: params[:channel_id], parent_id: json['event']['parent_id'])
-end
-
-# Send event (v2)
-post '/api/v2/chat/channels/messaging/:channel_id/event' do
-  json = JSON.parse(request.body.read)
-  create_event(type: json['event']['type'], channel_id: params[:channel_id], parent_id: json['event']['parent_id'])
-end
-
-# Mark channel read
-post '/channels/messaging/:channel_id/read' do
-  channel = find_channel_by_id(params[:channel_id])
-  halt(400, { message: "channel #{params[:channel_id]} not found" }.to_s) unless channel
-
-  mark_channel_read(channel: channel, user: current_user)
-  create_event(type: 'message.read', channel_id: params[:channel_id])
-end
-
-# Mark channel read (v2)
-post '/api/v2/chat/channels/messaging/:channel_id/read' do
-  channel = find_channel_by_id(params[:channel_id])
-  halt(400, { message: "channel #{params[:channel_id]} not found" }.to_s) unless channel
-
-  mark_channel_read(channel: channel, user: current_user)
-  create_event(type: 'message.read', channel_id: params[:channel_id])
-end
-
 # Mark channels delivered
 post '/channels/delivered' do
-  { duration: '7.11ms' }.to_s
-end
-
-# Mark channel unread from a message on
-post '/channels/messaging/:channel_id/unread' do
-  json = JSON.parse(request.body.read)
-  channel = find_channel_by_id(params[:channel_id])
-  read = mark_channel_unread(channel: channel, user: current_user, message_id: json['message_id'])
-  halt(400, { message: "message #{json['message_id']} not found" }.to_s) unless read
-
-  broadcast_event(
-    'type' => 'notification.mark_unread',
-    'created_at' => unique_date,
-    'cid' => channel['channel']['cid'],
-    'channel_type' => 'messaging',
-    'channel_id' => params[:channel_id],
-    'user' => current_user,
-    'first_unread_message_id' => json['message_id'],
-    'last_read_message_id' => read['last_read_message_id'],
-    'last_read_at' => read['last_read'],
-    'unread_messages' => read['unread_messages'],
-    'unread_channels' => 1,
-    'total_unread_count' => read['unread_messages']
-  )
-  { duration: '7.11ms' }.to_s
-end
-
-# Mark channel unread from a message on (v2)
-post '/api/v2/chat/channels/messaging/:channel_id/unread' do
-  json = JSON.parse(request.body.read)
-  channel = find_channel_by_id(params[:channel_id])
-  read = mark_channel_unread(channel: channel, user: current_user, message_id: json['message_id'])
-  halt(400, { message: "message #{json['message_id']} not found" }.to_s) unless read
-
-  broadcast_event(
-    'type' => 'notification.mark_unread',
-    'created_at' => unique_date,
-    'cid' => channel['channel']['cid'],
-    'channel_type' => 'messaging',
-    'channel_id' => params[:channel_id],
-    'user' => current_user,
-    'first_unread_message_id' => json['message_id'],
-    'last_read_message_id' => read['last_read_message_id'],
-    'last_read_at' => read['last_read'],
-    'unread_messages' => read['unread_messages'],
-    'unread_channels' => 1,
-    'total_unread_count' => read['unread_messages']
-  )
   { duration: '7.11ms' }.to_s
 end
 
@@ -512,6 +449,11 @@ end
 end
 
 ['/messages', '/api/v2/chat/messages'].each do |messages|
+  # Show thread list
+  get "#{messages}/:message_id/replies" do
+    paginate_thread_list(params: params)
+  end
+
   # Cast poll vote or answer
   post "#{messages}/:message_id/polls/:poll_id/vote" do
     json = JSON.parse(request.body.read)
