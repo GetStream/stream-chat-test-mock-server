@@ -56,7 +56,7 @@ class Mocks
   end
 
   def self.member
-    JSON.parse(File.read('src/jsons/http_member.json'))
+    update_member['members'].detect { |member| member['user_id'] == 'leia_organa' }
   end
 
   def self.update_member
