@@ -111,7 +111,7 @@ end
 def duplicate_message_error(message_id)
   {
     code: 4,
-    message: "a message with ID #{message_id} already exists",
+    message: "SendMessage failed with error: \"a message with ID #{message_id} already exists\"",
     StatusCode: 400,
     duration: '0.10ms',
     more_info: 'https://getstream.io/chat/docs/api_errors_response',
