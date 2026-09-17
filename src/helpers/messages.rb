@@ -119,6 +119,17 @@ def duplicate_message_error(message_id)
   }.to_json
 end
 
+def rejected_message_error
+  {
+    code: 4,
+    message: 'SendMessage failed with error: "the message was rejected"',
+    StatusCode: 400,
+    duration: '0.10ms',
+    more_info: 'https://getstream.io/chat/docs/api_errors_response',
+    details: []
+  }.to_json
+end
+
 def update_message(request_body:, params:, delete: false)
   timestamp = unique_date
   json = request_body.empty? ? {} : JSON.parse(request_body)
@@ -154,7 +165,7 @@ end
 
 def create_message(request_body:, channel_id: nil)
   if $fail_messages
-    return nil
+    halt(400, rejected_message_error)
   elsif $freeze_messages
     status(408)
     return nil
