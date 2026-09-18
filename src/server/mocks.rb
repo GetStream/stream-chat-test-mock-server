@@ -1,4 +1,7 @@
 class Mocks
+  # The user sync.rb passes to add_members when recording http_add_member.json.
+  MEMBER_USER_ID = 'leia_organa'.freeze
+
   def self.health_check
     JSON.parse(File.read('src/jsons/ws_health_check.json'))
   end
@@ -56,7 +59,8 @@ class Mocks
   end
 
   def self.member
-    JSON.parse(File.read('src/jsons/http_member.json'))
+    update_member['members'].detect { |member| member['user_id'] == MEMBER_USER_ID } ||
+      raise("no #{MEMBER_USER_ID} in http_add_member.json; sync.rb records the add-member call for that user")
   end
 
   def self.update_member
