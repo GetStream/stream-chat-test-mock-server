@@ -111,7 +111,18 @@ end
 def duplicate_message_error(message_id)
   {
     code: 4,
-    message: "a message with ID #{message_id} already exists",
+    message: "SendMessage failed with error: \"a message with ID #{message_id} already exists\"",
+    StatusCode: 400,
+    duration: '0.10ms',
+    more_info: 'https://getstream.io/chat/docs/api_errors_response',
+    details: []
+  }.to_json
+end
+
+def rejected_message_error
+  {
+    code: 4,
+    message: 'SendMessage failed with error: "the message was rejected"',
     StatusCode: 400,
     duration: '0.10ms',
     more_info: 'https://getstream.io/chat/docs/api_errors_response',
@@ -154,7 +165,7 @@ end
 
 def create_message(request_body:, channel_id: nil)
   if $fail_messages
-    return nil
+    halt(400, rejected_message_error)
   elsif $freeze_messages
     status(408)
     return nil
