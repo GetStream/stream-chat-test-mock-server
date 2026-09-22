@@ -26,6 +26,11 @@ require_relative 'robots/chat'
 require_relative 'robots/participant'
 
 $ws = nil
+# The websocket protocol the connected client negotiated. v1 authenticates through the
+# connect URL and takes a health.check carrying `me` as its first frame; v2 authenticates
+# with a text frame after the upgrade and takes a connection.ok instead.
+$ws_protocol = :v1
+$ws_authenticated = false
 $message_list = []
 $sync_events = []
 $reminders = []
@@ -57,15 +62,58 @@ get '/stop' do
   end
 end
 
-# The health check is rebuilt on every send so its `me` carries the live
+# The connection payload is rebuilt on every send so its `me` carries the live
 # moderation state. The static payload would reset the own user, wiping any
 # mute or block a few seconds after the endpoint applied it. Token-error
-# payloads set by jwt.rb pass through untouched.
-def send_health_check
+# payloads set by jwt.rb pass through untouched and close the socket on both protocols.
+def connection_payload
   payload = JSON.parse($health_check)
   payload['me'] = payload['me'].merge(live_own_user_state) if payload['type'] == 'health.check' && payload['me']
+  payload
+end
+
+def send_connection_error?(payload)
+  return false unless payload['type'] == 'connection.error'
+
   $ws&.send(payload.to_s)
-  $ws&.close(1000) if payload['type'] == 'connection.error'
+  $ws&.close(1000)
+  true
+end
+
+# v2 handshake response: a single connection.ok carrying the own user.
+def send_connection_ok
+  payload = connection_payload
+  return if send_connection_error?(payload)
+
+  $ws&.send(
+    {
+      'type' => 'connection.ok',
+      'created_at' => unique_date,
+      'connection_id' => payload['connection_id'],
+      'me' => payload['me']
+    }.to_s
+  )
+end
+
+def send_health_check
+  payload = connection_payload
+  return if send_connection_error?(payload)
+
+  if $ws_protocol == :v2
+    # v2 keeps the keepalive minimal: `me` rides on connection.ok instead.
+    return unless $ws_authenticated
+
+    $ws&.send(
+      {
+        'type' => 'health.check',
+        'connection_id' => payload['connection_id'],
+        'created_at' => unique_date,
+        'custom' => {}
+      }.to_s
+    )
+  else
+    $ws&.send(payload.to_s)
+  end
 end
 
 Thread.new do
