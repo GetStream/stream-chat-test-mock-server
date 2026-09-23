@@ -57,6 +57,20 @@ get '/stop' do
   end
 end
 
+# Faye sockets must only be written from the EventMachine reactor thread. Frames sent from the
+# health-check loop or a Puma request thread are otherwise silently dropped once the loop has
+# closed a socket, so every send and close is handed to the reactor. The socket is captured at
+# call time so a queued frame never lands on a socket opened after it was sent.
+def ws_send(data)
+  ws = $ws
+  EM.schedule { ws.send(data) } if ws
+end
+
+def ws_close(code)
+  ws = $ws
+  EM.schedule { ws.close(code) } if ws
+end
+
 # The health check is rebuilt on every send so its `me` carries the live
 # moderation state. The static payload would reset the own user, wiping any
 # mute or block a few seconds after the endpoint applied it. Token-error
@@ -64,8 +78,8 @@ end
 def send_health_check
   payload = JSON.parse($health_check)
   payload['me'] = payload['me'].merge(live_own_user_state) if payload['type'] == 'health.check' && payload['me']
-  $ws&.send(payload.to_s)
-  $ws&.close(1000) if payload['type'] == 'connection.error'
+  ws_send(payload.to_s)
+  ws_close(1000) if payload['type'] == 'connection.error'
 end
 
 Thread.new do

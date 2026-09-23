@@ -42,7 +42,7 @@ def broadcast_event(event)
     snapshot['created_at'] = unique_date
     $sync_events << snapshot
   end
-  $ws&.send(event.to_s)
+  ws_send(event.to_s)
 end
 
 # Whether a recorded event is at or after the client's `last_sync_at`.
