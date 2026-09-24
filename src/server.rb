@@ -104,7 +104,8 @@ def send_connection_ok
       'type' => 'connection.ok',
       'created_at' => unique_date,
       'connection_id' => payload['connection_id'],
-      'me' => payload['me']
+      'me' => payload['me'],
+      'custom' => {}
     }.to_s
   )
 end

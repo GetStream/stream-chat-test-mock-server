@@ -35,6 +35,6 @@ def create_guest_user(request_user:, nested_custom:)
     'teams' => [],
     'blocked_user_ids' => []
   }
-  user = nested_custom ? user.merge('custom' => extra) : user.merge(extra)
+  user = nested_custom ? user.merge('custom' => extra) : extra.merge(user)
   { user: user, access_token: GUEST_TOKEN, duration: '7.11ms' }.to_s
 end
