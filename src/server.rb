@@ -62,6 +62,20 @@ get '/stop' do
   end
 end
 
+# Faye sockets must only be written from the EventMachine reactor thread. Frames sent from the
+# health-check loop or a Puma request thread are otherwise silently dropped once the loop has
+# closed a socket, so every send and close is handed to the reactor. The socket is captured at
+# call time so a queued frame never lands on a socket opened after it was sent.
+def ws_send(data)
+  ws = $ws
+  EM.schedule { ws.send(data) } if ws
+end
+
+def ws_close(code)
+  ws = $ws
+  EM.schedule { ws.close(code) } if ws
+end
+
 # The connection payload is rebuilt on every send so its `me` carries the live
 # moderation state. The static payload would reset the own user, wiping any
 # mute or block a few seconds after the endpoint applied it. Token-error
@@ -75,8 +89,8 @@ end
 def send_connection_error?(payload)
   return false unless payload['type'] == 'connection.error'
 
-  $ws&.send(payload.to_s)
-  $ws&.close(1000)
+  ws_send(payload.to_s)
+  ws_close(1000)
   true
 end
 
@@ -85,7 +99,7 @@ def send_connection_ok
   payload = connection_payload
   return if send_connection_error?(payload)
 
-  $ws&.send(
+  ws_send(
     {
       'type' => 'connection.ok',
       'created_at' => unique_date,
@@ -103,7 +117,7 @@ def send_health_check
     # v2 keeps the keepalive minimal: `me` rides on connection.ok instead.
     return unless $ws_authenticated
 
-    $ws&.send(
+    ws_send(
       {
         'type' => 'health.check',
         'connection_id' => payload['connection_id'],
@@ -112,7 +126,7 @@ def send_health_check
       }.to_s
     )
   else
-    $ws&.send(payload.to_s)
+    ws_send(payload.to_s)
   end
 end
 
