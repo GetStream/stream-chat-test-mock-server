@@ -2,12 +2,38 @@ get '/ping' do
   halt(200)
 end
 
-# Connect to WebSocket
+# Connect to WebSocket (v1). The client authenticates through the connect URL and takes
+# a health.check carrying `me` as its first frame.
 get '/connect' do
   if Faye::WebSocket.websocket?(request.env)
+    $ws_protocol = :v1
+    $ws_authenticated = true
     $ws = Faye::WebSocket.new(request.env)
     $ws.on(:open) { |_| send_health_check }
     $ws.on(:close) { $ws = nil }
+    $ws.rack_response
+  end
+end
+
+# Connect to WebSocket (v2). The client sends one text frame
+# {"token": …, "user_details": …, "products": ["chat"]} after the upgrade and the server
+# answers with connection.ok, followed by the periodic health checks.
+get '/api/v2/connect' do
+  if Faye::WebSocket.websocket?(request.env)
+    $ws_protocol = :v2
+    $ws_authenticated = false
+    $ws = Faye::WebSocket.new(request.env)
+    $ws.on(:message) do |event|
+      next if $ws_authenticated
+      next unless websocket_auth_frame?(event.data)
+
+      $ws_authenticated = true
+      send_connection_ok
+    end
+    $ws.on(:close) do
+      $ws = nil
+      $ws_authenticated = false
+    end
     $ws.rack_response
   end
 end
@@ -19,15 +45,19 @@ end
 
 # Synchronize: replay the events broadcast since `last_sync_at` for the requested channels,
 # so a client that missed live events while its socket was down recovers them on reconnect.
-post '/sync' do
-  body = request.body.read
-  json = body.empty? ? {} : JSON.parse(body)
-  cids = json['channel_cids'] || []
-  last_sync_at = json['last_sync_at']
-  events = $sync_events.select do |event|
-    cids.include?(event['cid']) && event_after_sync?(event['created_at'], last_sync_at)
+# The v2 route receives `with_inaccessible_cids`, `watch` and `connection_id` as query params;
+# they need no handling because the server never revokes channel access.
+['/sync', '/api/v2/chat/sync'].each do |sync|
+  post sync do
+    body = request.body.read
+    json = body.empty? ? {} : JSON.parse(body)
+    cids = json['channel_cids'] || []
+    last_sync_at = json['last_sync_at']
+    events = $sync_events.select do |event|
+      cids.include?(event['cid']) && event_after_sync?(event['created_at'], last_sync_at)
+    end
+    { events: events, inaccessible_cids: [], duration: '7.11ms' }.to_s
   end
-  { events: events }.to_s
 end
 
 # Show channel list
@@ -364,6 +394,15 @@ end
 # Show blocked users
 get '/users/block' do
   { blocks: $blocked_users, duration: '7.11ms' }.to_s
+end
+
+# Create a guest user. v1 flattens the user extra data onto `user`; v2 nests it under `custom`.
+['/guest', '/api/v2/guest'].each do |guest|
+  post guest do
+    body = request.body.read
+    json = body.empty? ? {} : JSON.parse(body)
+    create_guest_user(request_user: json['user'] || {}, nested_custom: guest.start_with?('/api/v2'))
+  end
 end
 
 # Query message reminders

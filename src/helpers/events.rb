@@ -37,6 +37,8 @@ SYNC_REPLAYED_EVENT_TYPES = %w[
 # deleted message's original `created_at`, which would equal `last_sync_at` and be dropped. The
 # snapshot is taken at send time so a later in-place mutation of the message cannot change it.
 def broadcast_event(event)
+  # v2 event models require `custom`; none of the recorded fixtures carry one.
+  event['custom'] ||= {} if event.kind_of?(Hash)
   if event.kind_of?(Hash) && event['cid'] && SYNC_REPLAYED_EVENT_TYPES.include?(event['type'])
     snapshot = JSON.parse(event.to_s)
     snapshot['created_at'] = unique_date
