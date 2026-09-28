@@ -277,7 +277,7 @@ def create_draft(channel_id:, request_body:)
   response['draft']['message']['text'] = text
   response['draft']['message']['id'] = message_id
   response['draft']['channel_cid'] = cid
-  response['draft']['channel'] = channel
+  response['draft']['channel'] = channel['channel']
   if parent_id
     response['draft']['parent_id'] = parent_id
     response['draft']['parent_message'] = parent_message
@@ -290,7 +290,7 @@ def create_draft(channel_id:, request_body:)
   ws_response['created_at'] = response['draft']['created_at']
   ws_response['draft']['created_at'] = response['draft']['created_at']
   ws_response['draft']['channel_cid'] = ws_response['cid']
-  ws_response['draft']['channel'] = channel
+  ws_response['draft']['channel'] = channel['channel']
   ws_response['draft']['message']['text'] = text
   ws_response['draft']['message']['id'] = message_id
 
