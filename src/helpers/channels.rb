@@ -11,6 +11,14 @@ def set_channel_name(channel, name)
   end
 end
 
+def remove_channel_name(channel)
+  if $api_version == :v2
+    channel['custom']&.delete('name')
+  else
+    channel.delete('name')
+  end
+end
+
 def find_channel_by_id(id)
   $channel_list['channels'].detect { |channel| channel['channel']['id'] == id }
 end

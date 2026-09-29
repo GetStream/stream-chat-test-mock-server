@@ -2,7 +2,10 @@ def update_members(channel_id:, request_body:)
   channel = find_channel_by_id(channel_id)
   json = request_body.empty? ? {} : JSON.parse(request_body)
   remove_members = json['remove_members']&.any? || false
-  member_ids = (remove_members ? json['remove_members'] : json['add_members']) || []
+  # v2 adds members as member requests, v1 as ids.
+  member_ids = ((remove_members ? json['remove_members'] : json['add_members']) || []).map do |entry|
+    entry.kind_of?(Hash) ? entry['user_id'] : entry
+  end
 
   unless remove_members
     member = Mocks.member
