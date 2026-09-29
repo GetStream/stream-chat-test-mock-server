@@ -12,13 +12,8 @@ STREAM_BASE_URL = 'chat.stream-io-api.com'
 STREAM_HTTP_URL = "https://#{STREAM_BASE_URL}"
 STREAM_API_URL = API_V2 ? "#{STREAM_HTTP_URL}/api/v2/chat" : STREAM_HTTP_URL
 STREAM_WSS_URL = API_V2 ? "wss://#{STREAM_BASE_URL}/api/v2/connect" : "wss://#{STREAM_BASE_URL}/connect"
-# v1 records against the UIKit demo app, v2 against the SwiftUI one (DemoUsers.swift in stream-chat-swift).
-STREAM_DEMO_API_KEY = API_V2 ? 'zcgvnykxsfm8' : '8br4watad788'
-STREAM_DEMO_TOKEN = if API_V2
-                      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoibHVrZV9za3l3YWxrZXIifQ.b6EiC8dq2AHk0JPfI-6PN-AM9TVzt8JV-qB1N9kchlI'
-                    else
-                      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoibHVrZV9za3l3YWxrZXIifQ.kFSLHRB5X62t0Zlc7nwczWUfsQMwfkpylC6jCUZ6Mc0'
-                    end
+STREAM_DEMO_API_KEY = 'zcgvnykxsfm8'
+STREAM_DEMO_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoibHVrZV9za3l3YWxrZXIifQ.b6EiC8dq2AHk0JPfI-6PN-AM9TVzt8JV-qB1N9kchlI'
 STREAM_USER_ID = 'luke_skywalker'
 STREAM_HEADERS = {
   'Authorization' => STREAM_DEMO_TOKEN,

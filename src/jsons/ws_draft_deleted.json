@@ -1,13 +1,13 @@
 {
   "type": "draft.deleted",
-  "created_at": "2026-06-24T11:44:51.387194429Z",
-  "cid": "messaging:9214bd91-fafb-49b7-ae0c-c6e4cbdef8c9",
+  "created_at": "2026-09-29T12:49:57.391508891Z",
+  "cid": "messaging:7a164b98-c65c-4305-8cbe-1aaa6b6161e4",
   "draft": {
     "message": {
       "id": "",
       "text": ""
     },
-    "channel_cid": "messaging:9214bd91-fafb-49b7-ae0c-c6e4cbdef8c9",
+    "channel_cid": "messaging:7a164b98-c65c-4305-8cbe-1aaa6b6161e4",
     "channel": null,
     "parent_message": null,
     "quoted_message": null,

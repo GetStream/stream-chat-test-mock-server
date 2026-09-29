@@ -1,6 +1,6 @@
 {
   "message": {
-    "id": "9bb53407-d04c-46f0-9567-f212a82e4b00",
+    "id": "2fd21762-5e26-48fd-9eb1-3568dc593e2c",
     "text": "https://www.youtube.com/watch?v=xOX7MsrbaPY",
     "html": "<p><a href=\"https://www.youtube.com/watch?v=xOX7MsrbaPY\" rel=\"nofollow\">https://www.youtube.com/watch?v=xOX7MsrbaPY</a></p>\n",
     "type": "regular",
@@ -8,45 +8,27 @@
       "id": "luke_skywalker",
       "name": "Luke Skywalker",
       "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
-      "language": "zh",
+      "language": "en",
       "role": "user",
       "teams": [
 
       ],
-      "created_at": "2024-04-04T09:26:11.805899Z",
-      "updated_at": "2026-06-23T13:32:25.454217Z",
+      "created_at": "2022-02-03T15:47:10.148169Z",
+      "updated_at": "2026-08-05T13:13:24.369473Z",
       "banned": false,
       "online": true,
-      "last_active": "2026-06-24T11:44:45.388376007Z",
+      "last_active": "2026-09-29T12:49:31.294453401Z",
       "blocked_user_ids": [
 
       ],
-      "avg_response_time": 140111,
-      "type": "team",
-      "canBeAddedToGroups": true,
-      "pando": "{\"speciality\":\"ios engineer\"}",
-      "birthland": "Tatooine",
-      "canReceiveMessages": false,
-      "custom_extra_data_key": true,
-      "team": "test",
-      "birthLand": "Tatooine"
+      "birthland": "Tatooine"
     },
     "member": {
       "channel_role": "channel_member",
       "notifications_muted": false
     },
     "attachments": [
-      {
-        "type": "video",
-        "author_name": "YouTube",
-        "title": "Introducing MotionScape: Prototype SwiftUI Animation Easings",
-        "title_link": "https://www.youtube.com/watch?v=xOX7MsrbaPY",
-        "text": "MotionScape is your SwiftUI animation's playground as a developer. You can see all animations and their parameters in effect with beautifully designed and handcrafted animation examples. Best of all: directly preview and export your settings as production-ready SwiftUI code that you can use in your apps as-is.\n\nSupercharge your apps with animations and get to know how to use them - with MotionScape!\n\nDownload MotionScape from the Mac AppStore: \nhttps://gstrm.io/motionscape-yt\n\nWebpage:\nhttps://getstream.github.io/motionscape-app/\n\nSwiftUI chat messaging:\nhttps://getstream.io/chat/sdk/swiftui/\n...",
-        "image_url": "https://i.ytimg.com/vi/xOX7MsrbaPY/mqdefault.jpg",
-        "thumb_url": "https://i.ytimg.com/vi/xOX7MsrbaPY/mqdefault.jpg",
-        "asset_url": "https://www.youtube.com/watch?v=xOX7MsrbaPY",
-        "og_scrape_url": "https://www.youtube.com/watch?v=xOX7MsrbaPY"
-      }
+
     ],
     "latest_reactions": [
 
@@ -60,9 +42,9 @@
     },
     "reply_count": 0,
     "deleted_reply_count": 0,
-    "cid": "messaging:9214bd91-fafb-49b7-ae0c-c6e4cbdef8c9",
-    "created_at": "2026-06-24T11:44:50.507782Z",
-    "updated_at": "2026-06-24T11:44:50.507782Z",
+    "cid": "messaging:7a164b98-c65c-4305-8cbe-1aaa6b6161e4",
+    "created_at": "2026-09-29T12:49:56.023585Z",
+    "updated_at": "2026-09-29T12:49:56.023585Z",
     "shadowed": false,
     "mentioned_users": [
 
@@ -78,5 +60,5 @@
 
     ]
   },
-  "duration": "166.13ms"
+  "duration": "101.17ms"
 }
