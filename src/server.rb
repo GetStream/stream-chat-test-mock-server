@@ -22,6 +22,7 @@ require_relative 'helpers/moderation'
 require_relative 'helpers/polls'
 require_relative 'helpers/reminders'
 require_relative 'helpers/threads'
+require_relative 'helpers/v2_custom'
 require_relative 'robots/chat'
 require_relative 'robots/participant'
 
@@ -55,6 +56,13 @@ before do
   request.body.rewind
 end
 
+# v2 clients expect the extra data nested under `custom`; the state is kept in the v1 shape.
+after '/api/v2/*' do
+  next if Faye::WebSocket.websocket?(request.env)
+
+  body(to_v2_json(response.body.join))
+end
+
 get '/stop' do
   Thread.new do
     sleep 1
@@ -67,6 +75,7 @@ end
 # closed a socket, so every send and close is handed to the reactor. The socket is captured at
 # call time so a queued frame never lands on a socket opened after it was sent.
 def ws_send(data)
+  data = to_v2_json(data) if $ws_protocol == :v2
   ws = $ws
   EM.schedule { ws.send(data) } if ws
 end
