@@ -1,0 +1,33 @@
+{
+  "event": {
+    "type": "typing.start",
+    "cid": "messaging:3b95e7dd-2155-40be-b4be-9a08c2ba0ec8",
+    "channel_id": "3b95e7dd-2155-40be-b4be-9a08c2ba0ec8",
+    "channel_type": "messaging",
+    "user": {
+      "id": "luke_skywalker",
+      "name": "Luke Skywalker",
+      "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+      "custom": {
+        "birthland": "Tatooine"
+      },
+      "language": "en",
+      "role": "user",
+      "teams": [
+
+      ],
+      "created_at": 1643903230148169000,
+      "updated_at": 1785935604369473000,
+      "banned": false,
+      "online": true,
+      "last_active": 1790685571288648101,
+      "blocked_user_ids": [
+
+      ]
+    },
+    "custom": {
+    },
+    "created_at": 1790685601402612614
+  },
+  "duration": "6.44ms"
+}

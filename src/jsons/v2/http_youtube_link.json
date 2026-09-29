@@ -1,0 +1,68 @@
+{
+  "message": {
+    "id": "601e4032-946f-4e82-b1e2-144c2fe7f185",
+    "text": "https://www.youtube.com/watch?v=xOX7MsrbaPY",
+    "html": "<p><a href=\"https://www.youtube.com/watch?v=xOX7MsrbaPY\" rel=\"nofollow\">https://www.youtube.com/watch?v=xOX7MsrbaPY</a></p>\n",
+    "type": "regular",
+    "user": {
+      "id": "luke_skywalker",
+      "name": "Luke Skywalker",
+      "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+      "custom": {
+        "birthland": "Tatooine"
+      },
+      "language": "en",
+      "role": "user",
+      "teams": [
+
+      ],
+      "created_at": 1643903230148169000,
+      "updated_at": 1785935604369473000,
+      "banned": false,
+      "online": true,
+      "last_active": 1790685571288648101,
+      "blocked_user_ids": [
+
+      ]
+    },
+    "member": {
+      "channel_role": "channel_member",
+      "notifications_muted": false
+    },
+    "attachments": [
+
+    ],
+    "latest_reactions": [
+
+    ],
+    "own_reactions": [
+
+    ],
+    "reaction_counts": {
+    },
+    "reaction_scores": {
+    },
+    "reply_count": 0,
+    "deleted_reply_count": 0,
+    "cid": "messaging:3b95e7dd-2155-40be-b4be-9a08c2ba0ec8",
+    "created_at": 1790685603522502000,
+    "updated_at": 1790685603522502000,
+    "custom": {
+    },
+    "shadowed": false,
+    "mentioned_users": [
+
+    ],
+    "mentioned_channel": false,
+    "mentioned_here": false,
+    "silent": false,
+    "pinned": false,
+    "pinned_at": null,
+    "pinned_by": null,
+    "pin_expires": null,
+    "restricted_visibility": [
+
+    ]
+  },
+  "duration": "145.56ms"
+}

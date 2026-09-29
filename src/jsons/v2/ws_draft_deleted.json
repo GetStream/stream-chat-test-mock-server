@@ -1,0 +1,20 @@
+{
+  "type": "draft.deleted",
+  "created_at": 1790685604655682741,
+  "custom": {
+  },
+  "cid": "messaging:3b95e7dd-2155-40be-b4be-9a08c2ba0ec8",
+  "draft": {
+    "message": {
+      "id": "",
+      "text": "",
+      "custom": {
+      }
+    },
+    "channel_cid": "messaging:3b95e7dd-2155-40be-b4be-9a08c2ba0ec8",
+    "channel": null,
+    "parent_message": null,
+    "quoted_message": null,
+    "created_at": 0
+  }
+}

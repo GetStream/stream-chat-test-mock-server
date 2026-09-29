@@ -1,3 +1,16 @@
+# v2 carries the channel name as custom data.
+def channel_name(channel)
+  $api_version == :v2 ? channel.dig('custom', 'name') : channel['name']
+end
+
+def set_channel_name(channel, name)
+  if $api_version == :v2
+    (channel['custom'] ||= {})['name'] = name
+  else
+    channel['name'] = name
+  end
+end
+
 def find_channel_by_id(id)
   $channel_list['channels'].detect { |channel| channel['channel']['id'] == id }
 end
@@ -18,7 +31,7 @@ def queried_channels(filter)
   return channels if name_terms.empty? && member_terms.empty?
 
   channels.select do |channel|
-    name = channel['channel']['name'].to_s.downcase
+    name = channel_name(channel['channel']).to_s.downcase
     member_names = (channel['members'] || []).map { |m| m.dig('user', 'name').to_s.downcase }
     name_terms.any? { |term| name.include?(term.downcase) } ||
       member_terms.any? { |term| member_names.any? { |n| n.include?(term.downcase) } }
@@ -90,7 +103,7 @@ def truncate_channel(channel_id:, request_body:)
   response['channel']['cid'] = "messaging:#{channel_id}"
   response['channel']['truncated_by'] = truncated_by
   response['channel']['truncated_at'] = truncated_at
-  response['channel']['name'] = channel['channel']['name']
+  set_channel_name(response['channel'], channel_name(channel['channel']))
 
   # Send channel.truncated websocket event
   ws_response = Mocks.event_ws

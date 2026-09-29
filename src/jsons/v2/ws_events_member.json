@@ -1,0 +1,62 @@
+{
+  "type": "member.added",
+  "cid": "messaging:3b95e7dd-2155-40be-b4be-9a08c2ba0ec8",
+  "channel_id": "3b95e7dd-2155-40be-b4be-9a08c2ba0ec8",
+  "channel_type": "messaging",
+  "member": {
+    "user_id": "leia_organa",
+    "user": {
+      "id": "leia_organa",
+      "role": "user",
+      "teams_role": {
+      },
+      "custom": {
+        "birthland": "Polis Massa",
+        "image": "https://vignette.wikia.nocookie.net/starwars/images/f/fc/Leia_Organa_TLJ.png",
+        "name": "Leia Organa"
+      },
+      "created_at": 1643903252254140000,
+      "updated_at": 1776152257976935000,
+      "last_active": 1790684653723169631,
+      "last_engaged_at": 1790642134417611000,
+      "banned": false,
+      "online": false,
+      "language": "de"
+    },
+    "custom": {
+    },
+    "status": "member",
+    "created_at": 1790685602169748000,
+    "updated_at": 1790685602169748000,
+    "banned": false,
+    "shadow_banned": false,
+    "is_global_banned": false,
+    "archived_at": null,
+    "pinned_at": null,
+    "role": "member",
+    "channel_role": "channel_member",
+    "notifications_muted": false
+  },
+  "user": {
+    "id": "leia_organa",
+    "role": "user",
+    "teams_role": {
+    },
+    "custom": {
+      "birthland": "Polis Massa",
+      "image": "https://vignette.wikia.nocookie.net/starwars/images/f/fc/Leia_Organa_TLJ.png",
+      "name": "Leia Organa"
+    },
+    "created_at": 1643903252254140000,
+    "updated_at": 1776152257976935000,
+    "last_active": 1790684653723169631,
+    "last_engaged_at": 1790642134417611000,
+    "banned": false,
+    "online": false,
+    "language": "de"
+  },
+  "channel_last_message_at": 1790685601643391000,
+  "custom": {
+  },
+  "created_at": 1790685602177710755
+}

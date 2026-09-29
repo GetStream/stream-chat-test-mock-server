@@ -1,0 +1,104 @@
+{
+  "draft": {
+    "message": {
+      "id": "d9e2129c-7b83-47db-9495-1db6b114122d",
+      "text": "Test",
+      "show_in_channel": false,
+      "custom": {
+      },
+      "silent": false
+    },
+    "channel_cid": "messaging:3b95e7dd-2155-40be-b4be-9a08c2ba0ec8",
+    "channel": {
+      "id": "3b95e7dd-2155-40be-b4be-9a08c2ba0ec8",
+      "type": "messaging",
+      "cid": "messaging:3b95e7dd-2155-40be-b4be-9a08c2ba0ec8",
+      "last_message_at": 1790685604269791000,
+      "created_at": 1790685600841819000,
+      "updated_at": 1790685600841819000,
+      "created_by": {
+        "id": "luke_skywalker",
+        "name": "Luke Skywalker",
+        "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+        "custom": {
+          "birthland": "Tatooine"
+        },
+        "language": "en",
+        "role": "user",
+        "teams": [
+
+        ],
+        "created_at": 1643903230148169000,
+        "updated_at": 1785935604369473000,
+        "banned": false,
+        "online": true,
+        "last_active": 1790685571288648101,
+        "blocked_user_ids": [
+
+        ]
+      },
+      "frozen": false,
+      "disabled": false,
+      "member_count": 4,
+      "config": {
+        "created_at": 1649840197837805000,
+        "updated_at": 1781718049619769000,
+        "name": "messaging",
+        "typing_events": true,
+        "read_events": true,
+        "connect_events": true,
+        "delivery_events": true,
+        "search": true,
+        "reactions": true,
+        "replies": true,
+        "quotes": true,
+        "mutes": true,
+        "uploads": true,
+        "url_enrichment": true,
+        "custom_events": true,
+        "push_notifications": true,
+        "reminders": false,
+        "mark_messages_pending": false,
+        "polls": true,
+        "user_message_reminders": false,
+        "shared_locations": false,
+        "count_messages": false,
+        "message_retention": "infinite",
+        "max_message_length": 5000,
+        "automod": "AI",
+        "automod_behavior": "flag",
+        "blocklist_behavior": "flag",
+        "automod_thresholds": {
+        },
+        "skip_last_msg_update_for_system_msgs": true,
+        "commands": [
+          {
+            "name": "giphy",
+            "description": "Post a random gif to the channel",
+            "args": "[text]",
+            "set": "fun_set"
+          },
+          {
+            "name": "mute",
+            "description": "Mute a user",
+            "args": "[@username]",
+            "set": "moderation_set"
+          },
+          {
+            "name": "unmute",
+            "description": "Unmute a user",
+            "args": "[@username]",
+            "set": "moderation_set"
+          }
+        ]
+      },
+      "custom": {
+        "name": "Sync Mock Server"
+      }
+    },
+    "parent_message": null,
+    "quoted_message": null,
+    "created_at": 1790685604464010551
+  },
+  "duration": "16.96ms"
+}
