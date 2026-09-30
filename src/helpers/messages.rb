@@ -489,7 +489,7 @@ def paginate_message_list(params:, request_body:)
   channel = find_channel_by_id(params[:channel_id])
   json = request_body.empty? ? {} : JSON.parse(request_body)
   messages = json['messages']
-  return channel.to_s unless messages && messages['limit']
+  return channel&.merge('duration' => '7.11ms').to_s unless messages && messages['limit']
 
   message_list = channel_visible_messages(cid: "#{params[:channel_type]}:#{params[:channel_id]}")
   paginated_messages = mock_message_pagination(
@@ -502,7 +502,7 @@ def paginate_message_list(params:, request_body:)
     id_around: messages['id_around']
   )
   channel['messages'] = paginated_messages
-  channel.to_s
+  channel.merge('duration' => '7.11ms').to_s
 end
 
 def paginate_thread_list(params:)
