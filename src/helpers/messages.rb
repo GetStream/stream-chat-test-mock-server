@@ -461,7 +461,14 @@ def mock_attachments(params)
     end
   end
 
+  attachments.map! { |a| v2_attachment(a) } if $api_version == :v2
   attachments.empty? ? nil : attachments
+end
+
+# v2 carries non-standard attachment fields as custom data.
+def v2_attachment(attachment)
+  custom_keys = ['file_size', 'mime_type']
+  attachment.except(*custom_keys).merge('custom' => attachment.slice(*custom_keys))
 end
 
 def create_link_preview(url)
