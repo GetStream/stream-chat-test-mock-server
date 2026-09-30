@@ -1,62 +1,290 @@
 {
-  "type": "member.added",
-  "cid": "messaging:3b95e7dd-2155-40be-b4be-9a08c2ba0ec8",
-  "channel_id": "3b95e7dd-2155-40be-b4be-9a08c2ba0ec8",
-  "channel_type": "messaging",
   "member": {
     "user_id": "leia_organa",
     "user": {
       "id": "leia_organa",
-      "role": "user",
-      "teams_role": {
-      },
+      "name": "Leia Organa",
+      "image": "https://vignette.wikia.nocookie.net/starwars/images/f/fc/Leia_Organa_TLJ.png",
       "custom": {
-        "birthland": "Polis Massa",
-        "image": "https://vignette.wikia.nocookie.net/starwars/images/f/fc/Leia_Organa_TLJ.png",
-        "name": "Leia Organa"
+        "birthland": "Polis Massa"
       },
+      "language": "de",
+      "role": "user",
+      "teams": [
+
+      ],
       "created_at": 1643903252254140000,
       "updated_at": 1776152257976935000,
-      "last_active": 1790684653723169631,
-      "last_engaged_at": 1790642134417611000,
       "banned": false,
       "online": false,
-      "language": "de"
+      "last_active": 1790712422080155000,
+      "blocked_user_ids": [
+
+      ]
     },
     "custom": {
     },
     "status": "member",
-    "created_at": 1790685602169748000,
-    "updated_at": 1790685602169748000,
+    "created_at": 1790748427044645000,
+    "updated_at": 1790748427044645000,
     "banned": false,
     "shadow_banned": false,
-    "is_global_banned": false,
-    "archived_at": null,
-    "pinned_at": null,
     "role": "member",
     "channel_role": "channel_member",
     "notifications_muted": false
   },
   "user": {
     "id": "leia_organa",
-    "role": "user",
-    "teams_role": {
-    },
+    "name": "Leia Organa",
+    "image": "https://vignette.wikia.nocookie.net/starwars/images/f/fc/Leia_Organa_TLJ.png",
     "custom": {
-      "birthland": "Polis Massa",
-      "image": "https://vignette.wikia.nocookie.net/starwars/images/f/fc/Leia_Organa_TLJ.png",
-      "name": "Leia Organa"
+      "birthland": "Polis Massa"
     },
+    "language": "de",
+    "role": "user",
+    "teams": [
+
+    ],
     "created_at": 1643903252254140000,
     "updated_at": 1776152257976935000,
-    "last_active": 1790684653723169631,
-    "last_engaged_at": 1790642134417611000,
     "banned": false,
     "online": false,
-    "language": "de"
+    "last_active": 1790712422080155000,
+    "blocked_user_ids": [
+
+    ]
   },
-  "channel_last_message_at": 1790685601643391000,
+  "type": "member.added",
+  "created_at": 1790748427061822958,
   "custom": {
   },
-  "created_at": 1790685602177710755
+  "cid": "messaging:6bd7e72d-fdfd-49b4-913c-bbe9f777df91",
+  "channel_member_count": 4,
+  "channel_type": "messaging",
+  "channel_id": "6bd7e72d-fdfd-49b4-913c-bbe9f777df91",
+  "channel": {
+    "id": "6bd7e72d-fdfd-49b4-913c-bbe9f777df91",
+    "type": "messaging",
+    "cid": "messaging:6bd7e72d-fdfd-49b4-913c-bbe9f777df91",
+    "last_message_at": 1790748426434097000,
+    "created_at": 1790748425634716000,
+    "updated_at": 1790748425634716000,
+    "created_by": {
+      "id": "luke_skywalker",
+      "name": "Luke Skywalker",
+      "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+      "custom": {
+        "birthland": "Tatooine"
+      },
+      "language": "en",
+      "role": "user",
+      "teams": [
+
+      ],
+      "created_at": 1643903230148169000,
+      "updated_at": 1785935604369473000,
+      "banned": false,
+      "online": true,
+      "last_active": 1790748415218891771,
+      "blocked_user_ids": [
+
+      ]
+    },
+    "frozen": false,
+    "disabled": false,
+    "members": [
+      {
+        "user_id": "count_dooku",
+        "user": {
+          "id": "count_dooku",
+          "name": "Count Dooku",
+          "image": "https://vignette.wikia.nocookie.net/starwars/images/b/b8/Dooku_Headshot.jpg",
+          "custom": {
+            "birthland": "Serenno"
+          },
+          "language": "ar",
+          "role": "user",
+          "teams": [
+
+          ],
+          "created_at": 1643905086843426000,
+          "updated_at": 1785203655269523000,
+          "banned": false,
+          "online": false,
+          "last_active": 1790673958077680000,
+          "blocked_user_ids": [
+
+          ]
+        },
+        "custom": {
+        },
+        "status": "member",
+        "created_at": 1790748425636910000,
+        "updated_at": 1790748425636910000,
+        "banned": false,
+        "shadow_banned": false,
+        "role": "member",
+        "channel_role": "channel_member",
+        "notifications_muted": false
+      },
+      {
+        "user_id": "lando_calrissian",
+        "user": {
+          "id": "lando_calrissian",
+          "name": "Lando Calrissian",
+          "image": "https://vignette.wikia.nocookie.net/starwars/images/8/8f/Lando_ROTJ.png",
+          "custom": {
+            "birthland": "Socorro"
+          },
+          "language": "en",
+          "role": "user",
+          "teams": [
+
+          ],
+          "created_at": 1643904702156199000,
+          "updated_at": 1766071050150540000,
+          "banned": false,
+          "online": false,
+          "last_active": 1790596271928904000,
+          "blocked_user_ids": [
+
+          ]
+        },
+        "custom": {
+        },
+        "status": "member",
+        "created_at": 1790748425636910000,
+        "updated_at": 1790748425636910000,
+        "banned": false,
+        "shadow_banned": false,
+        "role": "member",
+        "channel_role": "channel_member",
+        "notifications_muted": false
+      },
+      {
+        "user_id": "luke_skywalker",
+        "user": {
+          "id": "luke_skywalker",
+          "name": "Luke Skywalker",
+          "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+          "custom": {
+            "birthland": "Tatooine"
+          },
+          "language": "en",
+          "role": "user",
+          "teams": [
+
+          ],
+          "created_at": 1643903230148169000,
+          "updated_at": 1785935604369473000,
+          "banned": false,
+          "online": true,
+          "last_active": 1790748415218891771,
+          "blocked_user_ids": [
+
+          ]
+        },
+        "custom": {
+        },
+        "status": "member",
+        "created_at": 1790748425636910000,
+        "updated_at": 1790748425636910000,
+        "banned": false,
+        "shadow_banned": false,
+        "role": "owner",
+        "channel_role": "channel_member",
+        "notifications_muted": false
+      },
+      {
+        "user_id": "leia_organa",
+        "user": {
+          "id": "leia_organa",
+          "name": "Leia Organa",
+          "image": "https://vignette.wikia.nocookie.net/starwars/images/f/fc/Leia_Organa_TLJ.png",
+          "custom": {
+            "birthland": "Polis Massa"
+          },
+          "language": "de",
+          "role": "user",
+          "teams": [
+
+          ],
+          "created_at": 1643903252254140000,
+          "updated_at": 1776152257976935000,
+          "banned": false,
+          "online": false,
+          "last_active": 1790712422080155000,
+          "blocked_user_ids": [
+
+          ]
+        },
+        "custom": {
+        },
+        "status": "member",
+        "created_at": 1790748427044645000,
+        "updated_at": 1790748427044645000,
+        "banned": false,
+        "shadow_banned": false,
+        "role": "member",
+        "channel_role": "channel_member",
+        "notifications_muted": false
+      }
+    ],
+    "member_count": 4,
+    "config": {
+      "created_at": 1649840197837805000,
+      "updated_at": 1781718049619769000,
+      "name": "messaging",
+      "typing_events": true,
+      "read_events": true,
+      "connect_events": true,
+      "delivery_events": true,
+      "search": true,
+      "reactions": true,
+      "replies": true,
+      "quotes": true,
+      "mutes": true,
+      "uploads": true,
+      "url_enrichment": true,
+      "custom_events": true,
+      "push_notifications": true,
+      "reminders": false,
+      "mark_messages_pending": false,
+      "polls": true,
+      "user_message_reminders": false,
+      "shared_locations": false,
+      "count_messages": false,
+      "message_retention": "infinite",
+      "max_message_length": 5000,
+      "automod": "AI",
+      "automod_behavior": "flag",
+      "blocklist_behavior": "flag",
+      "automod_thresholds": {
+      },
+      "skip_last_msg_update_for_system_msgs": true,
+      "commands": [
+        {
+          "name": "giphy",
+          "description": "Post a random gif to the channel",
+          "args": "[text]",
+          "set": "fun_set"
+        },
+        {
+          "name": "mute",
+          "description": "Mute a user",
+          "args": "[@username]",
+          "set": "moderation_set"
+        },
+        {
+          "name": "unmute",
+          "description": "Unmute a user",
+          "args": "[@username]",
+          "set": "moderation_set"
+        }
+      ]
+    },
+    "custom": {
+      "name": "Sync Mock Server"
+    }
+  }
 }

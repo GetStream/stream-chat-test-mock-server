@@ -1,6 +1,6 @@
 {
   "message": {
-    "id": "a0b4bda8-4ed7-419b-8832-14c84d79cf2b",
+    "id": "56306035-deab-4417-983c-842861469b22",
     "text": "https://images.unsplash.com/photo-1568574728383-06fca083883d",
     "html": "<p><a href=\"https://images.unsplash.com/photo-1568574728383-06fca083883d\" rel=\"nofollow\">https://images.unsplash.com/photo-1568574728383-06fca083883d</a></p>\n",
     "type": "regular",
@@ -20,7 +20,7 @@
       "updated_at": 1785935604369473000,
       "banned": false,
       "online": true,
-      "last_active": 1790685571288648101,
+      "last_active": 1790748415218891771,
       "blocked_user_ids": [
 
       ]
@@ -30,7 +30,16 @@
       "notifications_muted": false
     },
     "attachments": [
-
+      {
+        "type": "image",
+        "image_url": "https://images.unsplash.com/photo-1568574728383-06fca083883d",
+        "thumb_url": "https://images.unsplash.com/photo-1568574728383-06fca083883d",
+        "custom": {
+        },
+        "og_scrape_url": "https://images.unsplash.com/photo-1568574728383-06fca083883d",
+        "title": "Title",
+        "text": "Description"
+      }
     ],
     "latest_reactions": [
 
@@ -44,9 +53,9 @@
     },
     "reply_count": 0,
     "deleted_reply_count": 0,
-    "cid": "messaging:3b95e7dd-2155-40be-b4be-9a08c2ba0ec8",
-    "created_at": 1790685603978244000,
-    "updated_at": 1790685603978244000,
+    "cid": "messaging:6bd7e72d-fdfd-49b4-913c-bbe9f777df91",
+    "created_at": 1790748429596573000,
+    "updated_at": 1790748429611418000,
     "custom": {
     },
     "shadowed": false,
@@ -62,7 +71,94 @@
     "pin_expires": null,
     "restricted_visibility": [
 
-    ]
+    ],
+    "channel": {
+      "id": "6bd7e72d-fdfd-49b4-913c-bbe9f777df91",
+      "type": "messaging",
+      "cid": "messaging:6bd7e72d-fdfd-49b4-913c-bbe9f777df91",
+      "last_message_at": 1790748429596573000,
+      "created_at": 1790748425634716000,
+      "updated_at": 1790748425634716000,
+      "created_by": {
+        "id": "luke_skywalker",
+        "name": "Luke Skywalker",
+        "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+        "custom": {
+          "birthland": "Tatooine"
+        },
+        "language": "en",
+        "role": "user",
+        "teams": [
+
+        ],
+        "created_at": 1643903230148169000,
+        "updated_at": 1785935604369473000,
+        "banned": false,
+        "online": true,
+        "last_active": 1790748415218891771,
+        "blocked_user_ids": [
+
+        ]
+      },
+      "frozen": false,
+      "disabled": false,
+      "member_count": 4,
+      "config": {
+        "created_at": 1649840197837805000,
+        "updated_at": 1781718049619769000,
+        "name": "messaging",
+        "typing_events": true,
+        "read_events": true,
+        "connect_events": true,
+        "delivery_events": true,
+        "search": true,
+        "reactions": true,
+        "replies": true,
+        "quotes": true,
+        "mutes": true,
+        "uploads": true,
+        "url_enrichment": true,
+        "custom_events": true,
+        "push_notifications": true,
+        "reminders": false,
+        "mark_messages_pending": false,
+        "polls": true,
+        "user_message_reminders": false,
+        "shared_locations": false,
+        "count_messages": false,
+        "message_retention": "infinite",
+        "max_message_length": 5000,
+        "automod": "AI",
+        "automod_behavior": "flag",
+        "blocklist_behavior": "flag",
+        "automod_thresholds": {
+        },
+        "skip_last_msg_update_for_system_msgs": true,
+        "commands": [
+          {
+            "name": "giphy",
+            "description": "Post a random gif to the channel",
+            "args": "[text]",
+            "set": "fun_set"
+          },
+          {
+            "name": "mute",
+            "description": "Mute a user",
+            "args": "[@username]",
+            "set": "moderation_set"
+          },
+          {
+            "name": "unmute",
+            "description": "Unmute a user",
+            "args": "[@username]",
+            "set": "moderation_set"
+          }
+        ]
+      },
+      "custom": {
+        "name": "Sync Mock Server"
+      }
+    }
   },
-  "duration": "158.19ms"
+  "duration": "134.99ms"
 }

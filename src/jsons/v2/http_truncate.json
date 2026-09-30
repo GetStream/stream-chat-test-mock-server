@@ -1,12 +1,12 @@
 {
-  "duration": "32.54ms",
+  "duration": "57.29ms",
   "channel": {
-    "id": "3b95e7dd-2155-40be-b4be-9a08c2ba0ec8",
+    "id": "6bd7e72d-fdfd-49b4-913c-bbe9f777df91",
     "type": "messaging",
-    "cid": "messaging:3b95e7dd-2155-40be-b4be-9a08c2ba0ec8",
+    "cid": "messaging:6bd7e72d-fdfd-49b4-913c-bbe9f777df91",
     "last_message_at": 0,
-    "created_at": 1790685600841819000,
-    "updated_at": 1790685604838881000,
+    "created_at": 1790748425634716000,
+    "updated_at": 1790748433010807000,
     "created_by": {
       "id": "luke_skywalker",
       "name": "Luke Skywalker",
@@ -23,7 +23,7 @@
       "updated_at": 1785935604369473000,
       "banned": false,
       "online": true,
-      "last_active": 1790685571288648101,
+      "last_active": 1790748415218891771,
       "blocked_user_ids": [
 
       ]
@@ -57,8 +57,8 @@
         "custom": {
         },
         "status": "member",
-        "created_at": 1790685600844507000,
-        "updated_at": 1790685600844507000,
+        "created_at": 1790748425636910000,
+        "updated_at": 1790748425636910000,
         "banned": false,
         "shadow_banned": false,
         "role": "member",
@@ -91,8 +91,8 @@
         "custom": {
         },
         "status": "member",
-        "created_at": 1790685600844507000,
-        "updated_at": 1790685600844507000,
+        "created_at": 1790748425636910000,
+        "updated_at": 1790748425636910000,
         "banned": false,
         "shadow_banned": false,
         "role": "member",
@@ -117,7 +117,7 @@
           "updated_at": 1785935604369473000,
           "banned": false,
           "online": true,
-          "last_active": 1790685571288648101,
+          "last_active": 1790748415218891771,
           "blocked_user_ids": [
 
           ]
@@ -125,8 +125,8 @@
         "custom": {
         },
         "status": "member",
-        "created_at": 1790685600844507000,
-        "updated_at": 1790685600844507000,
+        "created_at": 1790748425636910000,
+        "updated_at": 1790748425636910000,
         "banned": false,
         "shadow_banned": false,
         "role": "owner",
@@ -151,7 +151,7 @@
           "updated_at": 1776152257976935000,
           "banned": false,
           "online": false,
-          "last_active": 1790684741588008134,
+          "last_active": 1790712422080155000,
           "blocked_user_ids": [
 
           ]
@@ -159,8 +159,8 @@
         "custom": {
         },
         "status": "member",
-        "created_at": 1790685602169748000,
-        "updated_at": 1790685602169748000,
+        "created_at": 1790748427044645000,
+        "updated_at": 1790748427044645000,
         "banned": false,
         "shadow_banned": false,
         "role": "member",
@@ -221,7 +221,7 @@
         }
       ]
     },
-    "truncated_at": 1790685604833237000,
+    "truncated_at": 1790748433005282000,
     "truncated_by": {
       "id": "luke_skywalker",
       "name": "Luke Skywalker",
@@ -238,7 +238,7 @@
       "updated_at": 1785935604369473000,
       "banned": false,
       "online": true,
-      "last_active": 1790685571288648101,
+      "last_active": 1790748415218891771,
       "blocked_user_ids": [
 
       ]
@@ -248,7 +248,7 @@
     }
   },
   "message": {
-    "id": "a4203b42-691e-4191-b5aa-0c50a9460dfd",
+    "id": "1e37f7fa-b898-496a-a441-d62197fad60b",
     "text": "Channel truncated",
     "html": "<p>Channel truncated</p>\n",
     "type": "system",
@@ -268,7 +268,7 @@
       "updated_at": 1785935604369473000,
       "banned": false,
       "online": true,
-      "last_active": 1790685571288648101,
+      "last_active": 1790748415218891771,
       "blocked_user_ids": [
 
       ]
@@ -288,9 +288,9 @@
     },
     "reply_count": 0,
     "deleted_reply_count": 0,
-    "cid": "messaging:3b95e7dd-2155-40be-b4be-9a08c2ba0ec8",
-    "created_at": 1790685604833238000,
-    "updated_at": 1790685604833238000,
+    "cid": "messaging:6bd7e72d-fdfd-49b4-913c-bbe9f777df91",
+    "created_at": 1790748433005283000,
+    "updated_at": 1790748433005283000,
     "custom": {
     },
     "shadowed": false,

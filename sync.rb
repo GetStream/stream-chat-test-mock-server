@@ -54,6 +54,9 @@ def establish_websocket_connection(event_data)
   health_check['me']['channel_mutes'] = []
   health_check['me']['mutes'] = []
   health_check['me']['devices'] = []
+  %w[total_unread_count unread_channels unread_count unread_threads].each do |key|
+    health_check['me'][key] = 0 if health_check['me'].key?(key)
+  end
   save_json(health_check, 'ws_health_check.json')
   health_check['connection_id']
 end
@@ -93,7 +96,7 @@ def send_typing_event(channel_id)
   save_json(response, 'http_events.json')
 end
 
-def send_message(channel_id, text, filename, fill_attachment: false)
+def send_message(channel_id, text, filename, fill_attachment: false, enriched: false)
   message_id = SecureRandom.uuid
   payload = {
     message: {
@@ -106,9 +109,21 @@ def send_message(channel_id, text, filename, fill_attachment: false)
   }.to_json
   endpoint = "#{STREAM_API_URL}/channels/messaging/#{channel_id}/message?api_key=#{STREAM_DEMO_API_KEY}"
   response = http_post(endpoint, payload)
+  response['message'] = wait_for_enriched_message(message_id) if enriched
   fill_attachment_defaults(response) if fill_attachment
   save_json(response, filename)
   message_id
+end
+
+# The demo app enriches URLs asynchronously, so the send response has no link attachment yet;
+# poll the message until the scraped attachment lands on it.
+def wait_for_enriched_message(message_id)
+  15.times do
+    sleep(1)
+    message = http_get("#{STREAM_API_URL}/messages/#{message_id}?api_key=#{STREAM_DEMO_API_KEY}")['message']
+    return message unless message['attachments'].empty?
+  end
+  raise("message #{message_id} got no link attachment within 15 seconds")
 end
 
 # Image link previews (e.g. Unsplash) come back without `title`/`text`, so the
@@ -126,7 +141,8 @@ def send_youtube_link(channel_id)
     channel_id,
     'https://www.youtube.com/watch?v=xOX7MsrbaPY',
     'http_youtube_link.json',
-    fill_attachment: true
+    fill_attachment: true,
+    enriched: true
   )
 end
 
@@ -139,12 +155,13 @@ def send_unsplash_link(channel_id)
     channel_id,
     'https://images.unsplash.com/photo-1568574728383-06fca083883d',
     'http_unsplash_link.json',
-    fill_attachment: true
+    fill_attachment: true,
+    enriched: true
   )
 end
 
 def send_giphy_link(channel_id)
-  send_message(channel_id, 'https://giphy.com/gifs/test-gw3IWyGkC0rsazTi', 'http_giphy_link.json')
+  send_message(channel_id, 'https://giphy.com/gifs/test-gw3IWyGkC0rsazTi', 'http_giphy_link.json', enriched: true)
 end
 
 def create_draft_message(channel_id, text, filename)

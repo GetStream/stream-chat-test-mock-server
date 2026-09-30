@@ -1,6 +1,6 @@
 {
   "message": {
-    "id": "2fd21762-5e26-48fd-9eb1-3568dc593e2c",
+    "id": "b834886a-d501-4461-a7a7-6b06f9bcc9cf",
     "text": "https://www.youtube.com/watch?v=xOX7MsrbaPY",
     "html": "<p><a href=\"https://www.youtube.com/watch?v=xOX7MsrbaPY\" rel=\"nofollow\">https://www.youtube.com/watch?v=xOX7MsrbaPY</a></p>\n",
     "type": "regular",
@@ -17,7 +17,7 @@
       "updated_at": "2026-08-05T13:13:24.369473Z",
       "banned": false,
       "online": true,
-      "last_active": "2026-09-29T12:49:31.294453401Z",
+      "last_active": "2026-09-30T06:06:55.218891771Z",
       "blocked_user_ids": [
 
       ],
@@ -28,7 +28,17 @@
       "notifications_muted": false
     },
     "attachments": [
-
+      {
+        "type": "video",
+        "author_name": "YouTube",
+        "title": "Introducing MotionScape: Prototype SwiftUI Animation Easings",
+        "title_link": "https://www.youtube.com/watch?v=xOX7MsrbaPY",
+        "text": "MotionScape is your SwiftUI animation's playground as a developer. You can see all animations and their parameters in effect with beautifully designed and handcrafted animation examples. Best of all: directly preview and export your settings as production-ready SwiftUI code that you can use in your apps as-is.\n\nSupercharge your apps with animations and get to know how to use them - with MotionScape!\n\nDownload MotionScape from the Mac AppStore: \nhttps://gstrm.io/motionscape-yt\n\nWebpage:\nhttps://getstream.github.io/motionscape-app/\n\nSwiftUI chat messaging:\nhttps://getstream.io/chat/sdk/swiftui/\n...",
+        "image_url": "https://i.ytimg.com/vi/xOX7MsrbaPY/mqdefault.jpg",
+        "thumb_url": "https://i.ytimg.com/vi/xOX7MsrbaPY/mqdefault.jpg",
+        "asset_url": "https://www.youtube.com/watch?v=xOX7MsrbaPY",
+        "og_scrape_url": "https://www.youtube.com/watch?v=xOX7MsrbaPY"
+      }
     ],
     "latest_reactions": [
 
@@ -42,9 +52,9 @@
     },
     "reply_count": 0,
     "deleted_reply_count": 0,
-    "cid": "messaging:7a164b98-c65c-4305-8cbe-1aaa6b6161e4",
-    "created_at": "2026-09-29T12:49:56.023585Z",
-    "updated_at": "2026-09-29T12:49:56.023585Z",
+    "cid": "messaging:f1cb3448-9597-4860-a530-447f2c6c9916",
+    "created_at": "2026-09-30T06:06:58.85721Z",
+    "updated_at": "2026-09-30T06:06:58.994809Z",
     "shadowed": false,
     "mentioned_users": [
 
@@ -58,7 +68,90 @@
     "pin_expires": null,
     "restricted_visibility": [
 
-    ]
+    ],
+    "channel": {
+      "id": "f1cb3448-9597-4860-a530-447f2c6c9916",
+      "type": "messaging",
+      "cid": "messaging:f1cb3448-9597-4860-a530-447f2c6c9916",
+      "last_message_at": "2026-09-30T06:06:58.85721Z",
+      "created_at": "2026-09-30T06:06:55.565838Z",
+      "updated_at": "2026-09-30T06:06:55.565838Z",
+      "created_by": {
+        "id": "luke_skywalker",
+        "name": "Luke Skywalker",
+        "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+        "language": "en",
+        "role": "user",
+        "teams": [
+
+        ],
+        "created_at": "2022-02-03T15:47:10.148169Z",
+        "updated_at": "2026-08-05T13:13:24.369473Z",
+        "banned": false,
+        "online": true,
+        "last_active": "2026-09-30T06:06:55.218891771Z",
+        "blocked_user_ids": [
+
+        ],
+        "birthland": "Tatooine"
+      },
+      "frozen": false,
+      "disabled": false,
+      "member_count": 4,
+      "config": {
+        "created_at": "2022-04-13T08:56:37.837805Z",
+        "updated_at": "2026-06-17T17:40:49.619769Z",
+        "name": "messaging",
+        "typing_events": true,
+        "read_events": true,
+        "connect_events": true,
+        "delivery_events": true,
+        "search": true,
+        "reactions": true,
+        "replies": true,
+        "quotes": true,
+        "mutes": true,
+        "uploads": true,
+        "url_enrichment": true,
+        "custom_events": true,
+        "push_notifications": true,
+        "reminders": false,
+        "mark_messages_pending": false,
+        "polls": true,
+        "user_message_reminders": false,
+        "shared_locations": false,
+        "count_messages": false,
+        "message_retention": "infinite",
+        "max_message_length": 5000,
+        "automod": "AI",
+        "automod_behavior": "flag",
+        "blocklist_behavior": "flag",
+        "automod_thresholds": {
+        },
+        "skip_last_msg_update_for_system_msgs": true,
+        "commands": [
+          {
+            "name": "giphy",
+            "description": "Post a random gif to the channel",
+            "args": "[text]",
+            "set": "fun_set"
+          },
+          {
+            "name": "mute",
+            "description": "Mute a user",
+            "args": "[@username]",
+            "set": "moderation_set"
+          },
+          {
+            "name": "unmute",
+            "description": "Unmute a user",
+            "args": "[@username]",
+            "set": "moderation_set"
+          }
+        ]
+      },
+      "name": "Sync Mock Server"
+    }
   },
-  "duration": "101.17ms"
+  "duration": "228.04ms"
 }

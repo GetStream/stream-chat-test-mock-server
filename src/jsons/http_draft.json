@@ -1,19 +1,19 @@
 {
   "draft": {
     "message": {
-      "id": "151cbaf8-af12-4691-891e-d9ad634e5540",
+      "id": "bf3fde8d-8574-49e5-8c48-70f94a1a113a",
       "text": "Test",
       "show_in_channel": false,
       "silent": false
     },
-    "channel_cid": "messaging:7a164b98-c65c-4305-8cbe-1aaa6b6161e4",
+    "channel_cid": "messaging:f1cb3448-9597-4860-a530-447f2c6c9916",
     "channel": {
-      "id": "7a164b98-c65c-4305-8cbe-1aaa6b6161e4",
+      "id": "f1cb3448-9597-4860-a530-447f2c6c9916",
       "type": "messaging",
-      "cid": "messaging:7a164b98-c65c-4305-8cbe-1aaa6b6161e4",
-      "last_message_at": "2026-09-29T12:49:56.840524Z",
-      "created_at": "2026-09-29T12:49:53.175442Z",
-      "updated_at": "2026-09-29T12:49:53.175442Z",
+      "cid": "messaging:f1cb3448-9597-4860-a530-447f2c6c9916",
+      "last_message_at": "2026-09-30T06:07:02.314441Z",
+      "created_at": "2026-09-30T06:06:55.565838Z",
+      "updated_at": "2026-09-30T06:06:55.565838Z",
       "created_by": {
         "id": "luke_skywalker",
         "name": "Luke Skywalker",
@@ -27,7 +27,7 @@
         "updated_at": "2026-08-05T13:13:24.369473Z",
         "banned": false,
         "online": true,
-        "last_active": "2026-09-29T12:49:31.294453401Z",
+        "last_active": "2026-09-30T06:06:55.218891771Z",
         "blocked_user_ids": [
 
         ],
@@ -92,7 +92,7 @@
     },
     "parent_message": null,
     "quoted_message": null,
-    "created_at": "2026-09-29T12:49:57.072332595Z"
+    "created_at": "2026-09-30T06:07:03.684974063Z"
   },
-  "duration": "11.83ms"
+  "duration": "12.28ms"
 }

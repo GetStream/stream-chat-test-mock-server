@@ -1,12 +1,12 @@
 {
-  "duration": "75.59ms",
+  "duration": "42.76ms",
   "channel": {
-    "id": "7a164b98-c65c-4305-8cbe-1aaa6b6161e4",
+    "id": "f1cb3448-9597-4860-a530-447f2c6c9916",
     "type": "messaging",
-    "cid": "messaging:7a164b98-c65c-4305-8cbe-1aaa6b6161e4",
+    "cid": "messaging:f1cb3448-9597-4860-a530-447f2c6c9916",
     "last_message_at": "0001-01-01T00:00:00Z",
-    "created_at": "2026-09-29T12:49:53.175442Z",
-    "updated_at": "2026-09-29T12:49:57.576307Z",
+    "created_at": "2026-09-30T06:06:55.565838Z",
+    "updated_at": "2026-09-30T06:07:04.1158Z",
     "created_by": {
       "id": "luke_skywalker",
       "name": "Luke Skywalker",
@@ -20,7 +20,7 @@
       "updated_at": "2026-08-05T13:13:24.369473Z",
       "banned": false,
       "online": true,
-      "last_active": "2026-09-29T12:49:31.294453401Z",
+      "last_active": "2026-09-30T06:06:55.218891771Z",
       "blocked_user_ids": [
 
       ],
@@ -51,8 +51,8 @@
           "birthland": "Serenno"
         },
         "status": "member",
-        "created_at": "2026-09-29T12:49:53.178611Z",
-        "updated_at": "2026-09-29T12:49:53.178611Z",
+        "created_at": "2026-09-30T06:06:55.570915Z",
+        "updated_at": "2026-09-30T06:06:55.570915Z",
         "banned": false,
         "shadow_banned": false,
         "role": "member",
@@ -81,8 +81,8 @@
           "birthland": "Socorro"
         },
         "status": "member",
-        "created_at": "2026-09-29T12:49:53.178611Z",
-        "updated_at": "2026-09-29T12:49:53.178611Z",
+        "created_at": "2026-09-30T06:06:55.570915Z",
+        "updated_at": "2026-09-30T06:06:55.570915Z",
         "banned": false,
         "shadow_banned": false,
         "role": "member",
@@ -104,15 +104,15 @@
           "updated_at": "2026-08-05T13:13:24.369473Z",
           "banned": false,
           "online": true,
-          "last_active": "2026-09-29T12:49:31.294453401Z",
+          "last_active": "2026-09-30T06:06:55.218891771Z",
           "blocked_user_ids": [
 
           ],
           "birthland": "Tatooine"
         },
         "status": "member",
-        "created_at": "2026-09-29T12:49:53.178611Z",
-        "updated_at": "2026-09-29T12:49:53.178611Z",
+        "created_at": "2026-09-30T06:06:55.570915Z",
+        "updated_at": "2026-09-30T06:06:55.570915Z",
         "banned": false,
         "shadow_banned": false,
         "role": "owner",
@@ -134,15 +134,15 @@
           "updated_at": "2026-04-14T07:37:37.976935Z",
           "banned": false,
           "online": false,
-          "last_active": "2026-09-29T12:25:41.588008134Z",
+          "last_active": "2026-09-29T20:07:02.080155Z",
           "blocked_user_ids": [
 
           ],
           "birthland": "Polis Massa"
         },
         "status": "member",
-        "created_at": "2026-09-29T12:49:54.726212Z",
-        "updated_at": "2026-09-29T12:49:54.726212Z",
+        "created_at": "2026-09-30T06:06:57.292413Z",
+        "updated_at": "2026-09-30T06:06:57.292413Z",
         "banned": false,
         "shadow_banned": false,
         "role": "member",
@@ -203,7 +203,7 @@
         }
       ]
     },
-    "truncated_at": "2026-09-29T12:49:57.569458Z",
+    "truncated_at": "2026-09-30T06:07:04.109488Z",
     "truncated_by": {
       "id": "luke_skywalker",
       "name": "Luke Skywalker",
@@ -217,7 +217,7 @@
       "updated_at": "2026-08-05T13:13:24.369473Z",
       "banned": false,
       "online": true,
-      "last_active": "2026-09-29T12:49:31.294453401Z",
+      "last_active": "2026-09-30T06:06:55.218891771Z",
       "blocked_user_ids": [
 
       ],
@@ -226,7 +226,7 @@
     "name": "Sync Mock Server"
   },
   "message": {
-    "id": "89bcb5f4-a33d-4d4c-a857-0edeb11ec946",
+    "id": "895fbde7-939a-472a-a87a-6a86c89fe0d9",
     "text": "Channel truncated",
     "html": "<p>Channel truncated</p>\n",
     "type": "system",
@@ -243,7 +243,7 @@
       "updated_at": "2026-08-05T13:13:24.369473Z",
       "banned": false,
       "online": true,
-      "last_active": "2026-09-29T12:49:31.294453401Z",
+      "last_active": "2026-09-30T06:06:55.218891771Z",
       "blocked_user_ids": [
 
       ],
@@ -264,9 +264,9 @@
     },
     "reply_count": 0,
     "deleted_reply_count": 0,
-    "cid": "messaging:7a164b98-c65c-4305-8cbe-1aaa6b6161e4",
-    "created_at": "2026-09-29T12:49:57.569459Z",
-    "updated_at": "2026-09-29T12:49:57.569459Z",
+    "cid": "messaging:f1cb3448-9597-4860-a530-447f2c6c9916",
+    "created_at": "2026-09-30T06:07:04.109489Z",
+    "updated_at": "2026-09-30T06:07:04.109489Z",
     "shadowed": false,
     "mentioned_users": [
 
