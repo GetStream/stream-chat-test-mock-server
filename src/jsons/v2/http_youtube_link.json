@@ -1,27 +1,29 @@
 {
   "message": {
-    "id": "0a276373-82c1-4feb-855d-1f36ed8bd93b",
-    "text": "https://images.unsplash.com/photo-1568574728383-06fca083883d",
-    "html": "<p><a href=\"https://images.unsplash.com/photo-1568574728383-06fca083883d\" rel=\"nofollow\">https://images.unsplash.com/photo-1568574728383-06fca083883d</a></p>\n",
+    "id": "122ae2c2-45e9-4281-b2f4-417a90a4750d",
+    "text": "https://www.youtube.com/watch?v=xOX7MsrbaPY",
+    "html": "<p><a href=\"https://www.youtube.com/watch?v=xOX7MsrbaPY\" rel=\"nofollow\">https://www.youtube.com/watch?v=xOX7MsrbaPY</a></p>\n",
     "type": "regular",
     "user": {
       "id": "luke_skywalker",
       "name": "Luke Skywalker",
       "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+      "custom": {
+        "birthland": "Tatooine"
+      },
       "language": "en",
       "role": "user",
       "teams": [
 
       ],
-      "created_at": "2022-02-03T15:47:10.148169Z",
-      "updated_at": "2026-08-05T13:13:24.369473Z",
+      "created_at": 1643903230148169000,
+      "updated_at": 1785935604369473000,
       "banned": false,
       "online": true,
-      "last_active": "2026-09-30T06:06:55.218891771Z",
+      "last_active": 1790748415218891771,
       "blocked_user_ids": [
 
-      ],
-      "birthland": "Tatooine"
+      ]
     },
     "member": {
       "channel_role": "channel_member",
@@ -29,12 +31,17 @@
     },
     "attachments": [
       {
-        "type": "image",
-        "image_url": "https://images.unsplash.com/photo-1568574728383-06fca083883d",
-        "thumb_url": "https://images.unsplash.com/photo-1568574728383-06fca083883d",
-        "og_scrape_url": "https://images.unsplash.com/photo-1568574728383-06fca083883d",
-        "title": "Title",
-        "text": "Description"
+        "type": "video",
+        "author_name": "YouTube",
+        "title": "Introducing MotionScape: Prototype SwiftUI Animation Easings",
+        "title_link": "https://www.youtube.com/watch?v=xOX7MsrbaPY",
+        "text": "MotionScape is your SwiftUI animation's playground as a developer. You can see all animations and their parameters in effect with beautifully designed and handcrafted animation examples. Best of all: directly preview and export your settings as production-ready SwiftUI code that you can use in your apps as-is.\n\nSupercharge your apps with animations and get to know how to use them - with MotionScape!\n\nDownload MotionScape from the Mac AppStore: \nhttps://gstrm.io/motionscape-yt\n\nWebpage:\nhttps://getstream.github.io/motionscape-app/\n\nSwiftUI chat messaging:\nhttps://getstream.io/chat/sdk/swiftui/\n...",
+        "image_url": "https://i.ytimg.com/vi/xOX7MsrbaPY/mqdefault.jpg",
+        "thumb_url": "https://i.ytimg.com/vi/xOX7MsrbaPY/mqdefault.jpg",
+        "asset_url": "https://www.youtube.com/watch?v=xOX7MsrbaPY",
+        "custom": {
+        },
+        "og_scrape_url": "https://www.youtube.com/watch?v=xOX7MsrbaPY"
       }
     ],
     "latest_reactions": [
@@ -49,9 +56,11 @@
     },
     "reply_count": 0,
     "deleted_reply_count": 0,
-    "cid": "messaging:f1cb3448-9597-4860-a530-447f2c6c9916",
-    "created_at": "2026-09-30T06:07:00.67186Z",
-    "updated_at": "2026-09-30T06:07:00.767391Z",
+    "cid": "messaging:6bd7e72d-fdfd-49b4-913c-bbe9f777df91",
+    "created_at": 1790748428101772000,
+    "updated_at": 1790748428119976000,
+    "custom": {
+    },
     "shadowed": false,
     "mentioned_users": [
 
@@ -67,37 +76,39 @@
 
     ],
     "channel": {
-      "id": "f1cb3448-9597-4860-a530-447f2c6c9916",
+      "id": "6bd7e72d-fdfd-49b4-913c-bbe9f777df91",
       "type": "messaging",
-      "cid": "messaging:f1cb3448-9597-4860-a530-447f2c6c9916",
-      "last_message_at": "2026-09-30T06:07:00.67186Z",
-      "created_at": "2026-09-30T06:06:55.565838Z",
-      "updated_at": "2026-09-30T06:06:55.565838Z",
+      "cid": "messaging:6bd7e72d-fdfd-49b4-913c-bbe9f777df91",
+      "last_message_at": 1790748428101772000,
+      "created_at": 1790748425634716000,
+      "updated_at": 1790748425634716000,
       "created_by": {
         "id": "luke_skywalker",
         "name": "Luke Skywalker",
         "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+        "custom": {
+          "birthland": "Tatooine"
+        },
         "language": "en",
         "role": "user",
         "teams": [
 
         ],
-        "created_at": "2022-02-03T15:47:10.148169Z",
-        "updated_at": "2026-08-05T13:13:24.369473Z",
+        "created_at": 1643903230148169000,
+        "updated_at": 1785935604369473000,
         "banned": false,
         "online": true,
-        "last_active": "2026-09-30T06:06:55.218891771Z",
+        "last_active": 1790748415218891771,
         "blocked_user_ids": [
 
-        ],
-        "birthland": "Tatooine"
+        ]
       },
       "frozen": false,
       "disabled": false,
       "member_count": 4,
       "config": {
-        "created_at": "2022-04-13T08:56:37.837805Z",
-        "updated_at": "2026-06-17T17:40:49.619769Z",
+        "created_at": 1649840197837805000,
+        "updated_at": 1781718049619769000,
         "name": "messaging",
         "typing_events": true,
         "read_events": true,
@@ -147,8 +158,10 @@
           }
         ]
       },
-      "name": "Sync Mock Server"
+      "custom": {
+        "name": "Sync Mock Server"
+      }
     }
   },
-  "duration": "135.23ms"
+  "duration": "132.69ms"
 }

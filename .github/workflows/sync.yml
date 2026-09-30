@@ -23,6 +23,8 @@ jobs:
     - uses: ./.github/actions/ruby-cache
     - run: bundle exec ruby sync.rb
       timeout-minutes: 5
+    - run: bundle exec ruby sync.rb v2
+      timeout-minutes: 5
     - name: Commit and push
       run: |
         git config --global user.email "stream-bot@getstream.io"

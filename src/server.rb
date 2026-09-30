@@ -25,6 +25,8 @@ require_relative 'helpers/threads'
 require_relative 'robots/chat'
 require_relative 'robots/participant'
 
+# The fixture set the server was started with: v2 nests the extra data under `custom`.
+$api_version = ARGV[1] == 'v2' ? :v2 : :v1
 $ws = nil
 # The websocket protocol the connected client negotiated. v1 authenticates through the
 # connect URL and takes a health.check carrying `me` as its first frame; v2 authenticates
@@ -82,7 +84,7 @@ end
 # payloads set by jwt.rb pass through untouched and close the socket on both protocols.
 def connection_payload
   payload = JSON.parse($health_check)
-  payload['me'] = payload['me'].merge(live_own_user_state) if payload['type'] == 'health.check' && payload['me']
+  payload['me'] = payload['me'].merge(live_own_user_state) if payload['me']
   payload
 end
 

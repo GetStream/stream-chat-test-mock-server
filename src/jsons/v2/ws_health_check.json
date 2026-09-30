@@ -1,0 +1,238 @@
+{
+  "type": "connection.ok",
+  "created_at": 1790748425253785421,
+  "connection_id": "6ababa98-0a82-3966-0300-0000003a663a",
+  "me": {
+    "id": "luke_skywalker",
+    "name": "Luke Skywalker",
+    "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+    "custom": {
+      "birthland": "Tatooine"
+    },
+    "language": "en",
+    "role": "user",
+    "teams": [
+
+    ],
+    "created_at": 1643903230148169000,
+    "updated_at": 1785935604369473000,
+    "banned": false,
+    "online": true,
+    "last_active": 1790748425246586071,
+    "privacy_settings": {
+      "typing_indicators": {
+        "enabled": true
+      },
+      "read_receipts": {
+        "enabled": true
+      },
+      "delivery_receipts": {
+        "enabled": true
+      }
+    },
+    "devices": [
+
+    ],
+    "invisible": false,
+    "mutes": [
+
+    ],
+    "channel_mutes": [
+
+    ],
+    "unread_count": 0,
+    "total_unread_count": 0,
+    "unread_channels": 0,
+    "unread_threads": 0
+  },
+  "chat": {
+    "mutes": [
+      {
+        "created_at": 1777384252144059000,
+        "updated_at": 1777384252144059000
+      },
+      {
+        "created_at": 1771611897508896000,
+        "updated_at": 1771611897508896000
+      },
+      {
+        "created_at": 1763485604292972000,
+        "updated_at": 1763485604292972000
+      },
+      {
+        "created_at": 1762422810547456000,
+        "updated_at": 1762422810547456000
+      },
+      {
+        "created_at": 1732099775809311000,
+        "updated_at": 1732099775809311000
+      },
+      {
+        "created_at": 1695156128304693000,
+        "updated_at": 1695156128304693000
+      },
+      {
+        "created_at": 1690867750255046000,
+        "updated_at": 1692705445725914000
+      },
+      {
+        "created_at": 1674366387127447000,
+        "updated_at": 1674366387127447000
+      }
+    ],
+    "channel_mutes": [
+      {
+        "created_at": 1780405740646321000,
+        "updated_at": 1780405740646321000
+      },
+      {
+        "created_at": 1775412690599265000,
+        "updated_at": 1775412690599265000
+      },
+      {
+        "created_at": 1773599567853752000,
+        "updated_at": 1773599567853752000
+      },
+      {
+        "created_at": 1770853504299672000,
+        "updated_at": 1770853504299672000
+      },
+      {
+        "created_at": 1770853444203124000,
+        "updated_at": 1770853444203124000
+      },
+      {
+        "created_at": 1770853373791178000,
+        "updated_at": 1770853373791178000
+      },
+      {
+        "created_at": 1769813554178953000,
+        "updated_at": 1769813554178953000
+      },
+      {
+        "created_at": 1769372533559558000,
+        "updated_at": 1769372533559558000
+      },
+      {
+        "created_at": 1763485811707339000,
+        "updated_at": 1763485811707339000
+      },
+      {
+        "created_at": 1763485759270594000,
+        "updated_at": 1763485759270594000
+      },
+      {
+        "created_at": 1763113295740516000,
+        "updated_at": 1763113295740516000
+      },
+      {
+        "created_at": 1757960226400189000,
+        "updated_at": 1757960226400189000
+      },
+      {
+        "created_at": 1755795472199231000,
+        "updated_at": 1755795472199231000
+      },
+      {
+        "created_at": 1747150076851107000,
+        "updated_at": 1747150076851107000
+      },
+      {
+        "created_at": 1746722714980029000,
+        "updated_at": 1746722714980029000
+      },
+      {
+        "created_at": 1746460267512696000,
+        "updated_at": 1746460267512696000
+      },
+      {
+        "created_at": 1745840111837067000,
+        "updated_at": 1745840111837067000
+      },
+      {
+        "created_at": 1733803282125092000,
+        "updated_at": 1733803282125092000
+      },
+      {
+        "created_at": 1728999407395666000,
+        "updated_at": 1728999407395666000
+      },
+      {
+        "created_at": 1709351837885402000,
+        "updated_at": 1709351837885402000
+      },
+      {
+        "created_at": 1704475592030197000,
+        "updated_at": 1704475592030197000
+      },
+      {
+        "created_at": 1698655121553697000,
+        "updated_at": 1698655121553697000
+      },
+      {
+        "created_at": 1698301425899939000,
+        "updated_at": 1698301425899939000
+      },
+      {
+        "created_at": 1695646381903461000,
+        "updated_at": 1695646381903461000
+      },
+      {
+        "created_at": 1695399219842818000,
+        "updated_at": 1695399219842818000
+      },
+      {
+        "created_at": 1686200838579713000,
+        "updated_at": 1686200838579713000
+      },
+      {
+        "created_at": 1683912982243469000,
+        "updated_at": 1683912982243469000
+      },
+      {
+        "created_at": 1683843924816346000,
+        "updated_at": 1683843924816346000
+      },
+      {
+        "created_at": 1672334403333951000,
+        "updated_at": 1672334403333951000
+      },
+      {
+        "created_at": 1666243908206804000,
+        "updated_at": 1666243908206804000
+      },
+      {
+        "created_at": 1665862543285379000,
+        "updated_at": 1665862543285379000
+      },
+      {
+        "created_at": 1665456088533838000,
+        "updated_at": 1665456088533838000
+      },
+      {
+        "created_at": 1665456080904612000,
+        "updated_at": 1665456080904612000
+      },
+      {
+        "created_at": 1661373726921057000,
+        "updated_at": 1661373726921057000
+      },
+      {
+        "created_at": 1661273414565814000,
+        "updated_at": 1661273414565814000
+      },
+      {
+        "created_at": 1654842943946581000,
+        "updated_at": 1654842943946581000
+      },
+      {
+        "created_at": 1653552411600570000,
+        "updated_at": 1653552411600570000
+      }
+    ],
+    "total_unread_count": 0,
+    "unread_channels": 0,
+    "unread_threads": 1,
+    "latest_hidden_channels": null
+  }
+}

@@ -4,33 +4,49 @@ require 'securerandom'
 require 'faye/websocket'
 require 'eventmachine'
 require 'uri'
+require 'fileutils'
 
+# `ruby sync.rb v2` records the v2 fixtures through the v2 endpoints; without an argument it records v1.
+API_V2 = ARGV[0] == 'v2'
 STREAM_BASE_URL = 'chat.stream-io-api.com'
 STREAM_HTTP_URL = "https://#{STREAM_BASE_URL}"
-STREAM_WSS_URL = "wss://#{STREAM_BASE_URL}/connect"
-STREAM_DEMO_API_KEY = '8br4watad788'
-STREAM_DEMO_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoibHVrZV9za3l3YWxrZXIifQ.kFSLHRB5X62t0Zlc7nwczWUfsQMwfkpylC6jCUZ6Mc0'
+STREAM_API_URL = API_V2 ? "#{STREAM_HTTP_URL}/api/v2/chat" : STREAM_HTTP_URL
+STREAM_WSS_URL = API_V2 ? "wss://#{STREAM_BASE_URL}/api/v2/connect" : "wss://#{STREAM_BASE_URL}/connect"
+STREAM_DEMO_API_KEY = 'zcgvnykxsfm8'
+STREAM_DEMO_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoibHVrZV9za3l3YWxrZXIifQ.b6EiC8dq2AHk0JPfI-6PN-AM9TVzt8JV-qB1N9kchlI'
 STREAM_USER_ID = 'luke_skywalker'
 STREAM_HEADERS = {
   'Authorization' => STREAM_DEMO_TOKEN,
   'Stream-Auth-Type' => 'jwt',
   'Content-Type' => 'application/json'
 }
-MOCK_SERVER_FIXTURES_PATH = 'src/jsons'
+MOCK_SERVER_FIXTURES_PATH = API_V2 ? 'src/jsons/v2' : 'src/jsons'
+
+STREAM_USER_DETAILS = {
+  id: STREAM_USER_ID,
+  name: 'Luke Skywalker',
+  image: 'https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg'
+}
 
 def connect_endpoint
+  return "#{STREAM_WSS_URL}?api_key=#{STREAM_DEMO_API_KEY}" if API_V2
+
   payload = {
     user_id: STREAM_USER_ID,
-    user_details: {
-      id: STREAM_USER_ID,
-      name: 'Luke Skywalker',
-      image: 'https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg',
-      birthland: 'Tatooine'
-    },
+    user_details: STREAM_USER_DETAILS.merge(birthland: 'Tatooine'),
     server_determines_connection_id: true
   }.to_json
   query_params = ["api_key=#{STREAM_DEMO_API_KEY}", "json=#{URI.encode_www_form_component(payload)}"]
   "#{STREAM_WSS_URL}?#{query_params.join('&')}"
+end
+
+# v2 authenticates with a text frame after the upgrade instead of through the connect URL.
+def websocket_auth_frame
+  {
+    token: STREAM_DEMO_TOKEN,
+    user_details: STREAM_USER_DETAILS.merge(custom: { birthland: 'Tatooine' }),
+    products: ['chat']
+  }.to_json
 end
 
 def establish_websocket_connection(event_data)
@@ -38,6 +54,9 @@ def establish_websocket_connection(event_data)
   health_check['me']['channel_mutes'] = []
   health_check['me']['mutes'] = []
   health_check['me']['devices'] = []
+  %w[total_unread_count unread_channels unread_count unread_threads].each do |key|
+    health_check['me'][key] = 0 if health_check['me'].key?(key)
+  end
   save_json(health_check, 'ws_health_check.json')
   health_check['connection_id']
 end
@@ -52,13 +71,13 @@ def request_channels(connection_id)
     message_limit: 25,
     watch: true
   }.to_json
-  query_params = [
-    "api_key=#{STREAM_DEMO_API_KEY}",
-    "connection_id=#{connection_id}",
-    "payload=#{URI.encode_www_form_component(payload)}"
-  ]
-  endpoint = "#{STREAM_HTTP_URL}/channels?#{query_params.join('&')}"
-  response = http_get(endpoint)
+  query_params = ["api_key=#{STREAM_DEMO_API_KEY}", "connection_id=#{connection_id}"]
+  if API_V2
+    response = http_post("#{STREAM_API_URL}/channels?#{query_params.join('&')}", payload)
+  else
+    query_params << "payload=#{URI.encode_www_form_component(payload)}"
+    response = http_get("#{STREAM_API_URL}/channels?#{query_params.join('&')}")
+  end
   response['channels'] = [response['channels'][0]]
   response['channels'][0]['members'].each_with_index do |member, i|
     response['channels'][0]['read'][i] = {}
@@ -72,12 +91,12 @@ end
 
 def send_typing_event(channel_id)
   payload = { event: { type: 'typing.start' } }.to_json
-  endpoint = "#{STREAM_HTTP_URL}/channels/messaging/#{channel_id}/event?api_key=#{STREAM_DEMO_API_KEY}"
+  endpoint = "#{STREAM_API_URL}/channels/messaging/#{channel_id}/event?api_key=#{STREAM_DEMO_API_KEY}"
   response = http_post(endpoint, payload)
   save_json(response, 'http_events.json')
 end
 
-def send_message(channel_id, text, filename, fill_attachment: false)
+def send_message(channel_id, text, filename, fill_attachment: false, enriched: false)
   message_id = SecureRandom.uuid
   payload = {
     message: {
@@ -88,11 +107,23 @@ def send_message(channel_id, text, filename, fill_attachment: false)
       text: text
     }
   }.to_json
-  endpoint = "#{STREAM_HTTP_URL}/channels/messaging/#{channel_id}/message?api_key=#{STREAM_DEMO_API_KEY}"
+  endpoint = "#{STREAM_API_URL}/channels/messaging/#{channel_id}/message?api_key=#{STREAM_DEMO_API_KEY}"
   response = http_post(endpoint, payload)
+  response['message'] = wait_for_enriched_message(message_id) if enriched
   fill_attachment_defaults(response) if fill_attachment
   save_json(response, filename)
   message_id
+end
+
+# The demo app enriches URLs asynchronously, so the send response has no link attachment yet;
+# poll the message until the scraped attachment lands on it.
+def wait_for_enriched_message(message_id)
+  15.times do
+    sleep(1)
+    message = http_get("#{STREAM_API_URL}/messages/#{message_id}?api_key=#{STREAM_DEMO_API_KEY}")['message']
+    return message unless message['attachments'].empty?
+  end
+  raise("message #{message_id} got no link attachment within 15 seconds")
 end
 
 # Image link previews (e.g. Unsplash) come back without `title`/`text`, so the
@@ -110,7 +141,8 @@ def send_youtube_link(channel_id)
     channel_id,
     'https://www.youtube.com/watch?v=xOX7MsrbaPY',
     'http_youtube_link.json',
-    fill_attachment: true
+    fill_attachment: true,
+    enriched: true
   )
 end
 
@@ -123,12 +155,13 @@ def send_unsplash_link(channel_id)
     channel_id,
     'https://images.unsplash.com/photo-1568574728383-06fca083883d',
     'http_unsplash_link.json',
-    fill_attachment: true
+    fill_attachment: true,
+    enriched: true
   )
 end
 
 def send_giphy_link(channel_id)
-  send_message(channel_id, 'https://giphy.com/gifs/test-gw3IWyGkC0rsazTi', 'http_giphy_link.json')
+  send_message(channel_id, 'https://giphy.com/gifs/test-gw3IWyGkC0rsazTi', 'http_giphy_link.json', enriched: true)
 end
 
 def create_draft_message(channel_id, text, filename)
@@ -141,23 +174,27 @@ def create_draft_message(channel_id, text, filename)
       text: text
     }
   }.to_json
-  endpoint = "#{STREAM_HTTP_URL}/channels/messaging/#{channel_id}/draft?api_key=#{STREAM_DEMO_API_KEY}"
+  endpoint = "#{STREAM_API_URL}/channels/messaging/#{channel_id}/draft?api_key=#{STREAM_DEMO_API_KEY}"
   response = http_post(endpoint, payload)
   save_json(response, filename)
   message_id
 end
 
 def delete_draft_message(channel_id)
-  endpoint = "#{STREAM_HTTP_URL}/channels/messaging/#{channel_id}/draft?api_key=#{STREAM_DEMO_API_KEY}"
+  endpoint = "#{STREAM_API_URL}/channels/messaging/#{channel_id}/draft?api_key=#{STREAM_DEMO_API_KEY}"
   http_delete(endpoint)
+end
+
+# v2 takes the members as member requests and the name as custom data.
+def channel_data(members:, name:)
+  return { members: members, name: name } unless API_V2
+
+  { members: members.map { |id| { user_id: id } }, custom: { name: name } }
 end
 
 def create_channel(connection_id)
   payload = {
-    data: {
-      members: [STREAM_USER_ID, 'lando_calrissian', 'count_dooku'],
-      name: 'Sync Mock Server'
-    },
+    data: channel_data(members: [STREAM_USER_ID, 'lando_calrissian', 'count_dooku'], name: 'Sync Mock Server'),
     presence: true,
     state: true,
     watch: true,
@@ -165,7 +202,7 @@ def create_channel(connection_id)
   }.to_json
   channel_id = SecureRandom.uuid
   query_params = ["api_key=#{STREAM_DEMO_API_KEY}", "connection_id=#{connection_id}"]
-  endpoint = "#{STREAM_HTTP_URL}/channels/messaging/#{channel_id}/query?#{query_params.join('&')}"
+  endpoint = "#{STREAM_API_URL}/channels/messaging/#{channel_id}/query?#{query_params.join('&')}"
   response = http_post(endpoint, payload)
   save_json(response, 'http_channel_creation.json')
   channel_id
@@ -179,7 +216,7 @@ def add_reaction(message_id)
       score: 1
     }
   }.to_json
-  endpoint = "#{STREAM_HTTP_URL}/messages/#{message_id}/reaction?api_key=#{STREAM_DEMO_API_KEY}"
+  endpoint = "#{STREAM_API_URL}/messages/#{message_id}/reaction?api_key=#{STREAM_DEMO_API_KEY}"
   response = http_post(endpoint, payload)
   save_json(response, 'http_reaction.json')
 end
@@ -196,23 +233,23 @@ def truncate_channel_with_message(channel_id)
       text: 'Channel truncated'
     }
   }.to_json
-  endpoint = "#{STREAM_HTTP_URL}/channels/messaging/#{channel_id}/truncate?api_key=#{STREAM_DEMO_API_KEY}"
+  endpoint = "#{STREAM_API_URL}/channels/messaging/#{channel_id}/truncate?api_key=#{STREAM_DEMO_API_KEY}"
   response = http_post(endpoint, payload)
   save_json(response, 'http_truncate.json')
 end
 
 def add_member_to_channel(channel_id)
   payload = {
-    add_members: ['leia_organa'],
+    add_members: API_V2 ? [{ user_id: 'leia_organa' }] : ['leia_organa'],
     hide_history: false
   }.to_json
-  endpoint = "#{STREAM_HTTP_URL}/channels/messaging/#{channel_id}?api_key=#{STREAM_DEMO_API_KEY}"
+  endpoint = "#{STREAM_API_URL}/channels/messaging/#{channel_id}?api_key=#{STREAM_DEMO_API_KEY}"
   response = http_post(endpoint, payload)
   save_json(response, 'http_add_member.json')
 end
 
 def remove_channel(channel_id)
-  endpoint = "#{STREAM_HTTP_URL}/channels/messaging/#{channel_id}?api_key=#{STREAM_DEMO_API_KEY}"
+  endpoint = "#{STREAM_API_URL}/channels/messaging/#{channel_id}?api_key=#{STREAM_DEMO_API_KEY}"
   response = http_delete(endpoint)
   save_json(response, 'http_channel_removal.json')
 end
@@ -230,12 +267,20 @@ def send_attachment(channel_id)
   payload << "\r\n--#{boundary}--\r\n"
   headers = STREAM_HEADERS.dup
   headers['Content-Type'] = "multipart/form-data; boundary=#{boundary}"
-  endpoint = "#{STREAM_HTTP_URL}/channels/messaging/#{channel_id}/image?api_key=#{STREAM_DEMO_API_KEY}"
+  endpoint = "#{STREAM_API_URL}/channels/messaging/#{channel_id}/image?api_key=#{STREAM_DEMO_API_KEY}"
   response = http_post(endpoint, payload.join, headers)
   save_json(response, 'http_attachment.json')
 end
 
+# The SwiftUI demo app leaves `privacy_settings` out, which the clients treat as enabled.
+def enable_privacy_settings(user)
+  %w[typing_indicators read_receipts].each do |setting|
+    user.dig('privacy_settings', setting)&.store('enabled', true)
+  end
+end
+
 def save_json(data, filename)
+  FileUtils.mkdir_p(MOCK_SERVER_FIXTURES_PATH)
   File.write("#{MOCK_SERVER_FIXTURES_PATH}/#{filename}", JSON.pretty_generate(data))
   puts("✅ #{filename}")
 end
@@ -297,10 +342,12 @@ end
 
 EM.run do
   ws = Faye::WebSocket::Client.new(connect_endpoint, nil, headers: STREAM_HEADERS)
+  ws.on(:open) { ws.send(websocket_auth_frame) } if API_V2
 
   ws.on(:message) do |event|
     case JSON.parse(event.data)['type']
-    when 'health.check'
+    # v1 opens with a health.check carrying `me`, v2 with a connection.ok.
+    when 'health.check', 'connection.ok'
       next if @connection_id
 
       @connection_id = establish_websocket_connection(event.data)
@@ -336,12 +383,8 @@ EM.run do
       save_json(JSON.parse(event.data), 'ws_draft_deleted.json')
     when 'channel.updated'
       json = JSON.parse(event.data)
-      json['user']['privacy_settings']['typing_indicators']['enabled'] = true
-      json['user']['privacy_settings']['read_receipts']['enabled'] = true
-      json['channel']['members'].each do |member|
-        member['user']['privacy_settings']['typing_indicators']['enabled'] = true
-        member['user']['privacy_settings']['read_receipts']['enabled'] = true
-      end
+      enable_privacy_settings(json['user'])
+      json['channel']['members'].each { |member| enable_privacy_settings(member['user']) }
       save_json(json, 'ws_events_channel.json')
     when 'channel.deleted'
       ws.close

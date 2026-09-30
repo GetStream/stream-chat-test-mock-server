@@ -40,7 +40,7 @@ post '/mock' do
     channel_template = Mocks.channels['channels'].first
     channel_template['channel']['last_message_at'] = channel_timestamp
     channel_template['channel']['id'] = channel_id
-    channel_template['channel']['name'] = channel_name
+    set_channel_name(channel_template['channel'], channel_name)
     channel_template['channel']['cid'] = "messaging:#{channel_id}"
     channel_template['channel']['created_at'] = channel_timestamp
     channel_template['channel']['updated_at'] = channel_timestamp
@@ -59,7 +59,7 @@ post '/mock' do
     dm_channel = Mocks.channels['channels'].first
     dm_channel['channel']['id'] = dm_id
     dm_channel['channel']['cid'] = "messaging:#{dm_id}"
-    dm_channel['channel'].delete('name')
+    remove_channel_name(dm_channel['channel'])
     dm_channel['channel']['last_message_at'] = dm_timestamp
     dm_channel['channel']['created_at'] = dm_timestamp
     dm_channel['channel']['updated_at'] = dm_timestamp

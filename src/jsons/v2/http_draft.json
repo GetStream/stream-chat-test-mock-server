@@ -1,44 +1,48 @@
 {
   "draft": {
     "message": {
-      "id": "bf3fde8d-8574-49e5-8c48-70f94a1a113a",
+      "id": "ed0cc4c9-053c-4b9c-9d95-5556a41c480b",
       "text": "Test",
       "show_in_channel": false,
+      "custom": {
+      },
       "silent": false
     },
-    "channel_cid": "messaging:f1cb3448-9597-4860-a530-447f2c6c9916",
+    "channel_cid": "messaging:6bd7e72d-fdfd-49b4-913c-bbe9f777df91",
     "channel": {
-      "id": "f1cb3448-9597-4860-a530-447f2c6c9916",
+      "id": "6bd7e72d-fdfd-49b4-913c-bbe9f777df91",
       "type": "messaging",
-      "cid": "messaging:f1cb3448-9597-4860-a530-447f2c6c9916",
-      "last_message_at": "2026-09-30T06:07:02.314441Z",
-      "created_at": "2026-09-30T06:06:55.565838Z",
-      "updated_at": "2026-09-30T06:06:55.565838Z",
+      "cid": "messaging:6bd7e72d-fdfd-49b4-913c-bbe9f777df91",
+      "last_message_at": 1790748431134277000,
+      "created_at": 1790748425634716000,
+      "updated_at": 1790748425634716000,
       "created_by": {
         "id": "luke_skywalker",
         "name": "Luke Skywalker",
         "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+        "custom": {
+          "birthland": "Tatooine"
+        },
         "language": "en",
         "role": "user",
         "teams": [
 
         ],
-        "created_at": "2022-02-03T15:47:10.148169Z",
-        "updated_at": "2026-08-05T13:13:24.369473Z",
+        "created_at": 1643903230148169000,
+        "updated_at": 1785935604369473000,
         "banned": false,
         "online": true,
-        "last_active": "2026-09-30T06:06:55.218891771Z",
+        "last_active": 1790748415218891771,
         "blocked_user_ids": [
 
-        ],
-        "birthland": "Tatooine"
+        ]
       },
       "frozen": false,
       "disabled": false,
       "member_count": 4,
       "config": {
-        "created_at": "2022-04-13T08:56:37.837805Z",
-        "updated_at": "2026-06-17T17:40:49.619769Z",
+        "created_at": 1649840197837805000,
+        "updated_at": 1781718049619769000,
         "name": "messaging",
         "typing_events": true,
         "read_events": true,
@@ -88,11 +92,13 @@
           }
         ]
       },
-      "name": "Sync Mock Server"
+      "custom": {
+        "name": "Sync Mock Server"
+      }
     },
     "parent_message": null,
     "quoted_message": null,
-    "created_at": "2026-09-30T06:07:03.684974063Z"
+    "created_at": 1790748432514790219
   },
-  "duration": "12.28ms"
+  "duration": "12.78ms"
 }
