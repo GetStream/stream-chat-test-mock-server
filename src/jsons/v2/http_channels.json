@@ -2,11 +2,11 @@
   "channels": [
     {
       "channel": {
-        "id": "6bd7e72d-fdfd-49b4-913c-bbe9f777df91",
+        "id": "a4cab9d5-bee3-4251-8b81-365cfe98f4fd",
         "type": "messaging",
-        "cid": "messaging:6bd7e72d-fdfd-49b4-913c-bbe9f777df91",
-        "created_at": 1790748425634716000,
-        "updated_at": 1790748425634716000,
+        "cid": "messaging:a4cab9d5-bee3-4251-8b81-365cfe98f4fd",
+        "created_at": 1790813445130809000,
+        "updated_at": 1790813445130810000,
         "created_by": {
           "id": "luke_skywalker",
           "name": "Luke Skywalker",
@@ -23,7 +23,7 @@
           "updated_at": 1785935604369473000,
           "banned": false,
           "online": true,
-          "last_active": 1790748415218891771,
+          "last_active": 1790813445091809304,
           "blocked_user_ids": [
 
           ]
@@ -155,7 +155,7 @@
             ]
           },
           "unread_messages": 0,
-          "last_read": "2026-09-30T06:07:06Z"
+          "last_read": "2026-10-01T00:10:45Z"
         },
         {
           "user": {
@@ -180,7 +180,7 @@
             ]
           },
           "unread_messages": 0,
-          "last_read": "2026-09-30T06:07:06Z"
+          "last_read": "2026-10-01T00:10:45Z"
         },
         {
           "user": {
@@ -199,13 +199,13 @@
             "updated_at": 1785935604369473000,
             "banned": false,
             "online": true,
-            "last_active": 1790748415218891771,
+            "last_active": 1790813445091809304,
             "blocked_user_ids": [
 
             ]
           },
           "unread_messages": 0,
-          "last_read": "2026-09-30T06:07:06Z"
+          "last_read": "2026-10-01T00:10:45Z"
         }
       ],
       "members": [
@@ -235,8 +235,8 @@
           "custom": {
           },
           "status": "member",
-          "created_at": 1790748425636910000,
-          "updated_at": 1790748425636910000,
+          "created_at": 1790813445132937000,
+          "updated_at": 1790813445132937000,
           "banned": false,
           "shadow_banned": false,
           "role": "member",
@@ -269,8 +269,8 @@
           "custom": {
           },
           "status": "member",
-          "created_at": 1790748425636910000,
-          "updated_at": 1790748425636910000,
+          "created_at": 1790813445132937000,
+          "updated_at": 1790813445132937000,
           "banned": false,
           "shadow_banned": false,
           "role": "member",
@@ -295,7 +295,7 @@
             "updated_at": 1785935604369473000,
             "banned": false,
             "online": true,
-            "last_active": 1790748415218891771,
+            "last_active": 1790813445091809304,
             "blocked_user_ids": [
 
             ]
@@ -303,8 +303,8 @@
           "custom": {
           },
           "status": "member",
-          "created_at": 1790748425636910000,
-          "updated_at": 1790748425636910000,
+          "created_at": 1790813445132937000,
+          "updated_at": 1790813445132937000,
           "banned": false,
           "shadow_banned": false,
           "role": "owner",
@@ -329,7 +329,7 @@
           "updated_at": 1785935604369473000,
           "banned": false,
           "online": true,
-          "last_active": 1790748415218891771,
+          "last_active": 1790813445091809304,
           "blocked_user_ids": [
 
           ]
@@ -337,8 +337,8 @@
         "custom": {
         },
         "status": "member",
-        "created_at": 1790748425636910000,
-        "updated_at": 1790748425636910000,
+        "created_at": 1790813445132937000,
+        "updated_at": 1790813445132937000,
         "banned": false,
         "shadow_banned": false,
         "channel_role": "channel_member",
@@ -349,5 +349,5 @@
       ]
     }
   ],
-  "duration": "108.90ms"
+  "duration": "106.16ms"
 }

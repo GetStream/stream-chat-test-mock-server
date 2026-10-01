@@ -1,6 +1,6 @@
 {
   "message": {
-    "id": "2d7237b1-b51e-45be-9269-0de2c7bf08c8",
+    "id": "ee86d5d4-5767-4706-b327-76afff5ab5f5",
     "text": "/giphy Test",
     "command": "giphy",
     "html": "<p>/giphy Test</p>\n",
@@ -18,7 +18,7 @@
       "updated_at": "2026-08-05T13:13:24.369473Z",
       "banned": false,
       "online": true,
-      "last_active": "2026-09-30T06:06:55.218891771Z",
+      "last_active": "2026-10-01T00:10:39.033959504Z",
       "blocked_user_ids": [
 
       ],
@@ -32,8 +32,8 @@
       {
         "type": "giphy",
         "title": "Test",
-        "title_link": "https://giphy.com/gifs/patrick-star-cornball-CK6wJ7FYJnyo9xLYZC",
-        "thumb_url": "https://media1.giphy.com/media/v1.Y2lkPWM0YjAzNjc1eDJudGRodjdydGQ0OHhnMTFlbDBsY2phemF1dnlwcnQxOW55a2EwbiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/CK6wJ7FYJnyo9xLYZC/giphy.gif",
+        "title_link": "https://giphy.com/gifs/converse-xTkcEId8z20sPCMlK8",
+        "thumb_url": "https://media0.giphy.com/media/v1.Y2lkPWM0YjAzNjc1Y3Q2M2NnemhhbHZ0YXA4OGlkbmlrN29nNHRudnhhb3I4d3o2Z2MzcCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/xTkcEId8z20sPCMlK8/giphy.gif",
         "actions": [
           {
             "name": "image_action",
@@ -59,52 +59,52 @@
         ],
         "giphy": {
           "original": {
-            "url": "https://media1.giphy.com/media/v1.Y2lkPWM0YjAzNjc1eDJudGRodjdydGQ0OHhnMTFlbDBsY2phemF1dnlwcnQxOW55a2EwbiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/CK6wJ7FYJnyo9xLYZC/giphy.gif",
-            "width": "480",
-            "height": "354",
-            "size": "1013684",
-            "frames": "24"
+            "url": "https://media0.giphy.com/media/v1.Y2lkPWM0YjAzNjc1Y3Q2M2NnemhhbHZ0YXA4OGlkbmlrN29nNHRudnhhb3I4d3o2Z2MzcCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/xTkcEId8z20sPCMlK8/giphy.gif",
+            "width": "640",
+            "height": "480",
+            "size": "1926883",
+            "frames": "21"
           },
           "fixed_height": {
-            "url": "https://media1.giphy.com/media/v1.Y2lkPWM0YjAzNjc1eDJudGRodjdydGQ0OHhnMTFlbDBsY2phemF1dnlwcnQxOW55a2EwbiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/CK6wJ7FYJnyo9xLYZC/200.gif",
-            "width": "272",
+            "url": "https://media0.giphy.com/media/v1.Y2lkPWM0YjAzNjc1Y3Q2M2NnemhhbHZ0YXA4OGlkbmlrN29nNHRudnhhb3I4d3o2Z2MzcCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/xTkcEId8z20sPCMlK8/200.gif",
+            "width": "266",
             "height": "200",
-            "size": "317395",
+            "size": "273420",
             "frames": ""
           },
           "fixed_height_still": {
-            "url": "https://media1.giphy.com/media/v1.Y2lkPWM0YjAzNjc1eDJudGRodjdydGQ0OHhnMTFlbDBsY2phemF1dnlwcnQxOW55a2EwbiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/CK6wJ7FYJnyo9xLYZC/200_s.gif",
-            "width": "272",
+            "url": "https://media0.giphy.com/media/v1.Y2lkPWM0YjAzNjc1Y3Q2M2NnemhhbHZ0YXA4OGlkbmlrN29nNHRudnhhb3I4d3o2Z2MzcCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/xTkcEId8z20sPCMlK8/200_s.gif",
+            "width": "266",
             "height": "200",
-            "size": "31946",
+            "size": "13431",
             "frames": ""
           },
           "fixed_height_downsampled": {
-            "url": "https://media1.giphy.com/media/v1.Y2lkPWM0YjAzNjc1eDJudGRodjdydGQ0OHhnMTFlbDBsY2phemF1dnlwcnQxOW55a2EwbiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/CK6wJ7FYJnyo9xLYZC/200_d.gif",
-            "width": "272",
+            "url": "https://media0.giphy.com/media/v1.Y2lkPWM0YjAzNjc1Y3Q2M2NnemhhbHZ0YXA4OGlkbmlrN29nNHRudnhhb3I4d3o2Z2MzcCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/xTkcEId8z20sPCMlK8/200_d.gif",
+            "width": "266",
             "height": "200",
-            "size": "85963",
+            "size": "76034",
             "frames": ""
           },
           "fixed_width": {
-            "url": "https://media1.giphy.com/media/v1.Y2lkPWM0YjAzNjc1eDJudGRodjdydGQ0OHhnMTFlbDBsY2phemF1dnlwcnQxOW55a2EwbiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/CK6wJ7FYJnyo9xLYZC/200w.gif",
+            "url": "https://media0.giphy.com/media/v1.Y2lkPWM0YjAzNjc1Y3Q2M2NnemhhbHZ0YXA4OGlkbmlrN29nNHRudnhhb3I4d3o2Z2MzcCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/xTkcEId8z20sPCMlK8/200w.gif",
             "width": "200",
-            "height": "148",
-            "size": "168947",
+            "height": "150",
+            "size": "207926",
             "frames": ""
           },
           "fixed_width_still": {
-            "url": "https://media1.giphy.com/media/v1.Y2lkPWM0YjAzNjc1eDJudGRodjdydGQ0OHhnMTFlbDBsY2phemF1dnlwcnQxOW55a2EwbiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/CK6wJ7FYJnyo9xLYZC/200w_s.gif",
+            "url": "https://media0.giphy.com/media/v1.Y2lkPWM0YjAzNjc1Y3Q2M2NnemhhbHZ0YXA4OGlkbmlrN29nNHRudnhhb3I4d3o2Z2MzcCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/xTkcEId8z20sPCMlK8/200w_s.gif",
             "width": "200",
-            "height": "148",
-            "size": "17723",
+            "height": "150",
+            "size": "12035",
             "frames": ""
           },
           "fixed_width_downsampled": {
-            "url": "https://media1.giphy.com/media/v1.Y2lkPWM0YjAzNjc1eDJudGRodjdydGQ0OHhnMTFlbDBsY2phemF1dnlwcnQxOW55a2EwbiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/CK6wJ7FYJnyo9xLYZC/200w_d.gif",
+            "url": "https://media0.giphy.com/media/v1.Y2lkPWM0YjAzNjc1Y3Q2M2NnemhhbHZ0YXA4OGlkbmlrN29nNHRudnhhb3I4d3o2Z2MzcCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/xTkcEId8z20sPCMlK8/200w_d.gif",
             "width": "200",
-            "height": "148",
-            "size": "38771",
+            "height": "150",
+            "size": "56715",
             "frames": ""
           }
         }
@@ -122,9 +122,9 @@
     },
     "reply_count": 0,
     "deleted_reply_count": 0,
-    "cid": "messaging:f1cb3448-9597-4860-a530-447f2c6c9916",
-    "created_at": "2026-09-30T06:06:58.351297Z",
-    "updated_at": "2026-09-30T06:06:58.351297Z",
+    "cid": "messaging:ac8b4102-f079-4f62-9ae4-6fc099df893c",
+    "created_at": "2026-10-01T00:10:40.633412Z",
+    "updated_at": "2026-10-01T00:10:40.633412Z",
     "shadowed": false,
     "mentioned_users": [
 
@@ -144,5 +144,5 @@
       "name": "Giphy"
     }
   },
-  "duration": "235.46ms"
+  "duration": "209.65ms"
 }

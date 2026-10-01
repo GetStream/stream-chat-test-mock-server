@@ -1,10 +1,10 @@
 {
   "channel": {
-    "id": "f1cb3448-9597-4860-a530-447f2c6c9916",
+    "id": "ac8b4102-f079-4f62-9ae4-6fc099df893c",
     "type": "messaging",
-    "cid": "messaging:f1cb3448-9597-4860-a530-447f2c6c9916",
-    "created_at": "2026-09-30T06:06:55.565838Z",
-    "updated_at": "2026-09-30T06:06:55.565838Z",
+    "cid": "messaging:ac8b4102-f079-4f62-9ae4-6fc099df893c",
+    "created_at": "2026-10-01T00:10:39.123256Z",
+    "updated_at": "2026-10-01T00:10:39.123256Z",
     "created_by": {
       "id": "luke_skywalker",
       "name": "Luke Skywalker",
@@ -18,7 +18,7 @@
       "updated_at": "2026-08-05T13:13:24.369473Z",
       "banned": false,
       "online": true,
-      "last_active": "2026-09-30T06:06:55.218891771Z",
+      "last_active": "2026-10-01T00:10:39.033959504Z",
       "blocked_user_ids": [
 
       ],
@@ -146,7 +146,7 @@
         ],
         "birthland": "Serenno"
       },
-      "last_read": "2026-09-30T06:06:55.593500961Z",
+      "last_read": "2026-10-01T00:10:39.150639091Z",
       "unread_messages": 0
     },
     {
@@ -169,7 +169,7 @@
         ],
         "birthland": "Socorro"
       },
-      "last_read": "2026-09-30T06:06:55.593500961Z",
+      "last_read": "2026-10-01T00:10:39.150639091Z",
       "unread_messages": 0
     },
     {
@@ -186,13 +186,13 @@
         "updated_at": "2026-08-05T13:13:24.369473Z",
         "banned": false,
         "online": true,
-        "last_active": "2026-09-30T06:06:55.218891771Z",
+        "last_active": "2026-10-01T00:10:39.033959504Z",
         "blocked_user_ids": [
 
         ],
         "birthland": "Tatooine"
       },
-      "last_read": "2026-09-30T06:06:55.593500961Z",
+      "last_read": "2026-10-01T00:10:39.150639091Z",
       "unread_messages": 0
     }
   ],
@@ -219,8 +219,8 @@
         "birthland": "Serenno"
       },
       "status": "member",
-      "created_at": "2026-09-30T06:06:55.570915Z",
-      "updated_at": "2026-09-30T06:06:55.570915Z",
+      "created_at": "2026-10-01T00:10:39.128436Z",
+      "updated_at": "2026-10-01T00:10:39.128436Z",
       "banned": false,
       "shadow_banned": false,
       "role": "member",
@@ -249,8 +249,8 @@
         "birthland": "Socorro"
       },
       "status": "member",
-      "created_at": "2026-09-30T06:06:55.570915Z",
-      "updated_at": "2026-09-30T06:06:55.570915Z",
+      "created_at": "2026-10-01T00:10:39.128436Z",
+      "updated_at": "2026-10-01T00:10:39.128436Z",
       "banned": false,
       "shadow_banned": false,
       "role": "member",
@@ -272,15 +272,15 @@
         "updated_at": "2026-08-05T13:13:24.369473Z",
         "banned": false,
         "online": true,
-        "last_active": "2026-09-30T06:06:55.218891771Z",
+        "last_active": "2026-10-01T00:10:39.033959504Z",
         "blocked_user_ids": [
 
         ],
         "birthland": "Tatooine"
       },
       "status": "member",
-      "created_at": "2026-09-30T06:06:55.570915Z",
-      "updated_at": "2026-09-30T06:06:55.570915Z",
+      "created_at": "2026-10-01T00:10:39.128436Z",
+      "updated_at": "2026-10-01T00:10:39.128436Z",
       "banned": false,
       "shadow_banned": false,
       "role": "owner",
@@ -302,15 +302,15 @@
       "updated_at": "2026-08-05T13:13:24.369473Z",
       "banned": false,
       "online": true,
-      "last_active": "2026-09-30T06:06:55.218891771Z",
+      "last_active": "2026-10-01T00:10:39.033959504Z",
       "blocked_user_ids": [
 
       ],
       "birthland": "Tatooine"
     },
     "status": "member",
-    "created_at": "2026-09-30T06:06:55.570915Z",
-    "updated_at": "2026-09-30T06:06:55.570915Z",
+    "created_at": "2026-10-01T00:10:39.128436Z",
+    "updated_at": "2026-10-01T00:10:39.128436Z",
     "banned": false,
     "shadow_banned": false,
     "role": "owner",
@@ -320,5 +320,5 @@
   "threads": [
 
   ],
-  "duration": "57.18ms"
+  "duration": "67.36ms"
 }

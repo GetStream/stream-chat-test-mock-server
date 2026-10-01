@@ -14,15 +14,15 @@
       "updated_at": "2026-04-14T07:37:37.976935Z",
       "banned": false,
       "online": false,
-      "last_active": "2026-09-29T20:07:02.080155Z",
+      "last_active": "2026-09-30T23:30:21.411870669Z",
       "blocked_user_ids": [
 
       ],
       "birthland": "Polis Massa"
     },
     "status": "member",
-    "created_at": "2026-09-30T06:06:57.292413Z",
-    "updated_at": "2026-09-30T06:06:57.292413Z",
+    "created_at": "2026-10-01T00:10:40.068577Z",
+    "updated_at": "2026-10-01T00:10:40.068577Z",
     "banned": false,
     "shadow_banned": false,
     "role": "member",
@@ -42,25 +42,25 @@
     "updated_at": "2026-04-14T07:37:37.976935Z",
     "banned": false,
     "online": false,
-    "last_active": "2026-09-29T20:07:02.080155Z",
+    "last_active": "2026-09-30T23:30:07.023020999Z",
     "blocked_user_ids": [
 
     ],
     "birthland": "Polis Massa"
   },
   "type": "member.added",
-  "created_at": "2026-09-30T06:06:57.309055266Z",
-  "cid": "messaging:f1cb3448-9597-4860-a530-447f2c6c9916",
+  "created_at": "2026-10-01T00:10:40.084214873Z",
+  "cid": "messaging:ac8b4102-f079-4f62-9ae4-6fc099df893c",
   "channel_member_count": 4,
   "channel_type": "messaging",
-  "channel_id": "f1cb3448-9597-4860-a530-447f2c6c9916",
+  "channel_id": "ac8b4102-f079-4f62-9ae4-6fc099df893c",
   "channel": {
-    "id": "f1cb3448-9597-4860-a530-447f2c6c9916",
+    "id": "ac8b4102-f079-4f62-9ae4-6fc099df893c",
     "type": "messaging",
-    "cid": "messaging:f1cb3448-9597-4860-a530-447f2c6c9916",
-    "last_message_at": "2026-09-30T06:06:56.805104Z",
-    "created_at": "2026-09-30T06:06:55.565838Z",
-    "updated_at": "2026-09-30T06:06:55.565838Z",
+    "cid": "messaging:ac8b4102-f079-4f62-9ae4-6fc099df893c",
+    "last_message_at": "2026-10-01T00:10:39.943171Z",
+    "created_at": "2026-10-01T00:10:39.123256Z",
+    "updated_at": "2026-10-01T00:10:39.123256Z",
     "created_by": {
       "id": "luke_skywalker",
       "name": "Luke Skywalker",
@@ -74,7 +74,7 @@
       "updated_at": "2026-08-05T13:13:24.369473Z",
       "banned": false,
       "online": true,
-      "last_active": "2026-09-30T06:06:55.218891771Z",
+      "last_active": "2026-10-01T00:10:39.033959504Z",
       "blocked_user_ids": [
 
       ],
@@ -105,8 +105,8 @@
           "birthland": "Serenno"
         },
         "status": "member",
-        "created_at": "2026-09-30T06:06:55.570915Z",
-        "updated_at": "2026-09-30T06:06:55.570915Z",
+        "created_at": "2026-10-01T00:10:39.128436Z",
+        "updated_at": "2026-10-01T00:10:39.128436Z",
         "banned": false,
         "shadow_banned": false,
         "role": "member",
@@ -135,8 +135,8 @@
           "birthland": "Socorro"
         },
         "status": "member",
-        "created_at": "2026-09-30T06:06:55.570915Z",
-        "updated_at": "2026-09-30T06:06:55.570915Z",
+        "created_at": "2026-10-01T00:10:39.128436Z",
+        "updated_at": "2026-10-01T00:10:39.128436Z",
         "banned": false,
         "shadow_banned": false,
         "role": "member",
@@ -158,15 +158,15 @@
           "updated_at": "2026-08-05T13:13:24.369473Z",
           "banned": false,
           "online": true,
-          "last_active": "2026-09-30T06:06:55.218891771Z",
+          "last_active": "2026-10-01T00:10:39.033959504Z",
           "blocked_user_ids": [
 
           ],
           "birthland": "Tatooine"
         },
         "status": "member",
-        "created_at": "2026-09-30T06:06:55.570915Z",
-        "updated_at": "2026-09-30T06:06:55.570915Z",
+        "created_at": "2026-10-01T00:10:39.128436Z",
+        "updated_at": "2026-10-01T00:10:39.128436Z",
         "banned": false,
         "shadow_banned": false,
         "role": "owner",
@@ -188,15 +188,15 @@
           "updated_at": "2026-04-14T07:37:37.976935Z",
           "banned": false,
           "online": false,
-          "last_active": "2026-09-29T20:07:02.080155Z",
+          "last_active": "2026-09-30T23:30:21.411870669Z",
           "blocked_user_ids": [
 
           ],
           "birthland": "Polis Massa"
         },
         "status": "member",
-        "created_at": "2026-09-30T06:06:57.292413Z",
-        "updated_at": "2026-09-30T06:06:57.292413Z",
+        "created_at": "2026-10-01T00:10:40.068577Z",
+        "updated_at": "2026-10-01T00:10:40.068577Z",
         "banned": false,
         "shadow_banned": false,
         "role": "member",

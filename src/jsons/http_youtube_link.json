@@ -1,6 +1,6 @@
 {
   "message": {
-    "id": "b834886a-d501-4461-a7a7-6b06f9bcc9cf",
+    "id": "d79b2e7c-3c8a-43a0-a6f5-fb72040a24d2",
     "text": "https://www.youtube.com/watch?v=xOX7MsrbaPY",
     "html": "<p><a href=\"https://www.youtube.com/watch?v=xOX7MsrbaPY\" rel=\"nofollow\">https://www.youtube.com/watch?v=xOX7MsrbaPY</a></p>\n",
     "type": "regular",
@@ -17,7 +17,7 @@
       "updated_at": "2026-08-05T13:13:24.369473Z",
       "banned": false,
       "online": true,
-      "last_active": "2026-09-30T06:06:55.218891771Z",
+      "last_active": "2026-10-01T00:10:39.033959504Z",
       "blocked_user_ids": [
 
       ],
@@ -52,9 +52,9 @@
     },
     "reply_count": 0,
     "deleted_reply_count": 0,
-    "cid": "messaging:f1cb3448-9597-4860-a530-447f2c6c9916",
-    "created_at": "2026-09-30T06:06:58.85721Z",
-    "updated_at": "2026-09-30T06:06:58.994809Z",
+    "cid": "messaging:ac8b4102-f079-4f62-9ae4-6fc099df893c",
+    "created_at": "2026-10-01T00:10:40.781796Z",
+    "updated_at": "2026-10-01T00:10:40.897722Z",
     "shadowed": false,
     "mentioned_users": [
 
@@ -70,12 +70,12 @@
 
     ],
     "channel": {
-      "id": "f1cb3448-9597-4860-a530-447f2c6c9916",
+      "id": "ac8b4102-f079-4f62-9ae4-6fc099df893c",
       "type": "messaging",
-      "cid": "messaging:f1cb3448-9597-4860-a530-447f2c6c9916",
-      "last_message_at": "2026-09-30T06:06:58.85721Z",
-      "created_at": "2026-09-30T06:06:55.565838Z",
-      "updated_at": "2026-09-30T06:06:55.565838Z",
+      "cid": "messaging:ac8b4102-f079-4f62-9ae4-6fc099df893c",
+      "last_message_at": "2026-10-01T00:10:40.781796Z",
+      "created_at": "2026-10-01T00:10:39.123256Z",
+      "updated_at": "2026-10-01T00:10:39.123256Z",
       "created_by": {
         "id": "luke_skywalker",
         "name": "Luke Skywalker",
@@ -89,7 +89,7 @@
         "updated_at": "2026-08-05T13:13:24.369473Z",
         "banned": false,
         "online": true,
-        "last_active": "2026-09-30T06:06:55.218891771Z",
+        "last_active": "2026-10-01T00:10:39.033959504Z",
         "blocked_user_ids": [
 
         ],
@@ -153,5 +153,5 @@
       "name": "Sync Mock Server"
     }
   },
-  "duration": "228.04ms"
+  "duration": "138.94ms"
 }

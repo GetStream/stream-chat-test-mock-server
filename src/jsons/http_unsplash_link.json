@@ -1,6 +1,6 @@
 {
   "message": {
-    "id": "0a276373-82c1-4feb-855d-1f36ed8bd93b",
+    "id": "f72e24a7-c1be-4ab0-913e-5380c783c1c4",
     "text": "https://images.unsplash.com/photo-1568574728383-06fca083883d",
     "html": "<p><a href=\"https://images.unsplash.com/photo-1568574728383-06fca083883d\" rel=\"nofollow\">https://images.unsplash.com/photo-1568574728383-06fca083883d</a></p>\n",
     "type": "regular",
@@ -17,7 +17,7 @@
       "updated_at": "2026-08-05T13:13:24.369473Z",
       "banned": false,
       "online": true,
-      "last_active": "2026-09-30T06:06:55.218891771Z",
+      "last_active": "2026-10-01T00:10:39.033959504Z",
       "blocked_user_ids": [
 
       ],
@@ -49,9 +49,9 @@
     },
     "reply_count": 0,
     "deleted_reply_count": 0,
-    "cid": "messaging:f1cb3448-9597-4860-a530-447f2c6c9916",
-    "created_at": "2026-09-30T06:07:00.67186Z",
-    "updated_at": "2026-09-30T06:07:00.767391Z",
+    "cid": "messaging:ac8b4102-f079-4f62-9ae4-6fc099df893c",
+    "created_at": "2026-10-01T00:10:41.938304Z",
+    "updated_at": "2026-10-01T00:10:42.0511Z",
     "shadowed": false,
     "mentioned_users": [
 
@@ -67,12 +67,12 @@
 
     ],
     "channel": {
-      "id": "f1cb3448-9597-4860-a530-447f2c6c9916",
+      "id": "ac8b4102-f079-4f62-9ae4-6fc099df893c",
       "type": "messaging",
-      "cid": "messaging:f1cb3448-9597-4860-a530-447f2c6c9916",
-      "last_message_at": "2026-09-30T06:07:00.67186Z",
-      "created_at": "2026-09-30T06:06:55.565838Z",
-      "updated_at": "2026-09-30T06:06:55.565838Z",
+      "cid": "messaging:ac8b4102-f079-4f62-9ae4-6fc099df893c",
+      "last_message_at": "2026-10-01T00:10:41.938304Z",
+      "created_at": "2026-10-01T00:10:39.123256Z",
+      "updated_at": "2026-10-01T00:10:39.123256Z",
       "created_by": {
         "id": "luke_skywalker",
         "name": "Luke Skywalker",
@@ -86,7 +86,7 @@
         "updated_at": "2026-08-05T13:13:24.369473Z",
         "banned": false,
         "online": true,
-        "last_active": "2026-09-30T06:06:55.218891771Z",
+        "last_active": "2026-10-01T00:10:39.033959504Z",
         "blocked_user_ids": [
 
         ],
@@ -150,5 +150,5 @@
       "name": "Sync Mock Server"
     }
   },
-  "duration": "135.23ms"
+  "duration": "106.42ms"
 }

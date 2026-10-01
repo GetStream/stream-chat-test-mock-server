@@ -1,7 +1,7 @@
 {
   "type": "connection.ok",
-  "created_at": 1790748425253785421,
-  "connection_id": "6ababa98-0a82-3966-0300-0000003a663a",
+  "created_at": 1790813445098708574,
+  "connection_id": "6ababd0e-0a82-4538-0300-0000006067d4",
   "me": {
     "id": "luke_skywalker",
     "name": "Luke Skywalker",
@@ -18,7 +18,7 @@
     "updated_at": 1785935604369473000,
     "banned": false,
     "online": true,
-    "last_active": 1790748425246586071,
+    "last_active": 1790813445091809304,
     "privacy_settings": {
       "typing_indicators": {
         "enabled": true
@@ -230,8 +230,8 @@
         "updated_at": 1653552411600570000
       }
     ],
-    "total_unread_count": 0,
-    "unread_channels": 0,
+    "total_unread_count": 1,
+    "unread_channels": 1,
     "unread_threads": 1,
     "latest_hidden_channels": null
   }

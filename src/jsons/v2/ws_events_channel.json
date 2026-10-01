@@ -1,19 +1,19 @@
 {
   "type": "channel.updated",
-  "created_at": 1790748427065210498,
+  "created_at": 1790813445706446112,
   "custom": {
   },
-  "cid": "messaging:6bd7e72d-fdfd-49b4-913c-bbe9f777df91",
+  "cid": "messaging:a4cab9d5-bee3-4251-8b81-365cfe98f4fd",
   "channel_member_count": 4,
   "channel_type": "messaging",
-  "channel_id": "6bd7e72d-fdfd-49b4-913c-bbe9f777df91",
+  "channel_id": "a4cab9d5-bee3-4251-8b81-365cfe98f4fd",
   "channel": {
-    "id": "6bd7e72d-fdfd-49b4-913c-bbe9f777df91",
+    "id": "a4cab9d5-bee3-4251-8b81-365cfe98f4fd",
     "type": "messaging",
-    "cid": "messaging:6bd7e72d-fdfd-49b4-913c-bbe9f777df91",
-    "last_message_at": 1790748426434097000,
-    "created_at": 1790748425634716000,
-    "updated_at": 1790748425634716000,
+    "cid": "messaging:a4cab9d5-bee3-4251-8b81-365cfe98f4fd",
+    "last_message_at": 1790813445533786000,
+    "created_at": 1790813445130809000,
+    "updated_at": 1790813445130810000,
     "created_by": {
       "id": "luke_skywalker",
       "name": "Luke Skywalker",
@@ -30,7 +30,7 @@
       "updated_at": 1785935604369473000,
       "banned": false,
       "online": true,
-      "last_active": 1790748415218891771,
+      "last_active": 1790813445091809304,
       "blocked_user_ids": [
 
       ]
@@ -64,8 +64,8 @@
         "custom": {
         },
         "status": "member",
-        "created_at": 1790748425636910000,
-        "updated_at": 1790748425636910000,
+        "created_at": 1790813445132937000,
+        "updated_at": 1790813445132937000,
         "banned": false,
         "shadow_banned": false,
         "role": "member",
@@ -98,8 +98,8 @@
         "custom": {
         },
         "status": "member",
-        "created_at": 1790748425636910000,
-        "updated_at": 1790748425636910000,
+        "created_at": 1790813445132937000,
+        "updated_at": 1790813445132937000,
         "banned": false,
         "shadow_banned": false,
         "role": "member",
@@ -124,7 +124,7 @@
           "updated_at": 1785935604369473000,
           "banned": false,
           "online": true,
-          "last_active": 1790748415218891771,
+          "last_active": 1790813445091809304,
           "blocked_user_ids": [
 
           ]
@@ -132,8 +132,8 @@
         "custom": {
         },
         "status": "member",
-        "created_at": 1790748425636910000,
-        "updated_at": 1790748425636910000,
+        "created_at": 1790813445132937000,
+        "updated_at": 1790813445132937000,
         "banned": false,
         "shadow_banned": false,
         "role": "owner",
@@ -158,7 +158,7 @@
           "updated_at": 1776152257976935000,
           "banned": false,
           "online": false,
-          "last_active": 1790712422080155000,
+          "last_active": 1790811021411870669,
           "blocked_user_ids": [
 
           ]
@@ -166,8 +166,8 @@
         "custom": {
         },
         "status": "member",
-        "created_at": 1790748427044645000,
-        "updated_at": 1790748427044645000,
+        "created_at": 1790813445678848000,
+        "updated_at": 1790813445678848000,
         "banned": false,
         "shadow_banned": false,
         "role": "member",
@@ -248,7 +248,7 @@
     "updated_at": 1785935604369473000,
     "banned": false,
     "online": true,
-    "last_active": 1790748415218891771,
+    "last_active": 1790813445091809304,
     "blocked_user_ids": [
 
     ]

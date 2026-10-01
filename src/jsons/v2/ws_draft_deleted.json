@@ -1,9 +1,9 @@
 {
   "type": "draft.deleted",
-  "created_at": 1790748432709872849,
+  "created_at": 1790813450200125848,
   "custom": {
   },
-  "cid": "messaging:6bd7e72d-fdfd-49b4-913c-bbe9f777df91",
+  "cid": "messaging:a4cab9d5-bee3-4251-8b81-365cfe98f4fd",
   "draft": {
     "message": {
       "id": "",
@@ -11,7 +11,7 @@
       "custom": {
       }
     },
-    "channel_cid": "messaging:6bd7e72d-fdfd-49b4-913c-bbe9f777df91",
+    "channel_cid": "messaging:a4cab9d5-bee3-4251-8b81-365cfe98f4fd",
     "channel": null,
     "parent_message": null,
     "quoted_message": null,

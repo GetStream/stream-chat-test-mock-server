@@ -1,8 +1,8 @@
 {
   "event": {
     "type": "typing.start",
-    "cid": "messaging:6bd7e72d-fdfd-49b4-913c-bbe9f777df91",
-    "channel_id": "6bd7e72d-fdfd-49b4-913c-bbe9f777df91",
+    "cid": "messaging:a4cab9d5-bee3-4251-8b81-365cfe98f4fd",
+    "channel_id": "a4cab9d5-bee3-4251-8b81-365cfe98f4fd",
     "channel_type": "messaging",
     "user": {
       "id": "luke_skywalker",
@@ -20,14 +20,14 @@
       "updated_at": 1785935604369473000,
       "banned": false,
       "online": true,
-      "last_active": 1790748415218891771,
+      "last_active": 1790813445091809304,
       "blocked_user_ids": [
 
       ]
     },
     "custom": {
     },
-    "created_at": 1790748426189354446
+    "created_at": 1790813445385004324
   },
-  "duration": "4.78ms"
+  "duration": "4.72ms"
 }
