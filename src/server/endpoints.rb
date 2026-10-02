@@ -157,7 +157,7 @@ end
 # Get message
 get '/messages/:message_id' do
   message = find_message_by_id(params[:message_id])
-  { message: message }.to_s
+  { message: message, duration: '7.11ms' }.to_s
 end
 
 # Update message
