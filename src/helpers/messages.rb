@@ -511,7 +511,7 @@ def paginate_thread_list(params:)
 
   unless params[:limit] && parent_message
     thread_list.insert(0, parent_message) if parent_message
-    return { messages: thread_list }.to_s
+    return { messages: thread_list, duration: '7.11ms' }.to_s
   end
 
   thread_list.insert(0, parent_message) if parent_message
@@ -526,7 +526,7 @@ def paginate_thread_list(params:)
     id_around: params[:id_around]
   )
 
-  { messages: paginated_messages }.to_s
+  { messages: paginated_messages, duration: '7.11ms' }.to_s
 end
 
 def mock_message_pagination(message_list:, limit:, id_lt: nil, id_gt: nil, id_lte: nil, id_gte: nil, id_around: nil)
