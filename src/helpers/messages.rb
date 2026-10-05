@@ -471,15 +471,20 @@ def v2_attachment(attachment)
   attachment.except(*custom_keys).merge('custom' => attachment.slice(*custom_keys))
 end
 
+def link_preview_attachment(url)
+  return nil if url.nil?
+
+  if url.include?('youtube')
+    Mocks.youtube_link['message']['attachments'].first
+  elsif url.include?('unsplash')
+    Mocks.unsplash_link['message']['attachments'].first
+  elsif url.include?('giphy')
+    Mocks.giphy_link['message']['attachments'].first
+  end
+end
+
 def create_link_preview(url)
-  attachment =
-    if url.include?('youtube')
-      Mocks.youtube_link['message']['attachments'].first
-    elsif url.include?('unsplash')
-      Mocks.unsplash_link['message']['attachments'].first
-    elsif url.include?('giphy')
-      Mocks.giphy_link['message']['attachments'].first
-    end
+  attachment = link_preview_attachment(url)
   return '' if attachment.nil?
 
   attachment.merge('duration' => '7.11ms').to_s

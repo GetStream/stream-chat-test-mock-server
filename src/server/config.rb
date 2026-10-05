@@ -19,3 +19,11 @@ post '/config/cooldown' do
 
   halt(200)
 end
+
+# Toggles message reminders (`user_message_reminders`) in the config of every channel.
+post '/config/reminders' do
+  $channel_list['channels'].each do |channel|
+    channel['channel']['config']['user_message_reminders'] = params[:value].to_s.casecmp('true').zero?
+  end
+  halt(200)
+end

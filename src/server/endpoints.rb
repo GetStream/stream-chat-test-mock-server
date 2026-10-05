@@ -140,8 +140,10 @@ post '/api/v2/chat/channels/:channel_type/query' do
 end
 
 # Mark channels delivered
-post '/channels/delivered' do
-  { duration: '7.11ms' }.to_s
+['/channels/delivered', '/api/v2/chat/channels/delivered'].each do |delivered_path|
+  post delivered_path do
+    { duration: '7.11ms' }.to_s
+  end
 end
 
 # Send message
@@ -155,9 +157,11 @@ post '/api/v2/chat/channels/messaging/:channel_id/message' do
 end
 
 # Get message
-get '/messages/:message_id' do
-  message = find_message_by_id(params[:message_id])
-  { message: message, duration: '7.11ms' }.to_s
+['/messages/:message_id', '/api/v2/chat/messages/:message_id'].each do |message_path|
+  get message_path do
+    message = find_message_by_id(params[:message_id])
+    { message: message, duration: '7.11ms' }.to_s
+  end
 end
 
 # Update message
@@ -281,30 +285,32 @@ post '/api/v2/chat/channels/messaging/:channel_id' do
 end
 
 # Delete channel
-delete '/channels/messaging/:channel_id' do
-  channel = find_channel_by_id(params[:channel_id])
-  halt(400, { message: "channel #{params[:channel_id]} not found" }.to_s) unless channel
+['/channels/messaging/:channel_id', '/api/v2/chat/channels/messaging/:channel_id'].each do |channel_path|
+  delete channel_path do
+    channel = find_channel_by_id(params[:channel_id])
+    halt(400, { message: "channel #{params[:channel_id]} not found" }.to_s) unless channel
 
-  timestamp = unique_date
-  channel['channel']['deleted_at'] = timestamp
-  $channel_list['channels'].delete(channel)
-  $message_list.delete_if { |msg| msg['cid'] == channel['channel']['cid'] }
-  # The participant and chat robots act on the current channel; leaving the pointer
-  # on the deleted channel would break every robot call after the deletion.
-  if params[:channel_id] == $current_channel_id
-    $current_channel_id = $channel_list['channels'].first&.dig('channel', 'id')
+    timestamp = unique_date
+    channel['channel']['deleted_at'] = timestamp
+    $channel_list['channels'].delete(channel)
+    $message_list.delete_if { |msg| msg['cid'] == channel['channel']['cid'] }
+    # The participant and chat robots act on the current channel; leaving the pointer
+    # on the deleted channel would break every robot call after the deletion.
+    if params[:channel_id] == $current_channel_id
+      $current_channel_id = $channel_list['channels'].first&.dig('channel', 'id')
+    end
+
+    broadcast_event(
+      'type' => 'channel.deleted',
+      'created_at' => timestamp,
+      'cid' => channel['channel']['cid'],
+      'channel_type' => 'messaging',
+      'channel_id' => params[:channel_id],
+      'channel' => channel['channel'],
+      'user' => current_user
+    )
+    { channel: channel['channel'], duration: '7.11ms' }.to_s
   end
-
-  broadcast_event(
-    'type' => 'channel.deleted',
-    'created_at' => timestamp,
-    'cid' => channel['channel']['cid'],
-    'channel_type' => 'messaging',
-    'channel_id' => params[:channel_id],
-    'channel' => channel['channel'],
-    'user' => current_user
-  )
-  { channel: channel['channel'], duration: '7.11ms' }.to_s
 end
 
 # Show pinned messages
@@ -317,10 +323,21 @@ get '/channels/messaging/:channel_id/pinned_messages' do
   { messages: pinned_messages, duration: '7.11ms' }.to_s
 end
 
+# Show pinned messages (v2). The v2 client sends `limit` as a plain query param.
+get '/api/v2/chat/channels/messaging/:channel_id/pinned_messages' do
+  pinned_messages = $message_list.select do |msg|
+    msg['cid'] == "messaging:#{params[:channel_id]}" && msg['pinned']
+  end
+  pinned_messages = pinned_messages.last(params[:limit].to_i) if params[:limit]
+  { messages: pinned_messages, duration: '7.11ms' }.to_s
+end
+
 # Search messages
-get '/search' do
-  payload = JSON.parse(params[:payload])
-  { results: search_messages(payload).map { |msg| { message: msg } }, duration: '7.11ms' }.to_s
+['/search', '/api/v2/chat/search'].each do |search_path|
+  get search_path do
+    payload = JSON.parse(params[:payload])
+    { results: search_messages(payload).map { |msg| { message: msg } }, duration: '7.11ms' }.to_s
+  end
 end
 
 # Show thread list
@@ -372,13 +389,17 @@ post '/moderation/unmute' do
 end
 
 # Mute channel
-post '/moderation/mute/channel' do
-  mute_channel(channel_cids: JSON.parse(request.body.read)['channel_cids'])
+['/moderation/mute/channel', '/api/v2/chat/moderation/mute/channel'].each do |mute_path|
+  post mute_path do
+    mute_channel(channel_cids: JSON.parse(request.body.read)['channel_cids'])
+  end
 end
 
 # Unmute channel
-post '/moderation/unmute/channel' do
-  unmute_channel(channel_cids: JSON.parse(request.body.read)['channel_cids'])
+['/moderation/unmute/channel', '/api/v2/chat/moderation/unmute/channel'].each do |unmute_path|
+  post unmute_path do
+    unmute_channel(channel_cids: JSON.parse(request.body.read)['channel_cids'])
+  end
 end
 
 # Block user
@@ -393,6 +414,44 @@ end
 
 # Show blocked users
 get '/users/block' do
+  { blocks: $blocked_users, duration: '7.11ms' }.to_s
+end
+
+# Flag message or user (v2)
+post '/api/v2/moderation/flag' do
+  flag_target(request_body: request.body.read)
+end
+
+# Mute users (v2). The v2 request carries `target_ids`; v1 a single `target_id`.
+post '/api/v2/moderation/mute' do
+  target_ids = JSON.parse(request.body.read)['target_ids'] || []
+  halt(400, { message: 'target_ids is required' }.to_s) if target_ids.empty?
+
+  target_ids.each { |target_id| mute_user(target_id: target_id) }
+  { mutes: $user_mutes, duration: '7.11ms' }.to_s
+end
+
+# Unmute users (v2)
+post '/api/v2/moderation/unmute' do
+  target_ids = JSON.parse(request.body.read)['target_ids'] || []
+  halt(400, { message: 'target_ids is required' }.to_s) if target_ids.empty?
+
+  target_ids.each { |target_id| unmute_user(target_id: target_id) }
+  { duration: '7.11ms' }.to_s
+end
+
+# Block user (v2)
+post '/api/v2/users/block' do
+  block_user(blocked_user_id: JSON.parse(request.body.read)['blocked_user_id'])
+end
+
+# Unblock user (v2)
+post '/api/v2/users/unblock' do
+  unblock_user(blocked_user_id: JSON.parse(request.body.read)['blocked_user_id'])
+end
+
+# Show blocked users (v2)
+get '/api/v2/users/block' do
   { blocks: $blocked_users, duration: '7.11ms' }.to_s
 end
 
@@ -516,4 +575,12 @@ end
 # Get link preview details
 get '/og' do
   create_link_preview(params[:url])
+end
+
+get '/api/v2/og' do
+  attachment = link_preview_attachment(params[:url])
+  halt(400, { message: "No link preview mock for #{params[:url]}" }.to_json) if attachment.nil?
+
+  # The v2 OG response requires `custom`, which the v1 fixtures do not carry.
+  { 'custom' => {} }.merge(attachment).merge('duration' => '7.11ms').to_json
 end

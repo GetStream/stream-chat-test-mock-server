@@ -24,6 +24,7 @@ end
 # `action`: String - Pass this param if you need to update a message (available options: `pin`, `unpin`, `edit`, `delete`)
 # `hard_delete`: Boolean - Pass this param if you need to hard delete a message (requires: `action=delete`)
 # `delay`: Int - Pass this param if you need the ws to be delayed by the amount of seconds
+# `thread_notification`: Boolean - Also send `notification.thread_message_new` for a thread reply
 
 post '/participant/message' do
   halt(400, { message: 'no current channel' }.to_s) unless find_channel_by_id($current_channel_id)
@@ -67,7 +68,9 @@ post '/participant/message' do
     channel_id: params[:action] ? template_message['channel_id'] : $current_channel_id,
     message_id: params[:action] ? template_message['id'] : unique_id,
     quoted_message_id: quoted_message_id,
-    parent_id: parent_id,
+    # Updates (edit/delete/pin) keep the thread linkage of the template message and must not bump the parent reply count again.
+    parent_id: params[:action] ? nil : parent_id,
+    reply_count: params[:action] ? template_message['reply_count'] : 0,
     show_in_channel: params[:thread_and_channel] ? also_in_channel : params[:thread] ? false : nil,
     text: text,
     attachments: attachments,
@@ -112,7 +115,25 @@ post '/participant/message' do
   else
     broadcast_event(response)
   end
+  broadcast_thread_message_new(message) if params[:thread_notification] == 'true' && parent_id && params[:action].nil?
   sync_channels
+end
+
+# The backend also notifies thread participants about a new reply; clients update
+# the thread list (latest replies, unread count) from this event only. Opt-in with
+# `thread_notification=true` so existing thread tests keep receiving a single event.
+def broadcast_thread_message_new(message)
+  channel = find_channel_by_id(message['channel_id'])
+  broadcast_event(
+    'type' => 'notification.thread_message_new',
+    'created_at' => message['created_at'],
+    'cid' => "messaging:#{message['channel_id']}",
+    'channel_id' => message['channel_id'],
+    'channel_type' => 'messaging',
+    'channel' => channel['channel'],
+    'message' => message,
+    'user' => Participant.user
+  )
 end
 
 ###### PUSH NOTIFICATIONS ######
@@ -298,6 +319,19 @@ post '/participant/poll_vote' do
     vote_data: vote_data,
     user: Participant.user
   )
+  sync_channels
+  ''
+end
+
+### Parameters
+# `text`: String - The text of the option the participant suggests
+
+post '/participant/poll_option' do
+  message = $message_list.reverse.detect { |msg| msg['poll'] }
+  halt(400, { message: 'no message with a poll' }.to_s) unless message
+  halt(400, { message: 'text param is required' }.to_s) if params[:text].to_s.empty?
+
+  create_poll_option(poll_id: message['poll']['id'], request_body: { text: params[:text] }.to_json)
   sync_channels
   ''
 end
