@@ -160,7 +160,7 @@ end
 ['/messages/:message_id', '/api/v2/chat/messages/:message_id'].each do |message_path|
   get message_path do
     message = find_message_by_id(params[:message_id])
-    { message: message, duration: '7.11ms' }.to_s
+    { message: message_with_channel(message), duration: '7.11ms' }.to_s
   end
 end
 

@@ -89,6 +89,17 @@ def find_message_by_id(id)
   $message_list.detect { |msg| msg['id'] == id }
 end
 
+def message_with_channel(message)
+  return message if message.nil?
+
+  channel = $channel_list['channels'].detect { |c| c['channel']['cid'] == message['cid'] }&.dig('channel')
+  channel ||= begin
+    type, id = message['cid'].to_s.split(':', 2)
+    Mocks.channels['channels'].first['channel'].merge('cid' => message['cid'], 'id' => id, 'type' => type)
+  end
+  message.merge('channel' => channel)
+end
+
 # The search payload carries the term either as a plain string or wrapped in an
 # operator condition like {"$autocomplete": "term"} or {"$q": "term"}. The channel
 # scope arrives in filter_conditions as a bare cid or an operator hash like
