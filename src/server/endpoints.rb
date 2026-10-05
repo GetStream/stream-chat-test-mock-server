@@ -313,23 +313,17 @@ end
   end
 end
 
-# Show pinned messages
-get '/channels/messaging/:channel_id/pinned_messages' do
-  payload = params[:payload] ? JSON.parse(params[:payload]) : {}
-  pinned_messages = $message_list.select do |msg|
-    msg['cid'] == "messaging:#{params[:channel_id]}" && msg['pinned']
+# Show pinned messages. v1 sends the options as a JSON `payload`, v2 as plain query params.
+['/channels/messaging/:channel_id/pinned_messages', '/api/v2/chat/channels/messaging/:channel_id/pinned_messages'].each do |pinned_path|
+  get pinned_path do
+    payload = params[:payload] ? JSON.parse(params[:payload]) : {}
+    limit = params[:limit] || payload['limit']
+    pinned_messages = $message_list.select do |msg|
+      msg['cid'] == "messaging:#{params[:channel_id]}" && msg['pinned']
+    end
+    pinned_messages = pinned_messages.last(limit.to_i) if limit
+    { messages: pinned_messages, duration: '7.11ms' }.to_s
   end
-  pinned_messages = pinned_messages.last(payload['limit'].to_i) if payload['limit']
-  { messages: pinned_messages, duration: '7.11ms' }.to_s
-end
-
-# Show pinned messages (v2). The v2 client sends `limit` as a plain query param.
-get '/api/v2/chat/channels/messaging/:channel_id/pinned_messages' do
-  pinned_messages = $message_list.select do |msg|
-    msg['cid'] == "messaging:#{params[:channel_id]}" && msg['pinned']
-  end
-  pinned_messages = pinned_messages.last(params[:limit].to_i) if params[:limit]
-  { messages: pinned_messages, duration: '7.11ms' }.to_s
 end
 
 # Search messages
@@ -581,6 +575,7 @@ get '/api/v2/og' do
   attachment = link_preview_attachment(params[:url])
   halt(400, { message: "No link preview mock for #{params[:url]}" }.to_json) if attachment.nil?
 
-  # The v2 OG response requires `custom`, which the v1 fixtures do not carry.
+  # `custom` is required on the v2 OG response. The v2 fixtures already carry it;
+  # the default only covers a v2 request served from the v1 fixtures.
   { 'custom' => {} }.merge(attachment).merge('duration' => '7.11ms').to_json
 end

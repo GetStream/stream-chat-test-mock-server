@@ -36,17 +36,30 @@ post '/participant/message' do
   also_in_channel = params[:thread_and_channel] == 'true'
   parent_id = params[:thread] || also_in_channel ? last_channel_message['id'] : nil
   thread_list = parent_id ? $message_list.filter { |m| m['parent_id'] == parent_id } : []
-  message_type = params[:action] == 'delete' ? :deleted : params[:thread] && !also_in_channel ? :reply : :regular
 
-  template_message = if message_type == :deleted
-                       $message_list.filter { |msg| msg['user']['id'] == Participant.user['id'] }.pop
+  # Updates act on the newest stored message that is not deleted yet (a soft-deleted
+  # message stays in the list as `type: deleted`, so it must not be picked up again).
+  template_message = if params[:action] == 'delete'
+                       $message_list.reverse.find { |msg| msg['user']['id'] == Participant.user['id'] && msg['deleted_at'].nil? }
                      elsif params[:action]
-                       $message_list.pop
+                       $message_list.reverse.find { |msg| msg['deleted_at'].nil? }
                      elsif params[:giphy]
                        Mocks.giphy['message']
                      else
                        response['message']
                      end
+  halt(400, { message: 'no message to update' }.to_s) if template_message.nil?
+
+  # An update keeps the stored type (`reply` stays `reply` without `thread=true`); only a delete changes it.
+  message_type = if params[:action] == 'delete'
+                   :deleted
+                 elsif params[:action]
+                   template_message['type'].to_sym
+                 elsif params[:thread] && !also_in_channel
+                   :reply
+                 else
+                   :regular
+                 end
 
   template_message['attachments'][0]['actions'] = nil if params[:giphy]
   text = ['pin', 'unpin'].include?(params[:action]) ? template_message['text'] : request.body.read
@@ -83,7 +96,9 @@ post '/participant/message' do
     pinned: params[:action] == 'pin',
     pinned_at: params[:action] == 'pin' ? timestamp : nil,
     pinned_by: params[:action] == 'pin' ? Participant.user : nil,
-    pin_expires: nil
+    pin_expires: nil,
+    # The template of an update is already in the list and is mutated in place.
+    track_message: params[:action].nil?
   )
 
   action_type = case params[:action]
@@ -107,15 +122,20 @@ post '/participant/message' do
   response['user'] = Participant.user
   response['hard_delete'] = true if params[:hard_delete] == 'true' && params[:action] == 'delete'
 
+  thread_notification = params[:thread_notification] == 'true' && parent_id && params[:action].nil?
+  send_events = lambda do
+    broadcast_event(response)
+    broadcast_thread_message_new(message) if thread_notification
+  end
+
   if params[:delay].to_i.positive?
     Thread.new do
       sleep(params[:delay].to_i)
-      broadcast_event(response)
+      send_events.call
     end
   else
-    broadcast_event(response)
+    send_events.call
   end
-  broadcast_thread_message_new(message) if params[:thread_notification] == 'true' && parent_id && params[:action].nil?
   sync_channels
 end
 
