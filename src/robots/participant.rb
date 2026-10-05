@@ -24,6 +24,7 @@ end
 # `action`: String - Pass this param if you need to update a message (available options: `pin`, `unpin`, `edit`, `delete`)
 # `hard_delete`: Boolean - Pass this param if you need to hard delete a message (requires: `action=delete`)
 # `delay`: Int - Pass this param if you need the ws to be delayed by the amount of seconds
+# `thread_notification`: Boolean - Also send `notification.thread_message_new` for a thread reply
 
 post '/participant/message' do
   halt(400, { message: 'no current channel' }.to_s) unless find_channel_by_id($current_channel_id)
@@ -35,17 +36,30 @@ post '/participant/message' do
   also_in_channel = params[:thread_and_channel] == 'true'
   parent_id = params[:thread] || also_in_channel ? last_channel_message['id'] : nil
   thread_list = parent_id ? $message_list.filter { |m| m['parent_id'] == parent_id } : []
-  message_type = params[:action] == 'delete' ? :deleted : params[:thread] && !also_in_channel ? :reply : :regular
 
-  template_message = if message_type == :deleted
-                       $message_list.filter { |msg| msg['user']['id'] == Participant.user['id'] }.pop
+  # Updates act on the newest stored message that is not deleted yet (a soft-deleted
+  # message stays in the list as `type: deleted`, so it must not be picked up again).
+  template_message = if params[:action] == 'delete'
+                       $message_list.reverse.find { |msg| msg['user']['id'] == Participant.user['id'] && msg['deleted_at'].nil? }
                      elsif params[:action]
-                       $message_list.pop
+                       $message_list.reverse.find { |msg| msg['deleted_at'].nil? }
                      elsif params[:giphy]
                        Mocks.giphy['message']
                      else
                        response['message']
                      end
+  halt(400, { message: 'no message to update' }.to_s) if template_message.nil?
+
+  # An update keeps the stored type (`reply` stays `reply` without `thread=true`); only a delete changes it.
+  message_type = if params[:action] == 'delete'
+                   :deleted
+                 elsif params[:action]
+                   template_message['type'].to_sym
+                 elsif params[:thread] && !also_in_channel
+                   :reply
+                 else
+                   :regular
+                 end
 
   template_message['attachments'][0]['actions'] = nil if params[:giphy]
   text = ['pin', 'unpin'].include?(params[:action]) ? template_message['text'] : request.body.read
@@ -67,7 +81,9 @@ post '/participant/message' do
     channel_id: params[:action] ? template_message['channel_id'] : $current_channel_id,
     message_id: params[:action] ? template_message['id'] : unique_id,
     quoted_message_id: quoted_message_id,
-    parent_id: parent_id,
+    # Updates (edit/delete/pin) keep the thread linkage of the template message and must not bump the parent reply count again.
+    parent_id: params[:action] ? nil : parent_id,
+    reply_count: params[:action] ? template_message['reply_count'] : 0,
     show_in_channel: params[:thread_and_channel] ? also_in_channel : params[:thread] ? false : nil,
     text: text,
     attachments: attachments,
@@ -80,7 +96,9 @@ post '/participant/message' do
     pinned: params[:action] == 'pin',
     pinned_at: params[:action] == 'pin' ? timestamp : nil,
     pinned_by: params[:action] == 'pin' ? Participant.user : nil,
-    pin_expires: nil
+    pin_expires: nil,
+    # The template of an update is already in the list and is mutated in place.
+    track_message: params[:action].nil?
   )
 
   action_type = case params[:action]
@@ -104,15 +122,38 @@ post '/participant/message' do
   response['user'] = Participant.user
   response['hard_delete'] = true if params[:hard_delete] == 'true' && params[:action] == 'delete'
 
+  thread_notification = params[:thread_notification] == 'true' && parent_id && params[:action].nil?
+  send_events = lambda do
+    broadcast_event(response)
+    broadcast_thread_message_new(message) if thread_notification
+  end
+
   if params[:delay].to_i.positive?
     Thread.new do
       sleep(params[:delay].to_i)
-      broadcast_event(response)
+      send_events.call
     end
   else
-    broadcast_event(response)
+    send_events.call
   end
   sync_channels
+end
+
+# The backend also notifies thread participants about a new reply; clients update
+# the thread list (latest replies, unread count) from this event only. Opt-in with
+# `thread_notification=true` so existing thread tests keep receiving a single event.
+def broadcast_thread_message_new(message)
+  channel = find_channel_by_id(message['channel_id'])
+  broadcast_event(
+    'type' => 'notification.thread_message_new',
+    'created_at' => message['created_at'],
+    'cid' => "messaging:#{message['channel_id']}",
+    'channel_id' => message['channel_id'],
+    'channel_type' => 'messaging',
+    'channel' => channel['channel'],
+    'message' => message,
+    'user' => Participant.user
+  )
 end
 
 ###### PUSH NOTIFICATIONS ######
@@ -298,6 +339,19 @@ post '/participant/poll_vote' do
     vote_data: vote_data,
     user: Participant.user
   )
+  sync_channels
+  ''
+end
+
+### Parameters
+# `text`: String - The text of the option the participant suggests
+
+post '/participant/poll_option' do
+  message = $message_list.reverse.detect { |msg| msg['poll'] }
+  halt(400, { message: 'no message with a poll' }.to_s) unless message
+  halt(400, { message: 'text param is required' }.to_s) if params[:text].to_s.empty?
+
+  create_poll_option(poll_id: message['poll']['id'], request_body: { text: params[:text] }.to_json)
   sync_channels
   ''
 end
