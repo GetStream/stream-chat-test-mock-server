@@ -38,8 +38,9 @@ def find_poll_message(poll_id)
   $message_list.detect { |msg| msg.dig('poll', 'id') == poll_id }
 end
 
-def poll_option(text)
-  { 'id' => unique_id, 'text' => text.to_s }
+# `custom` is required on v2 poll and option payloads.
+def poll_option(text, custom = nil)
+  { 'id' => unique_id, 'text' => text.to_s, 'custom' => custom || {} }
 end
 
 # Answer votes carry `is_answer` and `answer_text` on top of this shape, with an
@@ -63,7 +64,7 @@ def create_poll(request_body:)
     'id' => json['id'] || unique_id,
     'name' => json['name'].to_s,
     'description' => json['description'].to_s,
-    'options' => (json['options'] || []).map { |option| poll_option(option['text']) },
+    'options' => (json['options'] || []).map { |option| poll_option(option['text'], option['custom']) },
     'allow_answers' => json['allow_answers'] || false,
     'allow_user_suggested_options' => json['allow_user_suggested_options'] || false,
     'enforce_unique_vote' => json['enforce_unique_vote'] || false,
@@ -79,7 +80,8 @@ def create_poll(request_body:)
     'own_votes' => [],
     'latest_answers' => [],
     'latest_votes_by_option' => {},
-    'vote_counts_by_option' => {}
+    'vote_counts_by_option' => {},
+    'custom' => json['custom'] || {}
   }
   $polls << poll
   { poll: poll, duration: '7.11ms' }.to_s
@@ -97,7 +99,7 @@ def update_poll(request_body:)
   if json['options']
     poll['options'] = json['options'].map do |option|
       existing = poll['options'].detect { |opt| opt['id'] == option['id'] }
-      existing ? existing.merge('text' => option['text'].to_s) : poll_option(option['text'])
+      existing ? existing.merge('text' => option['text'].to_s) : poll_option(option['text'], option['custom'])
     end
   end
   poll['updated_at'] = unique_date
@@ -111,7 +113,7 @@ end
 POLL_CORE_KEYS = %w[
   id name description options allow_answers allow_user_suggested_options enforce_unique_vote
   voting_visibility is_closed created_by created_by_id created_at updated_at vote_count
-  answers_count own_votes latest_answers latest_votes_by_option vote_counts_by_option
+  answers_count own_votes latest_answers latest_votes_by_option vote_counts_by_option custom
 ].freeze
 
 def partial_update_poll(poll_id:, request_body:)
@@ -142,7 +144,8 @@ def create_poll_option(poll_id:, request_body:)
   poll = find_poll(poll_id)
   halt(400, { message: "poll #{poll_id} not found" }.to_s) unless poll
 
-  option = poll_option(JSON.parse(request_body)['text'])
+  json = JSON.parse(request_body)
+  option = poll_option(json['text'], json['custom'])
   poll['options'] << option
   poll['updated_at'] = unique_date
   broadcast_poll_event(type: PollEventType.updated, poll: poll)
