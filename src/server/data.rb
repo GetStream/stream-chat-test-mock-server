@@ -46,6 +46,6 @@ end
 # the media type of the upload is on the `file` part itself.
 def uploaded_file_type
   part = params['file']
-  mime_type = part.is_a?(Hash) ? part['type'].to_s : request.content_type.to_s
+  mime_type = part.kind_of?(Hash) ? part['type'].to_s : request.content_type.to_s
   mime_type.include?('video') ? 'video' : 'file'
 end
