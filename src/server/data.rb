@@ -41,3 +41,11 @@ end
 def upload_response(type)
   { file: test_asset(type), duration: '49.41ms' }
 end
+
+# Uploads are multipart, so the request content type is always `multipart/form-data`;
+# the media type of the upload is on the `file` part itself.
+def uploaded_file_type
+  part = params['file']
+  mime_type = part.is_a?(Hash) ? part['type'].to_s : request.content_type.to_s
+  mime_type.include?('video') ? 'video' : 'file'
+end
