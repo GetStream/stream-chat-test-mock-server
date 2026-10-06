@@ -3,8 +3,10 @@
 # stateless: flag_target echoes a flag object back, which is all the clients
 # need since nothing queries flags.
 
+# The recorded connection `me` is a complete own user; `current_user` is only a message
+# author and lacks own-user fields (devices, unread counts) that v2 clients require.
 def own_user
-  current_user.dup.merge(live_own_user_state)
+  connection_payload['me'] || current_user.dup.merge(live_own_user_state)
 end
 
 # The client applies every own-user push as a full update, so any payload that
