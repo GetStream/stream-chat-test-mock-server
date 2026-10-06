@@ -49,6 +49,9 @@ $freeze_messages = nil
 $delay_messages = nil
 $forbidden_words = ["wth"]
 $all_channels_loaded = false
+# Set by /app_user when a test logs the app in as a second user.
+$app_user = nil
+$delay_channel_list = nil
 
 set :port, ARGV[0] || 4568
 
@@ -85,6 +88,7 @@ end
 def connection_payload
   payload = JSON.parse($health_check)
   payload['me'] = payload['me'].merge(live_own_user_state) if payload['me']
+  payload['me'] = payload['me'].merge($app_user) if payload['me'] && $app_user
   payload
 end
 

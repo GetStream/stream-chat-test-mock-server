@@ -127,6 +127,41 @@ post '/delay_messages' do
   ''
 end
 
+# Delays every channel list query, so a test can act while the channel list is loading.
+post '/delay_channel_list' do
+  $delay_channel_list = params[:delay].to_i.positive? ? params[:delay].to_i : 5
+  ''
+end
+
+# Switches the app user, so a test can log the app in as a second user after logging out.
+# From then on the connection `me`, `current_user` and the author of the messages the app
+# sends are this user, and the user joins every channel with a fully read state, like a
+# member on the backend. The previous app user stays a member.
+### Parameters
+# `id`: String - Id of the user the app logs in as
+# `name`: String - Name of that user
+post '/app_user' do
+  halt(400, { message: 'id is required' }.to_s) if params[:id].to_s.empty?
+
+  previous_user_id = current_user['id']
+  $app_user = { 'id' => params[:id], 'name' => params[:name] || params[:id] }
+  user = Mocks.message['message']['user'].merge($app_user)
+  $channel_list['channels'].each do |channel|
+    previous_member = channel['members'].detect { |member| member['user_id'] == previous_user_id }
+    next unless previous_member
+
+    member = channel['members'].detect { |m| m['user_id'] == user['id'] }
+    unless member
+      member = previous_member.merge('user_id' => user['id'], 'user' => previous_member['user'].merge($app_user))
+      channel['members'] << member
+      channel['channel']['member_count'] = channel['members'].count
+    end
+    channel['membership'] = member if channel['membership']
+    seed_read_state(channel: channel, user: user, last_read: unique_date) unless find_read_state(channel: channel, user_id: user['id'])
+  end
+  ''
+end
+
 # Truncates the current channel as a server-side action, reusing the same helper
 # as the client-initiated truncate endpoint. The app under test only receives the
 # `channel.truncated` websocket event (and the system message when requested).
@@ -146,6 +181,13 @@ end
 
 post '/remove_member' do
   update_members(channel_id: $current_channel_id, request_body: { remove_members: [params[:user_id]] }.to_json)
+  ''
+end
+
+# Mutes the current channel for the app user as a server-side action (e.g. from another
+# device). The app under test only receives the `notification.channel_mutes_updated` event.
+post '/mute_channel' do
+  mute_channel(channel_cids: ["messaging:#{$current_channel_id}"])
   ''
 end
 
