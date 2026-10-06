@@ -29,7 +29,7 @@ end
 def test_asset(type)
   assets = {
     'image' => 'https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg',
-    'video' => 'https://sample-videos.com/video321/mp4/720/big_buck_bunny_720p_1mb.mp4',
+    'video' => 'https://raw.githubusercontent.com/GetStream/stream-chat-test-mock-server/main/src/assets/video.mp4',
     'file' => 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf'
   }
   assets[type]

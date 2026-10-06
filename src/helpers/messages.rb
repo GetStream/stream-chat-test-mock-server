@@ -229,7 +229,7 @@ def create_message(request_body:, channel_id: nil)
     quoted_message_id: quoted_message_id,
     show_in_channel: channel_reply,
     text: message_text,
-    user: template_message['user'],
+    user: $app_user ? current_user : template_message['user'],
     created_at: timestamp,
     updated_at: timestamp,
     attachments: attachments,
@@ -581,7 +581,10 @@ def mock_message_pagination(message_list:, limit:, id_lt: nil, id_gt: nil, id_lt
     end
   elsif id_around
     message_index = message_list.index { |msg| msg['id'] == id_around }
-    if message_index
+    if message_index && $centered_around_pagination
+      start_with = [message_index - (limit / 2), 0].max
+      end_with = [start_with + limit - 1, message_list.count - 1].min
+    elsif message_index
       start_with = message_index
       end_with = [message_index + limit, message_list.count - 1].min
     end

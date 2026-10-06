@@ -70,6 +70,7 @@ end
   # Show channel list (post request). Android sends the query as the request body,
   # while iOS sends it as the `payload` query parameter.
   post channels do
+    sleep($delay_channel_list) if $delay_channel_list
     sync_channels
     body = request.body.read
     paginate_channel_list(payload: params[:payload] || (body unless body.empty?))

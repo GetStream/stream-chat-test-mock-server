@@ -25,9 +25,18 @@ end
 # `hard_delete`: Boolean - Pass this param if you need to hard delete a message (requires: `action=delete`)
 # `delay`: Int - Pass this param if you need the ws to be delayed by the amount of seconds
 # `thread_notification`: Boolean - Also send `notification.thread_message_new` for a thread reply
+# `system`: Boolean - Pass this param if it's a system message (e.g. posted by a server-side action)
+# `channel_name`: String - Send a new message to the channel with this name instead of the current channel
 
 post '/participant/message' do
   halt(400, { message: 'no current channel' }.to_s) unless find_channel_by_id($current_channel_id)
+
+  target_channel_id = $current_channel_id
+  if params[:channel_name]
+    target_channel = $channel_list['channels'].detect { |c| channel_name(c['channel']) == params[:channel_name] }
+    halt(400, { message: "channel #{params[:channel_name]} not found" }.to_s) unless target_channel
+    target_channel_id = target_channel['channel']['id']
+  end
 
   timestamp = unique_date
   attachments = mock_attachments(params)
@@ -57,6 +66,8 @@ post '/participant/message' do
                    template_message['type'].to_sym
                  elsif params[:thread] && !also_in_channel
                    :reply
+                 elsif params[:system] == 'true'
+                   :system
                  else
                    :regular
                  end
@@ -78,7 +89,7 @@ post '/participant/message' do
   message = mock_message(
     template_message,
     message_type: message_type,
-    channel_id: params[:action] ? template_message['channel_id'] : $current_channel_id,
+    channel_id: params[:action] ? template_message['channel_id'] : target_channel_id,
     message_id: params[:action] ? template_message['id'] : unique_id,
     quoted_message_id: quoted_message_id,
     # Updates (edit/delete/pin) keep the thread linkage of the template message and must not bump the parent reply count again.
@@ -389,6 +400,29 @@ post '/participant/typing/stop' do
     channel_id: $current_channel_id,
     parent_id: parent_id,
     user: Participant.user
+  )
+  ''
+end
+
+# Marks the current channel as delivered but not read for the participant, like the
+# participant's client acknowledging the app user's messages while the channel is
+# scrolled up: they turn from sent to delivered until /participant/read.
+post '/participant/delivered' do
+  channel = find_channel_by_id($current_channel_id)
+  halt(400, { message: 'no current channel' }.to_s) unless channel
+
+  read = mark_channel_delivered(channel: channel, user: Participant.user)
+  halt(400, { message: 'no message to deliver' }.to_s) unless read
+
+  broadcast_event(
+    'type' => 'message.delivered',
+    'cid' => channel['channel']['cid'],
+    'channel_id' => channel['channel']['id'],
+    'channel_type' => channel['channel']['type'],
+    'user' => Participant.user,
+    'created_at' => unique_date,
+    'last_delivered_at' => read['last_delivered_at'],
+    'last_delivered_message_id' => read['last_delivered_message_id']
   )
   ''
 end

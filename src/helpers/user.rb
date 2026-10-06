@@ -2,6 +2,7 @@ def current_user
   return @user if @user
 
   @user = Mocks.message['message']['user']
+  @user = @user.merge($app_user) if $app_user
   @user
 end
 

@@ -27,3 +27,11 @@ post '/config/reminders' do
   end
   halt(200)
 end
+
+# By default `id_around` returns the target message plus the next `limit` messages.
+# Enabling this centres the window on the target like the real backend, so clients
+# know there are older messages to load after jumping to a mid-page message.
+post '/config/centered_around_pagination' do
+  $centered_around_pagination = params[:value].to_s.casecmp('true').zero?
+  halt(200)
+end

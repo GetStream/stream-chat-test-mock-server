@@ -48,6 +48,20 @@ def mark_channel_read(channel:, user:)
   read
 end
 
+# Advances the user's delivery state to the newest channel message without touching
+# `last_read`. A user without a read entry gets one that predates every message, so
+# the delivery does not count as a read.
+def mark_channel_delivered(channel:, user:)
+  last_message = channel_visible_messages(cid: channel['channel']['cid']).last
+  return nil unless last_message
+
+  read = find_read_state(channel: channel, user_id: user['id']) ||
+         seed_read_state(channel: channel, user: user, last_read: channel['channel']['created_at'])
+  read['last_delivered_at'] = unique_date
+  read['last_delivered_message_id'] = last_message['id']
+  read
+end
+
 # Rewinds the user's read state to just before `message_id`, so that message and
 # everything after it count as unread, mirroring the backend's mark-unread.
 def mark_channel_unread(channel:, user:, message_id:)
