@@ -232,7 +232,7 @@ end
 
 # Send file
 post '/channels/messaging/:channel_id/file' do
-  upload_response(request.content_type.include?('video') ? 'video' : 'file').to_json
+  upload_response(uploaded_file_type).to_json
 end
 
 # Send image (v2)
@@ -242,7 +242,7 @@ end
 
 # Send file (v2)
 post '/api/v2/chat/channels/messaging/:channel_id/file' do
-  upload_response(request.content_type.include?('video') ? 'video' : 'file').to_json
+  upload_response(uploaded_file_type).to_json
 end
 
 # Send reaction
