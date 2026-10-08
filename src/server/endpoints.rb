@@ -92,7 +92,20 @@ end
     channel = find_channel_by_id(params[:channel_id])
     halt(400, { message: "channel #{params[:channel_id]} not found" }.to_s) unless channel
 
-    mark_channel_read(channel: channel, user: current_user)
+    read = mark_channel_read(channel: channel, user: current_user)
+    broadcast_event(
+      'type' => 'notification.mark_read',
+      'created_at' => unique_date,
+      'cid' => channel['channel']['cid'],
+      'channel_type' => 'messaging',
+      'channel_id' => params[:channel_id],
+      'channel' => channel['channel'],
+      'user' => current_user,
+      'last_read_message_id' => read['last_read_message_id'],
+      'unread_messages' => 0,
+      'unread_channels' => 0,
+      'total_unread_count' => 0
+    )
     create_event(type: 'message.read', channel_id: params[:channel_id])
   end
 
