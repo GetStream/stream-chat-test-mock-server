@@ -22,6 +22,7 @@ require_relative 'helpers/moderation'
 require_relative 'helpers/polls'
 require_relative 'helpers/reminders'
 require_relative 'helpers/threads'
+require_relative 'helpers/v2'
 require_relative 'robots/chat'
 require_relative 'robots/participant'
 
