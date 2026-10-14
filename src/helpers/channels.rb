@@ -24,16 +24,28 @@ def channel_group(channel)
   $api_version == :v2 ? channel.dig('custom', 'group') : channel['group']
 end
 
+# Every group stays in `$channel_groups` until the next /mock, so the grouped unread
+# counts keep reporting a group at 0 after its last channel moves out.
 def set_channel_group(channel, group)
   if $api_version == :v2
     (channel['custom'] ||= {})['group'] = group
   else
     channel['group'] = group
   end
+  $channel_groups << group unless $channel_groups.include?(group)
 end
 
 def find_channel_by_id(id)
   $channel_list['channels'].detect { |channel| channel['channel']['id'] == id }
+end
+
+def find_channel_by_name(name)
+  $channel_list['channels'].detect { |channel| channel_name(channel['channel']) == name }
+end
+
+# A new channel message moves the channel up, like on the backend.
+def update_last_message_at(channel_id:, message:)
+  find_channel_by_id(channel_id)['channel']['last_message_at'] = message['created_at']
 end
 
 def sync_channels
@@ -116,11 +128,6 @@ def grouped_channels(group)
   channels.select { |c| channel_group(c['channel']) == group }
 end
 
-def unread_for_current_user?(channel)
-  read = find_read_state(channel: channel, user_id: current_user['id'])
-  read && read['unread_messages'] > 0
-end
-
 # Like the backend, the response holds only the requested groups. `next` and `prev`
 # are opaque cursors to the client, so the mock uses the page start offset as both.
 # `unread_channels` counts the whole group, not only the returned page.
@@ -139,7 +146,7 @@ def query_grouped_channels(groups:, limit:)
         'channels' => channels[offset, page_limit] || [],
         'next' => next_offset < channels.count ? next_offset.to_s : nil,
         'prev' => offset.positive? ? [offset - page_limit, 0].max.to_s : nil,
-        'unread_channels' => channels.count { |c| unread_for_current_user?(c) }
+        'unread_channels' => channels.count { |c| current_user_unread_messages(c) > 0 }
       }
     ]
   end

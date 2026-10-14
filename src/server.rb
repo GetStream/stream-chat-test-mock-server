@@ -42,6 +42,7 @@ $channel_mutes = []
 $blocked_users = []
 $block_hidden_channels = {}
 $channel_list = Mocks.channels
+$channel_groups = []
 $current_channel_id = Mocks.event_ws['channel_id']
 $health_check = Mocks.health_check.to_s
 $fail_messages = nil

@@ -29,6 +29,7 @@ post '/mock' do
   $message_list = []
   $sync_events = []
   $channel_list['channels'] = []
+  $channel_groups = []
   $reminders = []
   $polls = []
   $user_mutes = []
