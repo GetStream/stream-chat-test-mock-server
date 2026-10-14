@@ -76,6 +76,15 @@ end
     paginate_channel_list(payload: params[:payload] || (body unless body.empty?))
   end
 
+  # Show grouped channel list
+  post "#{channels}/grouped" do
+    body = request.body.read
+    json = body.empty? ? {} : JSON.parse(body)
+    halt(400, { message: 'at least one group is required' }.to_s) if json['groups'].to_h.empty?
+
+    query_grouped_channels(groups: json['groups'], limit: json['limit'])
+  end
+
   # Show channel info
   post "#{channels}/:channel_type/:channel_id/query" do
     paginate_message_list(params: params, request_body: request.body.read)
