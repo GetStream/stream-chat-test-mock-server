@@ -525,8 +525,9 @@ end
   end
 end
 
-# iOS sends every poll path under /api/v2 while Android and Flutter send it unprefixed,
-# so each poll route is registered under both spellings, like the v2 upload routes above.
+# iOS sends every poll path under /api/v2, Flutter sends it unprefixed and Android is moving
+# from unprefixed to /api/v2, so each poll route is registered under both spellings, like the
+# v2 upload routes above.
 ['/polls', '/api/v2/polls'].each do |polls|
   # Create poll
   post polls do
