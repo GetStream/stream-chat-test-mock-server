@@ -54,6 +54,13 @@ def unread_counts
   }
 end
 
+# `notification.mark_read` also carries `unread_count`, which the backend sets to the total
+# unread count. Clients require it: without it they fail to parse the event and reconnect.
+def mark_read_unread_counts
+  counts = unread_counts
+  counts.merge('unread_count' => counts['total_unread_count'])
+end
+
 def current_user_unread_messages(channel)
   find_read_state(channel: channel, user_id: current_user['id'])&.dig('unread_messages').to_i
 end
