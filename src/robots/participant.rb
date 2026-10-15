@@ -463,6 +463,26 @@ post '/participant/channel_group' do
   halt(400, { message: 'channel not found' }.to_s) unless channel
 
   set_channel_group(channel['channel'], params[:group])
+  broadcast_channel_updated_by_participant(channel: channel, delay: params[:delay].to_i)
+  ''
+end
+
+# Sets a channel's custom `touched_at` date to now, like a partial update made by the
+# participant. It counts towards the channel's grouped `query_timestamp`. The app under
+# test receives `channel.updated`.
+### Parameters
+# `channel_name`: String - Touch the channel with this name instead of the current channel
+# `delay`: Int - Send the event after this many seconds. The touch itself happens right away
+post '/participant/channel_touch' do
+  channel = params[:channel_name] ? find_channel_by_name(params[:channel_name]) : find_channel_by_id($current_channel_id)
+  halt(400, { message: 'channel not found' }.to_s) unless channel
+
+  set_channel_touched_at(channel['channel'], unique_date)
+  broadcast_channel_updated_by_participant(channel: channel, delay: params[:delay].to_i)
+  ''
+end
+
+def broadcast_channel_updated_by_participant(channel:, delay:)
   channel['channel']['updated_at'] = unique_date
   send_event = lambda do
     broadcast_event(
@@ -477,13 +497,12 @@ post '/participant/channel_group' do
     )
   end
 
-  if params[:delay].to_i.positive?
+  if delay.positive?
     Thread.new do
-      sleep(params[:delay].to_i)
+      sleep(delay)
       send_event.call
     end
   else
     send_event.call
   end
-  ''
 end

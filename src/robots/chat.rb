@@ -14,10 +14,15 @@
 # `channel_groups`: String - Comma-separated groups for the first channels, in the same
 #                   order as `channel_names`, set as the custom `group` field that
 #                   grouped channel queries read. Channels without an entry get no group
+# `channel_days_ago`: String - Comma-separated ages in days for the first channels, in the same
+#                     order as `channel_names`. Lets a test seed channels on both sides of a
+#                     grouped `query_timestamp` cutoff. Channels without an entry are about
+#                     11 days old
 post '/mock' do
   channels_count = params[:channels].to_i || 1
   channel_names = (params[:channel_names] || '').split(',')
   channel_groups = (params[:channel_groups] || '').split(',')
+  channel_days_ago = (params[:channel_days_ago] || '').split(',')
   messages_count = params[:messages].to_i || 0
   replies_count = params[:replies].to_i || 0
 
@@ -41,7 +46,9 @@ post '/mock' do
     channel_id = SecureRandom.uuid
     channel_name = channel_names[i - 1] || i.to_s
     $current_channel_id = channel_id if i == 1
-    channel_timestamp = update_date(timestamp: timestamp, minus_seconds: (i * 600) + 1_000_000)
+    days_ago = channel_days_ago[i - 1].to_s
+    age_seconds = days_ago.empty? ? 1_000_000 : days_ago.to_i * 86_400
+    channel_timestamp = update_date(timestamp: timestamp, minus_seconds: (i * 600) + age_seconds)
     channel_template = Mocks.channels['channels'].first
     channel_template['channel']['last_message_at'] = channel_timestamp
     channel_template['channel']['id'] = channel_id

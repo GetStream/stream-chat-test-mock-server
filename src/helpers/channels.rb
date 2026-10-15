@@ -35,6 +35,19 @@ def set_channel_group(channel, group)
   $channel_groups << group unless $channel_groups.include?(group)
 end
 
+# The backend reads a grouped channel's `touched_at` date from its custom data.
+def channel_touched_at(channel)
+  $api_version == :v2 ? channel.dig('custom', 'touched_at') : channel['touched_at']
+end
+
+def set_channel_touched_at(channel, touched_at)
+  if $api_version == :v2
+    (channel['custom'] ||= {})['touched_at'] = touched_at
+  else
+    channel['touched_at'] = touched_at
+  end
+end
+
 def find_channel_by_id(id)
   $channel_list['channels'].detect { |channel| channel['channel']['id'] == id }
 end
@@ -118,25 +131,81 @@ end
 
 GROUPED_ALL_GROUP = 'all'
 GROUPED_DEFAULT_LIMIT = 10
+GROUPED_RELATIVE_CUTOFF = /\A(?:now-)?(\d+)d\z/.freeze
 
 # The channels of a group, newest first. The `all` group holds every channel. Seeded
-# channels share `last_message_at`, so `created_at` keeps the order stable.
-def grouped_channels(group)
+# channels share `last_message_at`, so `created_at` keeps the order stable. With a
+# `query_timestamp` sort, the order follows that timestamp instead.
+def grouped_channels(group, filter: nil, sort: nil)
   channels = queried_channels(nil).sort_by { |c| [c['channel']['last_message_at'].to_s, c['channel']['created_at'].to_s] }.reverse
-  return channels if group == GROUPED_ALL_GROUP
+  channels = channels.sort_by { |c| query_timestamp(c['channel']) }.reverse if query_timestamp_sort?(sort)
+  channels = channels.select { |c| channel_group(c['channel']) == group } unless group == GROUPED_ALL_GROUP
+  return channels if filter.nil?
 
-  channels.select { |c| channel_group(c['channel']) == group }
+  now = Time.now.utc
+  channels.select { |c| grouped_filter_matches?(filter, c['channel'], now) }
+end
+
+def query_timestamp_sort?(sort)
+  (sort || []).any? { |param| param['field'] == 'query_timestamp' }
+end
+
+# Like the backend, the latest of the channel's creation, its last message and its custom
+# `touched_at` date.
+def query_timestamp(channel)
+  [channel['created_at'], channel['last_message_at'], channel_touched_at(channel)]
+    .compact
+    .map { |date| Time.parse(date) }
+    .max
+end
+
+# Evaluates the conditions the backend accepts in a group's `filter_conditions`: `group`
+# with `$eq`, `$in` and `$ne`, and `query_timestamp` with `$gte`, combined with `$and` and
+# `$or`. An empty filter matches the whole group. Any other condition matches.
+def grouped_filter_matches?(filter, channel, now)
+  filter.all? do |field, condition|
+    case field
+    when '$and' then condition.all? { |child| grouped_filter_matches?(child, channel, now) }
+    when '$or' then condition.any? { |child| grouped_filter_matches?(child, channel, now) }
+    when 'group' then grouped_condition_matches?(condition, channel_group(channel))
+    when 'query_timestamp' then query_timestamp_condition_matches?(condition, query_timestamp(channel), now)
+    else true
+    end
+  end
+end
+
+def grouped_condition_matches?(condition, group)
+  return condition == group unless condition.kind_of?(Hash)
+
+  condition.all? do |operator, value|
+    case operator
+    when '$eq' then value == group
+    when '$in' then value.include?(group)
+    when '$ne' then value != group
+    else true
+    end
+  end
+end
+
+def query_timestamp_condition_matches?(condition, timestamp, now)
+  cutoff = condition.kind_of?(Hash) ? condition['$gte'] : nil
+  return true if cutoff.nil?
+
+  relative = GROUPED_RELATIVE_CUTOFF.match(cutoff)
+  cutoff_time = relative ? now - (relative[1].to_i * 86_400) : Time.parse(cutoff)
+  timestamp >= cutoff_time
 end
 
 # Like the backend, the response holds only the requested groups. `next` and `prev`
 # are opaque cursors to the client, so the mock uses the page start offset as both.
-# `unread_channels` counts the whole group, not only the returned page.
-def query_grouped_channels(groups:, limit:)
+# `unread_channels` counts the whole group, not only the returned page. A group's
+# `filter_conditions` narrow both.
+def query_grouped_channels(groups:, limit:, sort: nil)
   sync_channels
   default_limit = limit.to_i.positive? ? limit.to_i : GROUPED_DEFAULT_LIMIT
   response_groups = groups.to_h do |group, page|
     page ||= {}
-    channels = grouped_channels(group)
+    channels = grouped_channels(group, filter: page['filter_conditions'], sort: sort)
     page_limit = page['limit'].to_i.positive? ? page['limit'].to_i : default_limit
     offset = (page['next'] || page['prev']).to_i
     next_offset = offset + page_limit

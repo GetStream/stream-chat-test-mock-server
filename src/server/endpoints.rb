@@ -109,7 +109,7 @@ end
     json = body.empty? ? {} : JSON.parse(body)
     halt(400, { message: 'at least one group is required' }.to_s) if json['groups'].to_h.empty?
 
-    query_grouped_channels(groups: json['groups'], limit: json['limit'])
+    query_grouped_channels(groups: json['groups'], limit: json['limit'], sort: json['sort'])
   end
 
   # Show channel info
