@@ -2,6 +2,33 @@ get '/ping' do
   halt(200)
 end
 
+# Android calls the v2 REST paths while its websocket is still v1, so a v1 run also takes v2-encoded
+# requests. Their nested custom data is flattened back before any handler reads the body, so what the
+# server stores stays v1-shaped for the v1 socket, and the answer gets the v2 shape back. The guest
+# handler already speaks both shapes.
+before '/api/v2/*' do
+  next if $api_version == :v2 || request.path_info == '/api/v2/guest'
+
+  request.body.rewind
+  json = begin
+    JSON.parse(request.body.read)
+  rescue JSON::ParserError
+    nil
+  end
+  request.env['rack.input'] = StringIO.new(flatten_custom(json).to_json) if json
+end
+
+after '/api/v2/*' do
+  next if $api_version == :v2 || request.path_info == '/api/v2/guest'
+
+  json = begin
+    JSON.parse(Array(response.body).join)
+  rescue JSON::ParserError
+    nil
+  end
+  body JSON.pretty_generate(nest_v2_custom(json)) if json.kind_of?(Hash)
+end
+
 # Connect to WebSocket (v1). The client authenticates through the connect URL and takes
 # a health.check carrying `me` as its first frame.
 get '/connect' do
@@ -383,17 +410,19 @@ post '/api/v2/chat/threads' do
 end
 
 # Query message reactions
-post '/messages/:message_id/reactions' do
-  body = request.body.read
-  json = body.empty? ? {} : JSON.parse(body)
-  filter_type = json.dig('filter', 'type')
-  filter_type = filter_type.values.first if filter_type.kind_of?(Hash)
-  message = find_message_by_id(params[:message_id])
-  halt(400, { message: "message #{params[:message_id]} not found" }.to_s) unless message
+['/messages/:message_id/reactions', '/api/v2/chat/messages/:message_id/reactions'].each do |reactions_path|
+  post reactions_path do
+    body = request.body.read
+    json = body.empty? ? {} : JSON.parse(body)
+    filter_type = json.dig('filter', 'type')
+    filter_type = filter_type.values.first if filter_type.kind_of?(Hash)
+    message = find_message_by_id(params[:message_id])
+    halt(400, { message: "message #{params[:message_id]} not found" }.to_s) unless message
 
-  reactions = message['latest_reactions'] || []
-  reactions = reactions.select { |reaction| reaction['type'] == filter_type } if filter_type
-  { reactions: reactions, duration: '7.11ms' }.to_s
+    reactions = message['latest_reactions'] || []
+    reactions = reactions.select { |reaction| reaction['type'] == filter_type } if filter_type
+    { reactions: reactions, duration: '7.11ms' }.to_s
+  end
 end
 
 # Flag message or user
@@ -493,27 +522,32 @@ end
 end
 
 # Query message reminders
-post '/reminders/query' do
-  { reminders: $reminders, duration: '7.11ms' }.to_s
+['/reminders/query', '/api/v2/chat/reminders/query'].each do |reminders_query|
+  post reminders_query do
+    { reminders: $reminders, duration: '7.11ms' }.to_s
+  end
 end
 
-# Create message reminder
-post '/messages/:message_id/reminders' do
-  create_reminder(message_id: params[:message_id], remind_at: JSON.parse(request.body.read)['remind_at'])
+['/messages/:message_id/reminders', '/api/v2/chat/messages/:message_id/reminders'].each do |reminders|
+  # Create message reminder
+  post reminders do
+    create_reminder(message_id: params[:message_id], remind_at: JSON.parse(request.body.read)['remind_at'])
+  end
+
+  # Update message reminder
+  patch reminders do
+    update_reminder(message_id: params[:message_id], remind_at: JSON.parse(request.body.read)['remind_at'])
+  end
+
+  # Delete message reminder
+  delete reminders do
+    delete_reminder(message_id: params[:message_id])
+  end
 end
 
-# Update message reminder
-patch '/messages/:message_id/reminders' do
-  update_reminder(message_id: params[:message_id], remind_at: JSON.parse(request.body.read)['remind_at'])
-end
-
-# Delete message reminder
-delete '/messages/:message_id/reminders' do
-  delete_reminder(message_id: params[:message_id])
-end
-
-# iOS sends every poll path under /api/v2 while Android and Flutter send it unprefixed,
-# so each poll route is registered under both spellings, like the v2 upload routes above.
+# iOS sends every poll path under /api/v2, Flutter sends it unprefixed and Android is moving
+# from unprefixed to /api/v2, so each poll route is registered under both spellings, like the
+# v2 upload routes above.
 ['/polls', '/api/v2/polls'].each do |polls|
   # Create poll
   post polls do
