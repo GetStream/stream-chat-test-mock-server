@@ -108,8 +108,10 @@ end
     body = request.body.read
     json = body.empty? ? {} : JSON.parse(body)
     halt(400, { message: 'at least one group is required' }.to_s) if json['groups'].to_h.empty?
+    error = grouped_request_error(json)
+    halt(400, { message: error }.to_s) if error
 
-    query_grouped_channels(groups: json['groups'], limit: json['limit'])
+    query_grouped_channels(groups: json['groups'], limit: json['limit'], sort: json['sort'])
   end
 
   # Show channel info

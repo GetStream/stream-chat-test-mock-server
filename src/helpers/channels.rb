@@ -35,6 +35,19 @@ def set_channel_group(channel, group)
   $channel_groups << group unless $channel_groups.include?(group)
 end
 
+# The backend reads a grouped channel's `touched_at` date from its custom data.
+def channel_touched_at(channel)
+  $api_version == :v2 ? channel.dig('custom', 'touched_at') : channel['touched_at']
+end
+
+def set_channel_touched_at(channel, touched_at)
+  if $api_version == :v2
+    (channel['custom'] ||= {})['touched_at'] = touched_at
+  else
+    channel['touched_at'] = touched_at
+  end
+end
+
 def find_channel_by_id(id)
   $channel_list['channels'].detect { |channel| channel['channel']['id'] == id }
 end
@@ -118,25 +131,167 @@ end
 
 GROUPED_ALL_GROUP = 'all'
 GROUPED_DEFAULT_LIMIT = 10
+GROUPED_RELATIVE_CUTOFF = /\A(?:now-)?(\d+)d\z/.freeze
 
 # The channels of a group, newest first. The `all` group holds every channel. Seeded
-# channels share `last_message_at`, so `created_at` keeps the order stable.
-def grouped_channels(group)
+# channels share `last_message_at`, so `created_at` keeps the order stable. With a
+# `query_timestamp` sort, the order follows that timestamp instead, with ties broken by
+# `cid` ascending like the backend.
+def grouped_channels(group, filter: nil, sort: nil)
   channels = queried_channels(nil).sort_by { |c| [c['channel']['last_message_at'].to_s, c['channel']['created_at'].to_s] }.reverse
-  return channels if group == GROUPED_ALL_GROUP
+  channels = channels.sort_by { |c| [-query_timestamp(c['channel']).to_f, c['channel']['cid']] } if query_timestamp_sort?(sort)
+  channels = channels.select { |c| channel_group(c['channel']) == group } unless group == GROUPED_ALL_GROUP
+  return channels if filter.nil?
 
-  channels.select { |c| channel_group(c['channel']) == group }
+  now = Time.now.utc
+  channels.select { |c| grouped_filter_matches?(filter, c['channel'], now) }
+end
+
+def query_timestamp_sort?(sort)
+  sort_by?(sort, 'query_timestamp')
+end
+
+# Like the backend, a grouped sort is a single descending `query_timestamp` or `last_updated`.
+def sort_by?(sort, field)
+  sort.kind_of?(Array) && sort.size == 1 && sort[0]['field'] == field && sort[0]['direction'] == -1 && sort[0]['type'].to_s.empty?
+end
+
+# The error the backend returns for a grouped request it rejects, or nil. Filters need the
+# `query_timestamp` sort. A named group's filter takes only `query_timestamp`. The `all`
+# group's filter needs a group in every `$or` branch, or a standalone `$ne` exclusion.
+def grouped_request_error(json)
+  sort = json['sort']
+  return 'grouped sort supports query_timestamp or last_updated descending' if sort.to_a.any? && !sort_by?(sort, 'query_timestamp') && !sort_by?(sort, 'last_updated')
+
+  json['groups'].to_h.each do |group, page|
+    filter = page.to_h['filter_conditions']
+    next if filter.nil?
+    return 'grouped filters require query_timestamp descending sort' unless query_timestamp_sort?(sort)
+
+    error = group == GROUPED_ALL_GROUP ? grouped_filter_error(filter) : named_group_filter_error(filter)
+    return error if error
+  end
+  nil
+end
+
+def named_group_filter_error(filter)
+  return 'named group filters support only query_timestamp' unless filter.keys.all?('query_timestamp')
+
+  filter.key?('query_timestamp') ? query_timestamp_condition_error(filter['query_timestamp']) : nil
+end
+
+def grouped_filter_error(filter, in_or_branch: false)
+  nodes = grouped_conjunction(filter)
+  if nodes.size == 1 && nodes[0][0] == '$or'
+    branches = nodes[0][1].to_a
+    return 'each OR branch must specify a group' if branches.empty?
+
+    branches.each do |branch|
+      error = grouped_filter_error(branch, in_or_branch: true)
+      return error if error
+    end
+    return nil
+  end
+
+  group_nodes = nodes.select { |key, _| key == 'group' }
+  return 'grouped filters support only group and query_timestamp' if nodes.any? { |key, _| !['group', 'query_timestamp'].include?(key) }
+  return 'each branch must specify a group' if group_nodes.empty?
+  return 'each branch supports one group filter' if group_nodes.size > 1
+
+  group_condition = group_nodes[0][1]
+  if group_condition.kind_of?(Hash) && group_condition.key?('$ne')
+    return 'group exclusion must be standalone' if in_or_branch || nodes.size != 1
+  elsif group_condition.kind_of?(Hash) && group_condition.keys != ['$eq'] && group_condition.keys != ['$in']
+    return 'group supports equality, $in or standalone $ne'
+  end
+
+  timestamp_nodes = nodes.select { |key, _| key == 'query_timestamp' }
+  return 'query_timestamp supports one $gte date bound' if timestamp_nodes.size > 1
+
+  timestamp_nodes.empty? ? nil : query_timestamp_condition_error(timestamp_nodes[0][1])
+end
+
+def rfc3339?(value)
+  Time.iso8601(value)
+  true
+rescue ArgumentError
+  false
+end
+
+# The [key, condition] pairs of a filter, with `$and` flattened like the backend does.
+def grouped_conjunction(filter)
+  filter.to_h.flat_map do |key, value|
+    key == '$and' ? value.to_a.flat_map { |child| grouped_conjunction(child) } : [[key, value]]
+  end
+end
+
+def query_timestamp_condition_error(condition)
+  cutoff = condition.kind_of?(Hash) && condition.keys == ['$gte'] ? condition['$gte'] : nil
+  return 'query_timestamp supports one $gte date bound' unless cutoff.kind_of?(String) && !cutoff.empty?
+
+  relative = GROUPED_RELATIVE_CUTOFF.match(cutoff)
+  return nil if relative && relative[1].to_i.positive?
+  return nil if !relative && rfc3339?(cutoff)
+
+  "selector date must be RFC3339 or positive whole days ago, such as '7d' or 'now-7d'"
+end
+
+# Like the backend, the latest of the channel's creation, its last message and its custom
+# `touched_at` date.
+def query_timestamp(channel)
+  [channel['created_at'], channel['last_message_at'], channel_touched_at(channel)]
+    .compact
+    .map { |date| Time.parse(date) }
+    .max
+end
+
+# Evaluates the conditions the backend accepts in a group's `filter_conditions`: `group`
+# with `$eq`, `$in` and `$ne`, and `query_timestamp` with `$gte`, combined with `$and` and
+# `$or`. An empty filter matches the whole group. Any other condition matches.
+def grouped_filter_matches?(filter, channel, now)
+  filter.all? do |field, condition|
+    case field
+    when '$and' then condition.all? { |child| grouped_filter_matches?(child, channel, now) }
+    when '$or' then condition.any? { |child| grouped_filter_matches?(child, channel, now) }
+    when 'group' then grouped_condition_matches?(condition, channel_group(channel))
+    when 'query_timestamp' then query_timestamp_condition_matches?(condition, query_timestamp(channel), now)
+    else true
+    end
+  end
+end
+
+def grouped_condition_matches?(condition, group)
+  return condition == group unless condition.kind_of?(Hash)
+
+  condition.all? do |operator, value|
+    case operator
+    when '$eq' then value == group
+    when '$in' then value.include?(group)
+    when '$ne' then value != group
+    else true
+    end
+  end
+end
+
+def query_timestamp_condition_matches?(condition, timestamp, now)
+  cutoff = condition.kind_of?(Hash) ? condition['$gte'] : nil
+  return true if cutoff.nil?
+
+  relative = GROUPED_RELATIVE_CUTOFF.match(cutoff)
+  cutoff_time = relative ? now - (relative[1].to_i * 86_400) : Time.parse(cutoff)
+  timestamp >= cutoff_time
 end
 
 # Like the backend, the response holds only the requested groups. `next` and `prev`
 # are opaque cursors to the client, so the mock uses the page start offset as both.
-# `unread_channels` counts the whole group, not only the returned page.
-def query_grouped_channels(groups:, limit:)
+# `unread_channels` counts the whole group, not only the returned page. A group's
+# `filter_conditions` narrow both.
+def query_grouped_channels(groups:, limit:, sort: nil)
   sync_channels
   default_limit = limit.to_i.positive? ? limit.to_i : GROUPED_DEFAULT_LIMIT
   response_groups = groups.to_h do |group, page|
     page ||= {}
-    channels = grouped_channels(group)
+    channels = grouped_channels(group, filter: page['filter_conditions'], sort: sort)
     page_limit = page['limit'].to_i.positive? ? page['limit'].to_i : default_limit
     offset = (page['next'] || page['prev']).to_i
     next_offset = offset + page_limit
