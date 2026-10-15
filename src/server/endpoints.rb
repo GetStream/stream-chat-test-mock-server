@@ -112,7 +112,7 @@ end
       'user' => current_user,
       'last_read_message_id' => read['last_read_message_id'],
       'unread_messages' => 0,
-      **mark_read_unread_counts
+      **unread_counts
     )
     create_event(type: 'message.read', channel_id: params[:channel_id])
   end
@@ -125,7 +125,7 @@ end
       'type' => 'notification.mark_read',
       'created_at' => unique_date,
       'user' => current_user,
-      **mark_read_unread_counts
+      **unread_counts
     )
     { duration: '7.11ms' }.to_s
   end

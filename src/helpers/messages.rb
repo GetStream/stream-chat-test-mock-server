@@ -265,6 +265,7 @@ def create_giphy(request_body:, message_id:)
     message['command'] = 'giphy'
     message['text'] = ''
     message['html'] = ''
+    update_last_message_at(channel_id: message['cid'].split(':').last, message: message)
   elsif action == AttachmentActionType.shuffle
     return nil
   else

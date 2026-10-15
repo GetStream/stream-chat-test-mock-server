@@ -455,6 +455,7 @@ end
 ### Parameters
 # `group`: String - The group to move the channel to
 # `channel_name`: String - Move the channel with this name instead of the current channel
+# `delay`: Int - Send the event after this many seconds. The move itself happens right away
 post '/participant/channel_group' do
   halt(400, { message: 'group is required' }.to_s) if params[:group].to_s.empty?
 
@@ -463,15 +464,26 @@ post '/participant/channel_group' do
 
   set_channel_group(channel['channel'], params[:group])
   channel['channel']['updated_at'] = unique_date
-  broadcast_event(
-    'type' => 'channel.updated',
-    'created_at' => channel['channel']['updated_at'],
-    'cid' => channel['channel']['cid'],
-    'channel_id' => channel['channel']['id'],
-    'channel_type' => channel['channel']['type'],
-    'channel_member_count' => channel['members'].count,
-    'channel' => channel['channel'],
-    'user' => Participant.user
-  )
+  send_event = lambda do
+    broadcast_event(
+      'type' => 'channel.updated',
+      'created_at' => channel['channel']['updated_at'],
+      'cid' => channel['channel']['cid'],
+      'channel_id' => channel['channel']['id'],
+      'channel_type' => channel['channel']['type'],
+      'channel_member_count' => channel['members'].count,
+      'channel' => channel['channel'],
+      'user' => Participant.user
+    )
+  end
+
+  if params[:delay].to_i.positive?
+    Thread.new do
+      sleep(params[:delay].to_i)
+      send_event.call
+    end
+  else
+    send_event.call
+  end
   ''
 end
