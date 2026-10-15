@@ -17,7 +17,9 @@
 # `channel_days_ago`: String - Comma-separated ages in days for the first channels, in the same
 #                     order as `channel_names`. Lets a test seed channels on both sides of a
 #                     grouped `query_timestamp` cutoff. Channels without an entry are about
-#                     11 days old. Seeded messages of an aged channel follow its own age
+#                     11 days old. Seeded messages of an aged channel follow its own age.
+#                     Messages are dated about 28 hours after the channel, so with
+#                     `messages` a channel younger than that gets messages in the future
 post '/mock' do
   channels_count = params[:channels].to_i || 1
   channel_names = (params[:channel_names] || '').split(',')

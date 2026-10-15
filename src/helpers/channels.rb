@@ -135,10 +135,11 @@ GROUPED_RELATIVE_CUTOFF = /\A(?:now-)?(\d+)d\z/.freeze
 
 # The channels of a group, newest first. The `all` group holds every channel. Seeded
 # channels share `last_message_at`, so `created_at` keeps the order stable. With a
-# `query_timestamp` sort, the order follows that timestamp instead.
+# `query_timestamp` sort, the order follows that timestamp instead, with ties broken by
+# `cid` ascending like the backend.
 def grouped_channels(group, filter: nil, sort: nil)
   channels = queried_channels(nil).sort_by { |c| [c['channel']['last_message_at'].to_s, c['channel']['created_at'].to_s] }.reverse
-  channels = channels.sort_by { |c| query_timestamp(c['channel']) }.reverse if query_timestamp_sort?(sort)
+  channels = channels.sort_by { |c| [-query_timestamp(c['channel']).to_f, c['channel']['cid']] } if query_timestamp_sort?(sort)
   channels = channels.select { |c| channel_group(c['channel']) == group } unless group == GROUPED_ALL_GROUP
   return channels if filter.nil?
 
