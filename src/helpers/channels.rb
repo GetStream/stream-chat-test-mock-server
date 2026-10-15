@@ -19,8 +19,33 @@ def remove_channel_name(channel)
   end
 end
 
+# The backend reads a channel's group from its custom `group` field.
+def channel_group(channel)
+  $api_version == :v2 ? channel.dig('custom', 'group') : channel['group']
+end
+
+# Every group stays in `$channel_groups` until the next /mock, so the grouped unread
+# counts keep reporting a group at 0 after its last channel moves out.
+def set_channel_group(channel, group)
+  if $api_version == :v2
+    (channel['custom'] ||= {})['group'] = group
+  else
+    channel['group'] = group
+  end
+  $channel_groups << group unless $channel_groups.include?(group)
+end
+
 def find_channel_by_id(id)
   $channel_list['channels'].detect { |channel| channel['channel']['id'] == id }
+end
+
+def find_channel_by_name(name)
+  $channel_list['channels'].detect { |channel| channel_name(channel['channel']) == name }
+end
+
+# A new channel message moves the channel up, like on the backend.
+def update_last_message_at(channel_id:, message:)
+  find_channel_by_id(channel_id)['channel']['last_message_at'] = message['created_at']
 end
 
 def sync_channels
@@ -89,6 +114,43 @@ def paginate_channel_list(payload: nil)
   end
 
   limited_channel_list.to_s
+end
+
+GROUPED_ALL_GROUP = 'all'
+GROUPED_DEFAULT_LIMIT = 10
+
+# The channels of a group, newest first. The `all` group holds every channel. Seeded
+# channels share `last_message_at`, so `created_at` keeps the order stable.
+def grouped_channels(group)
+  channels = queried_channels(nil).sort_by { |c| [c['channel']['last_message_at'].to_s, c['channel']['created_at'].to_s] }.reverse
+  return channels if group == GROUPED_ALL_GROUP
+
+  channels.select { |c| channel_group(c['channel']) == group }
+end
+
+# Like the backend, the response holds only the requested groups. `next` and `prev`
+# are opaque cursors to the client, so the mock uses the page start offset as both.
+# `unread_channels` counts the whole group, not only the returned page.
+def query_grouped_channels(groups:, limit:)
+  sync_channels
+  default_limit = limit.to_i.positive? ? limit.to_i : GROUPED_DEFAULT_LIMIT
+  response_groups = groups.to_h do |group, page|
+    page ||= {}
+    channels = grouped_channels(group)
+    page_limit = page['limit'].to_i.positive? ? page['limit'].to_i : default_limit
+    offset = (page['next'] || page['prev']).to_i
+    next_offset = offset + page_limit
+    [
+      group,
+      {
+        'channels' => channels[offset, page_limit] || [],
+        'next' => next_offset < channels.count ? next_offset.to_s : nil,
+        'prev' => offset.positive? ? [offset - page_limit, 0].max.to_s : nil,
+        'unread_channels' => channels.count { |c| current_user_unread_messages(c) > 0 }
+      }
+    ]
+  end
+  { 'groups' => response_groups, 'duration' => '7.11ms' }.to_s
 end
 
 def truncate_channel(channel_id:, request_body:)

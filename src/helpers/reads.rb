@@ -39,6 +39,29 @@ def track_message_read_states(channel_id:, message:)
   end
 end
 
+# The app user's unread counts, as the backend sends them on the events that carry them.
+# Like the backend, `unread_count` repeats the total. Clients require it on
+# `notification.mark_read`: without it they fail to parse the event and reconnect.
+# `grouped_unread_channels` has every seeded group plus `all`.
+def unread_counts
+  unread_channels = queried_channels(nil).select { |channel| current_user_unread_messages(channel) > 0 }
+  total_unread_count = unread_channels.sum { |channel| current_user_unread_messages(channel) }
+  grouped = $channel_groups.to_h do |group|
+    [group, unread_channels.count { |channel| channel_group(channel['channel']) == group }]
+  end
+  grouped[GROUPED_ALL_GROUP] = unread_channels.count
+  {
+    'unread_channels' => unread_channels.count,
+    'unread_count' => total_unread_count,
+    'total_unread_count' => total_unread_count,
+    'grouped_unread_channels' => grouped
+  }
+end
+
+def current_user_unread_messages(channel)
+  find_read_state(channel: channel, user_id: current_user['id'])&.dig('unread_messages').to_i
+end
+
 def mark_channel_read(channel:, user:)
   read = find_read_state(channel: channel, user_id: user['id']) ||
          seed_read_state(channel: channel, user: user, last_read: unique_date)

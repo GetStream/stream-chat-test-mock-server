@@ -82,6 +82,7 @@ def send_message_ws(response:, event_type:)
   ws_response['channel_id'] = response['message']['cid'].split(':').last
   ws_response['created_at'] = response['message']['created_at']
   ws_response['type'] = event_type
+  ws_response.merge!(unread_counts) if event_type == MessageEventType.new
   broadcast_event(ws_response)
 end
 
@@ -245,7 +246,10 @@ def create_message(request_body:, channel_id: nil)
   mocked_message['poll'] = poll if poll
 
   response['message'] = mocked_message
-  track_message_read_states(channel_id: channel_id, message: mocked_message) if message_type == :regular
+  if message_type == :regular
+    track_message_read_states(channel_id: channel_id, message: mocked_message)
+    update_last_message_at(channel_id: channel_id, message: mocked_message)
+  end
   send_message_ws(response: response, event_type: MessageEventType.new) if broadcast_new_message?(message_type)
   response.to_s
 end
@@ -261,6 +265,7 @@ def create_giphy(request_body:, message_id:)
     message['command'] = 'giphy'
     message['text'] = ''
     message['html'] = ''
+    update_last_message_at(channel_id: message['cid'].split(':').last, message: message)
   elsif action == AttachmentActionType.shuffle
     return nil
   else

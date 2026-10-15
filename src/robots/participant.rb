@@ -33,7 +33,7 @@ post '/participant/message' do
 
   target_channel_id = $current_channel_id
   if params[:channel_name]
-    target_channel = $channel_list['channels'].detect { |c| channel_name(c['channel']) == params[:channel_name] }
+    target_channel = find_channel_by_name(params[:channel_name])
     halt(400, { message: "channel #{params[:channel_name]} not found" }.to_s) unless target_channel
     target_channel_id = target_channel['channel']['id']
   end
@@ -123,6 +123,7 @@ post '/participant/message' do
 
   if params[:action].nil? && message_type == :regular
     track_message_read_states(channel_id: message['channel_id'], message: message)
+    update_last_message_at(channel_id: message['channel_id'], message: message)
   end
 
   response['channel_id'] = message['channel_id']
@@ -132,6 +133,7 @@ post '/participant/message' do
   response['message'] = message
   response['user'] = Participant.user
   response['hard_delete'] = true if params[:hard_delete] == 'true' && params[:action] == 'delete'
+  response.merge!(unread_counts) if action_type == MessageEventType.new
 
   thread_notification = params[:thread_notification] == 'true' && parent_id && params[:action].nil?
   send_events = lambda do
@@ -445,5 +447,43 @@ post '/participant/read' do
     parent_id: parent_id,
     user: Participant.user
   )
+  ''
+end
+
+# Moves a channel to another group, like a partial update of its custom `group` field
+# made by the participant. The app under test receives `channel.updated`.
+### Parameters
+# `group`: String - The group to move the channel to
+# `channel_name`: String - Move the channel with this name instead of the current channel
+# `delay`: Int - Send the event after this many seconds. The move itself happens right away
+post '/participant/channel_group' do
+  halt(400, { message: 'group is required' }.to_s) if params[:group].to_s.empty?
+
+  channel = params[:channel_name] ? find_channel_by_name(params[:channel_name]) : find_channel_by_id($current_channel_id)
+  halt(400, { message: 'channel not found' }.to_s) unless channel
+
+  set_channel_group(channel['channel'], params[:group])
+  channel['channel']['updated_at'] = unique_date
+  send_event = lambda do
+    broadcast_event(
+      'type' => 'channel.updated',
+      'created_at' => channel['channel']['updated_at'],
+      'cid' => channel['channel']['cid'],
+      'channel_id' => channel['channel']['id'],
+      'channel_type' => channel['channel']['type'],
+      'channel_member_count' => channel['members'].count,
+      'channel' => channel['channel'],
+      'user' => Participant.user
+    )
+  end
+
+  if params[:delay].to_i.positive?
+    Thread.new do
+      sleep(params[:delay].to_i)
+      send_event.call
+    end
+  else
+    send_event.call
+  end
   ''
 end

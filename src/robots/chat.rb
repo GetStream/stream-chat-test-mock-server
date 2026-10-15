@@ -11,9 +11,13 @@
 # `channel_names`: String - Comma-separated names for the first channels, in channel
 #                  order ("1", "2", ...). Channels without an entry keep their
 #                  positional name. Lets a test seed a name it can search for
+# `channel_groups`: String - Comma-separated groups for the first channels, in the same
+#                   order as `channel_names`, set as the custom `group` field that
+#                   grouped channel queries read. Channels without an entry get no group
 post '/mock' do
   channels_count = params[:channels].to_i || 1
   channel_names = (params[:channel_names] || '').split(',')
+  channel_groups = (params[:channel_groups] || '').split(',')
   messages_count = params[:messages].to_i || 0
   replies_count = params[:replies].to_i || 0
 
@@ -25,6 +29,7 @@ post '/mock' do
   $message_list = []
   $sync_events = []
   $channel_list['channels'] = []
+  $channel_groups = []
   $reminders = []
   $polls = []
   $user_mutes = []
@@ -41,6 +46,8 @@ post '/mock' do
     channel_template['channel']['last_message_at'] = channel_timestamp
     channel_template['channel']['id'] = channel_id
     set_channel_name(channel_template['channel'], channel_name)
+    channel_group = channel_groups[i - 1].to_s
+    set_channel_group(channel_template['channel'], channel_group) unless channel_group.empty?
     channel_template['channel']['cid'] = "messaging:#{channel_id}"
     channel_template['channel']['created_at'] = channel_timestamp
     channel_template['channel']['updated_at'] = channel_timestamp

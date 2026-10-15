@@ -103,6 +103,15 @@ end
     paginate_channel_list(payload: params[:payload] || (body unless body.empty?))
   end
 
+  # Show grouped channel list
+  post "#{channels}/grouped" do
+    body = request.body.read
+    json = body.empty? ? {} : JSON.parse(body)
+    halt(400, { message: 'at least one group is required' }.to_s) if json['groups'].to_h.empty?
+
+    query_grouped_channels(groups: json['groups'], limit: json['limit'])
+  end
+
   # Show channel info
   post "#{channels}/:channel_type/:channel_id/query" do
     paginate_message_list(params: params, request_body: request.body.read)
@@ -130,10 +139,22 @@ end
       'user' => current_user,
       'last_read_message_id' => read['last_read_message_id'],
       'unread_messages' => 0,
-      'unread_channels' => 0,
-      'total_unread_count' => 0
+      **unread_counts
     )
     create_event(type: 'message.read', channel_id: params[:channel_id])
+  end
+
+  # Mark all channels read. The backend sends a single notification.mark_read
+  # without a channel, which is how clients recognize a mark-all-read.
+  post "#{channels}/read" do
+    queried_channels(nil).each { |channel| mark_channel_read(channel: channel, user: current_user) }
+    broadcast_event(
+      'type' => 'notification.mark_read',
+      'created_at' => unique_date,
+      'user' => current_user,
+      **unread_counts
+    )
+    { duration: '7.11ms' }.to_s
   end
 
   # Mark channel unread from a message on
@@ -156,8 +177,7 @@ end
       'last_read_message_id' => read['last_read_message_id'],
       'last_read_at' => read['last_read'],
       'unread_messages' => read['unread_messages'],
-      'unread_channels' => 1,
-      'total_unread_count' => read['unread_messages']
+      **unread_counts
     )
     { duration: '7.11ms' }.to_s
   end
