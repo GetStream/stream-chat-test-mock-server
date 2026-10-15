@@ -147,7 +147,92 @@ def grouped_channels(group, filter: nil, sort: nil)
 end
 
 def query_timestamp_sort?(sort)
-  (sort || []).any? { |param| param['field'] == 'query_timestamp' }
+  sort_by?(sort, 'query_timestamp')
+end
+
+# Like the backend, a grouped sort is a single descending `query_timestamp` or `last_updated`.
+def sort_by?(sort, field)
+  sort.kind_of?(Array) && sort.size == 1 && sort[0]['field'] == field && sort[0]['direction'] == -1 && sort[0]['type'].to_s.empty?
+end
+
+# The error the backend returns for a grouped request it rejects, or nil. Filters need the
+# `query_timestamp` sort. A named group's filter takes only `query_timestamp`. The `all`
+# group's filter needs a group in every `$or` branch, or a standalone `$ne` exclusion.
+def grouped_request_error(json)
+  sort = json['sort']
+  return 'grouped sort supports query_timestamp or last_updated descending' if sort.to_a.any? && !sort_by?(sort, 'query_timestamp') && !sort_by?(sort, 'last_updated')
+
+  json['groups'].to_h.each do |group, page|
+    filter = page.to_h['filter_conditions']
+    next if filter.nil?
+    return 'grouped filters require query_timestamp descending sort' unless query_timestamp_sort?(sort)
+
+    error = group == GROUPED_ALL_GROUP ? grouped_filter_error(filter) : named_group_filter_error(filter)
+    return error if error
+  end
+  nil
+end
+
+def named_group_filter_error(filter)
+  return 'named group filters support only query_timestamp' unless filter.keys.all?('query_timestamp')
+
+  filter.key?('query_timestamp') ? query_timestamp_condition_error(filter['query_timestamp']) : nil
+end
+
+def grouped_filter_error(filter, in_or_branch: false)
+  nodes = grouped_conjunction(filter)
+  if nodes.size == 1 && nodes[0][0] == '$or'
+    branches = nodes[0][1].to_a
+    return 'each OR branch must specify a group' if branches.empty?
+
+    branches.each do |branch|
+      error = grouped_filter_error(branch, in_or_branch: true)
+      return error if error
+    end
+    return nil
+  end
+
+  group_nodes = nodes.select { |key, _| key == 'group' }
+  return 'grouped filters support only group and query_timestamp' if nodes.any? { |key, _| !['group', 'query_timestamp'].include?(key) }
+  return 'each branch must specify a group' if group_nodes.empty?
+  return 'each branch supports one group filter' if group_nodes.size > 1
+
+  group_condition = group_nodes[0][1]
+  if group_condition.kind_of?(Hash) && group_condition.key?('$ne')
+    return 'group exclusion must be standalone' if in_or_branch || nodes.size != 1
+  elsif group_condition.kind_of?(Hash) && group_condition.keys != ['$eq'] && group_condition.keys != ['$in']
+    return 'group supports equality, $in or standalone $ne'
+  end
+
+  timestamp_nodes = nodes.select { |key, _| key == 'query_timestamp' }
+  return 'query_timestamp supports one $gte date bound' if timestamp_nodes.size > 1
+
+  timestamp_nodes.empty? ? nil : query_timestamp_condition_error(timestamp_nodes[0][1])
+end
+
+def rfc3339?(value)
+  Time.iso8601(value)
+  true
+rescue ArgumentError
+  false
+end
+
+# The [key, condition] pairs of a filter, with `$and` flattened like the backend does.
+def grouped_conjunction(filter)
+  filter.to_h.flat_map do |key, value|
+    key == '$and' ? value.to_a.flat_map { |child| grouped_conjunction(child) } : [[key, value]]
+  end
+end
+
+def query_timestamp_condition_error(condition)
+  cutoff = condition.kind_of?(Hash) && condition.keys == ['$gte'] ? condition['$gte'] : nil
+  return 'query_timestamp supports one $gte date bound' unless cutoff.kind_of?(String) && !cutoff.empty?
+
+  relative = GROUPED_RELATIVE_CUTOFF.match(cutoff)
+  return nil if relative && relative[1].to_i.positive?
+  return nil if !relative && rfc3339?(cutoff)
+
+  "selector date must be RFC3339 or positive whole days ago, such as '7d' or 'now-7d'"
 end
 
 # Like the backend, the latest of the channel's creation, its last message and its custom
