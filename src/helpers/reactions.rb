@@ -47,6 +47,7 @@ def create_reaction(type:, message_id:, user: current_user, delete: nil, delay: 
       message['reaction_groups'].delete(type)
     end
     message['latest_reactions'].delete_if { |reaction| reaction['type'] == type && reaction['user_id'] == user['id'] }
+    message['own_reactions']&.delete_if { |reaction| reaction['type'] == type && reaction['user_id'] == user['id'] }
   elsif type_exists
     message['reaction_scores'][type] += 1
     message['reaction_counts'][type] += 1
@@ -57,10 +58,14 @@ def create_reaction(type:, message_id:, user: current_user, delete: nil, delay: 
     message['reaction_scores'][type] = 1
     message['reaction_counts'][type] = 1
     message['reaction_groups'] ||= {}
-    message['reaction_groups'][type] = {}
-    message['reaction_groups'][type] = { count: 1, sum_scores: 1, first_reaction_at: timestamp, last_reaction_at: timestamp }
+    message['reaction_groups'][type] = {
+      'count' => 1, 'sum_scores' => 1, 'first_reaction_at' => timestamp, 'last_reaction_at' => timestamp
+    }
     message['latest_reactions'] << response['reaction']
   end
+
+  # `own_reactions` belongs to the app user, the participant's reactions only go to `latest_reactions`.
+  (message['own_reactions'] ||= []) << response['reaction'] if !delete && user['id'] == current_user['id']
 
   response['message'] = message
   event_type = delete ? ReactionType.deleted : ReactionType.new
