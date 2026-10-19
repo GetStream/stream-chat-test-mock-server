@@ -30,7 +30,8 @@ def build_thread(parent:, reply_limit:)
     'active_participant_count' => participants.count,
     'reply_count' => replies.count,
     'latest_replies' => replies.last(reply_limit),
-    'thread_participants' => participants.map { |user| build_thread_participant(parent: parent, user: user, replies: replies) }
+    'thread_participants' => participants.map { |user| build_thread_participant(parent: parent, user: user, replies: replies) },
+    'custom' => {}
   }
 end
 
