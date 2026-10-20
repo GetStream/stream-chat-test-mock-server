@@ -89,7 +89,7 @@ V2_NESTED_CHILD_TYPES = {
 }.freeze
 
 # Gives a v1-shaped response the v2 shape: every known object nests the fields its v2 model does not
-# declare under `custom`.
+# declare under `custom`, and carries `custom` even when it has none, as the API does.
 def nest_v2_custom(value, type = nil)
   case value
   when Array
@@ -107,8 +107,6 @@ end
 
 def nest_undeclared(object, declared)
   undeclared = object.reject { |key, _| declared.include?(key) }
-  return object if undeclared.empty?
-
   custom = object['custom'].kind_of?(Hash) ? object['custom'] : {}
   object.slice(*declared).merge('custom' => custom.merge(undeclared))
 end
