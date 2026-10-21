@@ -59,7 +59,10 @@ def create_reaction(type:, message_id:, user: current_user, delete: nil, delay: 
     message['reaction_counts'][type] = 1
     message['reaction_groups'] ||= {}
     message['reaction_groups'][type] = {
-      'count' => 1, 'sum_scores' => 1, 'first_reaction_at' => timestamp, 'last_reaction_at' => timestamp,
+      'count' => 1,
+      'sum_scores' => 1,
+      'first_reaction_at' => timestamp,
+      'last_reaction_at' => timestamp,
       'latest_reactions_by' => []
     }
     message['latest_reactions'] << response['reaction']
