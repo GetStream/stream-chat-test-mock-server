@@ -21,7 +21,21 @@ def create_reminder(message_id:, remind_at:)
   }
   message['reminder'] = reminder_info(reminder)
   $reminders << reminder
+  broadcast_reminder_event('reminder.created', reminder)
   { reminder: reminder, duration: '7.11ms' }.to_s
+end
+
+# The backend tells the reminder's owner about every change, which is how a client that
+# did not make the change (or did, on another device) learns about it.
+def broadcast_reminder_event(type, reminder)
+  broadcast_event(
+    'type' => type,
+    'created_at' => unique_date,
+    'cid' => reminder['channel_cid'],
+    'message_id' => reminder['message_id'],
+    'user' => current_user,
+    'reminder' => reminder
+  )
 end
 
 def update_reminder(message_id:, remind_at:)
