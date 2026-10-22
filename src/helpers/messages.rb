@@ -59,6 +59,10 @@ class AttachmentActionType
     'send'
   end
 
+  def self.cancel
+    'cancel'
+  end
+
   def self.shuffle
     'shuffle'
   end
@@ -110,9 +114,12 @@ def search_messages(payload)
   term = condition.kind_of?(Hash) ? condition.values.first.to_s : condition.to_s
   cid_condition = payload.dig('filter_conditions', 'cid')
   cids = cid_condition.kind_of?(Hash) ? Array(cid_condition.values.first) : Array(cid_condition)
+  pinned_condition = payload.dig('message_filter_conditions', 'pinned')
+  pinned = pinned_condition.kind_of?(Hash) ? pinned_condition.values.first : pinned_condition
   $message_list.select do |msg|
     msg['type'] != 'deleted' &&
       (cids.empty? || cids.include?(msg['cid'])) &&
+      (pinned.nil? || msg['pinned'] == pinned) &&
       msg['text'].to_s.downcase.include?(term.downcase)
   end
 end
@@ -268,6 +275,10 @@ def create_giphy(request_body:, message_id:)
     update_last_message_at(channel_id: message['cid'].split(':').last, message: message)
   elsif action == AttachmentActionType.shuffle
     return nil
+  elsif action == AttachmentActionType.cancel
+    # The backend drops the ephemeral message and answers without one.
+    $message_list.delete_if { |msg| msg['id'] == message_id }
+    return { duration: '7.11ms' }.to_s
   else
     halt(503, 'Bad request')
     return

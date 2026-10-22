@@ -30,6 +30,20 @@ def update_members(channel_id:, request_body:)
     broadcast_event(ws_response)
   end
 
+  if remove_members && member_ids.include?(current_user['id'])
+    # The backend also tells the removed user, which is what drops the channel from their list.
+    notification = Mocks.ws_update_member
+    notification['type'] = 'notification.removed_from_channel'
+    notification['cid'] = "messaging:#{channel_id}"
+    notification['channel_id'] = channel_id
+    notification['channel_type'] = 'messaging'
+    notification['channel'] = channel['channel']
+    notification['member'] = channel['members'].detect { |m| m['user_id'] == current_user['id'] }
+    notification['user'] = current_user
+    notification['created_at'] = unique_date
+    broadcast_event(notification)
+  end
+
   if remove_members
     member_ids.each do |id|
       channel['members'].delete_if { |m| m['user_id'] == id }

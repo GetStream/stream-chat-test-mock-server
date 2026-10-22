@@ -89,6 +89,7 @@ end
 
 # Show channel list
 get '/channels' do
+  sleep($delay_channel_list) if $delay_channel_list
   sync_channels
   paginate_channel_list(payload: params[:payload])
 end
@@ -393,7 +394,12 @@ end
 ['/search', '/api/v2/chat/search'].each do |search_path|
   get search_path do
     payload = JSON.parse(params[:payload])
-    { results: search_messages(payload).map { |msg| { message: msg } }, duration: '7.11ms' }.to_s
+    results = search_messages(payload).map do |msg|
+      # The backend embeds the message's channel, which clients need to open a result.
+      channel = find_channel_by_id(msg['cid'].split(':').last)
+      { message: channel ? msg.merge('channel' => channel['channel']) : msg }
+    end
+    { results: results, duration: '7.11ms' }.to_s
   end
 end
 
@@ -447,17 +453,23 @@ post '/moderation/unmute' do
   unmute_user(target_id: JSON.parse(request.body.read)['target_id'])
 end
 
+# The channel(s) a mute request targets: `channel_cids`, or the single `channel_cid` some clients send.
+def requested_channel_cids(request_body)
+  json = JSON.parse(request_body)
+  json['channel_cids'] || [json['channel_cid']].compact
+end
+
 # Mute channel
 ['/moderation/mute/channel', '/api/v2/chat/moderation/mute/channel'].each do |mute_path|
   post mute_path do
-    mute_channel(channel_cids: JSON.parse(request.body.read)['channel_cids'])
+    mute_channel(channel_cids: requested_channel_cids(request.body.read))
   end
 end
 
 # Unmute channel
 ['/moderation/unmute/channel', '/api/v2/chat/moderation/unmute/channel'].each do |unmute_path|
   post unmute_path do
-    unmute_channel(channel_cids: JSON.parse(request.body.read)['channel_cids'])
+    unmute_channel(channel_cids: requested_channel_cids(request.body.read))
   end
 end
 
