@@ -1,6 +1,11 @@
 post '/config/read_events' do
   $channel_list['channels'].each do |channel|
-    channel['channel']['config']['read_events'] = params[:value].to_s.casecmp('true').zero?
+    enabled = params[:value].to_s.casecmp('true').zero?
+    channel['channel']['config']['read_events'] = enabled
+    # The backend derives the `read-events` capability from the config.
+    capabilities = channel['channel']['own_capabilities']
+    enabled ? capabilities |= ['read-events'] : capabilities.delete('read-events')
+    channel['channel']['own_capabilities'] = capabilities
   end
   halt(200)
 end
