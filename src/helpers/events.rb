@@ -6,6 +6,7 @@ def send_event_ws(response)
   ws_response['created_at'] = response['created_at']
   ws_response['type'] = response['event']['type']
   ws_response['parent_id'] = response['parent_id'] if response['parent_id']
+  ws_response['last_read_message_id'] = response['last_read_message_id'] if response['last_read_message_id']
   broadcast_event(ws_response)
 end
 
@@ -58,13 +59,14 @@ rescue ArgumentError
   true
 end
 
-def create_event(type:, channel_id:, parent_id: nil, user: current_user)
+def create_event(type:, channel_id:, parent_id: nil, user: current_user, last_read_message_id: nil)
   response = Mocks.event
   response['event']['type'] = type
   response['event']['cid'] = "messaging:#{channel_id}"
   response['event']['channel_id'] = channel_id
   response['created_at'] = unique_date
   response['parent_id'] = parent_id if parent_id
+  response['last_read_message_id'] = last_read_message_id if last_read_message_id
   response['user'] = user
   send_event_ws(response)
   response.to_s
