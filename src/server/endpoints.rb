@@ -359,6 +359,7 @@ end
     channel['channel']['deleted_at'] = timestamp
     $channel_list['channels'].delete(channel)
     $message_list.delete_if { |msg| msg['cid'] == channel['channel']['cid'] }
+    fail_channel_scheduled_messages(channel['channel']['cid'])
     # The participant and chat robots act on the current channel; leaving the pointer
     # on the deleted channel would break every robot call after the deletion.
     if params[:channel_id] == $current_channel_id

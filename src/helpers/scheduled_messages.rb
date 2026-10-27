@@ -24,6 +24,12 @@ def pending_scheduled_message?(scheduled)
   scheduled['status'] != 'failed'
 end
 
+# The app user's own scheduled messages. A test that switches users with /app_user does not
+# see the previous user's ones, like on the backend.
+def own_scheduled_messages
+  $scheduled_messages.select { |scheduled| scheduled.dig('user', 'id') == current_user['id'] }
+end
+
 # The backend answers with this error body, and the name in `exception_fields.reason`.
 def scheduled_message_error(code:, reason:, message:, status: 400, fields: {})
   halt(
@@ -107,7 +113,7 @@ def scheduled_message_content(message)
 end
 
 def check_scheduled_message_limits(cid)
-  pending = $scheduled_messages.select { |scheduled| pending_scheduled_message?(scheduled) }
+  pending = own_scheduled_messages.select { |scheduled| pending_scheduled_message?(scheduled) }
   if pending.count { |scheduled| scheduled['cid'] == cid } >= $scheduled_messages_channel_limit
     scheduled_message_error(
       code: 117,
@@ -184,6 +190,8 @@ def schedule_message(json:, channel_id:)
 
   send_at = round_send_at(requested_at, now)
   check_max_lead(send_at, now)
+  # Commands run at send time, so the backend does not schedule them.
+  halt(400, slash_command_not_schedulable_error) if message['text'].to_s.start_with?('/')
   check_scheduled_message_limits(cid)
 
   scheduled = store_scheduled_message(
@@ -194,6 +202,17 @@ def schedule_message(json:, channel_id:)
   )
   status(201)
   scheduled_message_send_response(scheduled)
+end
+
+def slash_command_not_schedulable_error
+  {
+    code: 4,
+    message: 'SendMessage failed with error: "slash commands cannot be scheduled"',
+    StatusCode: 400,
+    duration: '0.10ms',
+    more_info: 'https://getstream.io/chat/docs/api_errors_response',
+    details: []
+  }.to_json
 end
 
 # The send message response keeps its required `message`: the content as it will be sent,
@@ -238,7 +257,7 @@ def send_scheduled_message(scheduled)
     channel_id: scheduled['cid'].split(':').last
   )
   broadcast_scheduled_message_event(
-    'scheduled_message.sent', scheduled, 'message_id' => response['message']['id']
+    'scheduled_message.sent', scheduled.merge('status' => 'sent'), 'message_id' => response['message']['id']
   )
 end
 
@@ -250,7 +269,7 @@ end
 
 # Pending messages first, then failed ones, each by send time.
 def sorted_scheduled_messages(cid: nil, statuses: [])
-  $scheduled_messages
+  own_scheduled_messages
     .select { |scheduled| cid.nil? || scheduled['cid'] == cid }
     .select { |scheduled| statuses.empty? || statuses.include?(scheduled['status']) }
     .sort_by { |scheduled| [pending_scheduled_message?(scheduled) ? 0 : 1, Time.parse(scheduled['scheduled_at'])] }
@@ -361,6 +380,13 @@ def fail_scheduled_message(scheduled, failure_reason:)
   scheduled['failure_reason'] = failure_reason
   scheduled['updated_at'] = unique_date
   broadcast_scheduled_message_event('scheduled_message.failed', scheduled)
+end
+
+# Deleting a channel fails its pending scheduled messages, as on the backend.
+def fail_channel_scheduled_messages(cid)
+  $scheduled_messages.select { |scheduled| scheduled['cid'] == cid && pending_scheduled_message?(scheduled) }.each do |scheduled|
+    fail_scheduled_message(scheduled, failure_reason: 'channel_deleted')
+  end
 end
 
 # The opt-in `scheduled_messages` of a channel state: the user's own messages in that channel.
