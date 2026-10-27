@@ -560,6 +560,29 @@ end
   end
 end
 
+# Scheduled messages are created through the send message routes, with `scheduled_at`.
+['/scheduled_messages', '/api/v2/chat/scheduled_messages'].each do |scheduled_messages|
+  # Query scheduled messages
+  post "#{scheduled_messages}/query" do
+    query_scheduled_messages(request_body: request.body.read)
+  end
+
+  # Update scheduled message
+  patch "#{scheduled_messages}/:id" do
+    update_scheduled_message(id: params[:id], request_body: request.body.read)
+  end
+
+  # Delete scheduled message
+  delete "#{scheduled_messages}/:id" do
+    delete_scheduled_message(id: params[:id])
+  end
+
+  # Send scheduled message now
+  post "#{scheduled_messages}/:id/send_now" do
+    send_scheduled_message_now(id: params[:id])
+  end
+end
+
 # iOS sends every poll path under /api/v2, Flutter sends it unprefixed and Android is moving
 # from unprefixed to /api/v2, so each poll route is registered under both spellings, like the
 # v2 upload routes above.

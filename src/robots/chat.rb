@@ -39,6 +39,7 @@ post '/mock' do
   $channel_list['channels'] = []
   $channel_groups = []
   $reminders = []
+  reset_scheduled_messages
   $polls = []
   $user_mutes = []
   $channel_mutes = []
@@ -127,6 +128,7 @@ post '/mock' do
       end
     end
     channel['channel']['last_message_at'] = message_timestamp if messages_count.positive?
+    apply_schedule_message_capability(channel['channel'])
   end
 
   ''
@@ -219,5 +221,64 @@ end
 post '/create_reminder' do
   remind_at = params[:remind_at] ? update_date(timestamp: unique_date, plus_seconds: params[:remind_at].to_i) : nil
   create_reminder(message_id: last_message_id, remind_at: remind_at)
+  ''
+end
+
+# Sends every pending scheduled message of the app user, as when its time arrives. Each one
+# emits `message.new` and `scheduled_message.sent`.
+post '/send_scheduled_messages' do
+  $scheduled_messages.select { |scheduled| pending_scheduled_message?(scheduled) }.each do |scheduled|
+    send_scheduled_message(scheduled)
+  end
+  ''
+end
+
+# Fails a scheduled message, as the backend does when it cannot send it.
+### Parameters
+# `id`: String - Id of the scheduled message. Default: the last one scheduled
+# `failure_reason`: String - Why it failed, for example `banned` or `no_permission`. Default `banned`
+post '/fail_scheduled_message' do
+  scheduled = params[:id] ? find_scheduled_message(params[:id]) : $scheduled_messages.reverse.detect { |s| pending_scheduled_message?(s) }
+  halt(400, { message: 'scheduled message not found' }.to_s) unless scheduled
+
+  fail_scheduled_message(scheduled, failure_reason: params[:failure_reason] || 'banned')
+  ''
+end
+
+# Sets how many pending scheduled messages the app user can have in one channel. One more
+# fails with `scheduled_limit_channel` (117). Reset to 10 by /mock.
+### Parameters
+# `limit`: Integer - The limit per channel
+post '/scheduled_messages_limit' do
+  $scheduled_messages_channel_limit = params[:limit].to_i
+  ''
+end
+
+# Turns scheduled messages off for the app, like the app flag on the backend: every channel
+# loses the `schedule-message` capability, and scheduling or editing fails with
+# `scheduled_messages_disabled` (114). Turned back on by /mock.
+post '/disable_scheduled_messages' do
+  $scheduled_messages_enabled = false
+  $channel_list['channels'].each { |channel| apply_schedule_message_capability(channel['channel']) }
+  ''
+end
+
+# Creates a scheduled message in the current channel as a server-side action, like the app
+# user scheduling it on another device. The app under test only receives the
+# `scheduled_message.created` event.
+### Parameters
+# `text`: String - Text of the message. Default `Scheduled`
+# `scheduled_at`: Integer - Offset in seconds from now for the send time. Default 3600
+# `parent_id`: String - Id of the thread parent message, to schedule a thread reply
+post '/create_scheduled_message' do
+  content = { 'text' => params[:text] || 'Scheduled' }
+  content['parent_id'] = params[:parent_id] if params[:parent_id]
+  offset = params[:scheduled_at] ? params[:scheduled_at].to_i : 3600
+  store_scheduled_message(
+    id: unique_id,
+    cid: "messaging:#{$current_channel_id}",
+    content: scheduled_message_content(content),
+    scheduled_at: round_send_at(Time.now.utc + offset, Time.now.utc).strftime(time_format)
+  )
   ''
 end

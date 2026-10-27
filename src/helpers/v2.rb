@@ -64,6 +64,17 @@ V2_DECLARED_KEYS = {
   attachment: %w[
     custom asset_url author_icon author_link author_name color fallback footer footer_icon image_url og_scrape_url
     original_height original_width pretext text thumb_url title title_link type actions fields giphy
+  ],
+  scheduled_message: %w[
+    id cid user message scheduled_at status failure_reason created_at updated_at channel
+  ],
+  scheduled_message_content: %w[
+    text custom html mentioned_channel mentioned_here mml parent_id pin_expires pinned poll_id quoted_message_id
+    show_in_channel silent type attachments mentioned_group_ids mentioned_roles mentioned_users restricted_visibility
+    shared_location
+  ],
+  scheduled_message_channel: %w[
+    cid type id name image
   ]
 }.freeze
 
@@ -79,13 +90,16 @@ V2_CHILD_TYPES = {
   'thread' => :thread, 'threads' => :thread,
   'reaction' => :reaction, 'reactions' => :reaction, 'latest_reactions' => :reaction, 'own_reactions' => :reaction,
   'poll' => :poll, 'poll_option' => :poll_option,
-  'attachments' => :attachment
+  'attachments' => :attachment,
+  'scheduled_message' => :scheduled_message, 'scheduled_messages' => :scheduled_message
 }.freeze
 
 # Keys whose object type depends on the object holding them.
 V2_NESTED_CHILD_TYPES = {
   [:poll, 'options'] => :poll_option,
-  [:thread, 'thread_participants'] => :thread_participant
+  [:thread, 'thread_participants'] => :thread_participant,
+  [:scheduled_message, 'message'] => :scheduled_message_content,
+  [:scheduled_message, 'channel'] => :scheduled_message_channel
 }.freeze
 
 # Gives a v1-shaped response the v2 shape: every known object nests the fields its v2 model does not

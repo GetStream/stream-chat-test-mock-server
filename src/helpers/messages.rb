@@ -195,12 +195,24 @@ def create_message(request_body:, channel_id: nil)
   json = JSON.parse(request_body)
   message = json['message']
 
+  # A future `scheduled_at` stores the message to send later. A past one sends it now.
+  if json['scheduled_at']
+    scheduled_response = schedule_message(json: json, channel_id: channel_id)
+    return scheduled_response if scheduled_response
+  end
+
   # The real backend enforces message id uniqueness and rejects a duplicate send
   # with a 400 input error (code 4). Mirror it so that a client retrying a message
   # whose response was lost gets the same behavior as in production, and so that
   # channel query responses can never contain the same message id twice.
   halt(400, duplicate_message_error(message['id'])) if message['id'] && find_message_by_id(message['id'])
 
+  post_message(message: message, channel_id: channel_id, skip_enrich_url: json['skip_enrich_url']).to_s
+end
+
+# Adds a message to the channel and emits `message.new`, as the backend does once a send
+# request passes its checks. Returns the send message response.
+def post_message(message:, channel_id:, skip_enrich_url: nil)
   parent_id = message['parent_id']
   quoted_message_id = message['quoted_message_id']
   channel_reply = message['show_in_channel']
@@ -241,7 +253,7 @@ def create_message(request_body:, channel_id: nil)
     created_at: timestamp,
     updated_at: timestamp,
     attachments: attachments,
-    skip_enrich_url: json['skip_enrich_url'],
+    skip_enrich_url: skip_enrich_url,
     command: is_invalid_command ? message['text'].to_s.sub('/', '') : nil,
     track_message: message_type != :error
   )
@@ -258,7 +270,7 @@ def create_message(request_body:, channel_id: nil)
     update_last_message_at(channel_id: channel_id, message: mocked_message)
   end
   send_message_ws(response: response, event_type: MessageEventType.new) if broadcast_new_message?(message_type)
-  response.to_s
+  response
 end
 
 def create_giphy(request_body:, message_id:)
@@ -521,7 +533,11 @@ def paginate_message_list(params:, request_body:)
   channel = find_channel_by_id(params[:channel_id])
   json = request_body.empty? ? {} : JSON.parse(request_body)
   messages = json['messages']
-  return channel&.merge('duration' => '7.11ms').to_s unless messages && messages['limit']
+  scheduled_messages = scheduled_messages_field(
+    cid: "#{params[:channel_type]}:#{params[:channel_id]}",
+    requested: json['include_scheduled_messages']
+  )
+  return channel&.merge(scheduled_messages)&.merge('duration' => '7.11ms').to_s unless messages && messages['limit']
 
   message_list = channel_visible_messages(cid: "#{params[:channel_type]}:#{params[:channel_id]}")
   paginated_messages = mock_message_pagination(
@@ -534,7 +550,7 @@ def paginate_message_list(params:, request_body:)
     id_around: messages['id_around']
   )
   channel['messages'] = paginated_messages
-  channel.merge('duration' => '7.11ms').to_s
+  channel.merge(scheduled_messages).merge('duration' => '7.11ms').to_s
 end
 
 def paginate_thread_list(params:)
