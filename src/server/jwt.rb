@@ -18,8 +18,8 @@ get '/jwt/get' do
     "invalid_#{mocked_token}"
   elsif time < jwt[:invalid_token_date_timeout].to_i
     # Invalid token date flow
-    $health_check = invalid_jwt_date(params)
-    accept_same_token_after(jwt[:invalid_token_date_timeout])
+    $health_check = error = invalid_jwt_date(params)
+    accept_same_token_after(jwt[:invalid_token_date_timeout], error)
     mocked_token
   elsif time < jwt[:invalid_token_signature_timeout].to_i
     # Invalid token date flow
@@ -64,8 +64,7 @@ end
 
 # A token used before its issue date is accepted once the server's clock
 # catches up, so the same token connects again after the window ends.
-def accept_same_token_after(timeout)
-  error = $health_check
+def accept_same_token_after(timeout, error)
   Thread.new do
     sleep([timeout.to_i - Time.now.to_i, 0].max)
     $health_check = Mocks.health_check.to_s if $health_check == error
