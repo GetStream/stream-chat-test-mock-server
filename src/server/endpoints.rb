@@ -144,7 +144,8 @@ end
       'unread_messages' => 0,
       **unread_counts
     )
-    create_event(type: 'message.read', channel_id: params[:channel_id])
+    # Like the backend, message.read names the last read message too.
+    create_event(type: 'message.read', channel_id: params[:channel_id], last_read_message_id: read['last_read_message_id'])
   end
 
   # Mark all channels read. The backend sends a single notification.mark_read

@@ -433,7 +433,7 @@ post '/participant/read' do
   channel = find_channel_by_id($current_channel_id)
   halt(400, { message: 'no current channel' }.to_s) unless channel
 
-  mark_channel_read(channel: channel, user: Participant.user)
+  read = mark_channel_read(channel: channel, user: Participant.user)
 
   parent_id = nil
   if params[:thread]
@@ -445,7 +445,8 @@ post '/participant/read' do
     type: 'message.read',
     channel_id: $current_channel_id,
     parent_id: parent_id,
-    user: Participant.user
+    user: Participant.user,
+    last_read_message_id: parent_id ? nil : read['last_read_message_id']
   )
   ''
 end
