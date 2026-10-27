@@ -67,7 +67,9 @@ end
 def accept_same_token_after(timeout, error)
   Thread.new do
     sleep([timeout.to_i - Time.now.to_i, 0].max)
-    $health_check = Mocks.health_check.to_s if $health_check == error
+    # Every code-42 frame reads the same, so compare identity to clear only
+    # the error this call set, not a later window's.
+    $health_check = Mocks.health_check.to_s if $health_check.equal?(error)
   end
 end
 
