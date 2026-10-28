@@ -21,6 +21,7 @@ require_relative 'helpers/reads'
 require_relative 'helpers/moderation'
 require_relative 'helpers/polls'
 require_relative 'helpers/reminders'
+require_relative 'helpers/scheduled_messages'
 require_relative 'helpers/threads'
 require_relative 'helpers/v2'
 require_relative 'robots/chat'
@@ -37,12 +38,14 @@ $ws_authenticated = false
 $message_list = []
 $sync_events = []
 $reminders = []
+reset_scheduled_messages
 $polls = []
 $user_mutes = []
 $channel_mutes = []
 $blocked_users = []
 $block_hidden_channels = {}
 $channel_list = Mocks.channels
+$channel_list['channels'].each { |channel| apply_schedule_message_capability(channel['channel']) }
 $channel_groups = []
 $current_channel_id = Mocks.event_ws['channel_id']
 $health_check = Mocks.health_check.to_s

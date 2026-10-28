@@ -110,9 +110,12 @@ def paginate_channel_list(payload: nil)
   filter = payload && payload['filter_conditions']
   limited_channel_list = $channel_list.dup
   limited_channel_list['channels'] = queried_channels(filter)
+  include_scheduled_messages = payload && payload['include_scheduled_messages']
   # A search query is never sliced and leaves the pagination flag alone, so
   # channel search cannot disturb the paging state of the unfiltered queries.
-  return limited_channel_list.to_s if payload.nil? || payload['limit'].nil? || search_query?(filter)
+  if payload.nil? || payload['limit'].nil? || search_query?(filter)
+    return with_scheduled_messages(limited_channel_list, requested: include_scheduled_messages).to_s
+  end
 
   channels = limited_channel_list['channels'] || []
   channel_count = channels.count - 1
@@ -126,7 +129,15 @@ def paginate_channel_list(payload: nil)
     limited_channel_list['channels'] = channels[start_with..end_with] || []
   end
 
-  limited_channel_list.to_s
+  with_scheduled_messages(limited_channel_list, requested: include_scheduled_messages).to_s
+end
+
+# Fills the opt-in `scheduled_messages` of every channel in a channel list response.
+def with_scheduled_messages(channel_list, requested:)
+  channels = channel_list['channels'].map do |channel|
+    channel.merge(scheduled_messages_field(cid: channel['channel']['cid'], requested: requested))
+  end
+  channel_list.merge('channels' => channels)
 end
 
 GROUPED_ALL_GROUP = 'all'

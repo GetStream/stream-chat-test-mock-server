@@ -359,6 +359,7 @@ end
     channel['channel']['deleted_at'] = timestamp
     $channel_list['channels'].delete(channel)
     $message_list.delete_if { |msg| msg['cid'] == channel['channel']['cid'] }
+    fail_channel_scheduled_messages(channel['channel']['cid'])
     # The participant and chat robots act on the current channel; leaving the pointer
     # on the deleted channel would break every robot call after the deletion.
     if params[:channel_id] == $current_channel_id
@@ -557,6 +558,29 @@ end
   # Delete message reminder
   delete reminders do
     delete_reminder(message_id: params[:message_id])
+  end
+end
+
+# Scheduled messages are created through the send message routes, with `scheduled_at`.
+['/scheduled_messages', '/api/v2/chat/scheduled_messages'].each do |scheduled_messages|
+  # Query scheduled messages
+  post "#{scheduled_messages}/query" do
+    query_scheduled_messages(request_body: request.body.read)
+  end
+
+  # Update scheduled message
+  patch "#{scheduled_messages}/:id" do
+    update_scheduled_message(id: params[:id], request_body: request.body.read)
+  end
+
+  # Delete scheduled message
+  delete "#{scheduled_messages}/:id" do
+    delete_scheduled_message(id: params[:id])
+  end
+
+  # Send scheduled message now
+  post "#{scheduled_messages}/:id/send_now" do
+    send_scheduled_message_now(id: params[:id])
   end
 end
 
