@@ -291,21 +291,25 @@ end
 
 # Send image
 post '/channels/messaging/:channel_id/image' do
+  halt(400, upload_error('image')) if $fail_uploads
   upload_response('image').to_json
 end
 
 # Send file
 post '/channels/messaging/:channel_id/file' do
+  halt(400, upload_error('file')) if $fail_uploads
   upload_response(uploaded_file_type).to_json
 end
 
 # Send image (v2)
 post '/api/v2/chat/channels/messaging/:channel_id/image' do
+  halt(400, upload_error('image')) if $fail_uploads
   upload_response('image').to_json
 end
 
 # Send file (v2)
 post '/api/v2/chat/channels/messaging/:channel_id/file' do
+  halt(400, upload_error('file')) if $fail_uploads
   upload_response(uploaded_file_type).to_json
 end
 

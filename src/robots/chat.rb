@@ -139,6 +139,14 @@ post '/fail_messages' do
   ''
 end
 
+# Makes every image and file upload fail with a 400 until it is turned off.
+### Parameters
+# `fail`: Boolean - `false` turns the failure off. Default true
+post '/fail_uploads' do
+  $fail_uploads = params[:fail] != 'false'
+  ''
+end
+
 post '/freeze_messages' do
   $freeze_messages = true
   ''

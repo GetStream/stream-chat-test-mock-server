@@ -50,6 +50,7 @@ $channel_groups = []
 $current_channel_id = Mocks.event_ws['channel_id']
 $health_check = Mocks.health_check.to_s
 $fail_messages = nil
+$fail_uploads = false
 $freeze_messages = nil
 $delay_messages = nil
 $forbidden_words = ["wth"]

@@ -42,6 +42,17 @@ def upload_response(type)
   { file: test_asset(type), duration: '49.41ms' }
 end
 
+def upload_error(type)
+  {
+    code: 4,
+    message: "Upload#{type.capitalize} failed with error: \"the upload was rejected\"",
+    StatusCode: 400,
+    duration: '0.10ms',
+    more_info: 'https://getstream.io/chat/docs/api_errors_response',
+    details: []
+  }.to_json
+end
+
 # Uploads are multipart, so the request content type is always `multipart/form-data`;
 # the media type of the upload is on the `file` part itself.
 def uploaded_file_type
