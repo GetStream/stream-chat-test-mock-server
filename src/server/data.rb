@@ -45,7 +45,7 @@ end
 def upload_error(type)
   {
     code: 4,
-    message: "Upload#{type.capitalize} failed with error: \"the upload was rejected\"",
+    message: "UploadChannel#{type.capitalize} failed with error: \"the upload was rejected\"",
     StatusCode: 400,
     duration: '0.10ms',
     more_info: 'https://getstream.io/chat/docs/api_errors_response',
