@@ -1,7 +1,7 @@
 {
   "type": "connection.ok",
-  "created_at": 1790748425253785421,
-  "connection_id": "6ababa98-0a82-3966-0300-0000003a663a",
+  "created_at": 1793491579746154928,
+  "connection_id": "6ae4bb0f-0a82-4546-0300-00000034f274",
   "me": {
     "id": "luke_skywalker",
     "name": "Luke Skywalker",
@@ -18,7 +18,7 @@
     "updated_at": 1785935604369473000,
     "banned": false,
     "online": true,
-    "last_active": 1790748425246586071,
+    "last_active": 1793491579729512528,
     "privacy_settings": {
       "typing_indicators": {
         "enabled": true
@@ -43,189 +43,4555 @@
     "unread_count": 0,
     "total_unread_count": 0,
     "unread_channels": 0,
-    "unread_threads": 0
+    "unread_threads": 0,
+    "blocked_user_ids": [
+
+    ]
   },
   "chat": {
     "mutes": [
       {
+        "user": {
+          "id": "luke_skywalker",
+          "name": "Luke Skywalker",
+          "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+          "custom": {
+            "birthland": "Tatooine"
+          },
+          "language": "en",
+          "role": "user",
+          "teams": [
+
+          ],
+          "created_at": 1643903230148169000,
+          "updated_at": 1785935604369473000,
+          "banned": false,
+          "online": true,
+          "last_active": 1793491579729512528,
+          "blocked_user_ids": [
+
+          ]
+        },
+        "target": {
+          "id": "8e254b6b-71d3-46e4-af1d-e6fe064d9d24",
+          "custom": {
+          },
+          "language": "",
+          "role": "user",
+          "teams": [
+
+          ],
+          "created_at": 1777382885330275000,
+          "updated_at": 1777382885330275000,
+          "banned": false,
+          "online": false,
+          "last_active": 1777382885330275000,
+          "blocked_user_ids": [
+
+          ]
+        },
         "created_at": 1777384252144059000,
         "updated_at": 1777384252144059000
       },
       {
+        "user": {
+          "id": "luke_skywalker",
+          "name": "Luke Skywalker",
+          "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+          "custom": {
+            "birthland": "Tatooine"
+          },
+          "language": "en",
+          "role": "user",
+          "teams": [
+
+          ],
+          "created_at": 1643903230148169000,
+          "updated_at": 1785935604369473000,
+          "banned": false,
+          "online": true,
+          "last_active": 1793491579729512528,
+          "blocked_user_ids": [
+
+          ]
+        },
+        "target": {
+          "id": "darth_maul",
+          "name": "Darth Maul",
+          "image": "https://vignette.wikia.nocookie.net/starwars/images/5/50/Darth_Maul_profile.png",
+          "custom": {
+            "birthland": "Dathomir"
+          },
+          "language": "zh",
+          "role": "user",
+          "teams": [
+
+          ],
+          "created_at": 1643905038260807000,
+          "updated_at": 1761076697490692000,
+          "banned": false,
+          "online": false,
+          "last_active": 1785317922114262000,
+          "blocked_user_ids": [
+
+          ]
+        },
         "created_at": 1771611897508896000,
         "updated_at": 1771611897508896000
       },
       {
+        "user": {
+          "id": "luke_skywalker",
+          "name": "Luke Skywalker",
+          "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+          "custom": {
+            "birthland": "Tatooine"
+          },
+          "language": "en",
+          "role": "user",
+          "teams": [
+
+          ],
+          "created_at": 1643903230148169000,
+          "updated_at": 1785935604369473000,
+          "banned": false,
+          "online": true,
+          "last_active": 1793491579729512528,
+          "blocked_user_ids": [
+
+          ]
+        },
+        "target": {
+          "id": "AIStreamUser1",
+          "name": "AI Android Stream",
+          "image": "https://picsum.photos/id/705/300/300",
+          "custom": {
+          },
+          "language": "",
+          "role": "user",
+          "teams": [
+
+          ],
+          "created_at": 1732239952389507000,
+          "updated_at": 1791446092852149000,
+          "banned": false,
+          "online": false,
+          "last_active": 1770215490982358000,
+          "blocked_user_ids": [
+
+          ]
+        },
         "created_at": 1763485604292972000,
         "updated_at": 1763485604292972000
       },
       {
+        "user": {
+          "id": "luke_skywalker",
+          "name": "Luke Skywalker",
+          "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+          "custom": {
+            "birthland": "Tatooine"
+          },
+          "language": "en",
+          "role": "user",
+          "teams": [
+
+          ],
+          "created_at": 1643903230148169000,
+          "updated_at": 1785935604369473000,
+          "banned": false,
+          "online": true,
+          "last_active": 1793491579729512528,
+          "blocked_user_ids": [
+
+          ]
+        },
+        "target": {
+          "id": "ai-bot-messaging-with-4818ig795zn",
+          "name": "AI Bot",
+          "custom": {
+          },
+          "language": "",
+          "role": "admin",
+          "teams": [
+
+          ],
+          "created_at": 1736966957616464000,
+          "updated_at": 1736966957616464000,
+          "banned": false,
+          "online": false,
+          "last_active": 1736976859570787000,
+          "blocked_user_ids": [
+
+          ]
+        },
         "created_at": 1762422810547456000,
         "updated_at": 1762422810547456000
       },
       {
+        "user": {
+          "id": "luke_skywalker",
+          "name": "Luke Skywalker",
+          "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+          "custom": {
+            "birthland": "Tatooine"
+          },
+          "language": "en",
+          "role": "user",
+          "teams": [
+
+          ],
+          "created_at": 1643903230148169000,
+          "updated_at": 1785935604369473000,
+          "banned": false,
+          "online": true,
+          "last_active": 1793491579729512528,
+          "blocked_user_ids": [
+
+          ]
+        },
+        "target": {
+          "id": "tommaso-0",
+          "custom": {
+          },
+          "language": "",
+          "role": "user",
+          "teams": [
+
+          ],
+          "created_at": 1719562260619090000,
+          "updated_at": 1719562260619090000,
+          "banned": false,
+          "online": false,
+          "last_active": 1737457491525245000,
+          "blocked_user_ids": [
+
+          ]
+        },
         "created_at": 1732099775809311000,
         "updated_at": 1732099775809311000
       },
       {
+        "user": {
+          "id": "luke_skywalker",
+          "name": "Luke Skywalker",
+          "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+          "custom": {
+            "birthland": "Tatooine"
+          },
+          "language": "en",
+          "role": "user",
+          "teams": [
+
+          ],
+          "created_at": 1643903230148169000,
+          "updated_at": 1785935604369473000,
+          "banned": false,
+          "online": true,
+          "last_active": 1793491579729512528,
+          "blocked_user_ids": [
+
+          ]
+        },
+        "target": {
+          "id": "jar_jar_binks",
+          "name": "Jar Jar Binks",
+          "image": "https://vignette.wikia.nocookie.net/starwars/images/d/d2/Jar_Jar_aotc.jpg",
+          "custom": {
+            "birthland": "Naboo"
+          },
+          "language": "es",
+          "role": "user",
+          "teams": [
+
+          ],
+          "created_at": 1643905012181426000,
+          "updated_at": 1788167530639663000,
+          "banned": false,
+          "online": false,
+          "last_active": 1792675753387063000,
+          "blocked_user_ids": [
+
+          ]
+        },
         "created_at": 1695156128304693000,
         "updated_at": 1695156128304693000
       },
       {
+        "user": {
+          "id": "luke_skywalker",
+          "name": "Luke Skywalker",
+          "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+          "custom": {
+            "birthland": "Tatooine"
+          },
+          "language": "en",
+          "role": "user",
+          "teams": [
+
+          ],
+          "created_at": 1643903230148169000,
+          "updated_at": 1785935604369473000,
+          "banned": false,
+          "online": true,
+          "last_active": 1793491579729512528,
+          "blocked_user_ids": [
+
+          ]
+        },
+        "target": {
+          "id": "r2-d2",
+          "name": "R2-D2",
+          "image": "https://vignette.wikia.nocookie.net/starwars/images/e/eb/ArtooTFA2-Fathead.png",
+          "custom": {
+            "birthland": "Naboo"
+          },
+          "language": "zh",
+          "role": "user",
+          "teams": [
+
+          ],
+          "created_at": 1643904760394611000,
+          "updated_at": 1766546500379237000,
+          "banned": false,
+          "online": false,
+          "last_active": 1793362312363557000,
+          "blocked_user_ids": [
+
+          ]
+        },
         "created_at": 1690867750255046000,
         "updated_at": 1692705445725914000
       },
       {
+        "user": {
+          "id": "luke_skywalker",
+          "name": "Luke Skywalker",
+          "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+          "custom": {
+            "birthland": "Tatooine"
+          },
+          "language": "en",
+          "role": "user",
+          "teams": [
+
+          ],
+          "created_at": 1643903230148169000,
+          "updated_at": 1785935604369473000,
+          "banned": false,
+          "online": true,
+          "last_active": 1793491579729512528,
+          "blocked_user_ids": [
+
+          ]
+        },
+        "target": {
+          "id": "padme_amidala",
+          "name": "Padmé Amidala",
+          "image": "https://vignette.wikia.nocookie.net/starwars/images/b/b2/Padmegreenscrshot.jpg",
+          "custom": {
+            "birthland": "Naboo"
+          },
+          "language": "",
+          "role": "user",
+          "teams": [
+
+          ],
+          "created_at": 1643904865796564000,
+          "updated_at": 1785752930185355000,
+          "banned": false,
+          "online": false,
+          "last_active": 1790665873828479000,
+          "blocked_user_ids": [
+
+          ]
+        },
         "created_at": 1674366387127447000,
         "updated_at": 1674366387127447000
       }
     ],
     "channel_mutes": [
       {
+        "user": {
+          "id": "luke_skywalker",
+          "name": "Luke Skywalker",
+          "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+          "custom": {
+            "birthland": "Tatooine"
+          },
+          "language": "en",
+          "role": "user",
+          "teams": [
+
+          ],
+          "created_at": 1643903230148169000,
+          "updated_at": 1785935604369473000,
+          "banned": false,
+          "online": true,
+          "last_active": 1793491579729512528,
+          "blocked_user_ids": [
+
+          ]
+        },
+        "channel": {
+          "id": "docs-cookbook-party-b2722cb0e6cb4db49110fb237f9db3a5",
+          "type": "messaging",
+          "cid": "messaging:docs-cookbook-party-b2722cb0e6cb4db49110fb237f9db3a5",
+          "last_message_at": 1783009321647264000,
+          "created_at": 1773439593736084000,
+          "updated_at": 1784105394835446000,
+          "created_by": {
+            "id": "luke_skywalker",
+            "name": "Luke Skywalker",
+            "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+            "custom": {
+              "birthland": "Tatooine"
+            },
+            "language": "en",
+            "role": "user",
+            "teams": [
+
+            ],
+            "created_at": 1643903230148169000,
+            "updated_at": 1785935604369473000,
+            "banned": false,
+            "online": true,
+            "last_active": 1793491579729512528,
+            "blocked_user_ids": [
+
+            ]
+          },
+          "frozen": false,
+          "disabled": false,
+          "member_count": 15,
+          "config": {
+            "created_at": 1649840197837805000,
+            "updated_at": 1791283253538892000,
+            "name": "messaging",
+            "typing_events": true,
+            "read_events": true,
+            "connect_events": true,
+            "delivery_events": true,
+            "search": true,
+            "reactions": true,
+            "replies": true,
+            "quotes": true,
+            "mutes": true,
+            "uploads": true,
+            "url_enrichment": true,
+            "custom_events": true,
+            "push_notifications": true,
+            "reminders": false,
+            "mark_messages_pending": false,
+            "polls": true,
+            "user_message_reminders": false,
+            "shared_locations": false,
+            "count_messages": false,
+            "message_retention": "infinite",
+            "max_message_length": 5000,
+            "automod": "AI",
+            "automod_behavior": "flag",
+            "blocklist_behavior": "flag",
+            "automod_thresholds": {
+            },
+            "skip_last_msg_update_for_system_msgs": true,
+            "commands": [
+              {
+                "name": "giphy",
+                "description": "Post a random gif to the channel",
+                "args": "[text]",
+                "set": "fun_set"
+              },
+              {
+                "name": "mute",
+                "description": "Mute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              },
+              {
+                "name": "unmute",
+                "description": "Unmute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              }
+            ]
+          },
+          "custom": {
+            "docs_run": "b2722cb0e6cb4db49110fb237f9db3a5",
+            "name": "Birthday party"
+          },
+          "message_count": 0
+        },
         "created_at": 1780405740646321000,
         "updated_at": 1780405740646321000
       },
       {
+        "user": {
+          "id": "luke_skywalker",
+          "name": "Luke Skywalker",
+          "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+          "custom": {
+            "birthland": "Tatooine"
+          },
+          "language": "en",
+          "role": "user",
+          "teams": [
+
+          ],
+          "created_at": 1643903230148169000,
+          "updated_at": 1785935604369473000,
+          "banned": false,
+          "online": true,
+          "last_active": 1793491579729512528,
+          "blocked_user_ids": [
+
+          ]
+        },
+        "channel": {
+          "id": "docs-list-friday-8A031F",
+          "type": "messaging",
+          "cid": "messaging:docs-list-friday-8A031F",
+          "last_message_at": 1775182734661779000,
+          "created_at": 1773439473696157000,
+          "updated_at": 1773439473696157000,
+          "created_by": {
+            "id": "luke_skywalker",
+            "name": "Luke Skywalker",
+            "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+            "custom": {
+              "birthland": "Tatooine"
+            },
+            "language": "en",
+            "role": "user",
+            "teams": [
+
+            ],
+            "created_at": 1643903230148169000,
+            "updated_at": 1785935604369473000,
+            "banned": false,
+            "online": true,
+            "last_active": 1793491579729512528,
+            "blocked_user_ids": [
+
+            ]
+          },
+          "frozen": false,
+          "disabled": false,
+          "member_count": 3,
+          "config": {
+            "created_at": 1649840197837805000,
+            "updated_at": 1791283253538892000,
+            "name": "messaging",
+            "typing_events": true,
+            "read_events": true,
+            "connect_events": true,
+            "delivery_events": true,
+            "search": true,
+            "reactions": true,
+            "replies": true,
+            "quotes": true,
+            "mutes": true,
+            "uploads": true,
+            "url_enrichment": true,
+            "custom_events": true,
+            "push_notifications": true,
+            "reminders": false,
+            "mark_messages_pending": false,
+            "polls": true,
+            "user_message_reminders": false,
+            "shared_locations": false,
+            "count_messages": false,
+            "message_retention": "infinite",
+            "max_message_length": 5000,
+            "automod": "AI",
+            "automod_behavior": "flag",
+            "blocklist_behavior": "flag",
+            "automod_thresholds": {
+            },
+            "skip_last_msg_update_for_system_msgs": true,
+            "commands": [
+              {
+                "name": "giphy",
+                "description": "Post a random gif to the channel",
+                "args": "[text]",
+                "set": "fun_set"
+              },
+              {
+                "name": "mute",
+                "description": "Mute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              },
+              {
+                "name": "unmute",
+                "description": "Unmute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              }
+            ]
+          },
+          "custom": {
+            "docs_run": "da5fa71ef0e74544ac69763e2ec5796c",
+            "name": "Friday"
+          },
+          "message_count": 0
+        },
         "created_at": 1775412690599265000,
         "updated_at": 1775412690599265000
       },
       {
+        "user": {
+          "id": "luke_skywalker",
+          "name": "Luke Skywalker",
+          "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+          "custom": {
+            "birthland": "Tatooine"
+          },
+          "language": "en",
+          "role": "user",
+          "teams": [
+
+          ],
+          "created_at": 1643903230148169000,
+          "updated_at": 1785935604369473000,
+          "banned": false,
+          "online": true,
+          "last_active": 1793491579729512528,
+          "blocked_user_ids": [
+
+          ]
+        },
+        "channel": {
+          "id": "docs-cookbook-message-list-62b0db2bdc6f43e78378f70edf83b623",
+          "type": "messaging",
+          "cid": "messaging:docs-cookbook-message-list-62b0db2bdc6f43e78378f70edf83b623",
+          "last_message_at": 1778714451704543000,
+          "created_at": 1773473319385652000,
+          "updated_at": 1773473319385652000,
+          "created_by": {
+            "id": "luke_skywalker",
+            "name": "Luke Skywalker",
+            "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+            "custom": {
+              "birthland": "Tatooine"
+            },
+            "language": "en",
+            "role": "user",
+            "teams": [
+
+            ],
+            "created_at": 1643903230148169000,
+            "updated_at": 1785935604369473000,
+            "banned": false,
+            "online": true,
+            "last_active": 1793491579729512528,
+            "blocked_user_ids": [
+
+            ]
+          },
+          "frozen": false,
+          "disabled": false,
+          "member_count": 3,
+          "config": {
+            "created_at": 1649840197837805000,
+            "updated_at": 1791283253538892000,
+            "name": "messaging",
+            "typing_events": true,
+            "read_events": true,
+            "connect_events": true,
+            "delivery_events": true,
+            "search": true,
+            "reactions": true,
+            "replies": true,
+            "quotes": true,
+            "mutes": true,
+            "uploads": true,
+            "url_enrichment": true,
+            "custom_events": true,
+            "push_notifications": true,
+            "reminders": false,
+            "mark_messages_pending": false,
+            "polls": true,
+            "user_message_reminders": false,
+            "shared_locations": false,
+            "count_messages": false,
+            "message_retention": "infinite",
+            "max_message_length": 5000,
+            "automod": "AI",
+            "automod_behavior": "flag",
+            "blocklist_behavior": "flag",
+            "automod_thresholds": {
+            },
+            "skip_last_msg_update_for_system_msgs": true,
+            "commands": [
+              {
+                "name": "giphy",
+                "description": "Post a random gif to the channel",
+                "args": "[text]",
+                "set": "fun_set"
+              },
+              {
+                "name": "mute",
+                "description": "Mute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              },
+              {
+                "name": "unmute",
+                "description": "Unmute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              }
+            ]
+          },
+          "custom": {
+            "docs_run": "62b0db2bdc6f43e78378f70edf83b623",
+            "name": "Docs review"
+          },
+          "message_count": 0
+        },
         "created_at": 1773599567853752000,
         "updated_at": 1773599567853752000
       },
       {
+        "user": {
+          "id": "luke_skywalker",
+          "name": "Luke Skywalker",
+          "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+          "custom": {
+            "birthland": "Tatooine"
+          },
+          "language": "en",
+          "role": "user",
+          "teams": [
+
+          ],
+          "created_at": 1643903230148169000,
+          "updated_at": 1785935604369473000,
+          "banned": false,
+          "online": true,
+          "last_active": 1793491579729512528,
+          "blocked_user_ids": [
+
+          ]
+        },
+        "channel": {
+          "id": "chewbacca-luke_skywalker",
+          "type": "messaging",
+          "cid": "messaging:chewbacca-luke_skywalker",
+          "last_message_at": 1772022411422096000,
+          "created_at": 1763636106910366000,
+          "updated_at": 1770412579394647000,
+          "created_by": {
+            "id": "luke_skywalker",
+            "name": "Luke Skywalker",
+            "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+            "custom": {
+              "birthland": "Tatooine"
+            },
+            "language": "en",
+            "role": "user",
+            "teams": [
+
+            ],
+            "created_at": 1643903230148169000,
+            "updated_at": 1785935604369473000,
+            "banned": false,
+            "online": true,
+            "last_active": 1793491579729512528,
+            "blocked_user_ids": [
+
+            ]
+          },
+          "frozen": false,
+          "disabled": false,
+          "member_count": 1,
+          "config": {
+            "created_at": 1649840197837805000,
+            "updated_at": 1791283253538892000,
+            "name": "messaging",
+            "typing_events": true,
+            "read_events": true,
+            "connect_events": true,
+            "delivery_events": true,
+            "search": true,
+            "reactions": true,
+            "replies": true,
+            "quotes": true,
+            "mutes": true,
+            "uploads": true,
+            "url_enrichment": true,
+            "custom_events": true,
+            "push_notifications": true,
+            "reminders": false,
+            "mark_messages_pending": false,
+            "polls": true,
+            "user_message_reminders": false,
+            "shared_locations": false,
+            "count_messages": false,
+            "message_retention": "infinite",
+            "max_message_length": 5000,
+            "automod": "AI",
+            "automod_behavior": "flag",
+            "blocklist_behavior": "flag",
+            "automod_thresholds": {
+            },
+            "skip_last_msg_update_for_system_msgs": true,
+            "commands": [
+              {
+                "name": "giphy",
+                "description": "Post a random gif to the channel",
+                "args": "[text]",
+                "set": "fun_set"
+              },
+              {
+                "name": "mute",
+                "description": "Mute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              },
+              {
+                "name": "unmute",
+                "description": "Unmute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              }
+            ]
+          },
+          "custom": {
+            "name": "Hello "
+          },
+          "message_count": 0
+        },
         "created_at": 1770853504299672000,
         "updated_at": 1770853504299672000
       },
       {
+        "user": {
+          "id": "luke_skywalker",
+          "name": "Luke Skywalker",
+          "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+          "custom": {
+            "birthland": "Tatooine"
+          },
+          "language": "en",
+          "role": "user",
+          "teams": [
+
+          ],
+          "created_at": 1643903230148169000,
+          "updated_at": 1785935604369473000,
+          "banned": false,
+          "online": true,
+          "last_active": 1793491579729512528,
+          "blocked_user_ids": [
+
+          ]
+        },
+        "channel": {
+          "id": "024B8A85-E",
+          "type": "messaging",
+          "cid": "messaging:024B8A85-E",
+          "last_message_at": 1770412355757785000,
+          "created_at": 1767934219850775000,
+          "updated_at": 1767934219850775000,
+          "created_by": {
+            "id": "luke_skywalker",
+            "name": "Luke Skywalker",
+            "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+            "custom": {
+              "birthland": "Tatooine"
+            },
+            "language": "en",
+            "role": "user",
+            "teams": [
+
+            ],
+            "created_at": 1643903230148169000,
+            "updated_at": 1785935604369473000,
+            "banned": false,
+            "online": true,
+            "last_active": 1793491579729512528,
+            "blocked_user_ids": [
+
+            ]
+          },
+          "frozen": false,
+          "disabled": false,
+          "member_count": 3,
+          "config": {
+            "created_at": 1649840197837805000,
+            "updated_at": 1791283253538892000,
+            "name": "messaging",
+            "typing_events": true,
+            "read_events": true,
+            "connect_events": true,
+            "delivery_events": true,
+            "search": true,
+            "reactions": true,
+            "replies": true,
+            "quotes": true,
+            "mutes": true,
+            "uploads": true,
+            "url_enrichment": true,
+            "custom_events": true,
+            "push_notifications": true,
+            "reminders": false,
+            "mark_messages_pending": false,
+            "polls": true,
+            "user_message_reminders": false,
+            "shared_locations": false,
+            "count_messages": false,
+            "message_retention": "infinite",
+            "max_message_length": 5000,
+            "automod": "AI",
+            "automod_behavior": "flag",
+            "blocklist_behavior": "flag",
+            "automod_thresholds": {
+            },
+            "skip_last_msg_update_for_system_msgs": true,
+            "commands": [
+              {
+                "name": "giphy",
+                "description": "Post a random gif to the channel",
+                "args": "[text]",
+                "set": "fun_set"
+              },
+              {
+                "name": "mute",
+                "description": "Mute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              },
+              {
+                "name": "unmute",
+                "description": "Unmute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              }
+            ]
+          },
+          "custom": {
+            "name": "TEST GROUP"
+          },
+          "message_count": 0
+        },
         "created_at": 1770853444203124000,
         "updated_at": 1770853444203124000
       },
       {
+        "user": {
+          "id": "luke_skywalker",
+          "name": "Luke Skywalker",
+          "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+          "custom": {
+            "birthland": "Tatooine"
+          },
+          "language": "en",
+          "role": "user",
+          "teams": [
+
+          ],
+          "created_at": 1643903230148169000,
+          "updated_at": 1785935604369473000,
+          "banned": false,
+          "online": true,
+          "last_active": 1793491579729512528,
+          "blocked_user_ids": [
+
+          ]
+        },
+        "channel": {
+          "id": "!members-XFj_Y2sHVX_QWOYtWsRY83E1Tye-mF_PWug5qSiYHc8",
+          "type": "messaging",
+          "cid": "messaging:!members-XFj_Y2sHVX_QWOYtWsRY83E1Tye-mF_PWug5qSiYHc8",
+          "last_message_at": 1773079367323720000,
+          "created_at": 1667529265822910000,
+          "updated_at": 1773387837251734000,
+          "created_by": {
+            "id": "luke_skywalker",
+            "name": "Luke Skywalker",
+            "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+            "custom": {
+              "birthland": "Tatooine"
+            },
+            "language": "en",
+            "role": "user",
+            "teams": [
+
+            ],
+            "created_at": 1643903230148169000,
+            "updated_at": 1785935604369473000,
+            "banned": false,
+            "online": true,
+            "last_active": 1793491579729512528,
+            "blocked_user_ids": [
+
+            ]
+          },
+          "frozen": false,
+          "disabled": false,
+          "member_count": 5,
+          "config": {
+            "created_at": 1649840197837805000,
+            "updated_at": 1791283253538892000,
+            "name": "messaging",
+            "typing_events": true,
+            "read_events": true,
+            "connect_events": true,
+            "delivery_events": true,
+            "search": true,
+            "reactions": true,
+            "replies": true,
+            "quotes": true,
+            "mutes": true,
+            "uploads": true,
+            "url_enrichment": true,
+            "custom_events": true,
+            "push_notifications": true,
+            "reminders": false,
+            "mark_messages_pending": false,
+            "polls": true,
+            "user_message_reminders": false,
+            "shared_locations": false,
+            "count_messages": false,
+            "message_retention": "infinite",
+            "max_message_length": 5000,
+            "automod": "AI",
+            "automod_behavior": "flag",
+            "blocklist_behavior": "flag",
+            "automod_thresholds": {
+            },
+            "skip_last_msg_update_for_system_msgs": true,
+            "commands": [
+              {
+                "name": "giphy",
+                "description": "Post a random gif to the channel",
+                "args": "[text]",
+                "set": "fun_set"
+              },
+              {
+                "name": "mute",
+                "description": "Mute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              },
+              {
+                "name": "unmute",
+                "description": "Unmute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              }
+            ]
+          },
+          "custom": {
+            "name": "C-3PO, Chewbacca and 2 more"
+          },
+          "message_count": 0
+        },
         "created_at": 1770853373791178000,
         "updated_at": 1770853373791178000
       },
       {
+        "user": {
+          "id": "luke_skywalker",
+          "name": "Luke Skywalker",
+          "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+          "custom": {
+            "birthland": "Tatooine"
+          },
+          "language": "en",
+          "role": "user",
+          "teams": [
+
+          ],
+          "created_at": 1643903230148169000,
+          "updated_at": 1785935604369473000,
+          "banned": false,
+          "online": true,
+          "last_active": 1793491579729512528,
+          "blocked_user_ids": [
+
+          ]
+        },
+        "channel": {
+          "id": "!members-SOzNHYs3EdapIPz_apFL8SEGa3slEx4BTkxJAjpKGD8",
+          "type": "messaging",
+          "cid": "messaging:!members-SOzNHYs3EdapIPz_apFL8SEGa3slEx4BTkxJAjpKGD8",
+          "last_message_at": 1772472726450892000,
+          "created_at": 1769813491139083000,
+          "updated_at": 1769813491139083000,
+          "created_by": {
+            "id": "luke_skywalker",
+            "name": "Luke Skywalker",
+            "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+            "custom": {
+              "birthland": "Tatooine"
+            },
+            "language": "en",
+            "role": "user",
+            "teams": [
+
+            ],
+            "created_at": 1643903230148169000,
+            "updated_at": 1785935604369473000,
+            "banned": false,
+            "online": true,
+            "last_active": 1793491579729512528,
+            "blocked_user_ids": [
+
+            ]
+          },
+          "frozen": false,
+          "disabled": false,
+          "member_count": 2,
+          "config": {
+            "created_at": 1649840197837805000,
+            "updated_at": 1791283253538892000,
+            "name": "messaging",
+            "typing_events": true,
+            "read_events": true,
+            "connect_events": true,
+            "delivery_events": true,
+            "search": true,
+            "reactions": true,
+            "replies": true,
+            "quotes": true,
+            "mutes": true,
+            "uploads": true,
+            "url_enrichment": true,
+            "custom_events": true,
+            "push_notifications": true,
+            "reminders": false,
+            "mark_messages_pending": false,
+            "polls": true,
+            "user_message_reminders": false,
+            "shared_locations": false,
+            "count_messages": false,
+            "message_retention": "infinite",
+            "max_message_length": 5000,
+            "automod": "AI",
+            "automod_behavior": "flag",
+            "blocklist_behavior": "flag",
+            "automod_thresholds": {
+            },
+            "skip_last_msg_update_for_system_msgs": true,
+            "commands": [
+              {
+                "name": "giphy",
+                "description": "Post a random gif to the channel",
+                "args": "[text]",
+                "set": "fun_set"
+              },
+              {
+                "name": "mute",
+                "description": "Mute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              },
+              {
+                "name": "unmute",
+                "description": "Unmute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              }
+            ]
+          },
+          "custom": {
+          },
+          "message_count": 0
+        },
         "created_at": 1769813554178953000,
         "updated_at": 1769813554178953000
       },
       {
+        "user": {
+          "id": "luke_skywalker",
+          "name": "Luke Skywalker",
+          "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+          "custom": {
+            "birthland": "Tatooine"
+          },
+          "language": "en",
+          "role": "user",
+          "teams": [
+
+          ],
+          "created_at": 1643903230148169000,
+          "updated_at": 1785935604369473000,
+          "banned": false,
+          "online": true,
+          "last_active": 1793491579729512528,
+          "blocked_user_ids": [
+
+          ]
+        },
+        "channel": {
+          "id": "2166CF0B-B",
+          "type": "messaging",
+          "cid": "messaging:2166CF0B-B",
+          "last_message_at": 1769394372978015000,
+          "created_at": 1694775262993731000,
+          "updated_at": 1694775262993731000,
+          "created_by": {
+            "id": "leia_organa",
+            "name": "Leia Organa",
+            "image": "https://vignette.wikia.nocookie.net/starwars/images/f/fc/Leia_Organa_TLJ.png",
+            "custom": {
+              "birthland": "Polis Massa"
+            },
+            "language": "de",
+            "role": "user",
+            "teams": [
+
+            ],
+            "created_at": 1643903252254140000,
+            "updated_at": 1776152257976935000,
+            "banned": false,
+            "online": false,
+            "last_active": 1793230887732251000,
+            "blocked_user_ids": [
+
+            ]
+          },
+          "frozen": false,
+          "disabled": false,
+          "member_count": 3,
+          "config": {
+            "created_at": 1649840197837805000,
+            "updated_at": 1791283253538892000,
+            "name": "messaging",
+            "typing_events": true,
+            "read_events": true,
+            "connect_events": true,
+            "delivery_events": true,
+            "search": true,
+            "reactions": true,
+            "replies": true,
+            "quotes": true,
+            "mutes": true,
+            "uploads": true,
+            "url_enrichment": true,
+            "custom_events": true,
+            "push_notifications": true,
+            "reminders": false,
+            "mark_messages_pending": false,
+            "polls": true,
+            "user_message_reminders": false,
+            "shared_locations": false,
+            "count_messages": false,
+            "message_retention": "infinite",
+            "max_message_length": 5000,
+            "automod": "AI",
+            "automod_behavior": "flag",
+            "blocklist_behavior": "flag",
+            "automod_thresholds": {
+            },
+            "skip_last_msg_update_for_system_msgs": true,
+            "commands": [
+              {
+                "name": "giphy",
+                "description": "Post a random gif to the channel",
+                "args": "[text]",
+                "set": "fun_set"
+              },
+              {
+                "name": "mute",
+                "description": "Mute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              },
+              {
+                "name": "unmute",
+                "description": "Unmute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              }
+            ]
+          },
+          "custom": {
+            "name": "friday "
+          },
+          "message_count": 0
+        },
         "created_at": 1769372533559558000,
         "updated_at": 1769372533559558000
       },
       {
+        "user": {
+          "id": "luke_skywalker",
+          "name": "Luke Skywalker",
+          "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+          "custom": {
+            "birthland": "Tatooine"
+          },
+          "language": "en",
+          "role": "user",
+          "teams": [
+
+          ],
+          "created_at": 1643903230148169000,
+          "updated_at": 1785935604369473000,
+          "banned": false,
+          "online": true,
+          "last_active": 1793491579729512528,
+          "blocked_user_ids": [
+
+          ]
+        },
+        "channel": {
+          "id": "!members-Cj-77OqOd57zC7wkEFno51EXuTbi5SeQCJCxkWpFyJ0",
+          "type": "messaging",
+          "cid": "messaging:!members-Cj-77OqOd57zC7wkEFno51EXuTbi5SeQCJCxkWpFyJ0",
+          "last_message_at": 1758032646312941000,
+          "created_at": 1758032616836258000,
+          "updated_at": 1758032616836258000,
+          "created_by": {
+            "id": "luke_skywalker",
+            "name": "Luke Skywalker",
+            "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+            "custom": {
+              "birthland": "Tatooine"
+            },
+            "language": "en",
+            "role": "user",
+            "teams": [
+
+            ],
+            "created_at": 1643903230148169000,
+            "updated_at": 1785935604369473000,
+            "banned": false,
+            "online": true,
+            "last_active": 1793491579729512528,
+            "blocked_user_ids": [
+
+            ]
+          },
+          "frozen": false,
+          "disabled": false,
+          "member_count": 3,
+          "config": {
+            "created_at": 1649840197837805000,
+            "updated_at": 1791283253538892000,
+            "name": "messaging",
+            "typing_events": true,
+            "read_events": true,
+            "connect_events": true,
+            "delivery_events": true,
+            "search": true,
+            "reactions": true,
+            "replies": true,
+            "quotes": true,
+            "mutes": true,
+            "uploads": true,
+            "url_enrichment": true,
+            "custom_events": true,
+            "push_notifications": true,
+            "reminders": false,
+            "mark_messages_pending": false,
+            "polls": true,
+            "user_message_reminders": false,
+            "shared_locations": false,
+            "count_messages": false,
+            "message_retention": "infinite",
+            "max_message_length": 5000,
+            "automod": "AI",
+            "automod_behavior": "flag",
+            "blocklist_behavior": "flag",
+            "automod_thresholds": {
+            },
+            "skip_last_msg_update_for_system_msgs": true,
+            "commands": [
+              {
+                "name": "giphy",
+                "description": "Post a random gif to the channel",
+                "args": "[text]",
+                "set": "fun_set"
+              },
+              {
+                "name": "mute",
+                "description": "Mute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              },
+              {
+                "name": "unmute",
+                "description": "Unmute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              }
+            ]
+          },
+          "custom": {
+          },
+          "message_count": 0
+        },
         "created_at": 1763485811707339000,
         "updated_at": 1763485811707339000
       },
       {
+        "user": {
+          "id": "luke_skywalker",
+          "name": "Luke Skywalker",
+          "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+          "custom": {
+            "birthland": "Tatooine"
+          },
+          "language": "en",
+          "role": "user",
+          "teams": [
+
+          ],
+          "created_at": 1643903230148169000,
+          "updated_at": 1785935604369473000,
+          "banned": false,
+          "online": true,
+          "last_active": 1793491579729512528,
+          "blocked_user_ids": [
+
+          ]
+        },
+        "channel": {
+          "id": "D05D868A-B",
+          "type": "messaging",
+          "cid": "messaging:D05D868A-B",
+          "last_message_at": 1761926717780384000,
+          "created_at": 1743128826742626000,
+          "updated_at": 1743128826742627000,
+          "created_by": {
+            "id": "luke_skywalker",
+            "name": "Luke Skywalker",
+            "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+            "custom": {
+              "birthland": "Tatooine"
+            },
+            "language": "en",
+            "role": "user",
+            "teams": [
+
+            ],
+            "created_at": 1643903230148169000,
+            "updated_at": 1785935604369473000,
+            "banned": false,
+            "online": true,
+            "last_active": 1793491579729512528,
+            "blocked_user_ids": [
+
+            ]
+          },
+          "frozen": false,
+          "disabled": false,
+          "member_count": 2,
+          "config": {
+            "created_at": 1649840197837805000,
+            "updated_at": 1791283253538892000,
+            "name": "messaging",
+            "typing_events": true,
+            "read_events": true,
+            "connect_events": true,
+            "delivery_events": true,
+            "search": true,
+            "reactions": true,
+            "replies": true,
+            "quotes": true,
+            "mutes": true,
+            "uploads": true,
+            "url_enrichment": true,
+            "custom_events": true,
+            "push_notifications": true,
+            "reminders": false,
+            "mark_messages_pending": false,
+            "polls": true,
+            "user_message_reminders": false,
+            "shared_locations": false,
+            "count_messages": false,
+            "message_retention": "infinite",
+            "max_message_length": 5000,
+            "automod": "AI",
+            "automod_behavior": "flag",
+            "blocklist_behavior": "flag",
+            "automod_thresholds": {
+            },
+            "skip_last_msg_update_for_system_msgs": true,
+            "commands": [
+              {
+                "name": "giphy",
+                "description": "Post a random gif to the channel",
+                "args": "[text]",
+                "set": "fun_set"
+              },
+              {
+                "name": "mute",
+                "description": "Mute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              },
+              {
+                "name": "unmute",
+                "description": "Unmute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              }
+            ]
+          },
+          "custom": {
+            "name": "Group 2"
+          },
+          "message_count": 0
+        },
         "created_at": 1763485759270594000,
         "updated_at": 1763485759270594000
       },
       {
+        "user": {
+          "id": "luke_skywalker",
+          "name": "Luke Skywalker",
+          "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+          "custom": {
+            "birthland": "Tatooine"
+          },
+          "language": "en",
+          "role": "user",
+          "teams": [
+
+          ],
+          "created_at": 1643903230148169000,
+          "updated_at": 1785935604369473000,
+          "banned": false,
+          "online": true,
+          "last_active": 1793491579729512528,
+          "blocked_user_ids": [
+
+          ]
+        },
+        "channel": {
+          "id": "!members-FJSF0nvTiIBqLTCmm_kyI0-pliE83kWlFwJss7c0z24",
+          "type": "messaging",
+          "cid": "messaging:!members-FJSF0nvTiIBqLTCmm_kyI0-pliE83kWlFwJss7c0z24",
+          "last_message_at": 1763040079190827000,
+          "created_at": 1762544414850521000,
+          "updated_at": 1762544414850521000,
+          "created_by": {
+            "id": "luke_skywalker",
+            "name": "Luke Skywalker",
+            "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+            "custom": {
+              "birthland": "Tatooine"
+            },
+            "language": "en",
+            "role": "user",
+            "teams": [
+
+            ],
+            "created_at": 1643903230148169000,
+            "updated_at": 1785935604369473000,
+            "banned": false,
+            "online": true,
+            "last_active": 1793491579729512528,
+            "blocked_user_ids": [
+
+            ]
+          },
+          "frozen": false,
+          "disabled": false,
+          "member_count": 3,
+          "config": {
+            "created_at": 1649840197837805000,
+            "updated_at": 1791283253538892000,
+            "name": "messaging",
+            "typing_events": true,
+            "read_events": true,
+            "connect_events": true,
+            "delivery_events": true,
+            "search": true,
+            "reactions": true,
+            "replies": true,
+            "quotes": true,
+            "mutes": true,
+            "uploads": true,
+            "url_enrichment": true,
+            "custom_events": true,
+            "push_notifications": true,
+            "reminders": false,
+            "mark_messages_pending": false,
+            "polls": true,
+            "user_message_reminders": false,
+            "shared_locations": false,
+            "count_messages": false,
+            "message_retention": "infinite",
+            "max_message_length": 5000,
+            "automod": "AI",
+            "automod_behavior": "flag",
+            "blocklist_behavior": "flag",
+            "automod_thresholds": {
+            },
+            "skip_last_msg_update_for_system_msgs": true,
+            "commands": [
+              {
+                "name": "giphy",
+                "description": "Post a random gif to the channel",
+                "args": "[text]",
+                "set": "fun_set"
+              },
+              {
+                "name": "mute",
+                "description": "Mute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              },
+              {
+                "name": "unmute",
+                "description": "Unmute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              }
+            ]
+          },
+          "custom": {
+          },
+          "message_count": 0
+        },
         "created_at": 1763113295740516000,
         "updated_at": 1763113295740516000
       },
       {
+        "user": {
+          "id": "luke_skywalker",
+          "name": "Luke Skywalker",
+          "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+          "custom": {
+            "birthland": "Tatooine"
+          },
+          "language": "en",
+          "role": "user",
+          "teams": [
+
+          ],
+          "created_at": 1643903230148169000,
+          "updated_at": 1785935604369473000,
+          "banned": false,
+          "online": true,
+          "last_active": 1793491579729512528,
+          "blocked_user_ids": [
+
+          ]
+        },
+        "channel": {
+          "id": "!members-mLIJe8sI578-JC57rVD4uFerliPOIrMBXHmS5L4mW3w",
+          "type": "messaging",
+          "cid": "messaging:!members-mLIJe8sI578-JC57rVD4uFerliPOIrMBXHmS5L4mW3w",
+          "last_message_at": 1758479492136855000,
+          "created_at": 1756982504993421000,
+          "updated_at": 1756982504993421000,
+          "created_by": {
+            "id": "luke_skywalker",
+            "name": "Luke Skywalker",
+            "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+            "custom": {
+              "birthland": "Tatooine"
+            },
+            "language": "en",
+            "role": "user",
+            "teams": [
+
+            ],
+            "created_at": 1643903230148169000,
+            "updated_at": 1785935604369473000,
+            "banned": false,
+            "online": true,
+            "last_active": 1793491579729512528,
+            "blocked_user_ids": [
+
+            ]
+          },
+          "frozen": false,
+          "disabled": false,
+          "member_count": 2,
+          "config": {
+            "created_at": 1649840197837805000,
+            "updated_at": 1791283253538892000,
+            "name": "messaging",
+            "typing_events": true,
+            "read_events": true,
+            "connect_events": true,
+            "delivery_events": true,
+            "search": true,
+            "reactions": true,
+            "replies": true,
+            "quotes": true,
+            "mutes": true,
+            "uploads": true,
+            "url_enrichment": true,
+            "custom_events": true,
+            "push_notifications": true,
+            "reminders": false,
+            "mark_messages_pending": false,
+            "polls": true,
+            "user_message_reminders": false,
+            "shared_locations": false,
+            "count_messages": false,
+            "message_retention": "infinite",
+            "max_message_length": 5000,
+            "automod": "AI",
+            "automod_behavior": "flag",
+            "blocklist_behavior": "flag",
+            "automod_thresholds": {
+            },
+            "skip_last_msg_update_for_system_msgs": true,
+            "commands": [
+              {
+                "name": "giphy",
+                "description": "Post a random gif to the channel",
+                "args": "[text]",
+                "set": "fun_set"
+              },
+              {
+                "name": "mute",
+                "description": "Mute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              },
+              {
+                "name": "unmute",
+                "description": "Unmute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              }
+            ]
+          },
+          "custom": {
+          },
+          "message_count": 0
+        },
         "created_at": 1757960226400189000,
         "updated_at": 1757960226400189000
       },
       {
+        "user": {
+          "id": "luke_skywalker",
+          "name": "Luke Skywalker",
+          "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+          "custom": {
+            "birthland": "Tatooine"
+          },
+          "language": "en",
+          "role": "user",
+          "teams": [
+
+          ],
+          "created_at": 1643903230148169000,
+          "updated_at": 1785935604369473000,
+          "banned": false,
+          "online": true,
+          "last_active": 1793491579729512528,
+          "blocked_user_ids": [
+
+          ]
+        },
+        "channel": {
+          "id": "!members-C_AF5zGZZDsWISIWNR3IbbphVQDp3uBqI7drKgIx9sI",
+          "type": "messaging",
+          "cid": "messaging:!members-C_AF5zGZZDsWISIWNR3IbbphVQDp3uBqI7drKgIx9sI",
+          "last_message_at": 1755670849459312000,
+          "created_at": 1729009748407435000,
+          "updated_at": 1729009748407435000,
+          "created_by": {
+            "id": "luke_skywalker",
+            "name": "Luke Skywalker",
+            "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+            "custom": {
+              "birthland": "Tatooine"
+            },
+            "language": "en",
+            "role": "user",
+            "teams": [
+
+            ],
+            "created_at": 1643903230148169000,
+            "updated_at": 1785935604369473000,
+            "banned": false,
+            "online": true,
+            "last_active": 1793491579729512528,
+            "blocked_user_ids": [
+
+            ]
+          },
+          "frozen": false,
+          "disabled": false,
+          "member_count": 2,
+          "config": {
+            "created_at": 1649840197837805000,
+            "updated_at": 1791283253538892000,
+            "name": "messaging",
+            "typing_events": true,
+            "read_events": true,
+            "connect_events": true,
+            "delivery_events": true,
+            "search": true,
+            "reactions": true,
+            "replies": true,
+            "quotes": true,
+            "mutes": true,
+            "uploads": true,
+            "url_enrichment": true,
+            "custom_events": true,
+            "push_notifications": true,
+            "reminders": false,
+            "mark_messages_pending": false,
+            "polls": true,
+            "user_message_reminders": false,
+            "shared_locations": false,
+            "count_messages": false,
+            "message_retention": "infinite",
+            "max_message_length": 5000,
+            "automod": "AI",
+            "automod_behavior": "flag",
+            "blocklist_behavior": "flag",
+            "automod_thresholds": {
+            },
+            "skip_last_msg_update_for_system_msgs": true,
+            "commands": [
+              {
+                "name": "giphy",
+                "description": "Post a random gif to the channel",
+                "args": "[text]",
+                "set": "fun_set"
+              },
+              {
+                "name": "mute",
+                "description": "Mute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              },
+              {
+                "name": "unmute",
+                "description": "Unmute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              }
+            ]
+          },
+          "custom": {
+          },
+          "message_count": 0
+        },
         "created_at": 1755795472199231000,
         "updated_at": 1755795472199231000
       },
       {
+        "user": {
+          "id": "luke_skywalker",
+          "name": "Luke Skywalker",
+          "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+          "custom": {
+            "birthland": "Tatooine"
+          },
+          "language": "en",
+          "role": "user",
+          "teams": [
+
+          ],
+          "created_at": 1643903230148169000,
+          "updated_at": 1785935604369473000,
+          "banned": false,
+          "online": true,
+          "last_active": 1793491579729512528,
+          "blocked_user_ids": [
+
+          ]
+        },
+        "channel": {
+          "id": "EA0CAB74-F",
+          "type": "messaging",
+          "cid": "messaging:EA0CAB74-F",
+          "last_message_at": 1740584499607193000,
+          "created_at": 1740496801098890000,
+          "updated_at": 1740496801098890000,
+          "created_by": {
+            "id": "luke_skywalker",
+            "name": "Luke Skywalker",
+            "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+            "custom": {
+              "birthland": "Tatooine"
+            },
+            "language": "en",
+            "role": "user",
+            "teams": [
+
+            ],
+            "created_at": 1643903230148169000,
+            "updated_at": 1785935604369473000,
+            "banned": false,
+            "online": true,
+            "last_active": 1793491579729512528,
+            "blocked_user_ids": [
+
+            ]
+          },
+          "frozen": false,
+          "disabled": false,
+          "member_count": 3,
+          "config": {
+            "created_at": 1649840197837805000,
+            "updated_at": 1791283253538892000,
+            "name": "messaging",
+            "typing_events": true,
+            "read_events": true,
+            "connect_events": true,
+            "delivery_events": true,
+            "search": true,
+            "reactions": true,
+            "replies": true,
+            "quotes": true,
+            "mutes": true,
+            "uploads": true,
+            "url_enrichment": true,
+            "custom_events": true,
+            "push_notifications": true,
+            "reminders": false,
+            "mark_messages_pending": false,
+            "polls": true,
+            "user_message_reminders": false,
+            "shared_locations": false,
+            "count_messages": false,
+            "message_retention": "infinite",
+            "max_message_length": 5000,
+            "automod": "AI",
+            "automod_behavior": "flag",
+            "blocklist_behavior": "flag",
+            "automod_thresholds": {
+            },
+            "skip_last_msg_update_for_system_msgs": true,
+            "commands": [
+              {
+                "name": "giphy",
+                "description": "Post a random gif to the channel",
+                "args": "[text]",
+                "set": "fun_set"
+              },
+              {
+                "name": "mute",
+                "description": "Mute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              },
+              {
+                "name": "unmute",
+                "description": "Unmute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              }
+            ]
+          },
+          "custom": {
+            "name": "Mime type"
+          },
+          "message_count": 0
+        },
         "created_at": 1747150076851107000,
         "updated_at": 1747150076851107000
       },
       {
+        "user": {
+          "id": "luke_skywalker",
+          "name": "Luke Skywalker",
+          "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+          "custom": {
+            "birthland": "Tatooine"
+          },
+          "language": "en",
+          "role": "user",
+          "teams": [
+
+          ],
+          "created_at": 1643903230148169000,
+          "updated_at": 1785935604369473000,
+          "banned": false,
+          "online": true,
+          "last_active": 1793491579729512528,
+          "blocked_user_ids": [
+
+          ]
+        },
+        "channel": {
+          "id": "D3871EF9-1",
+          "type": "messaging",
+          "cid": "messaging:D3871EF9-1",
+          "last_message_at": 1654187384927898000,
+          "created_at": 1646930417200564000,
+          "updated_at": 1646930417200564000,
+          "created_by": {
+            "id": "luke_skywalker",
+            "name": "Luke Skywalker",
+            "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+            "custom": {
+              "birthland": "Tatooine"
+            },
+            "language": "en",
+            "role": "user",
+            "teams": [
+
+            ],
+            "created_at": 1643903230148169000,
+            "updated_at": 1785935604369473000,
+            "banned": false,
+            "online": true,
+            "last_active": 1793491579729512528,
+            "blocked_user_ids": [
+
+            ]
+          },
+          "frozen": false,
+          "disabled": false,
+          "member_count": 3,
+          "config": {
+            "created_at": 1649840197837805000,
+            "updated_at": 1791283253538892000,
+            "name": "messaging",
+            "typing_events": true,
+            "read_events": true,
+            "connect_events": true,
+            "delivery_events": true,
+            "search": true,
+            "reactions": true,
+            "replies": true,
+            "quotes": true,
+            "mutes": true,
+            "uploads": true,
+            "url_enrichment": true,
+            "custom_events": true,
+            "push_notifications": true,
+            "reminders": false,
+            "mark_messages_pending": false,
+            "polls": true,
+            "user_message_reminders": false,
+            "shared_locations": false,
+            "count_messages": false,
+            "message_retention": "infinite",
+            "max_message_length": 5000,
+            "automod": "AI",
+            "automod_behavior": "flag",
+            "blocklist_behavior": "flag",
+            "automod_thresholds": {
+            },
+            "skip_last_msg_update_for_system_msgs": true,
+            "commands": [
+              {
+                "name": "giphy",
+                "description": "Post a random gif to the channel",
+                "args": "[text]",
+                "set": "fun_set"
+              },
+              {
+                "name": "mute",
+                "description": "Mute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              },
+              {
+                "name": "unmute",
+                "description": "Unmute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              }
+            ]
+          },
+          "custom": {
+            "name": "hello"
+          },
+          "message_count": 0
+        },
         "created_at": 1746722714980029000,
         "updated_at": 1746722714980029000
       },
       {
+        "user": {
+          "id": "luke_skywalker",
+          "name": "Luke Skywalker",
+          "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+          "custom": {
+            "birthland": "Tatooine"
+          },
+          "language": "en",
+          "role": "user",
+          "teams": [
+
+          ],
+          "created_at": 1643903230148169000,
+          "updated_at": 1785935604369473000,
+          "banned": false,
+          "online": true,
+          "last_active": 1793491579729512528,
+          "blocked_user_ids": [
+
+          ]
+        },
+        "channel": {
+          "id": "DBE1E629-1",
+          "type": "messaging",
+          "cid": "messaging:DBE1E629-1",
+          "last_message_at": 1769441954851897000,
+          "created_at": 1724925568126521000,
+          "updated_at": 1772470684095464000,
+          "created_by": {
+            "id": "r2-d2",
+            "name": "R2-D2",
+            "image": "https://vignette.wikia.nocookie.net/starwars/images/e/eb/ArtooTFA2-Fathead.png",
+            "custom": {
+              "birthland": "Naboo"
+            },
+            "language": "zh",
+            "role": "user",
+            "teams": [
+
+            ],
+            "created_at": 1643904760394611000,
+            "updated_at": 1766546500379237000,
+            "banned": false,
+            "online": false,
+            "last_active": 1793362312363557000,
+            "blocked_user_ids": [
+
+            ]
+          },
+          "frozen": false,
+          "disabled": false,
+          "member_count": 3,
+          "config": {
+            "created_at": 1649840197837805000,
+            "updated_at": 1791283253538892000,
+            "name": "messaging",
+            "typing_events": true,
+            "read_events": true,
+            "connect_events": true,
+            "delivery_events": true,
+            "search": true,
+            "reactions": true,
+            "replies": true,
+            "quotes": true,
+            "mutes": true,
+            "uploads": true,
+            "url_enrichment": true,
+            "custom_events": true,
+            "push_notifications": true,
+            "reminders": false,
+            "mark_messages_pending": false,
+            "polls": true,
+            "user_message_reminders": false,
+            "shared_locations": false,
+            "count_messages": false,
+            "message_retention": "infinite",
+            "max_message_length": 5000,
+            "automod": "AI",
+            "automod_behavior": "flag",
+            "blocklist_behavior": "flag",
+            "automod_thresholds": {
+            },
+            "skip_last_msg_update_for_system_msgs": true,
+            "commands": [
+              {
+                "name": "giphy",
+                "description": "Post a random gif to the channel",
+                "args": "[text]",
+                "set": "fun_set"
+              },
+              {
+                "name": "mute",
+                "description": "Mute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              },
+              {
+                "name": "unmute",
+                "description": "Unmute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              }
+            ]
+          },
+          "custom": {
+            "image": "https://us-east4.gcp.stream-io-cdn.com/1166220/images/b214aa1b-230b-42ec-bfef-a1bea9bfc91e.9C81A5EF-7F1C-4358-BC38-435815C3FBD2.jpg?oh=2848&ow=4288&URLPrefix=aHR0cHM6Ly91cy1lYXN0NC5nY3Auc3RyZWFtLWlvLWNkbi5jb20vMTE2NjIyMC9pbWFnZXMvYjIxNGFhMWItMjMwYi00MmVjLWJmZWYtYTFiZWE5YmZjOTFlLjlDODFBNUVGLTdGMUMtNDM1OC1CQzM4LTQzNTgxNUMzRkJEMi5qcGc&Expires=1794701179&KeyName=chat-us-east4-cdn-key&Signature=mVgU8mbGgNPD1kvnFE_WEvfB5qg",
+            "is_pinned_by_chewbacca": true,
+            "name": "Unread testing"
+          },
+          "message_count": 0
+        },
         "created_at": 1746460267512696000,
         "updated_at": 1746460267512696000
       },
       {
+        "user": {
+          "id": "luke_skywalker",
+          "name": "Luke Skywalker",
+          "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+          "custom": {
+            "birthland": "Tatooine"
+          },
+          "language": "en",
+          "role": "user",
+          "teams": [
+
+          ],
+          "created_at": 1643903230148169000,
+          "updated_at": 1785935604369473000,
+          "banned": false,
+          "online": true,
+          "last_active": 1793491579729512528,
+          "blocked_user_ids": [
+
+          ]
+        },
+        "channel": {
+          "id": "EEBBE97A-D",
+          "type": "messaging",
+          "cid": "messaging:EEBBE97A-D",
+          "last_message_at": 1744951062841673000,
+          "created_at": 1742108626916045000,
+          "updated_at": 1742108626916045000,
+          "created_by": {
+            "id": "luke_skywalker",
+            "name": "Luke Skywalker",
+            "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+            "custom": {
+              "birthland": "Tatooine"
+            },
+            "language": "en",
+            "role": "user",
+            "teams": [
+
+            ],
+            "created_at": 1643903230148169000,
+            "updated_at": 1785935604369473000,
+            "banned": false,
+            "online": true,
+            "last_active": 1793491579729512528,
+            "blocked_user_ids": [
+
+            ]
+          },
+          "frozen": false,
+          "disabled": false,
+          "member_count": 2,
+          "config": {
+            "created_at": 1649840197837805000,
+            "updated_at": 1791283253538892000,
+            "name": "messaging",
+            "typing_events": true,
+            "read_events": true,
+            "connect_events": true,
+            "delivery_events": true,
+            "search": true,
+            "reactions": true,
+            "replies": true,
+            "quotes": true,
+            "mutes": true,
+            "uploads": true,
+            "url_enrichment": true,
+            "custom_events": true,
+            "push_notifications": true,
+            "reminders": false,
+            "mark_messages_pending": false,
+            "polls": true,
+            "user_message_reminders": false,
+            "shared_locations": false,
+            "count_messages": false,
+            "message_retention": "infinite",
+            "max_message_length": 5000,
+            "automod": "AI",
+            "automod_behavior": "flag",
+            "blocklist_behavior": "flag",
+            "automod_thresholds": {
+            },
+            "skip_last_msg_update_for_system_msgs": true,
+            "commands": [
+              {
+                "name": "giphy",
+                "description": "Post a random gif to the channel",
+                "args": "[text]",
+                "set": "fun_set"
+              },
+              {
+                "name": "mute",
+                "description": "Mute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              },
+              {
+                "name": "unmute",
+                "description": "Unmute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              }
+            ]
+          },
+          "custom": {
+            "name": "B test"
+          },
+          "message_count": 0
+        },
         "created_at": 1745840111837067000,
         "updated_at": 1745840111837067000
       },
       {
+        "user": {
+          "id": "luke_skywalker",
+          "name": "Luke Skywalker",
+          "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+          "custom": {
+            "birthland": "Tatooine"
+          },
+          "language": "en",
+          "role": "user",
+          "teams": [
+
+          ],
+          "created_at": 1643903230148169000,
+          "updated_at": 1785935604369473000,
+          "banned": false,
+          "online": true,
+          "last_active": 1793491579729512528,
+          "blocked_user_ids": [
+
+          ]
+        },
+        "channel": {
+          "id": "!members-lQ0_r-9bmPd-2reUwDTQdgRX50Iaw4SvyEIIfJSEeV4",
+          "type": "messaging",
+          "cid": "messaging:!members-lQ0_r-9bmPd-2reUwDTQdgRX50Iaw4SvyEIIfJSEeV4",
+          "last_message_at": 1733332442258783000,
+          "created_at": 1733327145027529000,
+          "updated_at": 1733327145027530000,
+          "created_by": {
+            "id": "luke_skywalker",
+            "name": "Luke Skywalker",
+            "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+            "custom": {
+              "birthland": "Tatooine"
+            },
+            "language": "en",
+            "role": "user",
+            "teams": [
+
+            ],
+            "created_at": 1643903230148169000,
+            "updated_at": 1785935604369473000,
+            "banned": false,
+            "online": true,
+            "last_active": 1793491579729512528,
+            "blocked_user_ids": [
+
+            ]
+          },
+          "frozen": false,
+          "disabled": false,
+          "member_count": 2,
+          "config": {
+            "created_at": 1649840197837805000,
+            "updated_at": 1791283253538892000,
+            "name": "messaging",
+            "typing_events": true,
+            "read_events": true,
+            "connect_events": true,
+            "delivery_events": true,
+            "search": true,
+            "reactions": true,
+            "replies": true,
+            "quotes": true,
+            "mutes": true,
+            "uploads": true,
+            "url_enrichment": true,
+            "custom_events": true,
+            "push_notifications": true,
+            "reminders": false,
+            "mark_messages_pending": false,
+            "polls": true,
+            "user_message_reminders": false,
+            "shared_locations": false,
+            "count_messages": false,
+            "message_retention": "infinite",
+            "max_message_length": 5000,
+            "automod": "AI",
+            "automod_behavior": "flag",
+            "blocklist_behavior": "flag",
+            "automod_thresholds": {
+            },
+            "skip_last_msg_update_for_system_msgs": true,
+            "commands": [
+              {
+                "name": "giphy",
+                "description": "Post a random gif to the channel",
+                "args": "[text]",
+                "set": "fun_set"
+              },
+              {
+                "name": "mute",
+                "description": "Mute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              },
+              {
+                "name": "unmute",
+                "description": "Unmute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              }
+            ]
+          },
+          "custom": {
+          },
+          "message_count": 0
+        },
         "created_at": 1733803282125092000,
         "updated_at": 1733803282125092000
       },
       {
+        "user": {
+          "id": "luke_skywalker",
+          "name": "Luke Skywalker",
+          "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+          "custom": {
+            "birthland": "Tatooine"
+          },
+          "language": "en",
+          "role": "user",
+          "teams": [
+
+          ],
+          "created_at": 1643903230148169000,
+          "updated_at": 1785935604369473000,
+          "banned": false,
+          "online": true,
+          "last_active": 1793491579729512528,
+          "blocked_user_ids": [
+
+          ]
+        },
+        "channel": {
+          "id": "D4114EE7-5",
+          "type": "livestream",
+          "cid": "livestream:D4114EE7-5",
+          "last_message_at": 1663584403576338000,
+          "created_at": 1663229237506732000,
+          "updated_at": 1663229237506733000,
+          "created_by": {
+            "id": "luke_skywalker",
+            "name": "Luke Skywalker",
+            "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+            "custom": {
+              "birthland": "Tatooine"
+            },
+            "language": "en",
+            "role": "user",
+            "teams": [
+
+            ],
+            "created_at": 1643903230148169000,
+            "updated_at": 1785935604369473000,
+            "banned": false,
+            "online": true,
+            "last_active": 1793491579729512528,
+            "blocked_user_ids": [
+
+            ]
+          },
+          "frozen": false,
+          "disabled": false,
+          "member_count": 2,
+          "config": {
+            "created_at": 1663229270890064000,
+            "updated_at": 1663229287459820000,
+            "name": "livestream",
+            "typing_events": false,
+            "read_events": false,
+            "connect_events": false,
+            "delivery_events": false,
+            "search": false,
+            "reactions": true,
+            "replies": true,
+            "quotes": true,
+            "mutes": true,
+            "uploads": true,
+            "url_enrichment": false,
+            "custom_events": true,
+            "push_notifications": true,
+            "reminders": false,
+            "mark_messages_pending": false,
+            "polls": false,
+            "user_message_reminders": false,
+            "shared_locations": false,
+            "count_messages": false,
+            "message_retention": "infinite",
+            "max_message_length": 280,
+            "automod": "disabled",
+            "automod_behavior": "flag",
+            "blocklist_behavior": "flag",
+            "automod_thresholds": {
+            },
+            "skip_last_msg_update_for_system_msgs": false,
+            "commands": [
+              {
+                "name": "giphy",
+                "description": "Post a random gif to the channel",
+                "args": "[text]",
+                "set": "fun_set"
+              },
+              {
+                "name": "ban",
+                "description": "Ban a user",
+                "args": "[@username] [text]",
+                "set": "moderation_set"
+              },
+              {
+                "name": "unban",
+                "description": "Unban a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              },
+              {
+                "name": "mute",
+                "description": "Mute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              },
+              {
+                "name": "unmute",
+                "description": "Unmute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              }
+            ]
+          },
+          "custom": {
+            "name": "livestream"
+          },
+          "message_count": 0
+        },
         "created_at": 1728999407395666000,
         "updated_at": 1728999407395666000
       },
       {
+        "user": {
+          "id": "luke_skywalker",
+          "name": "Luke Skywalker",
+          "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+          "custom": {
+            "birthland": "Tatooine"
+          },
+          "language": "en",
+          "role": "user",
+          "teams": [
+
+          ],
+          "created_at": 1643903230148169000,
+          "updated_at": 1785935604369473000,
+          "banned": false,
+          "online": true,
+          "last_active": 1793491579729512528,
+          "blocked_user_ids": [
+
+          ]
+        },
+        "channel": {
+          "id": "!members-AiVGkzRfvvXE4sLgFE8b1rH8KtV3-h6-KkxusdMHPXo",
+          "type": "messaging",
+          "cid": "messaging:!members-AiVGkzRfvvXE4sLgFE8b1rH8KtV3-h6-KkxusdMHPXo",
+          "created_at": 1659829783656709000,
+          "updated_at": 1659829783656709000,
+          "deleted_at": 1709351834092060000,
+          "created_by": {
+            "id": "luke_skywalker",
+            "name": "Luke Skywalker",
+            "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+            "custom": {
+              "birthland": "Tatooine"
+            },
+            "language": "en",
+            "role": "user",
+            "teams": [
+
+            ],
+            "created_at": 1643903230148169000,
+            "updated_at": 1785935604369473000,
+            "banned": false,
+            "online": true,
+            "last_active": 1793491579729512528,
+            "blocked_user_ids": [
+
+            ]
+          },
+          "frozen": false,
+          "disabled": false,
+          "config": {
+            "created_at": 1649840197837805000,
+            "updated_at": 1791283253538892000,
+            "name": "messaging",
+            "typing_events": true,
+            "read_events": true,
+            "connect_events": true,
+            "delivery_events": true,
+            "search": true,
+            "reactions": true,
+            "replies": true,
+            "quotes": true,
+            "mutes": true,
+            "uploads": true,
+            "url_enrichment": true,
+            "custom_events": true,
+            "push_notifications": true,
+            "reminders": false,
+            "mark_messages_pending": false,
+            "polls": true,
+            "user_message_reminders": false,
+            "shared_locations": false,
+            "count_messages": false,
+            "message_retention": "infinite",
+            "max_message_length": 5000,
+            "automod": "AI",
+            "automod_behavior": "flag",
+            "blocklist_behavior": "flag",
+            "automod_thresholds": {
+            },
+            "skip_last_msg_update_for_system_msgs": true,
+            "commands": [
+              {
+                "name": "giphy",
+                "description": "Post a random gif to the channel",
+                "args": "[text]",
+                "set": "fun_set"
+              },
+              {
+                "name": "mute",
+                "description": "Mute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              },
+              {
+                "name": "unmute",
+                "description": "Unmute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              }
+            ]
+          },
+          "truncated_at": 1709351834092060000,
+          "custom": {
+          },
+          "message_count": 0
+        },
         "created_at": 1709351837885402000,
         "updated_at": 1709351837885402000
       },
       {
+        "user": {
+          "id": "luke_skywalker",
+          "name": "Luke Skywalker",
+          "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+          "custom": {
+            "birthland": "Tatooine"
+          },
+          "language": "en",
+          "role": "user",
+          "teams": [
+
+          ],
+          "created_at": 1643903230148169000,
+          "updated_at": 1785935604369473000,
+          "banned": false,
+          "online": true,
+          "last_active": 1793491579729512528,
+          "blocked_user_ids": [
+
+          ]
+        },
+        "channel": {
+          "id": "24DA67CF-2",
+          "type": "messaging",
+          "cid": "messaging:24DA67CF-2",
+          "last_message_at": 1703389888156035000,
+          "created_at": 1682584181847515000,
+          "updated_at": 1682584181847515000,
+          "created_by": {
+            "id": "han_solo",
+            "name": "Han Solo",
+            "image": "https://vignette.wikia.nocookie.net/starwars/images/e/e2/TFAHanSolo.png",
+            "custom": {
+              "birthland": "Corellia"
+            },
+            "language": "",
+            "role": "user",
+            "teams": [
+
+            ],
+            "created_at": 1643904686478542000,
+            "updated_at": 1778690427112705000,
+            "banned": false,
+            "online": false,
+            "last_active": 1793179977346277000,
+            "blocked_user_ids": [
+
+            ]
+          },
+          "frozen": false,
+          "disabled": false,
+          "member_count": 3,
+          "config": {
+            "created_at": 1649840197837805000,
+            "updated_at": 1791283253538892000,
+            "name": "messaging",
+            "typing_events": true,
+            "read_events": true,
+            "connect_events": true,
+            "delivery_events": true,
+            "search": true,
+            "reactions": true,
+            "replies": true,
+            "quotes": true,
+            "mutes": true,
+            "uploads": true,
+            "url_enrichment": true,
+            "custom_events": true,
+            "push_notifications": true,
+            "reminders": false,
+            "mark_messages_pending": false,
+            "polls": true,
+            "user_message_reminders": false,
+            "shared_locations": false,
+            "count_messages": false,
+            "message_retention": "infinite",
+            "max_message_length": 5000,
+            "automod": "AI",
+            "automod_behavior": "flag",
+            "blocklist_behavior": "flag",
+            "automod_thresholds": {
+            },
+            "skip_last_msg_update_for_system_msgs": true,
+            "commands": [
+              {
+                "name": "giphy",
+                "description": "Post a random gif to the channel",
+                "args": "[text]",
+                "set": "fun_set"
+              },
+              {
+                "name": "mute",
+                "description": "Mute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              },
+              {
+                "name": "unmute",
+                "description": "Unmute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              }
+            ]
+          },
+          "custom": {
+            "name": "Test321"
+          },
+          "message_count": 0
+        },
         "created_at": 1704475592030197000,
         "updated_at": 1704475592030197000
       },
       {
+        "user": {
+          "id": "luke_skywalker",
+          "name": "Luke Skywalker",
+          "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+          "custom": {
+            "birthland": "Tatooine"
+          },
+          "language": "en",
+          "role": "user",
+          "teams": [
+
+          ],
+          "created_at": 1643903230148169000,
+          "updated_at": 1785935604369473000,
+          "banned": false,
+          "online": true,
+          "last_active": 1793491579729512528,
+          "blocked_user_ids": [
+
+          ]
+        },
+        "channel": {
+          "id": "!members-AjP44A8w6XSJgjxW7DrNoB8QQFDwiNeLFHjTwtexl6w",
+          "type": "messaging",
+          "cid": "messaging:!members-AjP44A8w6XSJgjxW7DrNoB8QQFDwiNeLFHjTwtexl6w",
+          "last_message_at": 1703162555004564000,
+          "created_at": 1696957142910887000,
+          "updated_at": 1696957142910887000,
+          "created_by": {
+            "id": "luke_skywalker",
+            "name": "Luke Skywalker",
+            "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+            "custom": {
+              "birthland": "Tatooine"
+            },
+            "language": "en",
+            "role": "user",
+            "teams": [
+
+            ],
+            "created_at": 1643903230148169000,
+            "updated_at": 1785935604369473000,
+            "banned": false,
+            "online": true,
+            "last_active": 1793491579729512528,
+            "blocked_user_ids": [
+
+            ]
+          },
+          "frozen": false,
+          "disabled": false,
+          "member_count": 5,
+          "config": {
+            "created_at": 1649840197837805000,
+            "updated_at": 1791283253538892000,
+            "name": "messaging",
+            "typing_events": true,
+            "read_events": true,
+            "connect_events": true,
+            "delivery_events": true,
+            "search": true,
+            "reactions": true,
+            "replies": true,
+            "quotes": true,
+            "mutes": true,
+            "uploads": true,
+            "url_enrichment": true,
+            "custom_events": true,
+            "push_notifications": true,
+            "reminders": false,
+            "mark_messages_pending": false,
+            "polls": true,
+            "user_message_reminders": false,
+            "shared_locations": false,
+            "count_messages": false,
+            "message_retention": "infinite",
+            "max_message_length": 5000,
+            "automod": "AI",
+            "automod_behavior": "flag",
+            "blocklist_behavior": "flag",
+            "automod_thresholds": {
+            },
+            "skip_last_msg_update_for_system_msgs": true,
+            "commands": [
+              {
+                "name": "giphy",
+                "description": "Post a random gif to the channel",
+                "args": "[text]",
+                "set": "fun_set"
+              },
+              {
+                "name": "mute",
+                "description": "Mute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              },
+              {
+                "name": "unmute",
+                "description": "Unmute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              }
+            ]
+          },
+          "custom": {
+          },
+          "message_count": 0
+        },
         "created_at": 1698655121553697000,
         "updated_at": 1698655121553697000
       },
       {
+        "user": {
+          "id": "luke_skywalker",
+          "name": "Luke Skywalker",
+          "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+          "custom": {
+            "birthland": "Tatooine"
+          },
+          "language": "en",
+          "role": "user",
+          "teams": [
+
+          ],
+          "created_at": 1643903230148169000,
+          "updated_at": 1785935604369473000,
+          "banned": false,
+          "online": true,
+          "last_active": 1793491579729512528,
+          "blocked_user_ids": [
+
+          ]
+        },
+        "channel": {
+          "id": "1D7A05AF-4",
+          "type": "messaging",
+          "cid": "messaging:1D7A05AF-4",
+          "last_message_at": 1701857037343652000,
+          "created_at": 1658828625085806000,
+          "updated_at": 1698265715991881000,
+          "created_by": {
+            "id": "r2-d2",
+            "name": "R2-D2",
+            "image": "https://vignette.wikia.nocookie.net/starwars/images/e/eb/ArtooTFA2-Fathead.png",
+            "custom": {
+              "birthland": "Naboo"
+            },
+            "language": "zh",
+            "role": "user",
+            "teams": [
+
+            ],
+            "created_at": 1643904760394611000,
+            "updated_at": 1766546500379237000,
+            "banned": false,
+            "online": false,
+            "last_active": 1793362312363557000,
+            "blocked_user_ids": [
+
+            ]
+          },
+          "frozen": false,
+          "disabled": false,
+          "member_count": 16,
+          "config": {
+            "created_at": 1649840197837805000,
+            "updated_at": 1791283253538892000,
+            "name": "messaging",
+            "typing_events": true,
+            "read_events": true,
+            "connect_events": true,
+            "delivery_events": true,
+            "search": true,
+            "reactions": true,
+            "replies": true,
+            "quotes": true,
+            "mutes": true,
+            "uploads": true,
+            "url_enrichment": true,
+            "custom_events": true,
+            "push_notifications": true,
+            "reminders": false,
+            "mark_messages_pending": false,
+            "polls": true,
+            "user_message_reminders": false,
+            "shared_locations": false,
+            "count_messages": false,
+            "message_retention": "infinite",
+            "max_message_length": 5000,
+            "automod": "AI",
+            "automod_behavior": "flag",
+            "blocklist_behavior": "flag",
+            "automod_thresholds": {
+            },
+            "skip_last_msg_update_for_system_msgs": true,
+            "commands": [
+              {
+                "name": "giphy",
+                "description": "Post a random gif to the channel",
+                "args": "[text]",
+                "set": "fun_set"
+              },
+              {
+                "name": "mute",
+                "description": "Mute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              },
+              {
+                "name": "unmute",
+                "description": "Unmute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              }
+            ]
+          },
+          "custom": {
+            "name": "Кпкк"
+          },
+          "message_count": 0
+        },
         "created_at": 1698301425899939000,
         "updated_at": 1698301425899939000
       },
       {
+        "user": {
+          "id": "luke_skywalker",
+          "name": "Luke Skywalker",
+          "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+          "custom": {
+            "birthland": "Tatooine"
+          },
+          "language": "en",
+          "role": "user",
+          "teams": [
+
+          ],
+          "created_at": 1643903230148169000,
+          "updated_at": 1785935604369473000,
+          "banned": false,
+          "online": true,
+          "last_active": 1793491579729512528,
+          "blocked_user_ids": [
+
+          ]
+        },
+        "channel": {
+          "id": "!members-2kEsAA5ru00P0h6gVImarD-1X6T4aBLaxd64ecnbB-A",
+          "type": "messaging",
+          "cid": "messaging:!members-2kEsAA5ru00P0h6gVImarD-1X6T4aBLaxd64ecnbB-A",
+          "last_message_at": 1695801299006076000,
+          "created_at": 1670299856049509000,
+          "updated_at": 1670299856049509000,
+          "created_by": {
+            "id": "luke_skywalker",
+            "name": "Luke Skywalker",
+            "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+            "custom": {
+              "birthland": "Tatooine"
+            },
+            "language": "en",
+            "role": "user",
+            "teams": [
+
+            ],
+            "created_at": 1643903230148169000,
+            "updated_at": 1785935604369473000,
+            "banned": false,
+            "online": true,
+            "last_active": 1793491579729512528,
+            "blocked_user_ids": [
+
+            ]
+          },
+          "frozen": false,
+          "disabled": false,
+          "member_count": 4,
+          "config": {
+            "created_at": 1649840197837805000,
+            "updated_at": 1791283253538892000,
+            "name": "messaging",
+            "typing_events": true,
+            "read_events": true,
+            "connect_events": true,
+            "delivery_events": true,
+            "search": true,
+            "reactions": true,
+            "replies": true,
+            "quotes": true,
+            "mutes": true,
+            "uploads": true,
+            "url_enrichment": true,
+            "custom_events": true,
+            "push_notifications": true,
+            "reminders": false,
+            "mark_messages_pending": false,
+            "polls": true,
+            "user_message_reminders": false,
+            "shared_locations": false,
+            "count_messages": false,
+            "message_retention": "infinite",
+            "max_message_length": 5000,
+            "automod": "AI",
+            "automod_behavior": "flag",
+            "blocklist_behavior": "flag",
+            "automod_thresholds": {
+            },
+            "skip_last_msg_update_for_system_msgs": true,
+            "commands": [
+              {
+                "name": "giphy",
+                "description": "Post a random gif to the channel",
+                "args": "[text]",
+                "set": "fun_set"
+              },
+              {
+                "name": "mute",
+                "description": "Mute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              },
+              {
+                "name": "unmute",
+                "description": "Unmute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              }
+            ]
+          },
+          "custom": {
+          },
+          "message_count": 0
+        },
         "created_at": 1695646381903461000,
         "updated_at": 1695646381903461000
       },
       {
+        "user": {
+          "id": "luke_skywalker",
+          "name": "Luke Skywalker",
+          "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+          "custom": {
+            "birthland": "Tatooine"
+          },
+          "language": "en",
+          "role": "user",
+          "teams": [
+
+          ],
+          "created_at": 1643903230148169000,
+          "updated_at": 1785935604369473000,
+          "banned": false,
+          "online": true,
+          "last_active": 1793491579729512528,
+          "blocked_user_ids": [
+
+          ]
+        },
+        "channel": {
+          "id": "!members-5CxqVMdMN7T2AyQw9rTHgu_Zc3oKNiNvExhYag7R3OI",
+          "type": "messaging",
+          "cid": "messaging:!members-5CxqVMdMN7T2AyQw9rTHgu_Zc3oKNiNvExhYag7R3OI",
+          "last_message_at": 1698315749191568000,
+          "created_at": 1643904991344973000,
+          "updated_at": 1643904991344973000,
+          "created_by": {
+            "id": "mace_windu",
+            "name": "Mace Windu",
+            "image": "https://vignette.wikia.nocookie.net/starwars/images/5/58/Mace_ROTS.png",
+            "custom": {
+              "birthland": "Haruun Kal"
+            },
+            "language": "vi",
+            "role": "user",
+            "teams": [
+
+            ],
+            "created_at": 1643904987171562000,
+            "updated_at": 1773709784307541000,
+            "banned": false,
+            "online": false,
+            "last_active": 1778714333632587000,
+            "blocked_user_ids": [
+
+            ]
+          },
+          "frozen": false,
+          "disabled": false,
+          "member_count": 2,
+          "config": {
+            "created_at": 1649840197837805000,
+            "updated_at": 1791283253538892000,
+            "name": "messaging",
+            "typing_events": true,
+            "read_events": true,
+            "connect_events": true,
+            "delivery_events": true,
+            "search": true,
+            "reactions": true,
+            "replies": true,
+            "quotes": true,
+            "mutes": true,
+            "uploads": true,
+            "url_enrichment": true,
+            "custom_events": true,
+            "push_notifications": true,
+            "reminders": false,
+            "mark_messages_pending": false,
+            "polls": true,
+            "user_message_reminders": false,
+            "shared_locations": false,
+            "count_messages": false,
+            "message_retention": "infinite",
+            "max_message_length": 5000,
+            "automod": "AI",
+            "automod_behavior": "flag",
+            "blocklist_behavior": "flag",
+            "automod_thresholds": {
+            },
+            "skip_last_msg_update_for_system_msgs": true,
+            "commands": [
+              {
+                "name": "giphy",
+                "description": "Post a random gif to the channel",
+                "args": "[text]",
+                "set": "fun_set"
+              },
+              {
+                "name": "mute",
+                "description": "Mute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              },
+              {
+                "name": "unmute",
+                "description": "Unmute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              }
+            ]
+          },
+          "custom": {
+          },
+          "message_count": 0
+        },
         "created_at": 1695399219842818000,
         "updated_at": 1695399219842818000
       },
       {
+        "user": {
+          "id": "luke_skywalker",
+          "name": "Luke Skywalker",
+          "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+          "custom": {
+            "birthland": "Tatooine"
+          },
+          "language": "en",
+          "role": "user",
+          "teams": [
+
+          ],
+          "created_at": 1643903230148169000,
+          "updated_at": 1785935604369473000,
+          "banned": false,
+          "online": true,
+          "last_active": 1793491579729512528,
+          "blocked_user_ids": [
+
+          ]
+        },
+        "channel": {
+          "id": "!members-tLD9DJ-AlO71203ozz3RYPgxBqQYO7skc7Mp45tSRXI",
+          "type": "messaging",
+          "cid": "messaging:!members-tLD9DJ-AlO71203ozz3RYPgxBqQYO7skc7Mp45tSRXI",
+          "created_at": 1680024972365531000,
+          "updated_at": 1680024972365531000,
+          "created_by": {
+            "id": "luke_skywalker",
+            "name": "Luke Skywalker",
+            "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+            "custom": {
+              "birthland": "Tatooine"
+            },
+            "language": "en",
+            "role": "user",
+            "teams": [
+
+            ],
+            "created_at": 1643903230148169000,
+            "updated_at": 1785935604369473000,
+            "banned": false,
+            "online": true,
+            "last_active": 1793491579729512528,
+            "blocked_user_ids": [
+
+            ]
+          },
+          "frozen": false,
+          "disabled": false,
+          "member_count": 4,
+          "config": {
+            "created_at": 1649840197837805000,
+            "updated_at": 1791283253538892000,
+            "name": "messaging",
+            "typing_events": true,
+            "read_events": true,
+            "connect_events": true,
+            "delivery_events": true,
+            "search": true,
+            "reactions": true,
+            "replies": true,
+            "quotes": true,
+            "mutes": true,
+            "uploads": true,
+            "url_enrichment": true,
+            "custom_events": true,
+            "push_notifications": true,
+            "reminders": false,
+            "mark_messages_pending": false,
+            "polls": true,
+            "user_message_reminders": false,
+            "shared_locations": false,
+            "count_messages": false,
+            "message_retention": "infinite",
+            "max_message_length": 5000,
+            "automod": "AI",
+            "automod_behavior": "flag",
+            "blocklist_behavior": "flag",
+            "automod_thresholds": {
+            },
+            "skip_last_msg_update_for_system_msgs": true,
+            "commands": [
+              {
+                "name": "giphy",
+                "description": "Post a random gif to the channel",
+                "args": "[text]",
+                "set": "fun_set"
+              },
+              {
+                "name": "mute",
+                "description": "Mute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              },
+              {
+                "name": "unmute",
+                "description": "Unmute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              }
+            ]
+          },
+          "custom": {
+          },
+          "message_count": 0
+        },
         "created_at": 1686200838579713000,
         "updated_at": 1686200838579713000
       },
       {
+        "user": {
+          "id": "luke_skywalker",
+          "name": "Luke Skywalker",
+          "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+          "custom": {
+            "birthland": "Tatooine"
+          },
+          "language": "en",
+          "role": "user",
+          "teams": [
+
+          ],
+          "created_at": 1643903230148169000,
+          "updated_at": 1785935604369473000,
+          "banned": false,
+          "online": true,
+          "last_active": 1793491579729512528,
+          "blocked_user_ids": [
+
+          ]
+        },
+        "channel": {
+          "id": "73BAE3B9-C",
+          "type": "messaging",
+          "cid": "messaging:73BAE3B9-C",
+          "last_message_at": 1784719298276142000,
+          "created_at": 1680265799418848000,
+          "updated_at": 1777281182766709000,
+          "created_by": {
+            "id": "general_grievous",
+            "name": "General Grievous",
+            "image": "https://vignette.wikia.nocookie.net/starwars/images/d/de/Grievoushead.jpg",
+            "custom": {
+              "birthland": "Qymaen jai Sheelal"
+            },
+            "language": "",
+            "role": "user",
+            "teams": [
+
+            ],
+            "created_at": 1643905107046523000,
+            "updated_at": 1764679577382392000,
+            "banned": false,
+            "online": false,
+            "last_active": 1772566380231240000,
+            "blocked_user_ids": [
+
+            ]
+          },
+          "frozen": false,
+          "disabled": false,
+          "member_count": 16,
+          "config": {
+            "created_at": 1649840197837805000,
+            "updated_at": 1791283253538892000,
+            "name": "messaging",
+            "typing_events": true,
+            "read_events": true,
+            "connect_events": true,
+            "delivery_events": true,
+            "search": true,
+            "reactions": true,
+            "replies": true,
+            "quotes": true,
+            "mutes": true,
+            "uploads": true,
+            "url_enrichment": true,
+            "custom_events": true,
+            "push_notifications": true,
+            "reminders": false,
+            "mark_messages_pending": false,
+            "polls": true,
+            "user_message_reminders": false,
+            "shared_locations": false,
+            "count_messages": false,
+            "message_retention": "infinite",
+            "max_message_length": 5000,
+            "automod": "AI",
+            "automod_behavior": "flag",
+            "blocklist_behavior": "flag",
+            "automod_thresholds": {
+            },
+            "skip_last_msg_update_for_system_msgs": true,
+            "commands": [
+              {
+                "name": "giphy",
+                "description": "Post a random gif to the channel",
+                "args": "[text]",
+                "set": "fun_set"
+              },
+              {
+                "name": "mute",
+                "description": "Mute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              },
+              {
+                "name": "unmute",
+                "description": "Unmute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              }
+            ]
+          },
+          "custom": {
+            "is_pinned_by_leia_organa": false,
+            "name": "Big Group For Testing",
+            "spark": 1
+          },
+          "message_count": 0
+        },
         "created_at": 1683912982243469000,
         "updated_at": 1683912982243469000
       },
       {
+        "user": {
+          "id": "luke_skywalker",
+          "name": "Luke Skywalker",
+          "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+          "custom": {
+            "birthland": "Tatooine"
+          },
+          "language": "en",
+          "role": "user",
+          "teams": [
+
+          ],
+          "created_at": 1643903230148169000,
+          "updated_at": 1785935604369473000,
+          "banned": false,
+          "online": true,
+          "last_active": 1793491579729512528,
+          "blocked_user_ids": [
+
+          ]
+        },
+        "channel": {
+          "id": "9D3E38CD-1",
+          "type": "messaging",
+          "cid": "messaging:9D3E38CD-1",
+          "last_message_at": 1766071925874552000,
+          "created_at": 1668641799434197000,
+          "updated_at": 1766103106683531000,
+          "created_by": {
+            "id": "luke_skywalker",
+            "name": "Luke Skywalker",
+            "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+            "custom": {
+              "birthland": "Tatooine"
+            },
+            "language": "en",
+            "role": "user",
+            "teams": [
+
+            ],
+            "created_at": 1643903230148169000,
+            "updated_at": 1785935604369473000,
+            "banned": false,
+            "online": true,
+            "last_active": 1793491579729512528,
+            "blocked_user_ids": [
+
+            ]
+          },
+          "frozen": false,
+          "disabled": false,
+          "member_count": 4,
+          "config": {
+            "created_at": 1649840197837805000,
+            "updated_at": 1791283253538892000,
+            "name": "messaging",
+            "typing_events": true,
+            "read_events": true,
+            "connect_events": true,
+            "delivery_events": true,
+            "search": true,
+            "reactions": true,
+            "replies": true,
+            "quotes": true,
+            "mutes": true,
+            "uploads": true,
+            "url_enrichment": true,
+            "custom_events": true,
+            "push_notifications": true,
+            "reminders": false,
+            "mark_messages_pending": false,
+            "polls": true,
+            "user_message_reminders": false,
+            "shared_locations": false,
+            "count_messages": false,
+            "message_retention": "infinite",
+            "max_message_length": 5000,
+            "automod": "AI",
+            "automod_behavior": "flag",
+            "blocklist_behavior": "flag",
+            "automod_thresholds": {
+            },
+            "skip_last_msg_update_for_system_msgs": true,
+            "commands": [
+              {
+                "name": "giphy",
+                "description": "Post a random gif to the channel",
+                "args": "[text]",
+                "set": "fun_set"
+              },
+              {
+                "name": "mute",
+                "description": "Mute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              },
+              {
+                "name": "unmute",
+                "description": "Unmute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              }
+            ]
+          },
+          "custom": {
+            "name": "Test1"
+          },
+          "message_count": 0
+        },
         "created_at": 1683843924816346000,
         "updated_at": 1683843924816346000
       },
       {
+        "user": {
+          "id": "luke_skywalker",
+          "name": "Luke Skywalker",
+          "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+          "custom": {
+            "birthland": "Tatooine"
+          },
+          "language": "en",
+          "role": "user",
+          "teams": [
+
+          ],
+          "created_at": 1643903230148169000,
+          "updated_at": 1785935604369473000,
+          "banned": false,
+          "online": true,
+          "last_active": 1793491579729512528,
+          "blocked_user_ids": [
+
+          ]
+        },
+        "channel": {
+          "id": "!members-NdihMmSNWYe1P4oo0gnO-BJh6zyO_-C-v6lOhqpHm7o",
+          "type": "messaging",
+          "cid": "messaging:!members-NdihMmSNWYe1P4oo0gnO-BJh6zyO_-C-v6lOhqpHm7o",
+          "last_message_at": 1672258342079391000,
+          "created_at": 1672258338582782000,
+          "updated_at": 1672258338582782000,
+          "created_by": {
+            "id": "luke_skywalker",
+            "name": "Luke Skywalker",
+            "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+            "custom": {
+              "birthland": "Tatooine"
+            },
+            "language": "en",
+            "role": "user",
+            "teams": [
+
+            ],
+            "created_at": 1643903230148169000,
+            "updated_at": 1785935604369473000,
+            "banned": false,
+            "online": true,
+            "last_active": 1793491579729512528,
+            "blocked_user_ids": [
+
+            ]
+          },
+          "frozen": false,
+          "disabled": false,
+          "member_count": 2,
+          "config": {
+            "created_at": 1649840197837805000,
+            "updated_at": 1791283253538892000,
+            "name": "messaging",
+            "typing_events": true,
+            "read_events": true,
+            "connect_events": true,
+            "delivery_events": true,
+            "search": true,
+            "reactions": true,
+            "replies": true,
+            "quotes": true,
+            "mutes": true,
+            "uploads": true,
+            "url_enrichment": true,
+            "custom_events": true,
+            "push_notifications": true,
+            "reminders": false,
+            "mark_messages_pending": false,
+            "polls": true,
+            "user_message_reminders": false,
+            "shared_locations": false,
+            "count_messages": false,
+            "message_retention": "infinite",
+            "max_message_length": 5000,
+            "automod": "AI",
+            "automod_behavior": "flag",
+            "blocklist_behavior": "flag",
+            "automod_thresholds": {
+            },
+            "skip_last_msg_update_for_system_msgs": true,
+            "commands": [
+              {
+                "name": "giphy",
+                "description": "Post a random gif to the channel",
+                "args": "[text]",
+                "set": "fun_set"
+              },
+              {
+                "name": "mute",
+                "description": "Mute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              },
+              {
+                "name": "unmute",
+                "description": "Unmute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              }
+            ]
+          },
+          "custom": {
+          },
+          "message_count": 0
+        },
         "created_at": 1672334403333951000,
         "updated_at": 1672334403333951000
       },
       {
+        "user": {
+          "id": "luke_skywalker",
+          "name": "Luke Skywalker",
+          "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+          "custom": {
+            "birthland": "Tatooine"
+          },
+          "language": "en",
+          "role": "user",
+          "teams": [
+
+          ],
+          "created_at": 1643903230148169000,
+          "updated_at": 1785935604369473000,
+          "banned": false,
+          "online": true,
+          "last_active": 1793491579729512528,
+          "blocked_user_ids": [
+
+          ]
+        },
+        "channel": {
+          "id": "0FDF0E29-3",
+          "type": "messaging",
+          "cid": "messaging:0FDF0E29-3",
+          "last_message_at": 1667793007352899000,
+          "created_at": 1660273188270359000,
+          "updated_at": 1660273188270359000,
+          "created_by": {
+            "id": "luke_skywalker",
+            "name": "Luke Skywalker",
+            "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+            "custom": {
+              "birthland": "Tatooine"
+            },
+            "language": "en",
+            "role": "user",
+            "teams": [
+
+            ],
+            "created_at": 1643903230148169000,
+            "updated_at": 1785935604369473000,
+            "banned": false,
+            "online": true,
+            "last_active": 1793491579729512528,
+            "blocked_user_ids": [
+
+            ]
+          },
+          "frozen": false,
+          "disabled": false,
+          "member_count": 8,
+          "config": {
+            "created_at": 1649840197837805000,
+            "updated_at": 1791283253538892000,
+            "name": "messaging",
+            "typing_events": true,
+            "read_events": true,
+            "connect_events": true,
+            "delivery_events": true,
+            "search": true,
+            "reactions": true,
+            "replies": true,
+            "quotes": true,
+            "mutes": true,
+            "uploads": true,
+            "url_enrichment": true,
+            "custom_events": true,
+            "push_notifications": true,
+            "reminders": false,
+            "mark_messages_pending": false,
+            "polls": true,
+            "user_message_reminders": false,
+            "shared_locations": false,
+            "count_messages": false,
+            "message_retention": "infinite",
+            "max_message_length": 5000,
+            "automod": "AI",
+            "automod_behavior": "flag",
+            "blocklist_behavior": "flag",
+            "automod_thresholds": {
+            },
+            "skip_last_msg_update_for_system_msgs": true,
+            "commands": [
+              {
+                "name": "giphy",
+                "description": "Post a random gif to the channel",
+                "args": "[text]",
+                "set": "fun_set"
+              },
+              {
+                "name": "mute",
+                "description": "Mute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              },
+              {
+                "name": "unmute",
+                "description": "Unmute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              }
+            ]
+          },
+          "custom": {
+            "name": "Djdjd"
+          },
+          "message_count": 0
+        },
         "created_at": 1666243908206804000,
         "updated_at": 1666243908206804000
       },
       {
+        "user": {
+          "id": "luke_skywalker",
+          "name": "Luke Skywalker",
+          "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+          "custom": {
+            "birthland": "Tatooine"
+          },
+          "language": "en",
+          "role": "user",
+          "teams": [
+
+          ],
+          "created_at": 1643903230148169000,
+          "updated_at": 1785935604369473000,
+          "banned": false,
+          "online": true,
+          "last_active": 1793491579729512528,
+          "blocked_user_ids": [
+
+          ]
+        },
+        "channel": {
+          "id": "4705B2DD-1",
+          "type": "messaging",
+          "cid": "messaging:4705B2DD-1",
+          "last_message_at": 1668199529070218000,
+          "created_at": 1659831460810135000,
+          "updated_at": 1659831460810135000,
+          "created_by": {
+            "id": "luke_skywalker",
+            "name": "Luke Skywalker",
+            "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+            "custom": {
+              "birthland": "Tatooine"
+            },
+            "language": "en",
+            "role": "user",
+            "teams": [
+
+            ],
+            "created_at": 1643903230148169000,
+            "updated_at": 1785935604369473000,
+            "banned": false,
+            "online": true,
+            "last_active": 1793491579729512528,
+            "blocked_user_ids": [
+
+            ]
+          },
+          "frozen": false,
+          "disabled": false,
+          "member_count": 3,
+          "config": {
+            "created_at": 1649840197837805000,
+            "updated_at": 1791283253538892000,
+            "name": "messaging",
+            "typing_events": true,
+            "read_events": true,
+            "connect_events": true,
+            "delivery_events": true,
+            "search": true,
+            "reactions": true,
+            "replies": true,
+            "quotes": true,
+            "mutes": true,
+            "uploads": true,
+            "url_enrichment": true,
+            "custom_events": true,
+            "push_notifications": true,
+            "reminders": false,
+            "mark_messages_pending": false,
+            "polls": true,
+            "user_message_reminders": false,
+            "shared_locations": false,
+            "count_messages": false,
+            "message_retention": "infinite",
+            "max_message_length": 5000,
+            "automod": "AI",
+            "automod_behavior": "flag",
+            "blocklist_behavior": "flag",
+            "automod_thresholds": {
+            },
+            "skip_last_msg_update_for_system_msgs": true,
+            "commands": [
+              {
+                "name": "giphy",
+                "description": "Post a random gif to the channel",
+                "args": "[text]",
+                "set": "fun_set"
+              },
+              {
+                "name": "mute",
+                "description": "Mute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              },
+              {
+                "name": "unmute",
+                "description": "Unmute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              }
+            ]
+          },
+          "custom": {
+            "name": "Test group of three"
+          },
+          "message_count": 0
+        },
         "created_at": 1665862543285379000,
         "updated_at": 1665862543285379000
       },
       {
+        "user": {
+          "id": "luke_skywalker",
+          "name": "Luke Skywalker",
+          "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+          "custom": {
+            "birthland": "Tatooine"
+          },
+          "language": "en",
+          "role": "user",
+          "teams": [
+
+          ],
+          "created_at": 1643903230148169000,
+          "updated_at": 1785935604369473000,
+          "banned": false,
+          "online": true,
+          "last_active": 1793491579729512528,
+          "blocked_user_ids": [
+
+          ]
+        },
+        "channel": {
+          "id": "!members--1OBYZMrkcJA60rXp2hwbHOdiAfOp80TcgOj5edT9xo",
+          "type": "messaging",
+          "cid": "messaging:!members--1OBYZMrkcJA60rXp2hwbHOdiAfOp80TcgOj5edT9xo",
+          "last_message_at": 1665317195797720000,
+          "created_at": 1663907279505093000,
+          "updated_at": 1663907279505093000,
+          "created_by": {
+            "id": "luke_skywalker",
+            "name": "Luke Skywalker",
+            "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+            "custom": {
+              "birthland": "Tatooine"
+            },
+            "language": "en",
+            "role": "user",
+            "teams": [
+
+            ],
+            "created_at": 1643903230148169000,
+            "updated_at": 1785935604369473000,
+            "banned": false,
+            "online": true,
+            "last_active": 1793491579729512528,
+            "blocked_user_ids": [
+
+            ]
+          },
+          "frozen": false,
+          "disabled": false,
+          "member_count": 4,
+          "config": {
+            "created_at": 1649840197837805000,
+            "updated_at": 1791283253538892000,
+            "name": "messaging",
+            "typing_events": true,
+            "read_events": true,
+            "connect_events": true,
+            "delivery_events": true,
+            "search": true,
+            "reactions": true,
+            "replies": true,
+            "quotes": true,
+            "mutes": true,
+            "uploads": true,
+            "url_enrichment": true,
+            "custom_events": true,
+            "push_notifications": true,
+            "reminders": false,
+            "mark_messages_pending": false,
+            "polls": true,
+            "user_message_reminders": false,
+            "shared_locations": false,
+            "count_messages": false,
+            "message_retention": "infinite",
+            "max_message_length": 5000,
+            "automod": "AI",
+            "automod_behavior": "flag",
+            "blocklist_behavior": "flag",
+            "automod_thresholds": {
+            },
+            "skip_last_msg_update_for_system_msgs": true,
+            "commands": [
+              {
+                "name": "giphy",
+                "description": "Post a random gif to the channel",
+                "args": "[text]",
+                "set": "fun_set"
+              },
+              {
+                "name": "mute",
+                "description": "Mute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              },
+              {
+                "name": "unmute",
+                "description": "Unmute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              }
+            ]
+          },
+          "custom": {
+          },
+          "message_count": 0
+        },
         "created_at": 1665456088533838000,
         "updated_at": 1665456088533838000
       },
       {
+        "user": {
+          "id": "luke_skywalker",
+          "name": "Luke Skywalker",
+          "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+          "custom": {
+            "birthland": "Tatooine"
+          },
+          "language": "en",
+          "role": "user",
+          "teams": [
+
+          ],
+          "created_at": 1643903230148169000,
+          "updated_at": 1785935604369473000,
+          "banned": false,
+          "online": true,
+          "last_active": 1793491579729512528,
+          "blocked_user_ids": [
+
+          ]
+        },
+        "channel": {
+          "id": "!members-RMk23PkLVv2nvt-0M3R2tk9-Ov3E4SOnmjDuk8x4omY",
+          "type": "messaging",
+          "cid": "messaging:!members-RMk23PkLVv2nvt-0M3R2tk9-Ov3E4SOnmjDuk8x4omY",
+          "last_message_at": 1668199579915588000,
+          "created_at": 1652342689252692000,
+          "updated_at": 1652342689252692000,
+          "created_by": {
+            "id": "luke_skywalker",
+            "name": "Luke Skywalker",
+            "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+            "custom": {
+              "birthland": "Tatooine"
+            },
+            "language": "en",
+            "role": "user",
+            "teams": [
+
+            ],
+            "created_at": 1643903230148169000,
+            "updated_at": 1785935604369473000,
+            "banned": false,
+            "online": true,
+            "last_active": 1793491579729512528,
+            "blocked_user_ids": [
+
+            ]
+          },
+          "frozen": false,
+          "disabled": false,
+          "member_count": 3,
+          "config": {
+            "created_at": 1649840197837805000,
+            "updated_at": 1791283253538892000,
+            "name": "messaging",
+            "typing_events": true,
+            "read_events": true,
+            "connect_events": true,
+            "delivery_events": true,
+            "search": true,
+            "reactions": true,
+            "replies": true,
+            "quotes": true,
+            "mutes": true,
+            "uploads": true,
+            "url_enrichment": true,
+            "custom_events": true,
+            "push_notifications": true,
+            "reminders": false,
+            "mark_messages_pending": false,
+            "polls": true,
+            "user_message_reminders": false,
+            "shared_locations": false,
+            "count_messages": false,
+            "message_retention": "infinite",
+            "max_message_length": 5000,
+            "automod": "AI",
+            "automod_behavior": "flag",
+            "blocklist_behavior": "flag",
+            "automod_thresholds": {
+            },
+            "skip_last_msg_update_for_system_msgs": true,
+            "commands": [
+              {
+                "name": "giphy",
+                "description": "Post a random gif to the channel",
+                "args": "[text]",
+                "set": "fun_set"
+              },
+              {
+                "name": "mute",
+                "description": "Mute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              },
+              {
+                "name": "unmute",
+                "description": "Unmute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              }
+            ]
+          },
+          "custom": {
+          },
+          "message_count": 0
+        },
         "created_at": 1665456080904612000,
         "updated_at": 1665456080904612000
       },
       {
+        "user": {
+          "id": "luke_skywalker",
+          "name": "Luke Skywalker",
+          "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+          "custom": {
+            "birthland": "Tatooine"
+          },
+          "language": "en",
+          "role": "user",
+          "teams": [
+
+          ],
+          "created_at": 1643903230148169000,
+          "updated_at": 1785935604369473000,
+          "banned": false,
+          "online": true,
+          "last_active": 1793491579729512528,
+          "blocked_user_ids": [
+
+          ]
+        },
+        "channel": {
+          "id": "3A856401-2",
+          "type": "messaging",
+          "cid": "messaging:3A856401-2",
+          "last_message_at": 1692183238467514000,
+          "created_at": 1656926266912980000,
+          "updated_at": 1656926266912980000,
+          "created_by": {
+            "id": "han_solo",
+            "name": "Han Solo",
+            "image": "https://vignette.wikia.nocookie.net/starwars/images/e/e2/TFAHanSolo.png",
+            "custom": {
+              "birthland": "Corellia"
+            },
+            "language": "",
+            "role": "user",
+            "teams": [
+
+            ],
+            "created_at": 1643904686478542000,
+            "updated_at": 1778690427112705000,
+            "banned": false,
+            "online": false,
+            "last_active": 1793179977346277000,
+            "blocked_user_ids": [
+
+            ]
+          },
+          "frozen": false,
+          "disabled": false,
+          "member_count": 1,
+          "config": {
+            "created_at": 1649840197837805000,
+            "updated_at": 1791283253538892000,
+            "name": "messaging",
+            "typing_events": true,
+            "read_events": true,
+            "connect_events": true,
+            "delivery_events": true,
+            "search": true,
+            "reactions": true,
+            "replies": true,
+            "quotes": true,
+            "mutes": true,
+            "uploads": true,
+            "url_enrichment": true,
+            "custom_events": true,
+            "push_notifications": true,
+            "reminders": false,
+            "mark_messages_pending": false,
+            "polls": true,
+            "user_message_reminders": false,
+            "shared_locations": false,
+            "count_messages": false,
+            "message_retention": "infinite",
+            "max_message_length": 5000,
+            "automod": "AI",
+            "automod_behavior": "flag",
+            "blocklist_behavior": "flag",
+            "automod_thresholds": {
+            },
+            "skip_last_msg_update_for_system_msgs": true,
+            "commands": [
+              {
+                "name": "giphy",
+                "description": "Post a random gif to the channel",
+                "args": "[text]",
+                "set": "fun_set"
+              },
+              {
+                "name": "mute",
+                "description": "Mute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              },
+              {
+                "name": "unmute",
+                "description": "Unmute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              }
+            ]
+          },
+          "custom": {
+            "name": "Aloha"
+          },
+          "message_count": 0
+        },
         "created_at": 1661373726921057000,
         "updated_at": 1661373726921057000
       },
       {
+        "user": {
+          "id": "luke_skywalker",
+          "name": "Luke Skywalker",
+          "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+          "custom": {
+            "birthland": "Tatooine"
+          },
+          "language": "en",
+          "role": "user",
+          "teams": [
+
+          ],
+          "created_at": 1643903230148169000,
+          "updated_at": 1785935604369473000,
+          "banned": false,
+          "online": true,
+          "last_active": 1793491579729512528,
+          "blocked_user_ids": [
+
+          ]
+        },
+        "channel": {
+          "id": "530924DC-6",
+          "type": "messaging",
+          "cid": "messaging:530924DC-6",
+          "last_message_at": 1703454396076423000,
+          "created_at": 1660273172321686000,
+          "updated_at": 1660273172321686000,
+          "created_by": {
+            "id": "han_solo",
+            "name": "Han Solo",
+            "image": "https://vignette.wikia.nocookie.net/starwars/images/e/e2/TFAHanSolo.png",
+            "custom": {
+              "birthland": "Corellia"
+            },
+            "language": "",
+            "role": "user",
+            "teams": [
+
+            ],
+            "created_at": 1643904686478542000,
+            "updated_at": 1778690427112705000,
+            "banned": false,
+            "online": false,
+            "last_active": 1793179977346277000,
+            "blocked_user_ids": [
+
+            ]
+          },
+          "frozen": false,
+          "disabled": false,
+          "member_count": 2,
+          "config": {
+            "created_at": 1649840197837805000,
+            "updated_at": 1791283253538892000,
+            "name": "messaging",
+            "typing_events": true,
+            "read_events": true,
+            "connect_events": true,
+            "delivery_events": true,
+            "search": true,
+            "reactions": true,
+            "replies": true,
+            "quotes": true,
+            "mutes": true,
+            "uploads": true,
+            "url_enrichment": true,
+            "custom_events": true,
+            "push_notifications": true,
+            "reminders": false,
+            "mark_messages_pending": false,
+            "polls": true,
+            "user_message_reminders": false,
+            "shared_locations": false,
+            "count_messages": false,
+            "message_retention": "infinite",
+            "max_message_length": 5000,
+            "automod": "AI",
+            "automod_behavior": "flag",
+            "blocklist_behavior": "flag",
+            "automod_thresholds": {
+            },
+            "skip_last_msg_update_for_system_msgs": true,
+            "commands": [
+              {
+                "name": "giphy",
+                "description": "Post a random gif to the channel",
+                "args": "[text]",
+                "set": "fun_set"
+              },
+              {
+                "name": "mute",
+                "description": "Mute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              },
+              {
+                "name": "unmute",
+                "description": "Unmute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              }
+            ]
+          },
+          "custom": {
+            "name": "ledge"
+          },
+          "message_count": 0
+        },
         "created_at": 1661273414565814000,
         "updated_at": 1661273414565814000
       },
       {
+        "user": {
+          "id": "luke_skywalker",
+          "name": "Luke Skywalker",
+          "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+          "custom": {
+            "birthland": "Tatooine"
+          },
+          "language": "en",
+          "role": "user",
+          "teams": [
+
+          ],
+          "created_at": 1643903230148169000,
+          "updated_at": 1785935604369473000,
+          "banned": false,
+          "online": true,
+          "last_active": 1793491579729512528,
+          "blocked_user_ids": [
+
+          ]
+        },
+        "channel": {
+          "id": "!members-LmtSVW-3lPPdYA5R05dJR9JgqVTTNPros0cUTzjz93E",
+          "type": "messaging",
+          "cid": "messaging:!members-LmtSVW-3lPPdYA5R05dJR9JgqVTTNPros0cUTzjz93E",
+          "last_message_at": 1768168988162314000,
+          "created_at": 1654698529731732000,
+          "updated_at": 1654698529731732000,
+          "created_by": {
+            "id": "luke_skywalker",
+            "name": "Luke Skywalker",
+            "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+            "custom": {
+              "birthland": "Tatooine"
+            },
+            "language": "en",
+            "role": "user",
+            "teams": [
+
+            ],
+            "created_at": 1643903230148169000,
+            "updated_at": 1785935604369473000,
+            "banned": false,
+            "online": true,
+            "last_active": 1793491579729512528,
+            "blocked_user_ids": [
+
+            ]
+          },
+          "frozen": false,
+          "disabled": false,
+          "member_count": 4,
+          "config": {
+            "created_at": 1649840197837805000,
+            "updated_at": 1791283253538892000,
+            "name": "messaging",
+            "typing_events": true,
+            "read_events": true,
+            "connect_events": true,
+            "delivery_events": true,
+            "search": true,
+            "reactions": true,
+            "replies": true,
+            "quotes": true,
+            "mutes": true,
+            "uploads": true,
+            "url_enrichment": true,
+            "custom_events": true,
+            "push_notifications": true,
+            "reminders": false,
+            "mark_messages_pending": false,
+            "polls": true,
+            "user_message_reminders": false,
+            "shared_locations": false,
+            "count_messages": false,
+            "message_retention": "infinite",
+            "max_message_length": 5000,
+            "automod": "AI",
+            "automod_behavior": "flag",
+            "blocklist_behavior": "flag",
+            "automod_thresholds": {
+            },
+            "skip_last_msg_update_for_system_msgs": true,
+            "commands": [
+              {
+                "name": "giphy",
+                "description": "Post a random gif to the channel",
+                "args": "[text]",
+                "set": "fun_set"
+              },
+              {
+                "name": "mute",
+                "description": "Mute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              },
+              {
+                "name": "unmute",
+                "description": "Unmute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              }
+            ]
+          },
+          "custom": {
+          },
+          "message_count": 0
+        },
         "created_at": 1654842943946581000,
         "updated_at": 1654842943946581000
       },
       {
+        "user": {
+          "id": "luke_skywalker",
+          "name": "Luke Skywalker",
+          "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+          "custom": {
+            "birthland": "Tatooine"
+          },
+          "language": "en",
+          "role": "user",
+          "teams": [
+
+          ],
+          "created_at": 1643903230148169000,
+          "updated_at": 1785935604369473000,
+          "banned": false,
+          "online": true,
+          "last_active": 1793491579729512528,
+          "blocked_user_ids": [
+
+          ]
+        },
+        "channel": {
+          "id": "C1713580-6",
+          "type": "messaging",
+          "cid": "messaging:C1713580-6",
+          "last_message_at": 1653391013118674000,
+          "created_at": 1653388650312277000,
+          "updated_at": 1653388650312277000,
+          "created_by": {
+            "id": "luke_skywalker",
+            "name": "Luke Skywalker",
+            "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+            "custom": {
+              "birthland": "Tatooine"
+            },
+            "language": "en",
+            "role": "user",
+            "teams": [
+
+            ],
+            "created_at": 1643903230148169000,
+            "updated_at": 1785935604369473000,
+            "banned": false,
+            "online": true,
+            "last_active": 1793491579729512528,
+            "blocked_user_ids": [
+
+            ]
+          },
+          "frozen": false,
+          "disabled": false,
+          "member_count": 1,
+          "config": {
+            "created_at": 1649840197837805000,
+            "updated_at": 1791283253538892000,
+            "name": "messaging",
+            "typing_events": true,
+            "read_events": true,
+            "connect_events": true,
+            "delivery_events": true,
+            "search": true,
+            "reactions": true,
+            "replies": true,
+            "quotes": true,
+            "mutes": true,
+            "uploads": true,
+            "url_enrichment": true,
+            "custom_events": true,
+            "push_notifications": true,
+            "reminders": false,
+            "mark_messages_pending": false,
+            "polls": true,
+            "user_message_reminders": false,
+            "shared_locations": false,
+            "count_messages": false,
+            "message_retention": "infinite",
+            "max_message_length": 5000,
+            "automod": "AI",
+            "automod_behavior": "flag",
+            "blocklist_behavior": "flag",
+            "automod_thresholds": {
+            },
+            "skip_last_msg_update_for_system_msgs": true,
+            "commands": [
+              {
+                "name": "giphy",
+                "description": "Post a random gif to the channel",
+                "args": "[text]",
+                "set": "fun_set"
+              },
+              {
+                "name": "mute",
+                "description": "Mute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              },
+              {
+                "name": "unmute",
+                "description": "Unmute a user",
+                "args": "[@username]",
+                "set": "moderation_set"
+              }
+            ]
+          },
+          "custom": {
+            "name": "Group 1:1"
+          },
+          "message_count": 0
+        },
         "created_at": 1653552411600570000,
         "updated_at": 1653552411600570000
       }

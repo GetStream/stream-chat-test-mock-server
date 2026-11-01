@@ -1,11 +1,11 @@
 {
   "channel": {
-    "id": "f1cb3448-9597-4860-a530-447f2c6c9916",
+    "id": "78570f0d-3f2b-43ba-981e-d911f62d515b",
     "type": "messaging",
-    "cid": "messaging:f1cb3448-9597-4860-a530-447f2c6c9916",
-    "last_message_at": "2026-09-30T06:06:56.805104Z",
-    "created_at": "2026-09-30T06:06:55.565838Z",
-    "updated_at": "2026-09-30T06:06:55.565838Z",
+    "cid": "messaging:78570f0d-3f2b-43ba-981e-d911f62d515b",
+    "last_message_at": "2026-11-01T00:06:13.709203Z",
+    "created_at": "2026-11-01T00:06:12.469414Z",
+    "updated_at": "2026-11-01T00:06:12.469414Z",
     "created_by": {
       "id": "luke_skywalker",
       "name": "Luke Skywalker",
@@ -19,7 +19,7 @@
       "updated_at": "2026-08-05T13:13:24.369473Z",
       "banned": false,
       "online": true,
-      "last_active": "2026-09-30T06:06:55.218891771Z",
+      "last_active": "2026-11-01T00:06:12.145617788Z",
       "blocked_user_ids": [
 
       ],
@@ -30,7 +30,7 @@
     "member_count": 4,
     "config": {
       "created_at": "2022-04-13T08:56:37.837805Z",
-      "updated_at": "2026-06-17T17:40:49.619769Z",
+      "updated_at": "2026-10-06T10:40:53.538892Z",
       "name": "messaging",
       "typing_events": true,
       "read_events": true,
@@ -134,15 +134,15 @@
         "updated_at": "2026-07-28T01:54:15.269523Z",
         "banned": false,
         "online": false,
-        "last_active": "2026-09-29T09:25:58.07768Z",
+        "last_active": "2026-10-02T00:26:58.517522Z",
         "blocked_user_ids": [
 
         ],
         "birthland": "Serenno"
       },
       "status": "member",
-      "created_at": "2026-09-30T06:06:55.570915Z",
-      "updated_at": "2026-09-30T06:06:55.570915Z",
+      "created_at": "2026-11-01T00:06:12.475644Z",
+      "updated_at": "2026-11-01T00:06:12.475644Z",
       "banned": false,
       "shadow_banned": false,
       "role": "member",
@@ -164,15 +164,15 @@
         "updated_at": "2025-12-18T15:17:30.15054Z",
         "banned": false,
         "online": false,
-        "last_active": "2026-09-28T11:51:11.928904Z",
+        "last_active": "2026-10-31T17:19:50.053302Z",
         "blocked_user_ids": [
 
         ],
         "birthland": "Socorro"
       },
       "status": "member",
-      "created_at": "2026-09-30T06:06:55.570915Z",
-      "updated_at": "2026-09-30T06:06:55.570915Z",
+      "created_at": "2026-11-01T00:06:12.475644Z",
+      "updated_at": "2026-11-01T00:06:12.475644Z",
       "banned": false,
       "shadow_banned": false,
       "role": "member",
@@ -194,15 +194,15 @@
         "updated_at": "2026-08-05T13:13:24.369473Z",
         "banned": false,
         "online": true,
-        "last_active": "2026-09-30T06:06:55.218891771Z",
+        "last_active": "2026-11-01T00:06:12.145617788Z",
         "blocked_user_ids": [
 
         ],
         "birthland": "Tatooine"
       },
       "status": "member",
-      "created_at": "2026-09-30T06:06:55.570915Z",
-      "updated_at": "2026-09-30T06:06:55.570915Z",
+      "created_at": "2026-11-01T00:06:12.475644Z",
+      "updated_at": "2026-11-01T00:06:12.475644Z",
       "banned": false,
       "shadow_banned": false,
       "role": "owner",
@@ -224,15 +224,15 @@
         "updated_at": "2026-04-14T07:37:37.976935Z",
         "banned": false,
         "online": false,
-        "last_active": "2026-09-29T20:07:02.080155Z",
+        "last_active": "2026-10-28T23:41:27.732251Z",
         "blocked_user_ids": [
 
         ],
         "birthland": "Polis Massa"
       },
       "status": "member",
-      "created_at": "2026-09-30T06:06:57.292413Z",
-      "updated_at": "2026-09-30T06:06:57.292413Z",
+      "created_at": "2026-11-01T00:06:13.999524Z",
+      "updated_at": "2026-11-01T00:06:13.999524Z",
       "banned": false,
       "shadow_banned": false,
       "role": "member",
@@ -240,5 +240,5 @@
       "notifications_muted": false
     }
   ],
-  "duration": "31.69ms"
+  "duration": "36.69ms"
 }

@@ -1,26 +1,26 @@
 {
   "type": "draft.updated",
-  "created_at": 1790748432521738929,
+  "created_at": 1793491585038132570,
   "custom": {
   },
-  "cid": "messaging:6bd7e72d-fdfd-49b4-913c-bbe9f777df91",
+  "cid": "messaging:47897ccf-fd3c-4bfc-ad51-b46919242591",
   "draft": {
     "message": {
-      "id": "ed0cc4c9-053c-4b9c-9d95-5556a41c480b",
+      "id": "b232aabd-d9b1-43d8-87cd-9ac25b58e972",
       "text": "Test",
       "show_in_channel": false,
       "custom": {
       },
       "silent": false
     },
-    "channel_cid": "messaging:6bd7e72d-fdfd-49b4-913c-bbe9f777df91",
+    "channel_cid": "messaging:47897ccf-fd3c-4bfc-ad51-b46919242591",
     "channel": {
-      "id": "6bd7e72d-fdfd-49b4-913c-bbe9f777df91",
+      "id": "47897ccf-fd3c-4bfc-ad51-b46919242591",
       "type": "messaging",
-      "cid": "messaging:6bd7e72d-fdfd-49b4-913c-bbe9f777df91",
-      "last_message_at": 1790748431134277000,
-      "created_at": 1790748425634716000,
-      "updated_at": 1790748425634716000,
+      "cid": "messaging:47897ccf-fd3c-4bfc-ad51-b46919242591",
+      "last_message_at": 1793491583849310000,
+      "created_at": 1793491579918721000,
+      "updated_at": 1793491579918722000,
       "created_by": {
         "id": "luke_skywalker",
         "name": "Luke Skywalker",
@@ -37,7 +37,7 @@
         "updated_at": 1785935604369473000,
         "banned": false,
         "online": true,
-        "last_active": 1790748415218891771,
+        "last_active": 1793491579729512528,
         "blocked_user_ids": [
 
         ]
@@ -47,7 +47,7 @@
       "member_count": 4,
       "config": {
         "created_at": 1649840197837805000,
-        "updated_at": 1781718049619769000,
+        "updated_at": 1791283253538892000,
         "name": "messaging",
         "typing_events": true,
         "read_events": true,
@@ -103,6 +103,6 @@
     },
     "parent_message": null,
     "quoted_message": null,
-    "created_at": 1790748432514790219
+    "created_at": 1793491585028365860
   }
 }

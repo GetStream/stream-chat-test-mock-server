@@ -1,6 +1,6 @@
 {
   "message": {
-    "id": "56306035-deab-4417-983c-842861469b22",
+    "id": "683de018-0541-4a3d-a7e2-942eec70296c",
     "text": "https://images.unsplash.com/photo-1568574728383-06fca083883d",
     "html": "<p><a href=\"https://images.unsplash.com/photo-1568574728383-06fca083883d\" rel=\"nofollow\">https://images.unsplash.com/photo-1568574728383-06fca083883d</a></p>\n",
     "type": "regular",
@@ -20,7 +20,7 @@
       "updated_at": 1785935604369473000,
       "banned": false,
       "online": true,
-      "last_active": 1790748415218891771,
+      "last_active": 1793491579729512528,
       "blocked_user_ids": [
 
       ]
@@ -53,9 +53,9 @@
     },
     "reply_count": 0,
     "deleted_reply_count": 0,
-    "cid": "messaging:6bd7e72d-fdfd-49b4-913c-bbe9f777df91",
-    "created_at": 1790748429596573000,
-    "updated_at": 1790748429611418000,
+    "cid": "messaging:47897ccf-fd3c-4bfc-ad51-b46919242591",
+    "created_at": 1793491582579395000,
+    "updated_at": 1793491582596184000,
     "custom": {
     },
     "shadowed": false,
@@ -73,12 +73,12 @@
 
     ],
     "channel": {
-      "id": "6bd7e72d-fdfd-49b4-913c-bbe9f777df91",
+      "id": "47897ccf-fd3c-4bfc-ad51-b46919242591",
       "type": "messaging",
-      "cid": "messaging:6bd7e72d-fdfd-49b4-913c-bbe9f777df91",
-      "last_message_at": 1790748429596573000,
-      "created_at": 1790748425634716000,
-      "updated_at": 1790748425634716000,
+      "cid": "messaging:47897ccf-fd3c-4bfc-ad51-b46919242591",
+      "last_message_at": 1793491582579395000,
+      "created_at": 1793491579918721000,
+      "updated_at": 1793491579918722000,
       "created_by": {
         "id": "luke_skywalker",
         "name": "Luke Skywalker",
@@ -95,7 +95,7 @@
         "updated_at": 1785935604369473000,
         "banned": false,
         "online": true,
-        "last_active": 1790748415218891771,
+        "last_active": 1793491579729512528,
         "blocked_user_ids": [
 
         ]
@@ -105,7 +105,7 @@
       "member_count": 4,
       "config": {
         "created_at": 1649840197837805000,
-        "updated_at": 1781718049619769000,
+        "updated_at": 1791283253538892000,
         "name": "messaging",
         "typing_events": true,
         "read_events": true,
@@ -160,5 +160,5 @@
       }
     }
   },
-  "duration": "134.99ms"
+  "duration": "29.70ms"
 }

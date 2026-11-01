@@ -1,12 +1,12 @@
 {
-  "duration": "57.29ms",
+  "duration": "52.26ms",
   "channel": {
-    "id": "6bd7e72d-fdfd-49b4-913c-bbe9f777df91",
+    "id": "47897ccf-fd3c-4bfc-ad51-b46919242591",
     "type": "messaging",
-    "cid": "messaging:6bd7e72d-fdfd-49b4-913c-bbe9f777df91",
+    "cid": "messaging:47897ccf-fd3c-4bfc-ad51-b46919242591",
     "last_message_at": 0,
-    "created_at": 1790748425634716000,
-    "updated_at": 1790748433010807000,
+    "created_at": 1793491579918721000,
+    "updated_at": 1793491585248980000,
     "created_by": {
       "id": "luke_skywalker",
       "name": "Luke Skywalker",
@@ -23,7 +23,7 @@
       "updated_at": 1785935604369473000,
       "banned": false,
       "online": true,
-      "last_active": 1790748415218891771,
+      "last_active": 1793491579729512528,
       "blocked_user_ids": [
 
       ]
@@ -49,7 +49,7 @@
           "updated_at": 1785203655269523000,
           "banned": false,
           "online": false,
-          "last_active": 1790673958077680000,
+          "last_active": 1790900818517522000,
           "blocked_user_ids": [
 
           ]
@@ -57,8 +57,8 @@
         "custom": {
         },
         "status": "member",
-        "created_at": 1790748425636910000,
-        "updated_at": 1790748425636910000,
+        "created_at": 1793491579922005000,
+        "updated_at": 1793491579922005000,
         "banned": false,
         "shadow_banned": false,
         "role": "member",
@@ -83,7 +83,7 @@
           "updated_at": 1766071050150540000,
           "banned": false,
           "online": false,
-          "last_active": 1790596271928904000,
+          "last_active": 1793467190053302000,
           "blocked_user_ids": [
 
           ]
@@ -91,8 +91,8 @@
         "custom": {
         },
         "status": "member",
-        "created_at": 1790748425636910000,
-        "updated_at": 1790748425636910000,
+        "created_at": 1793491579922005000,
+        "updated_at": 1793491579922005000,
         "banned": false,
         "shadow_banned": false,
         "role": "member",
@@ -117,7 +117,7 @@
           "updated_at": 1785935604369473000,
           "banned": false,
           "online": true,
-          "last_active": 1790748415218891771,
+          "last_active": 1793491579729512528,
           "blocked_user_ids": [
 
           ]
@@ -125,8 +125,8 @@
         "custom": {
         },
         "status": "member",
-        "created_at": 1790748425636910000,
-        "updated_at": 1790748425636910000,
+        "created_at": 1793491579922005000,
+        "updated_at": 1793491579922005000,
         "banned": false,
         "shadow_banned": false,
         "role": "owner",
@@ -151,7 +151,7 @@
           "updated_at": 1776152257976935000,
           "banned": false,
           "online": false,
-          "last_active": 1790712422080155000,
+          "last_active": 1793230887732251000,
           "blocked_user_ids": [
 
           ]
@@ -159,8 +159,8 @@
         "custom": {
         },
         "status": "member",
-        "created_at": 1790748427044645000,
-        "updated_at": 1790748427044645000,
+        "created_at": 1793491580808975000,
+        "updated_at": 1793491580808975000,
         "banned": false,
         "shadow_banned": false,
         "role": "member",
@@ -171,7 +171,7 @@
     "member_count": 4,
     "config": {
       "created_at": 1649840197837805000,
-      "updated_at": 1781718049619769000,
+      "updated_at": 1791283253538892000,
       "name": "messaging",
       "typing_events": true,
       "read_events": true,
@@ -221,7 +221,7 @@
         }
       ]
     },
-    "truncated_at": 1790748433005282000,
+    "truncated_at": 1793491585242582000,
     "truncated_by": {
       "id": "luke_skywalker",
       "name": "Luke Skywalker",
@@ -238,7 +238,7 @@
       "updated_at": 1785935604369473000,
       "banned": false,
       "online": true,
-      "last_active": 1790748415218891771,
+      "last_active": 1793491579729512528,
       "blocked_user_ids": [
 
       ]
@@ -248,7 +248,7 @@
     }
   },
   "message": {
-    "id": "1e37f7fa-b898-496a-a441-d62197fad60b",
+    "id": "17de5e23-fb55-4eab-a5fb-6d89caee89f3",
     "text": "Channel truncated",
     "html": "<p>Channel truncated</p>\n",
     "type": "system",
@@ -268,7 +268,7 @@
       "updated_at": 1785935604369473000,
       "banned": false,
       "online": true,
-      "last_active": 1790748415218891771,
+      "last_active": 1793491579729512528,
       "blocked_user_ids": [
 
       ]
@@ -288,9 +288,9 @@
     },
     "reply_count": 0,
     "deleted_reply_count": 0,
-    "cid": "messaging:6bd7e72d-fdfd-49b4-913c-bbe9f777df91",
-    "created_at": 1790748433005283000,
-    "updated_at": 1790748433005283000,
+    "cid": "messaging:47897ccf-fd3c-4bfc-ad51-b46919242591",
+    "created_at": 1793491585242583000,
+    "updated_at": 1793491585242583000,
     "custom": {
     },
     "shadowed": false,
