@@ -61,8 +61,9 @@ def update_last_message_at(channel_id:, message:)
   find_channel_by_id(channel_id)['channel']['last_message_at'] = message['created_at']
 end
 
+# Like the backend, a channel's `messages` leave out thread-only replies: they load with the thread.
 def sync_channels
-  $channel_list['channels'].each { |channel| channel['messages'] = $message_list.select { |msg| msg['cid'] == channel['channel']['cid'] } }
+  $channel_list['channels'].each { |channel| channel['messages'] = channel_visible_messages(cid: channel['channel']['cid']) }
   $channel_list.to_s
 end
 
