@@ -24,11 +24,14 @@ require_relative 'helpers/reminders'
 require_relative 'helpers/scheduled_messages'
 require_relative 'helpers/threads'
 require_relative 'helpers/v2'
+require_relative 'helpers/timestamps'
 require_relative 'robots/chat'
 require_relative 'robots/participant'
 
 # The fixture set the server was started with: v2 nests the extra data under `custom`.
 $api_version = ARGV[1] == 'v2' ? :v2 : :v1
+# Whether timestamps go out as unix nanoseconds, as the real v2 API sends them (see helpers/timestamps.rb).
+$ns_timestamps = ARGV[2] == 'ns'
 $ws = nil
 # The websocket protocol the connected client negotiated. v1 authenticates through the
 # connect URL and takes a health.check carrying `me` as its first frame; v2 authenticates
@@ -79,7 +82,8 @@ end
 # call time so a queued frame never lands on a socket opened after it was sent.
 def ws_send(data)
   ws = $ws
-  EM.schedule { ws.send(data) } if ws
+  frame = encode_ws_frame(data)
+  EM.schedule { ws.send(frame) } if ws
 end
 
 def ws_close(code)

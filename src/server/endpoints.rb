@@ -29,6 +29,32 @@ after '/api/v2/*' do
   body JSON.pretty_generate(nest_v2_custom(json)) if json.kind_of?(Hash)
 end
 
+# A run with nanosecond timestamps takes them in requests too: they are turned back into the date
+# strings the handlers store, and every JSON answer carries nanoseconds again.
+before do
+  next unless $ns_timestamps
+
+  request.body.rewind
+  json = begin
+    JSON.parse(request.body.read)
+  rescue JSON::ParserError
+    nil
+  end
+  request.env['rack.input'] = StringIO.new(from_ns_timestamps(json).to_json) if json
+  request.body.rewind
+end
+
+after do
+  next unless $ns_timestamps
+
+  json = begin
+    JSON.parse(Array(response.body).join)
+  rescue JSON::ParserError
+    nil
+  end
+  body JSON.pretty_generate(to_ns_timestamps(json)) if json.kind_of?(Hash) || json.kind_of?(Array)
+end
+
 # Connect to WebSocket (v1). The client authenticates through the connect URL and takes
 # a health.check carrying `me` as its first frame.
 get '/connect' do
@@ -689,4 +715,19 @@ get '/api/v2/og' do
   # `custom` is required on the v2 OG response. The v2 fixtures already carry it;
   # the default only covers a v2 request served from the v1 fixtures.
   { 'custom' => {} }.merge(attachment).merge('duration' => '7.11ms').to_json
+end
+
+# App settings. The JS client loads them before every upload to check the upload configs, and
+# fails the upload when they can't be loaded. No upload restrictions, like a default app.
+['/app', '/api/v2/app'].each do |app_path|
+  get app_path do
+    {
+      app: {
+        name: 'stream-chat-test-mock-server',
+        file_upload_config: {},
+        image_upload_config: {}
+      },
+      duration: '0.01ms'
+    }.to_json
+  end
 end

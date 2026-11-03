@@ -123,7 +123,7 @@ post '/mock' do
         reply_template['html'] = reply_template['text'].to_html
         reply_template['user'] = (j + 1).odd? ? current_user : Participant.user
         message_template['attachments'] = mock_attachments(image: 1, video: 1, file: 1) if params[:attachments]
-        channel['messages'] << reply_template
+        # Thread-only: tracked for the thread, not part of the channel's messages (as on the backend).
         $message_list << reply_template
       end
     end

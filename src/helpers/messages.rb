@@ -262,7 +262,11 @@ def post_message(message:, channel_id:, skip_enrich_url: nil)
   # (`poll_id`), never as a nested poll object: the client creates the poll with
   # POST /polls first and then sends a regular message referencing it.
   poll = message['poll_id'] ? find_poll(message['poll_id']) : nil
-  mocked_message['poll'] = poll if poll
+  if poll
+    mocked_message['poll'] = poll
+    # The backend's message carries the id too; stream-chat-js v10 keys the poll UI on it.
+    mocked_message['poll_id'] = poll['id']
+  end
 
   response['message'] = mocked_message
   if message_type == :regular
@@ -286,7 +290,9 @@ def create_giphy(request_body:, message_id:)
     message['html'] = ''
     update_last_message_at(channel_id: message['cid'].split(':').last, message: message)
   elsif action == AttachmentActionType.shuffle
-    return nil
+    # The backend answers with the ephemeral message, holding the next gif, and sends no event.
+    # A response without a message reads as a cancelled preview in stream-chat-js v10.
+    return { message: message, duration: '7.11ms' }.to_s
   elsif action == AttachmentActionType.cancel
     # The backend drops the ephemeral message and answers without one.
     $message_list.delete_if { |msg| msg['id'] == message_id }
@@ -537,7 +543,10 @@ def paginate_message_list(params:, request_body:)
     cid: "#{params[:channel_type]}:#{params[:channel_id]}",
     requested: json['include_scheduled_messages']
   )
-  return channel&.merge(scheduled_messages)&.merge('duration' => '7.11ms').to_s unless messages && messages['limit']
+  unless messages && messages['limit']
+    channel['messages'] = channel_visible_messages(cid: channel['channel']['cid']) if channel
+    return channel&.merge(scheduled_messages)&.merge('duration' => '7.11ms').to_s
+  end
 
   message_list = channel_visible_messages(cid: "#{params[:channel_type]}:#{params[:channel_id]}")
   paginated_messages = mock_message_pagination(
@@ -555,7 +564,10 @@ end
 
 def paginate_thread_list(params:)
   thread_list = $message_list.select { |msg| msg['parent_id'] == params[:message_id] }
-  parent_message = find_message_by_id(params[:message_id])
+  # The backend's replies never include the parent; the native suites were written against this
+  # mock's oldest page carrying it. stream-chat-js v10 (the run with ns timestamps) renders whatever
+  # the page holds, so there it gets the backend's answer.
+  parent_message = $ns_timestamps ? nil : find_message_by_id(params[:message_id])
 
   unless params[:limit] && parent_message
     thread_list.insert(0, parent_message) if parent_message
