@@ -61,10 +61,10 @@ get '/connect' do
   if Faye::WebSocket.websocket?(request.env)
     $ws_protocol = :v1
     $ws_authenticated = true
-    $ws = Faye::WebSocket.new(request.env)
-    $ws.on(:open) { |_| send_health_check }
-    $ws.on(:close) { $ws = nil }
-    $ws.rack_response
+    ws = $ws = Faye::WebSocket.new(request.env)
+    ws.on(:open) { |_| send_health_check }
+    ws.on(:close) { $ws = nil if $ws.equal?(ws) }
+    ws.rack_response
   end
 end
 
@@ -75,19 +75,21 @@ get '/api/v2/connect' do
   if Faye::WebSocket.websocket?(request.env)
     $ws_protocol = :v2
     $ws_authenticated = false
-    $ws = Faye::WebSocket.new(request.env)
-    $ws.on(:message) do |event|
+    ws = $ws = Faye::WebSocket.new(request.env)
+    ws.on(:message) do |event|
       next if $ws_authenticated
       next unless websocket_auth_frame?(event.data)
 
       $ws_authenticated = true
       send_connection_ok
     end
-    $ws.on(:close) do
+    ws.on(:close) do
+      next unless $ws.equal?(ws)
+
       $ws = nil
       $ws_authenticated = false
     end
-    $ws.rack_response
+    ws.rack_response
   end
 end
 
