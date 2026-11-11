@@ -313,6 +313,7 @@
         }
       ],
       "membership": {
+        "user_id": "luke_skywalker",
         "user": {
           "id": "luke_skywalker",
           "name": "Luke Skywalker",
