@@ -67,6 +67,6 @@ jobs:
         job_name: "${{ github.workflow }}: ${{ github.job }}"
         fields: message,commit,author,action,workflow,job,took
       env:
-        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_IOS_BOTS }}
         MATRIX_CONTEXT: ${{ toJson(matrix) }}
       if: failure()
