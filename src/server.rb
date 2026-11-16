@@ -48,7 +48,7 @@ $channel_mutes = []
 $blocked_users = []
 $block_hidden_channels = {}
 $channel_list = Mocks.channels
-$channel_list['channels'].each { |channel| apply_schedule_message_capability(channel['channel']) }
+$channel_list['channels'].each { |channel| apply_scheduled_messages_settings(channel['channel']) }
 $channel_groups = []
 $current_channel_id = Mocks.event_ws['channel_id']
 $health_check = Mocks.health_check.to_s
