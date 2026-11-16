@@ -128,7 +128,7 @@ post '/mock' do
       end
     end
     channel['channel']['last_message_at'] = message_timestamp if messages_count.positive?
-    apply_schedule_message_capability(channel['channel'])
+    apply_scheduled_messages_settings(channel['channel'])
   end
 
   ''
@@ -254,20 +254,27 @@ post '/fail_scheduled_message' do
 end
 
 # Sets how many pending scheduled messages the app user can have in one channel. One more
-# fails with `scheduled_limit_channel` (117). Reset to 10 by /mock.
+# fails with `scheduled_limit_channel` (117). Without `in_config`, the channel config is not
+# changed, like a config the client loaded before the change. With `in_config`, its
+# `scheduled_messages_max_per_channel` has the new limit too. Both are reset to 10 by /mock.
 ### Parameters
 # `limit`: Integer - The limit per channel
+# `in_config`: Boolean - Whether the channel config tells the new limit. Default false
 post '/scheduled_messages_limit' do
   $scheduled_messages_channel_limit = params[:limit].to_i
+  if params[:in_config].to_s.casecmp('true').zero?
+    $scheduled_messages_config_limit = $scheduled_messages_channel_limit
+    $channel_list['channels'].each { |channel| apply_scheduled_messages_settings(channel['channel']) }
+  end
   ''
 end
 
 # Turns scheduled messages off for the app, like the app flag on the backend: every channel
-# loses the `schedule-message` capability, and scheduling or editing fails with
+# loses the `schedule-message` capability and the limit in its config, and scheduling or editing fails with
 # `scheduled_messages_disabled` (114). Turned back on by /mock.
 post '/disable_scheduled_messages' do
   $scheduled_messages_enabled = false
-  $channel_list['channels'].each { |channel| apply_schedule_message_capability(channel['channel']) }
+  $channel_list['channels'].each { |channel| apply_scheduled_messages_settings(channel['channel']) }
   ''
 end
 

@@ -14,6 +14,7 @@ def reset_scheduled_messages
   $canceled_scheduled_message_ids = []
   $scheduled_messages_enabled = true
   $scheduled_messages_channel_limit = 10
+  $scheduled_messages_config_limit = 10
 end
 
 def find_scheduled_message(id)
@@ -397,11 +398,20 @@ def scheduled_messages_field(cid:, requested:)
   { 'scheduled_messages' => sorted_scheduled_messages(cid: cid).first(SCHEDULED_MESSAGES_PAGE_LIMIT) }
 end
 
-# The `schedule-message` capability follows the app flag, like on the backend.
-def apply_schedule_message_capability(channel)
+# The `schedule-message` capability follows the app flag, and the channel config carries the
+# per-channel limit while the feature is on, like on the backend.
+def apply_scheduled_messages_settings(channel)
   capabilities = channel['own_capabilities']
-  return unless capabilities
+  if capabilities
+    capabilities.delete('schedule-message')
+    capabilities << 'schedule-message' if $scheduled_messages_enabled
+  end
+  config = channel['config']
+  return unless config
 
-  capabilities.delete('schedule-message')
-  capabilities << 'schedule-message' if $scheduled_messages_enabled
+  if $scheduled_messages_enabled
+    config['scheduled_messages_max_per_channel'] = $scheduled_messages_config_limit
+  else
+    config.delete('scheduled_messages_max_per_channel')
+  end
 end
