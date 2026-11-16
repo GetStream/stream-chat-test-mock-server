@@ -254,8 +254,8 @@ post '/fail_scheduled_message' do
 end
 
 # Sets how many pending scheduled messages the app user can have in one channel. One more
-# fails with `scheduled_limit_channel` (117). The channel config keeps the default limit, like
-# a config the client loaded before the change, unless `in_config` is set: then its
+# fails with `scheduled_limit_channel` (117). Without `in_config`, the channel config is not
+# changed, like a config the client loaded before the change. With `in_config`, its
 # `scheduled_messages_max_per_channel` has the new limit too. Both are reset to 10 by /mock.
 ### Parameters
 # `limit`: Integer - The limit per channel
