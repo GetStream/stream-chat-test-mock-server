@@ -24,8 +24,7 @@ jobs:
         client-id: ${{ vars.IOS_RELEASE_BOT_CLIENT_ID }}
         private-key: ${{ secrets.IOS_RELEASE_BOT_PRIVATE_KEY }}
         owner: ${{ github.repository_owner }}
-        repositories: >-
-          ${{ github.event.repository.name }},stream-chat-android,stream-chat-swift
+        repositories: ${{ github.event.repository.name }},stream-chat-android,stream-chat-swift
     - name: Use release bot token
       run: echo "GITHUB_TOKEN=$TOKEN" >> "$GITHUB_ENV"
       env:
