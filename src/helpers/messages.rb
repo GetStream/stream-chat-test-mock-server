@@ -77,7 +77,7 @@ def broadcast_new_message?(message_type)
   [MessageType.regular, MessageType.reply, MessageType.system].include?(message_type)
 end
 
-def send_message_ws(response:, event_type:)
+def send_message_ws(response:, event_type:, hard_delete: false)
   ws_response = Mocks.message_ws
   ws_response['message_id'] = response['message']['id']
   ws_response['message'] = response['message']
@@ -86,6 +86,7 @@ def send_message_ws(response:, event_type:)
   ws_response['channel_id'] = response['message']['cid'].split(':').last
   ws_response['created_at'] = response['message']['created_at']
   ws_response['type'] = event_type
+  ws_response['hard_delete'] = hard_delete if event_type == MessageEventType.deleted
   ws_response.merge!(unread_counts) if event_type == MessageEventType.new
   broadcast_event(ws_response)
 end
@@ -176,9 +177,10 @@ def update_message(request_body:, params:, delete: false)
   message['updated_at'] = timestamp
   response = Mocks.message
   response['message'] = message
-  $message_list.delete_if { |msg| msg['id'] == params[:message_id] } if params[:hard].to_i == 1
+  hard_delete = delete && params[:hard].to_i == 1
+  $message_list.delete_if { |msg| msg['id'] == params[:message_id] } if hard_delete
 
-  send_message_ws(response: response, event_type: ws_event_type)
+  send_message_ws(response: response, event_type: ws_event_type, hard_delete: hard_delete)
   response.to_s
 end
 

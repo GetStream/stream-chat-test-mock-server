@@ -725,9 +725,17 @@ end
   get app_path do
     {
       app: {
+        id: 1,
         name: 'stream-chat-test-mock-server',
-        file_upload_config: {},
-        image_upload_config: {}
+        placement: '',
+        async_url_enrich_enabled: false,
+        auto_translation_enabled: false,
+        file_upload_config: { size_limit: 0 },
+        image_upload_config: { size_limit: 0 },
+        defaults: {
+          query_channels: { limit: 10, max_limit: 30, message_limit: 25, member_limit: 100 },
+          get_or_create_channel: { messages: { limit: 100 }, members: { limit: 100 } }
+        }
       },
       duration: '0.01ms'
     }.to_json

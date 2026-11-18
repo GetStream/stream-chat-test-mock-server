@@ -130,9 +130,10 @@ post '/participant/message' do
   response['cid'] = "messaging:#{message['channel_id']}"
   response['type'] = action_type
   response['created_at'] = timestamp
+  response['message_id'] = message['id']
   response['message'] = message
   response['user'] = Participant.user
-  response['hard_delete'] = true if params[:hard_delete] == 'true' && params[:action] == 'delete'
+  response['hard_delete'] = params[:hard_delete] == 'true' if action_type == MessageEventType.deleted
   response.merge!(unread_counts) if action_type == MessageEventType.new
 
   thread_notification = params[:thread_notification] == 'true' && parent_id && params[:action].nil?
