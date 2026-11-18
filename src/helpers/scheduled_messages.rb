@@ -10,8 +10,9 @@ SCHEDULED_MESSAGES_DEFAULT_PAGE_LIMIT = 20
 
 def reset_scheduled_messages
   $scheduled_messages = []
-  $sent_scheduled_message_ids = []
-  $canceled_scheduled_message_ids = []
+  # The ids of the scheduled messages that were sent or canceled, with the id of their owner.
+  $sent_scheduled_message_owners = {}
+  $canceled_scheduled_message_owners = {}
   $scheduled_messages_enabled = true
   $scheduled_messages_channel_limit = 10
   $scheduled_messages_config_limit = 10
@@ -87,15 +88,15 @@ def scheduled_message_canceled_error(id)
   )
 end
 
-# Only the app user's own scheduled messages can be changed. Like the backend, an id that was
-# already sent or canceled says so, and any other id is not found. Unlike the backend, the sent
-# and canceled ids are not checked against their owner.
+# Only the app user's own scheduled messages can be changed. Like the backend, an id of the app
+# user that was already sent or canceled says so, and any other id is not found, so a client
+# can't learn that another user's id exists.
 def own_scheduled_message(id)
   scheduled = find_scheduled_message(id)
   return scheduled if scheduled && scheduled.dig('user', 'id') == current_user['id']
 
-  scheduled_message_already_sent_error(id) if $sent_scheduled_message_ids.include?(id)
-  scheduled_message_canceled_error(id) if $canceled_scheduled_message_ids.include?(id)
+  scheduled_message_already_sent_error(id) if $sent_scheduled_message_owners[id] == current_user['id']
+  scheduled_message_canceled_error(id) if $canceled_scheduled_message_owners[id] == current_user['id']
   scheduled_message_not_found(id)
 end
 
@@ -162,7 +163,7 @@ def store_scheduled_message(id:, cid:, content:, scheduled_at:)
     'created_at' => timestamp,
     'updated_at' => timestamp
   }
-  $canceled_scheduled_message_ids.delete(id)
+  $canceled_scheduled_message_owners.delete(id)
   $scheduled_messages << scheduled
   broadcast_scheduled_message_event('scheduled_message.created', scheduled)
   scheduled
@@ -190,11 +191,11 @@ def schedule_message(json:, channel_id:)
     return scheduled_message_send_response(existing)
   end
 
-  scheduled_message_already_sent_error(id) if $sent_scheduled_message_ids.include?(id)
+  scheduled_message_already_sent_error(id) if $sent_scheduled_message_owners.key?(id)
 
   requested_at = Time.parse(json['scheduled_at'])
   if requested_at <= now
-    scheduled_message_canceled_error(id) if $canceled_scheduled_message_ids.include?(id)
+    scheduled_message_canceled_error(id) if $canceled_scheduled_message_owners.key?(id)
     return nil
   end
 
@@ -261,7 +262,7 @@ end
 # `message.new`, and removes it from the list.
 def send_scheduled_message(scheduled)
   $scheduled_messages.delete(scheduled)
-  $sent_scheduled_message_ids << scheduled['id']
+  $sent_scheduled_message_owners[scheduled['id']] = scheduled.dig('user', 'id')
   response = post_message(
     message: scheduled['message'].merge('id' => unique_id),
     channel_id: scheduled['cid'].split(':').last
@@ -363,7 +364,7 @@ def delete_scheduled_message(id:)
   scheduled = own_scheduled_message(id)
   $scheduled_messages.delete(scheduled)
   if pending_scheduled_message?(scheduled)
-    $canceled_scheduled_message_ids << id
+    $canceled_scheduled_message_owners[id] = scheduled.dig('user', 'id')
     scheduled = scheduled.merge('status' => 'canceled', 'updated_at' => unique_date)
   end
   broadcast_scheduled_message_event('scheduled_message.deleted', scheduled)
