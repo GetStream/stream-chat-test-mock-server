@@ -75,11 +75,28 @@ def scheduled_message_not_editable_error(id)
   )
 end
 
-# Only the app user's own scheduled messages can be changed; any other id is not found.
+def scheduled_message_already_sent_error(id)
+  scheduled_message_error(
+    code: 123, reason: 'scheduled_message_already_sent', message: "scheduled message ID #{id} was already sent"
+  )
+end
+
+def scheduled_message_canceled_error(id)
+  scheduled_message_error(
+    code: 124, reason: 'scheduled_message_canceled', message: "scheduled message #{id} was canceled"
+  )
+end
+
+# Only the app user's own scheduled messages can be changed. Like the backend, an id that was
+# already sent or canceled says so, and any other id is not found. Unlike the backend, the sent
+# and canceled ids are not checked against their owner.
 def own_scheduled_message(id)
   scheduled = find_scheduled_message(id)
-  scheduled_message_not_found(id) unless scheduled && scheduled.dig('user', 'id') == current_user['id']
-  scheduled
+  return scheduled if scheduled && scheduled.dig('user', 'id') == current_user['id']
+
+  scheduled_message_already_sent_error(id) if $sent_scheduled_message_ids.include?(id)
+  scheduled_message_canceled_error(id) if $canceled_scheduled_message_ids.include?(id)
+  scheduled_message_not_found(id)
 end
 
 def round_up_to_minute(time)
@@ -173,19 +190,11 @@ def schedule_message(json:, channel_id:)
     return scheduled_message_send_response(existing)
   end
 
-  if $sent_scheduled_message_ids.include?(id)
-    scheduled_message_error(
-      code: 123, reason: 'scheduled_message_already_sent', message: "scheduled message ID #{id} was already sent"
-    )
-  end
+  scheduled_message_already_sent_error(id) if $sent_scheduled_message_ids.include?(id)
 
   requested_at = Time.parse(json['scheduled_at'])
   if requested_at <= now
-    if $canceled_scheduled_message_ids.include?(id)
-      scheduled_message_error(
-        code: 124, reason: 'scheduled_message_canceled', message: "scheduled message #{id} was canceled"
-      )
-    end
+    scheduled_message_canceled_error(id) if $canceled_scheduled_message_ids.include?(id)
     return nil
   end
 
