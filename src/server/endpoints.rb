@@ -720,9 +720,17 @@ get '/api/v2/og' do
 end
 
 # App settings. The JS client loads them before every upload to check the upload configs, and
-# fails the upload when they can't be loaded. No upload restrictions, like a default app.
+# fails the upload when they can't be loaded. No upload restrictions, like a default app. The generated
+# client models require every field sent here, so keep the empty ones.
 ['/app', '/api/v2/app'].each do |app_path|
   get app_path do
+    upload_config = {
+      size_limit: 0,
+      allowed_file_extensions: [],
+      allowed_mime_types: [],
+      blocked_file_extensions: [],
+      blocked_mime_types: []
+    }
     {
       app: {
         id: 1,
@@ -730,8 +738,8 @@ end
         placement: '',
         async_url_enrich_enabled: false,
         auto_translation_enabled: false,
-        file_upload_config: { size_limit: 0 },
-        image_upload_config: { size_limit: 0 },
+        file_upload_config: upload_config,
+        image_upload_config: upload_config,
         defaults: {
           query_channels: { limit: 10, max_limit: 30, message_limit: 25, member_limit: 100 },
           get_or_create_channel: { messages: { limit: 100 }, members: { limit: 100 } }

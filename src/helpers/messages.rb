@@ -177,7 +177,7 @@ def update_message(request_body:, params:, delete: false)
   message['updated_at'] = timestamp
   response = Mocks.message
   response['message'] = message
-  hard_delete = delete && params[:hard].to_i == 1
+  hard_delete = delete && %w[1 true].include?(params[:hard].to_s)
   $message_list.delete_if { |msg| msg['id'] == params[:message_id] } if hard_delete
 
   send_message_ws(response: response, event_type: ws_event_type, hard_delete: hard_delete)
