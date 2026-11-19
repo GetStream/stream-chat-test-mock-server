@@ -25,13 +25,13 @@ end
 # The scheduled message as a response or an event carries it: with `message.quoted_message`, the
 # message `quoted_message_id` names, read when it is sent, as the backend does. It is absent when
 # the mock no longer has that message or it is in another channel; a soft deleted one comes as
-# deleted. A `quoted_message` the client sent is never sent back.
+# deleted. Like the backend, the quote comes without its own quote.
 def scheduled_message_payload(scheduled)
-  content = scheduled['message'].except('quoted_message')
-  quoted_id = content['quoted_message_id']
+  quoted_id = scheduled.dig('message', 'quoted_message_id')
   quoted = quoted_id && find_message_by_id(quoted_id)
-  content['quoted_message'] = quoted if quoted && quoted['cid'] == scheduled['cid']
-  scheduled.merge('message' => content)
+  return scheduled unless quoted && quoted['cid'] == scheduled['cid']
+
+  scheduled.merge('message' => scheduled['message'].merge('quoted_message' => quoted.except('quoted_message')))
 end
 
 def pending_scheduled_message?(scheduled)
@@ -137,7 +137,7 @@ end
 # The stored content of a scheduled message: the message as the client sent it, without the
 # fields the server sets.
 def scheduled_message_content(message)
-  content = message.reject { |key, _| %w[id cid user created_at updated_at].include?(key) }
+  content = message.reject { |key, _| %w[id cid user created_at updated_at quoted_message].include?(key) }
   content['text'] = content['text'].to_s
   content['custom'] ||= {} if $api_version == :v2
   content
@@ -395,7 +395,7 @@ def send_scheduled_message_now(id:)
   scheduled['scheduled_at'] = timestamp
   scheduled['updated_at'] = timestamp
   broadcast_scheduled_message_event('scheduled_message.updated', scheduled)
-  response = { scheduled_message: scheduled_message_payload(scheduled.dup), duration: '7.11ms' }.to_s
+  response = { scheduled_message: scheduled_message_payload(scheduled), duration: '7.11ms' }.to_s
   send_scheduled_message(scheduled)
   response
 end
