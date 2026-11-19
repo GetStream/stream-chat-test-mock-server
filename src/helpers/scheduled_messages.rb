@@ -22,6 +22,18 @@ def find_scheduled_message(id)
   $scheduled_messages.detect { |scheduled| scheduled['id'] == id }
 end
 
+# The scheduled message as a response or an event carries it: with `message.quoted_message`, the
+# message `quoted_message_id` names, read when it is sent, as the backend does. It is absent when
+# the mock no longer has that message or it is in another channel; a soft deleted one comes as
+# deleted. A `quoted_message` the client sent is never sent back.
+def scheduled_message_payload(scheduled)
+  content = scheduled['message'].except('quoted_message')
+  quoted_id = content['quoted_message_id']
+  quoted = quoted_id && find_message_by_id(quoted_id)
+  content['quoted_message'] = quoted if quoted && quoted['cid'] == scheduled['cid']
+  scheduled.merge('message' => content)
+end
+
 def pending_scheduled_message?(scheduled)
   scheduled['status'] != 'failed'
 end
@@ -242,7 +254,9 @@ def scheduled_message_send_response(scheduled)
     'created_at' => scheduled['created_at'],
     'updated_at' => scheduled['created_at']
   )
-  { message: message, scheduled_message: scheduled, duration: '7.11ms' }.to_s
+  payload = scheduled_message_payload(scheduled)
+  message['quoted_message'] = payload['message']['quoted_message'] if payload['message']['quoted_message']
+  { message: message, scheduled_message: payload, duration: '7.11ms' }.to_s
 end
 
 # The backend tells only the owner's own connections about a scheduled message.
@@ -253,7 +267,7 @@ def broadcast_scheduled_message_event(type, scheduled, extra = {})
       'created_at' => unique_date,
       'cid' => scheduled['cid'],
       'user' => current_user,
-      'scheduled_message' => scheduled
+      'scheduled_message' => scheduled_message_payload(scheduled)
     }.merge(extra)
   )
 end
@@ -311,7 +325,8 @@ def query_scheduled_messages(request_body:)
   )
   page = (scheduled_messages[offset, limit] || []).map do |scheduled|
     channel = scheduled_message_channel(scheduled['cid'])
-    channel ? scheduled.merge('channel' => channel) : scheduled
+    payload = scheduled_message_payload(scheduled)
+    channel ? payload.merge('channel' => channel) : payload
   end
   response = { scheduled_messages: page, duration: '7.11ms' }
   response[:next] = (offset + limit).to_s if offset + limit < scheduled_messages.count
@@ -356,7 +371,7 @@ def update_scheduled_message(id:, request_body:)
     scheduled['updated_at'] = unique_date
     broadcast_scheduled_message_event('scheduled_message.updated', scheduled)
   end
-  { scheduled_message: scheduled, duration: '7.11ms' }.to_s
+  { scheduled_message: scheduled_message_payload(scheduled), duration: '7.11ms' }.to_s
 end
 
 # Cancels a scheduled message, or removes a failed one. Allowed while the feature is off.
@@ -368,7 +383,7 @@ def delete_scheduled_message(id:)
     scheduled = scheduled.merge('status' => 'canceled', 'updated_at' => unique_date)
   end
   broadcast_scheduled_message_event('scheduled_message.deleted', scheduled)
-  { scheduled_message: scheduled, duration: '7.11ms' }.to_s
+  { scheduled_message: scheduled_message_payload(scheduled), duration: '7.11ms' }.to_s
 end
 
 # Moves the send time to now and sends the message. Allowed while the feature is off.
@@ -380,7 +395,7 @@ def send_scheduled_message_now(id:)
   scheduled['scheduled_at'] = timestamp
   scheduled['updated_at'] = timestamp
   broadcast_scheduled_message_event('scheduled_message.updated', scheduled)
-  response = { scheduled_message: scheduled.dup, duration: '7.11ms' }.to_s
+  response = { scheduled_message: scheduled_message_payload(scheduled.dup), duration: '7.11ms' }.to_s
   send_scheduled_message(scheduled)
   response
 end
@@ -405,7 +420,8 @@ end
 def scheduled_messages_field(cid:, requested:)
   return {} unless requested && $scheduled_messages_enabled
 
-  { 'scheduled_messages' => sorted_scheduled_messages(cid: cid).first(SCHEDULED_MESSAGES_PAGE_LIMIT) }
+  scheduled_messages = sorted_scheduled_messages(cid: cid).first(SCHEDULED_MESSAGES_PAGE_LIMIT)
+  { 'scheduled_messages' => scheduled_messages.map { |scheduled| scheduled_message_payload(scheduled) } }
 end
 
 # The `schedule-message` capability follows the app flag, and the channel config carries the
