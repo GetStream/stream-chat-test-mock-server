@@ -71,7 +71,7 @@ V2_DECLARED_KEYS = {
   scheduled_message_content: %w[
     text custom html mentioned_channel mentioned_here mml parent_id pin_expires pinned poll_id quoted_message_id
     show_in_channel silent type attachments mentioned_group_ids mentioned_roles mentioned_users restricted_visibility
-    shared_location
+    shared_location quoted_message
   ],
   scheduled_message_channel: %w[
     cid type id name image
