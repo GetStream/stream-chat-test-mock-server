@@ -7,6 +7,7 @@ SCHEDULED_MESSAGES_MAX_LEAD_SECONDS = 120 * 86_400
 SCHEDULED_MESSAGES_MAX_PER_USER = 100
 SCHEDULED_MESSAGES_PAGE_LIMIT = 100
 SCHEDULED_MESSAGES_DEFAULT_PAGE_LIMIT = 20
+SCHEDULED_MESSAGE_CHANNEL_MEMBER_LIMIT = 4
 
 def reset_scheduled_messages
   $scheduled_messages = []
@@ -25,13 +26,16 @@ end
 # The scheduled message as a response or an event carries it: with `message.quoted_message`, the
 # message `quoted_message_id` names, read when it is sent, as the backend does. It is absent when
 # the mock no longer has that message or it is in another channel; a soft deleted one comes as
-# deleted. Like the backend, the quote comes without its own quote.
-def scheduled_message_payload(scheduled)
+# deleted. Like the backend, the quote comes without its own quote. The summary of its channel is
+# in `channel`, except inside the `scheduled_messages` of its own channel.
+def scheduled_message_payload(scheduled, with_channel: true)
+  channel = with_channel && scheduled_message_channel(scheduled['cid'])
+  payload = channel ? scheduled.merge('channel' => channel) : scheduled
   quoted_id = scheduled.dig('message', 'quoted_message_id')
   quoted = quoted_id && find_message_by_id(quoted_id)
-  return scheduled unless quoted && quoted['cid'] == scheduled['cid']
+  return payload unless quoted && quoted['cid'] == scheduled['cid']
 
-  scheduled.merge('message' => scheduled['message'].merge('quoted_message' => quoted.except('quoted_message')))
+  payload.merge('message' => scheduled['message'].merge('quoted_message' => quoted.except('quoted_message')))
 end
 
 def pending_scheduled_message?(scheduled)
@@ -300,17 +304,23 @@ def sorted_scheduled_messages(cid: nil, statuses: [])
     .sort_by { |scheduled| [pending_scheduled_message?(scheduled) ? 0 : 1, Time.parse(scheduled['scheduled_at'])] }
 end
 
+# The summary of the channel, with its member count and its oldest members, as the backend sends
+# it. Absent when the mock no longer has the channel.
 def scheduled_message_channel(cid)
-  channel = $channel_list['channels'].detect { |c| c['channel']['cid'] == cid }&.dig('channel')
-  return nil unless channel
+  state = $channel_list['channels'].detect { |c| c['channel']['cid'] == cid }
+  return nil unless state
 
+  channel = state['channel']
+  members = state['members'] || []
   image = $api_version == :v2 ? channel.dig('custom', 'image') : channel['image']
   {
     'cid' => cid,
     'type' => channel['type'] || 'messaging',
     'id' => channel['id'],
     'name' => channel_name(channel),
-    'image' => image
+    'image' => image,
+    'member_count' => channel['member_count'] || members.count,
+    'members' => members.sort_by { |member| member['created_at'].to_s }.first(SCHEDULED_MESSAGE_CHANNEL_MEMBER_LIMIT)
   }.compact
 end
 
@@ -323,11 +333,7 @@ def query_scheduled_messages(request_body:)
     cid: scheduled_message_filter_values(filter['cid']).first,
     statuses: scheduled_message_filter_values(filter['status'])
   )
-  page = (scheduled_messages[offset, limit] || []).map do |scheduled|
-    channel = scheduled_message_channel(scheduled['cid'])
-    payload = scheduled_message_payload(scheduled)
-    channel ? payload.merge('channel' => channel) : payload
-  end
+  page = (scheduled_messages[offset, limit] || []).map { |scheduled| scheduled_message_payload(scheduled) }
   response = { scheduled_messages: page, duration: '7.11ms' }
   response[:next] = (offset + limit).to_s if offset + limit < scheduled_messages.count
   response.to_s
@@ -421,7 +427,7 @@ def scheduled_messages_field(cid:, requested:)
   return {} unless requested && $scheduled_messages_enabled
 
   scheduled_messages = sorted_scheduled_messages(cid: cid).first(SCHEDULED_MESSAGES_PAGE_LIMIT)
-  { 'scheduled_messages' => scheduled_messages.map { |scheduled| scheduled_message_payload(scheduled) } }
+  { 'scheduled_messages' => scheduled_messages.map { |scheduled| scheduled_message_payload(scheduled, with_channel: false) } }
 end
 
 # The `schedule-message` capability follows the app flag, and the channel config carries the

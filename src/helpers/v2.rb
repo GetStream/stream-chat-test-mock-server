@@ -74,7 +74,7 @@ V2_DECLARED_KEYS = {
     shared_location quoted_message
   ],
   scheduled_message_channel: %w[
-    cid type id name image
+    cid type id name image member_count members
   ]
 }.freeze
 
