@@ -278,6 +278,13 @@ post '/disable_scheduled_messages' do
   ''
 end
 
+# The id of the direct message channel `/mock` creates with `dm=true`.
+def direct_message_channel_id
+  id = $channel_list['channels'].map { |c| c['channel']['id'] }.detect { |cid| cid.start_with?('!members-') }
+  halt(400, { message: 'no direct message channel' }.to_s) unless id
+  id
+end
+
 # Creates a scheduled message in the current channel as a server-side action, like the app
 # user scheduling it on another device. The app under test only receives the
 # `scheduled_message.created` event.
@@ -285,13 +292,15 @@ end
 # `text`: String - Text of the message. Default `Scheduled`
 # `scheduled_at`: Integer - Offset in seconds from now for the send time. Default 3600
 # `parent_id`: String - Id of the thread parent message, to schedule a thread reply
+# `dm`: Boolean - Schedule it in the direct message channel of `/mock` with `dm=true` instead
 post '/create_scheduled_message' do
   content = { 'text' => params[:text] || 'Scheduled' }
   content['parent_id'] = params[:parent_id] if params[:parent_id]
   offset = params[:scheduled_at] ? params[:scheduled_at].to_i : 3600
+  channel_id = params[:dm] == 'true' ? direct_message_channel_id : $current_channel_id
   store_scheduled_message(
     id: unique_id,
-    cid: "messaging:#{$current_channel_id}",
+    cid: "messaging:#{channel_id}",
     content: scheduled_message_content(content),
     scheduled_at: round_send_at(Time.now.utc + offset, Time.now.utc).strftime(time_format)
   )
