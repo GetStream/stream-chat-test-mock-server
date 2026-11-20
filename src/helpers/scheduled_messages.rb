@@ -319,8 +319,8 @@ def scheduled_message_channel(cid)
     'id' => channel['id'],
     'name' => channel_name(channel),
     'image' => image,
-    'member_count' => channel['member_count'] || members.count,
-    'members' => members.sort_by { |member| member['created_at'].to_s }.first(SCHEDULED_MESSAGE_CHANNEL_MEMBER_LIMIT)
+    'member_count' => channel['member_count'],
+    'members' => members.first(SCHEDULED_MESSAGE_CHANNEL_MEMBER_LIMIT)
   }.compact
 end
 
